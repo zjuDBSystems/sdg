@@ -10,7 +10,6 @@ from image_code_data.data_size import calculate_score_from_csv
 from image_code_data.syntax import evaluate_js_folder
 from image_code_data.renderable import evaluate_renderability
 from image_code_data.ssim import evaluate_ssim
-from image_code_data.ocr import evaluate_ocr
 from image_code_data.chart_type import evaluate_chart_type
 from image_code_data.option_diversity import evaluate_option_diversity
 from image_code_data.code_duplication import evaluate_code_duplicate
@@ -186,9 +185,9 @@ class Dataset:
         ssim_score, ssim_score_details = evaluate_ssim(pair_file_path, image_file_path, screenshot_path)
         collector.add_scores("ssim_score", ssim_score_details, key_type="image")
 
-        # 接着是OCR检测
-        ocr_score, ocr_score_details = evaluate_ocr(pair_file_path, image_file_path, code_file_path)
-        collector.add_scores("ocr_score", ocr_score_details)
+        # # 接着是OCR检测
+        # ocr_score, ocr_score_details = evaluate_ocr(pair_file_path, image_file_path, code_file_path)
+        # collector.add_scores("ocr_score", ocr_score_details)
 
         # 接下来是数据集多样性
         # 首先是图表类型均衡性
@@ -217,7 +216,7 @@ class Dataset:
 
         # 一级指标得分
         code_quality_score = (syntax_score + renderable_score + configuration_complete_score) / 3
-        image_code_alignment_score = (ssim_score + ocr_score) / 2
+        image_code_alignment_score = ssim_score
         dataset_diversity_score = (chart_type_score + option_diversity_score) / 2
         data_repeatability_score = (code_duplicate_score + image_duplicate_score + joint_duplicate_score) / 3
 
@@ -237,8 +236,8 @@ class Dataset:
                     "配置项完整检测": configuration_complete_score
                 },
                 "图像代码对齐": {
-                    "图像与渲染截图的SSIM": ssim_score,
-                    "图像OCR检测的文字与配置项的余弦相似度": ocr_score
+                    "图像与渲染截图的SSIM": ssim_score
+
                 },
                 "数据集多样性": {
                     "图表类型均衡性": chart_type_score,
