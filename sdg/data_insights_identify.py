@@ -221,7 +221,7 @@ def calculate_top_metrics(client, code_quality_analysis, llm_weight):
 
 
 if __name__ == "__main__":
-    client = OpenAI(api_key="sk-3955d8823efd4f2483897446b91a7ffb", base_url="https://api.deepseek.com")
+    client = OpenAI(api_key="your key", base_url="https://api.deepseek.com")
     # 使用示例
     sample_scores = {
         "语法检测": 0.45,
