@@ -15,6 +15,7 @@ class DataType(Enum):
     VIDEO = 'video'
     TABLE = 'table'
     GRAPH = 'graph'
+    ECHARTS = 'echarts'
 
 
 @dataclass
@@ -86,5 +87,6 @@ def copy_dataset(src: Dataset, prefix: str):
         dirs.append(target_dir)
     meta_path = prefix + src.relative_meta_path
     dataset: Dataset = Dataset(dirs, meta_path)
+
     shutil.copy(src.meta_path, dataset.meta_path)
     return dataset
