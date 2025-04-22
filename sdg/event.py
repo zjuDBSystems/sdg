@@ -4,6 +4,7 @@ import asyncio
 from sse_starlette.sse import EventSourceResponse
 from dataclasses import dataclass
 from enum import Enum
+from datetime import datetime
 
 global_message_queue = Queue()
 
@@ -25,7 +26,6 @@ router = APIRouter(
 async def event_generator():
     while True:
         try:
-            asyncio.sleep(1)
             event = global_message_queue.get(timeout=1)
         except Empty:
             # If no message is received, continue waiting
@@ -34,10 +34,11 @@ async def event_generator():
             continue
         yield {
             "event": event.event.value,
-            "data": event.data
+            "data": event.data,
+            "comment": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         }
 
 
 @router.get("")
-async def get_messages():
+async def get_events():
     return EventSourceResponse(event_generator())
