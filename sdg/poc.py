@@ -6,7 +6,7 @@ import os
 
 from .data_operator.operator import Meta, Operator, OperatorMeta
 from . import data_operator
-from .storage.dataset import Dataset, DataType, Datadir
+from .storage.dataset import Dataset, DataType, Datadir, copy_dataset
 from .task.task_type import TaskType
 from .task.task import Task
 from .event import global_message_queue, EventType, EventResponse
@@ -149,6 +149,7 @@ def describe_metadata(metadata_path: str):
     global_message_queue.put(EventResponse(EventType.REASONING, f'multimodal dataset contains {len(lines) - 1} data pairs!'))
 
 def run_echart_task():
+    # load echart example dataset
     global_message_queue.put(EventResponse(event=EventType.REQUEST, data="Load multimodal dataset, include code and image!"))
     code_dir = Datadir('echart-code', DataType.CODE)
     describe_data(code_dir)
@@ -157,6 +158,17 @@ def run_echart_task():
     data_set = Dataset([code_dir, image_dir], 'echart.metadata')
     describe_metadata(data_set.meta_path)
     global_message_queue.put(EventResponse(event=EventType.RESPONSE, data="Load multimodal dataset done!"))
+
+    # build task workflow
+    # 1st step: Randomly modify echarts configuration code to generate new code file
+    # 2nd step: Generate echarts image for code without associated images
+    # 3rd step: Generate echart configuration code for image without associated code
+    # 4th step: Add noise to echarts image and generate new data pair
+    task = Task(
+        [registry['EChartMutationOperator'](), registry['ImgToEchartsOperator'](), registry['ImageRobustnessEnhancer']()],
+        data_set
+        )
+    task.run()
 
 if __name__ == '__main__':
     run_echart_task()

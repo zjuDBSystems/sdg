@@ -59,15 +59,19 @@ class EChartMutationOperator(Operator):
     def execute(self, dataset) -> None:
         
         df = pd.read_csv(dataset.meta_path)
-        code_dir = [dir for dir in dataset.dirs if dir.data_type == DataType.ECHARTS][0]
-        code_files = df[DataType.ECHARTS.value].tolist()
+        code_dir = [dir for dir in dataset.dirs if dir.data_type == DataType.CODE][0]
+        code_files = df[DataType.CODE.value].tolist()
         
         for index, file_name in enumerate(code_files):
+
+            print(file_name)
+            if pd.isna(file_name):
+                continue
 
             file_path = os.path.join(code_dir.data_path, file_name)
             with open(file_path,'rb') as f:
                 code = f.read().decode('utf-8')
-            print(code)
+            # print(code)
             start = code.find("{")
             end = code.rfind("}")
             echarts_config = json.loads(code[start:end+1])
@@ -94,8 +98,8 @@ class EChartMutationOperator(Operator):
             with open(file_path, 'wb') as f:
                 f.write(echarts_mutation_json.encode('utf-8'))
             # store image
-            with open(mutation_img_path, 'wb') as f:
-                f.write(self.generate_echarts_jpg(echarts_mutation_json))
+            # with open(mutation_img_path, 'wb') as f:
+            #     f.write(self.generate_echarts_jpg(echarts_mutation_json))
 
             
     '''
@@ -108,7 +112,7 @@ class EChartMutationOperator(Operator):
         """
         if isinstance(value, (int, float)) and random.random() < mutation_prob:
             factor = 1 + (random.uniform(-mutation_range, mutation_range))
-            print(factor)
+            # print(factor)
             return value * factor
         return value
 
