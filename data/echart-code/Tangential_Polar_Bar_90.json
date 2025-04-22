@@ -1,0 +1,53 @@
+{
+  "polar": {
+    "radius": [
+      38,
+      "77%"
+    ]
+  },
+  "angleAxis": {
+    "max": 4,
+    "startAngle": 57
+  },
+  "radiusAxis": {
+    "type": "category",
+    "data": [
+      "奖学金",
+      "教育公平",
+      "教育投资",
+      "学生评估",
+      "教育合作",
+      "教育资源"
+    ],
+    "axisLabel": {
+      "show": true,
+      "interval": 0,
+      "rotate": 0,
+      "margin": 8
+    }
+  },
+  "tooltip": {
+    "trigger": "item"
+  },
+  "series": {
+    "type": "bar",
+    "data": [
+      2.6,
+      0.6,
+      1.6,
+      3,
+      2.8,
+      1.5
+    ],
+    "color": [
+      "#4682B4"
+    ],
+    "coordinateSystem": "polar",
+    "label": {
+      "show": false,
+      "position": "middle",
+      "formatter": "{c}"
+    }
+  },
+  "backgroundColor": "#fff"
+}

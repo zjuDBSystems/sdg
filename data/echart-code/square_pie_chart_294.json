@@ -1,0 +1,59 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "1%",
+    "left": "center",
+    "data": [
+      "虚拟现实",
+      "智能音箱",
+      "非同质化代币",
+      "聊天机器人",
+      "自动驾驶"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": "95%",
+      "center": [
+        "47%",
+        "88%"
+      ],
+      "startAngle": 90,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 798,
+          "name": "虚拟现实"
+        },
+        {
+          "value": 912,
+          "name": "智能音箱"
+        },
+        {
+          "value": 230,
+          "name": "非同质化代币"
+        },
+        {
+          "value": 421,
+          "name": "聊天机器人"
+        },
+        {
+          "value": 875,
+          "name": "自动驾驶"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "inside",
+        "formatter": "{d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

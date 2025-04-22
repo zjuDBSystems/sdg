@@ -1,0 +1,52 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "4%",
+    "left": "center",
+    "data": [
+      "数据分析",
+      "加密货币",
+      "物联网"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "38%",
+        "82%"
+      ],
+      "center": [
+        "46%",
+        "75%"
+      ],
+      "startAngle": 180,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 150,
+          "name": "数据分析"
+        },
+        {
+          "value": 549,
+          "name": "加密货币"
+        },
+        {
+          "value": 599,
+          "name": "物联网"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "inside",
+        "formatter": "{b}: {d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

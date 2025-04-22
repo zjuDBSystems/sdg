@@ -1,0 +1,49 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "1%",
+    "left": "center",
+    "data": [
+      "忠诚度计划",
+      "品牌定位",
+      "可持续发展"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": "95%",
+      "center": [
+        "42%",
+        "63%"
+      ],
+      "startAngle": 90,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 399,
+          "name": "忠诚度计划"
+        },
+        {
+          "value": 190,
+          "name": "品牌定位"
+        },
+        {
+          "value": 1009,
+          "name": "可持续发展"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

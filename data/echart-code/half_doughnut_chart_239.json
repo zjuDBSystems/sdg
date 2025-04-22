@@ -1,0 +1,52 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "4%",
+    "left": "center",
+    "data": [
+      "赞助",
+      "活动营销",
+      "推荐"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "28%",
+        "73%"
+      ],
+      "center": [
+        "51%",
+        "54%"
+      ],
+      "startAngle": 180,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 479,
+          "name": "赞助"
+        },
+        {
+          "value": 410,
+          "name": "活动营销"
+        },
+        {
+          "value": 641,
+          "name": "推荐"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "inside",
+        "formatter": "{d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

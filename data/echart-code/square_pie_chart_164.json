@@ -1,0 +1,49 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "3%",
+    "left": "center",
+    "data": [
+      "内容营销",
+      "网络研讨会",
+      "短信"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": "93%",
+      "center": [
+        "14%",
+        "75%"
+      ],
+      "startAngle": 90,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 828,
+          "name": "内容营销"
+        },
+        {
+          "value": 942,
+          "name": "网络研讨会"
+        },
+        {
+          "value": 235,
+          "name": "短信"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{b}"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

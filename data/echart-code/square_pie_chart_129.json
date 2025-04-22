@@ -1,0 +1,69 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "0%",
+    "left": "center",
+    "data": [
+      "领导力",
+      "企业文化",
+      "产品开发",
+      "竞争分析",
+      "投资策略",
+      "企业社会责任",
+      "渠道管理"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": "88%",
+      "center": [
+        "40%",
+        "89%"
+      ],
+      "startAngle": 90,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 838,
+          "name": "领导力"
+        },
+        {
+          "value": 718,
+          "name": "企业文化"
+        },
+        {
+          "value": 100,
+          "name": "产品开发"
+        },
+        {
+          "value": 770,
+          "name": "竞争分析"
+        },
+        {
+          "value": 733,
+          "name": "投资策略"
+        },
+        {
+          "value": 119,
+          "name": "企业社会责任"
+        },
+        {
+          "value": 878,
+          "name": "渠道管理"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "inside",
+        "formatter": "{b}"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

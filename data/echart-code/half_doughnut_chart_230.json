@@ -1,0 +1,52 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "4%",
+    "left": "center",
+    "data": [
+      "其他",
+      "活动营销",
+      "平面广告"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "45%",
+        "79%"
+      ],
+      "center": [
+        "45%",
+        "64%"
+      ],
+      "startAngle": 180,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 696,
+          "name": "其他"
+        },
+        {
+          "value": 672,
+          "name": "活动营销"
+        },
+        {
+          "value": 137,
+          "name": "平面广告"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

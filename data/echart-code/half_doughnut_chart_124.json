@@ -1,0 +1,72 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "0%",
+    "left": "center",
+    "data": [
+      "教育投资",
+      "教育评估",
+      "特殊教育",
+      "实习",
+      "教师培训",
+      "教育质量",
+      "语言学习"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "55%",
+        "83%"
+      ],
+      "center": [
+        "46%",
+        "76%"
+      ],
+      "startAngle": 148,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 794,
+          "name": "教育投资"
+        },
+        {
+          "value": 1041,
+          "name": "教育评估"
+        },
+        {
+          "value": 577,
+          "name": "特殊教育"
+        },
+        {
+          "value": 112,
+          "name": "实习"
+        },
+        {
+          "value": 484,
+          "name": "教师培训"
+        },
+        {
+          "value": 1051,
+          "name": "教育质量"
+        },
+        {
+          "value": 1043,
+          "name": "语言学习"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{b}"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

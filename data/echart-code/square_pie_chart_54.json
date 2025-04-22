@@ -1,0 +1,74 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": false,
+    "top": "1%",
+    "left": "center",
+    "data": [
+      "客户细分",
+      "产品开发",
+      "供应链管理",
+      "财务规划",
+      "企业社会责任",
+      "渠道管理",
+      "客户满意度",
+      "客户关系管理"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": "91%",
+      "center": [
+        "18%",
+        "76%"
+      ],
+      "startAngle": 90,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 1049,
+          "name": "客户细分"
+        },
+        {
+          "value": 1045,
+          "name": "产品开发"
+        },
+        {
+          "value": 1095,
+          "name": "供应链管理"
+        },
+        {
+          "value": 121,
+          "name": "财务规划"
+        },
+        {
+          "value": 283,
+          "name": "企业社会责任"
+        },
+        {
+          "value": 1077,
+          "name": "渠道管理"
+        },
+        {
+          "value": 951,
+          "name": "客户满意度"
+        },
+        {
+          "value": 927,
+          "name": "客户关系管理"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{b}"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

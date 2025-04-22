@@ -1,0 +1,57 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "3%",
+    "left": "center",
+    "data": [
+      "电视广告",
+      "社交媒体",
+      "付费搜索",
+      "联盟广告"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "47%",
+        "73%"
+      ],
+      "center": [
+        "58%",
+        "60%"
+      ],
+      "startAngle": 180,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 801,
+          "name": "电视广告"
+        },
+        {
+          "value": 144,
+          "name": "社交媒体"
+        },
+        {
+          "value": 833,
+          "name": "付费搜索"
+        },
+        {
+          "value": 329,
+          "name": "联盟广告"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{b}: {d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

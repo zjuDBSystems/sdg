@@ -1,0 +1,62 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "4%",
+    "left": "center",
+    "data": [
+      "项目管理",
+      "财务规划",
+      "投资策略",
+      "绿色营销",
+      "公共关系"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "55%",
+        "85%"
+      ],
+      "center": [
+        "60%",
+        "68%"
+      ],
+      "startAngle": 180,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 530,
+          "name": "项目管理"
+        },
+        {
+          "value": 885,
+          "name": "财务规划"
+        },
+        {
+          "value": 419,
+          "name": "投资策略"
+        },
+        {
+          "value": 1010,
+          "name": "绿色营销"
+        },
+        {
+          "value": 716,
+          "name": "公共关系"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

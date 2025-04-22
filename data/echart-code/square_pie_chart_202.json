@@ -1,0 +1,74 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "2%",
+    "left": "center",
+    "data": [
+      "品牌定位",
+      "项目管理",
+      "公共关系",
+      "绩效管理",
+      "质量管理",
+      "产品开发",
+      "风险管理",
+      "团队建设"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": "92%",
+      "center": [
+        "22%",
+        "75%"
+      ],
+      "startAngle": 90,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 976,
+          "name": "品牌定位"
+        },
+        {
+          "value": 425,
+          "name": "项目管理"
+        },
+        {
+          "value": 400,
+          "name": "公共关系"
+        },
+        {
+          "value": 704,
+          "name": "绩效管理"
+        },
+        {
+          "value": 980,
+          "name": "质量管理"
+        },
+        {
+          "value": 623,
+          "name": "产品开发"
+        },
+        {
+          "value": 414,
+          "name": "风险管理"
+        },
+        {
+          "value": 458,
+          "name": "团队建设"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "inside",
+        "formatter": "{b}"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

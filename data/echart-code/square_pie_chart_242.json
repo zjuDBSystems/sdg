@@ -1,0 +1,54 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "2%",
+    "left": "center",
+    "data": [
+      "公共关系",
+      "变革管理",
+      "并购",
+      "市场分析"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": "91%",
+      "center": [
+        "10%",
+        "76%"
+      ],
+      "startAngle": 90,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 1017,
+          "name": "公共关系"
+        },
+        {
+          "value": 440,
+          "name": "变革管理"
+        },
+        {
+          "value": 539,
+          "name": "并购"
+        },
+        {
+          "value": 585,
+          "name": "市场分析"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

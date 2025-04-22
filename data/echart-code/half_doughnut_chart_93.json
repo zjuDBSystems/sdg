@@ -1,0 +1,57 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": false,
+    "top": "3%",
+    "left": "35%",
+    "data": [
+      "继续教育",
+      "教学方法",
+      "教育质量",
+      "特殊教育"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "55%",
+        "80%"
+      ],
+      "center": [
+        "47%",
+        "77%"
+      ],
+      "startAngle": 180,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 204,
+          "name": "继续教育"
+        },
+        {
+          "value": 434,
+          "name": "教学方法"
+        },
+        {
+          "value": 1030,
+          "name": "教育质量"
+        },
+        {
+          "value": 1063,
+          "name": "特殊教育"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{b}"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

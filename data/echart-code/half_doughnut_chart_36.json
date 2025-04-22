@@ -1,0 +1,67 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "0%",
+    "left": "center",
+    "data": [
+      "搜索引擎优化",
+      "自然搜索",
+      "户外广告牌",
+      "网红营销",
+      "搜索引擎营销",
+      "播客"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "42%",
+        "81%"
+      ],
+      "center": [
+        "41%",
+        "78%"
+      ],
+      "startAngle": 180,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 568,
+          "name": "搜索引擎优化"
+        },
+        {
+          "value": 500,
+          "name": "自然搜索"
+        },
+        {
+          "value": 414,
+          "name": "户外广告牌"
+        },
+        {
+          "value": 477,
+          "name": "网红营销"
+        },
+        {
+          "value": 547,
+          "name": "搜索引擎营销"
+        },
+        {
+          "value": 428,
+          "name": "播客"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{b}"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

@@ -1,0 +1,52 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": false,
+    "top": "0%",
+    "left": "center",
+    "data": [
+      "在线教育",
+      "教育公平",
+      "教育技术"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "30%",
+        "82%"
+      ],
+      "center": [
+        "56%",
+        "74%"
+      ],
+      "startAngle": 180,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 360,
+          "name": "在线教育"
+        },
+        {
+          "value": 794,
+          "name": "教育公平"
+        },
+        {
+          "value": 226,
+          "name": "教育技术"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{b}"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

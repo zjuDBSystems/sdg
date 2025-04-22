@@ -1,0 +1,59 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "2%",
+    "left": "center",
+    "data": [
+      "音乐",
+      "节日",
+      "视频博客",
+      "餐饮",
+      "时尚"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": "94%",
+      "center": [
+        "11%",
+        "86%"
+      ],
+      "startAngle": 83,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 841,
+          "name": "音乐"
+        },
+        {
+          "value": 623,
+          "name": "节日"
+        },
+        {
+          "value": 412,
+          "name": "视频博客"
+        },
+        {
+          "value": 278,
+          "name": "餐饮"
+        },
+        {
+          "value": 304,
+          "name": "时尚"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{b}: {d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

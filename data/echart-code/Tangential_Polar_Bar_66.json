@@ -1,0 +1,47 @@
+{
+  "polar": {
+    "radius": [
+      21,
+      "81%"
+    ]
+  },
+  "angleAxis": {
+    "max": 4,
+    "startAngle": 48
+  },
+  "radiusAxis": {
+    "type": "category",
+    "data": [
+      "定价策略",
+      "竞争分析",
+      "创新管理"
+    ],
+    "axisLabel": {
+      "show": true,
+      "interval": 0,
+      "rotate": 0,
+      "margin": 8
+    }
+  },
+  "tooltip": {
+    "trigger": "item"
+  },
+  "series": {
+    "type": "bar",
+    "data": [
+      3.1,
+      2,
+      1.7
+    ],
+    "color": [
+      "#73C0DE"
+    ],
+    "coordinateSystem": "polar",
+    "label": {
+      "show": true,
+      "position": "middle",
+      "formatter": "{c}"
+    }
+  },
+  "backgroundColor": "#fff"
+}

@@ -1,0 +1,67 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "3%",
+    "left": "center",
+    "data": [
+      "并购",
+      "品牌定位",
+      "危机管理",
+      "变革管理",
+      "渠道管理",
+      "市场分析"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "26%",
+        "74%"
+      ],
+      "center": [
+        "60%",
+        "59%"
+      ],
+      "startAngle": 180,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 975,
+          "name": "并购"
+        },
+        {
+          "value": 1068,
+          "name": "品牌定位"
+        },
+        {
+          "value": 338,
+          "name": "危机管理"
+        },
+        {
+          "value": 398,
+          "name": "变革管理"
+        },
+        {
+          "value": 733,
+          "name": "渠道管理"
+        },
+        {
+          "value": 280,
+          "name": "市场分析"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{b}: {d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

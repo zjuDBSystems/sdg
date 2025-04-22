@@ -1,0 +1,72 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "0%",
+    "left": "center",
+    "data": [
+      "变革管理",
+      "绩效管理",
+      "客户关系管理",
+      "质量管理",
+      "定价策略",
+      "创新管理",
+      "项目管理"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "30%",
+        "82%"
+      ],
+      "center": [
+        "48%",
+        "58%"
+      ],
+      "startAngle": 180,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 530,
+          "name": "变革管理"
+        },
+        {
+          "value": 1009,
+          "name": "绩效管理"
+        },
+        {
+          "value": 429,
+          "name": "客户关系管理"
+        },
+        {
+          "value": 598,
+          "name": "质量管理"
+        },
+        {
+          "value": 154,
+          "name": "定价策略"
+        },
+        {
+          "value": 756,
+          "name": "创新管理"
+        },
+        {
+          "value": 952,
+          "name": "项目管理"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "inside",
+        "formatter": "{d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

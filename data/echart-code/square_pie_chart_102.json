@@ -1,0 +1,59 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": false,
+    "top": "4%",
+    "left": "center",
+    "data": [
+      "市场分析",
+      "危机管理",
+      "风险管理",
+      "企业社会责任",
+      "竞争分析"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": "90%",
+      "center": [
+        "19%",
+        "77%"
+      ],
+      "startAngle": 90,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 258,
+          "name": "市场分析"
+        },
+        {
+          "value": 1017,
+          "name": "危机管理"
+        },
+        {
+          "value": 828,
+          "name": "风险管理"
+        },
+        {
+          "value": 364,
+          "name": "企业社会责任"
+        },
+        {
+          "value": 904,
+          "name": "竞争分析"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{b}"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

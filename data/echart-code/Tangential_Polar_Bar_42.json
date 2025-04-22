@@ -1,0 +1,53 @@
+{
+  "polar": {
+    "radius": [
+      22,
+      "88%"
+    ]
+  },
+  "angleAxis": {
+    "max": 5,
+    "startAngle": 54
+  },
+  "radiusAxis": {
+    "type": "category",
+    "data": [
+      "虚拟偶像",
+      "直播",
+      "视频博客",
+      "电子竞技",
+      "电视",
+      "综艺节目"
+    ],
+    "axisLabel": {
+      "show": true,
+      "interval": 0,
+      "rotate": 0,
+      "margin": 8
+    }
+  },
+  "tooltip": {
+    "trigger": "item"
+  },
+  "series": {
+    "type": "bar",
+    "data": [
+      1.2,
+      1.9,
+      3.9,
+      3.2,
+      2.4,
+      1
+    ],
+    "color": [
+      "#2E8B57"
+    ],
+    "coordinateSystem": "polar",
+    "label": {
+      "show": true,
+      "position": "middle",
+      "formatter": "{c}"
+    }
+  },
+  "backgroundColor": "#fff"
+}

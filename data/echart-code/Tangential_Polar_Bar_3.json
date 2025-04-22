@@ -1,0 +1,51 @@
+{
+  "polar": {
+    "radius": [
+      33,
+      "87%"
+    ]
+  },
+  "angleAxis": {
+    "max": 4,
+    "startAngle": 79
+  },
+  "radiusAxis": {
+    "type": "category",
+    "data": [
+      "户外广告牌",
+      "联盟营销",
+      "病毒营销",
+      "游击营销",
+      "付费搜索"
+    ],
+    "axisLabel": {
+      "show": true,
+      "interval": 0,
+      "rotate": 0,
+      "margin": 8
+    }
+  },
+  "tooltip": {
+    "trigger": "item"
+  },
+  "series": {
+    "type": "bar",
+    "data": [
+      0.7,
+      1.6,
+      1.8,
+      1.9,
+      3.4
+    ],
+    "color": [
+      "#FAC858"
+    ],
+    "coordinateSystem": "polar",
+    "label": {
+      "show": true,
+      "position": "middle",
+      "formatter": "{c}"
+    }
+  },
+  "backgroundColor": "#fff"
+}

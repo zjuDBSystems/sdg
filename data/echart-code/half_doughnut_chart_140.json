@@ -1,0 +1,62 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "0%",
+    "left": "40%",
+    "data": [
+      "聊天机器人",
+      "物联网",
+      "可穿戴技术",
+      "边缘计算",
+      "生物识别"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "48%",
+        "74%"
+      ],
+      "center": [
+        "57%",
+        "77%"
+      ],
+      "startAngle": 180,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 842,
+          "name": "聊天机器人"
+        },
+        {
+          "value": 652,
+          "name": "物联网"
+        },
+        {
+          "value": 511,
+          "name": "可穿戴技术"
+        },
+        {
+          "value": 676,
+          "name": "边缘计算"
+        },
+        {
+          "value": 854,
+          "name": "生物识别"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{b}: {d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

@@ -1,0 +1,54 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "4%",
+    "left": "center",
+    "data": [
+      "质量管理",
+      "绿色营销",
+      "品牌定位",
+      "供应链管理"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": "91%",
+      "center": [
+        "13%",
+        "67%"
+      ],
+      "startAngle": 90,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 1070,
+          "name": "质量管理"
+        },
+        {
+          "value": 990,
+          "name": "绿色营销"
+        },
+        {
+          "value": 692,
+          "name": "品牌定位"
+        },
+        {
+          "value": 736,
+          "name": "供应链管理"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{b}: {d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

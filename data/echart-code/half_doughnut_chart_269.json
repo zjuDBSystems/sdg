@@ -1,0 +1,52 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "4%",
+    "left": "center",
+    "data": [
+      "游戏",
+      "博物馆",
+      "音乐"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "38%",
+        "80%"
+      ],
+      "center": [
+        "44%",
+        "73%"
+      ],
+      "startAngle": 180,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 843,
+          "name": "游戏"
+        },
+        {
+          "value": 952,
+          "name": "博物馆"
+        },
+        {
+          "value": 148,
+          "name": "音乐"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{b}: {d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

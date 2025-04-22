@@ -1,0 +1,52 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "0%",
+    "left": "center",
+    "data": [
+      "绿色营销",
+      "定价策略",
+      "危机管理"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "48%",
+        "74%"
+      ],
+      "center": [
+        "42%",
+        "72%"
+      ],
+      "startAngle": 180,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 121,
+          "name": "绿色营销"
+        },
+        {
+          "value": 986,
+          "name": "定价策略"
+        },
+        {
+          "value": 388,
+          "name": "危机管理"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

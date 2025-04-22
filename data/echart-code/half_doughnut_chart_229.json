@@ -1,0 +1,52 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "1%",
+    "left": "center",
+    "data": [
+      "课程开发",
+      "学术研究",
+      "特殊教育"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "45%",
+        "82%"
+      ],
+      "center": [
+        "40%",
+        "68%"
+      ],
+      "startAngle": 141,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 652,
+          "name": "课程开发"
+        },
+        {
+          "value": 988,
+          "name": "学术研究"
+        },
+        {
+          "value": 712,
+          "name": "特殊教育"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{b}"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

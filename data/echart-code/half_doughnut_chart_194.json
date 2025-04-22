@@ -1,0 +1,52 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "2%",
+    "left": "center",
+    "data": [
+      "增强现实",
+      "自动驾驶",
+      "物联网"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "53%",
+        "84%"
+      ],
+      "center": [
+        "48%",
+        "73%"
+      ],
+      "startAngle": 180,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 834,
+          "name": "增强现实"
+        },
+        {
+          "value": 348,
+          "name": "自动驾驶"
+        },
+        {
+          "value": 775,
+          "name": "物联网"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": false,
+        "position": "outside",
+        "formatter": "{b}"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

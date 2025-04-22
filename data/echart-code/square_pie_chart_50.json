@@ -1,0 +1,69 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "4%",
+    "left": "center",
+    "data": [
+      "智能音箱",
+      "机器学习",
+      "语音助手",
+      "5G技术",
+      "大数据",
+      "聊天机器人",
+      "人工智能"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": "90%",
+      "center": [
+        "33%",
+        "70%"
+      ],
+      "startAngle": 90,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 222,
+          "name": "智能音箱"
+        },
+        {
+          "value": 230,
+          "name": "机器学习"
+        },
+        {
+          "value": 785,
+          "name": "语音助手"
+        },
+        {
+          "value": 116,
+          "name": "5G技术"
+        },
+        {
+          "value": 901,
+          "name": "大数据"
+        },
+        {
+          "value": 578,
+          "name": "聊天机器人"
+        },
+        {
+          "value": 269,
+          "name": "人工智能"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": false,
+        "position": "inside",
+        "formatter": "{b}: {d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

@@ -1,0 +1,52 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "2%",
+    "left": "center",
+    "data": [
+      "付费搜索",
+      "直接访问",
+      "推荐"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "55%",
+        "84%"
+      ],
+      "center": [
+        "58%",
+        "58%"
+      ],
+      "startAngle": 180,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 1039,
+          "name": "付费搜索"
+        },
+        {
+          "value": 752,
+          "name": "直接访问"
+        },
+        {
+          "value": 1091,
+          "name": "推荐"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": false,
+        "position": "inside",
+        "formatter": "{b}"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

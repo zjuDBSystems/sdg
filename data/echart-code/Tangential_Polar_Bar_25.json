@@ -1,0 +1,47 @@
+{
+  "polar": {
+    "radius": [
+      25,
+      "70%"
+    ]
+  },
+  "angleAxis": {
+    "max": 3,
+    "startAngle": 62
+  },
+  "radiusAxis": {
+    "type": "category",
+    "data": [
+      "预测分析",
+      "边缘计算",
+      "可穿戴技术"
+    ],
+    "axisLabel": {
+      "show": true,
+      "interval": 0,
+      "rotate": 0,
+      "margin": 8
+    }
+  },
+  "tooltip": {
+    "trigger": "item"
+  },
+  "series": {
+    "type": "bar",
+    "data": [
+      1.4,
+      1.9,
+      0.8
+    ],
+    "color": [
+      "#40E0D0"
+    ],
+    "coordinateSystem": "polar",
+    "label": {
+      "show": true,
+      "position": "middle",
+      "formatter": "{c}"
+    }
+  },
+  "backgroundColor": "#fff"
+}

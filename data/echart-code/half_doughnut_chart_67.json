@@ -1,0 +1,72 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": false,
+    "top": "2%",
+    "left": "center",
+    "data": [
+      "数据隐私",
+      "5G技术",
+      "加密货币",
+      "区块链",
+      "非同质化代币",
+      "边缘计算",
+      "自动驾驶"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "45%",
+        "75%"
+      ],
+      "center": [
+        "42%",
+        "53%"
+      ],
+      "startAngle": 180,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 542,
+          "name": "数据隐私"
+        },
+        {
+          "value": 306,
+          "name": "5G技术"
+        },
+        {
+          "value": 789,
+          "name": "加密货币"
+        },
+        {
+          "value": 558,
+          "name": "区块链"
+        },
+        {
+          "value": 655,
+          "name": "非同质化代币"
+        },
+        {
+          "value": 354,
+          "name": "边缘计算"
+        },
+        {
+          "value": 951,
+          "name": "自动驾驶"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{b}: {d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

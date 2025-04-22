@@ -1,0 +1,72 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "1%",
+    "left": "center",
+    "data": [
+      "自然语言处理",
+      "物联网",
+      "虚拟现实",
+      "可穿戴技术",
+      "生物识别",
+      "5G技术",
+      "云计算"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "37%",
+        "80%"
+      ],
+      "center": [
+        "43%",
+        "55%"
+      ],
+      "startAngle": 180,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 254,
+          "name": "自然语言处理"
+        },
+        {
+          "value": 200,
+          "name": "物联网"
+        },
+        {
+          "value": 724,
+          "name": "虚拟现实"
+        },
+        {
+          "value": 247,
+          "name": "可穿戴技术"
+        },
+        {
+          "value": 1063,
+          "name": "生物识别"
+        },
+        {
+          "value": 389,
+          "name": "5G技术"
+        },
+        {
+          "value": 144,
+          "name": "云计算"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "inside",
+        "formatter": "{d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

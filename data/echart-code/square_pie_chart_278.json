@@ -1,0 +1,59 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "2%",
+    "left": "center",
+    "data": [
+      "直播",
+      "演出",
+      "动漫",
+      "游戏",
+      "体育"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": "94%",
+      "center": [
+        "38%",
+        "78%"
+      ],
+      "startAngle": 96,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 334,
+          "name": "直播"
+        },
+        {
+          "value": 605,
+          "name": "演出"
+        },
+        {
+          "value": 1082,
+          "name": "动漫"
+        },
+        {
+          "value": 650,
+          "name": "游戏"
+        },
+        {
+          "value": 879,
+          "name": "体育"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "inside",
+        "formatter": "{b}"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

@@ -1,0 +1,54 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "0%",
+    "left": "center",
+    "data": [
+      "成人教育",
+      "实习",
+      "职业指导",
+      "职业培训"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": "95%",
+      "center": [
+        "21%",
+        "69%"
+      ],
+      "startAngle": 90,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 284,
+          "name": "成人教育"
+        },
+        {
+          "value": 965,
+          "name": "实习"
+        },
+        {
+          "value": 326,
+          "name": "职业指导"
+        },
+        {
+          "value": 525,
+          "name": "职业培训"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "inside",
+        "formatter": "{d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

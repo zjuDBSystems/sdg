@@ -1,0 +1,49 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": false,
+    "top": "2%",
+    "left": "center",
+    "data": [
+      "物联网",
+      "生物识别",
+      "5G技术"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": "88%",
+      "center": [
+        "13%",
+        "68%"
+      ],
+      "startAngle": 84,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 660,
+          "name": "物联网"
+        },
+        {
+          "value": 525,
+          "name": "生物识别"
+        },
+        {
+          "value": 772,
+          "name": "5G技术"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{b}"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

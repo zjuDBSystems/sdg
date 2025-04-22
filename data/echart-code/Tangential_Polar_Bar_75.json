@@ -1,0 +1,53 @@
+{
+  "polar": {
+    "radius": [
+      29,
+      "88%"
+    ]
+  },
+  "angleAxis": {
+    "max": 5,
+    "startAngle": 54
+  },
+  "radiusAxis": {
+    "type": "category",
+    "data": [
+      "时尚",
+      "节日",
+      "动漫",
+      "真人秀",
+      "纪录片",
+      "派对"
+    ],
+    "axisLabel": {
+      "show": true,
+      "interval": 0,
+      "rotate": 0,
+      "margin": 8
+    }
+  },
+  "tooltip": {
+    "trigger": "item"
+  },
+  "series": {
+    "type": "bar",
+    "data": [
+      2.7,
+      3.4,
+      2,
+      0.8,
+      3.7,
+      1.8
+    ],
+    "color": [
+      "#9A60B4"
+    ],
+    "coordinateSystem": "polar",
+    "label": {
+      "show": true,
+      "position": "middle",
+      "formatter": "{c}"
+    }
+  },
+  "backgroundColor": "#fff"
+}

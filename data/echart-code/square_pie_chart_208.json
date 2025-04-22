@@ -1,0 +1,69 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "4%",
+    "left": "center",
+    "data": [
+      "教育改革",
+      "教育创新",
+      "特殊教育",
+      "职业培训",
+      "教育交流",
+      "在线教育",
+      "职业指导"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": "90%",
+      "center": [
+        "26%",
+        "60%"
+      ],
+      "startAngle": 90,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 757,
+          "name": "教育改革"
+        },
+        {
+          "value": 763,
+          "name": "教育创新"
+        },
+        {
+          "value": 1015,
+          "name": "特殊教育"
+        },
+        {
+          "value": 392,
+          "name": "职业培训"
+        },
+        {
+          "value": 359,
+          "name": "教育交流"
+        },
+        {
+          "value": 732,
+          "name": "在线教育"
+        },
+        {
+          "value": 852,
+          "name": "职业指导"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "inside",
+        "formatter": "{b}"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

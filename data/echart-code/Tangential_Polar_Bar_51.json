@@ -1,0 +1,47 @@
+{
+  "polar": {
+    "radius": [
+      27,
+      "78%"
+    ]
+  },
+  "angleAxis": {
+    "max": 5,
+    "startAngle": 70
+  },
+  "radiusAxis": {
+    "type": "category",
+    "data": [
+      "电影",
+      "餐饮",
+      "展览"
+    ],
+    "axisLabel": {
+      "show": true,
+      "interval": 0,
+      "rotate": 0,
+      "margin": 8
+    }
+  },
+  "tooltip": {
+    "trigger": "item"
+  },
+  "series": {
+    "type": "bar",
+    "data": [
+      2.6,
+      0.7,
+      3.9
+    ],
+    "color": [
+      "#32CD32"
+    ],
+    "coordinateSystem": "polar",
+    "label": {
+      "show": true,
+      "position": "middle",
+      "formatter": "{c}"
+    }
+  },
+  "backgroundColor": "#fff"
+}

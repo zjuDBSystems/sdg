@@ -1,0 +1,77 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": false,
+    "top": "0%",
+    "left": "center",
+    "data": [
+      "可持续发展",
+      "忠诚度计划",
+      "品牌定位",
+      "投资策略",
+      "绿色营销",
+      "公共关系",
+      "危机管理",
+      "竞争分析"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "50%",
+        "80%"
+      ],
+      "center": [
+        "41%",
+        "80%"
+      ],
+      "startAngle": 180,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 403,
+          "name": "可持续发展"
+        },
+        {
+          "value": 446,
+          "name": "忠诚度计划"
+        },
+        {
+          "value": 947,
+          "name": "品牌定位"
+        },
+        {
+          "value": 500,
+          "name": "投资策略"
+        },
+        {
+          "value": 312,
+          "name": "绿色营销"
+        },
+        {
+          "value": 773,
+          "name": "公共关系"
+        },
+        {
+          "value": 262,
+          "name": "危机管理"
+        },
+        {
+          "value": 297,
+          "name": "竞争分析"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{b}"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

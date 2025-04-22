@@ -1,0 +1,54 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "3%",
+    "left": "center",
+    "data": [
+      "网络研讨会",
+      "付费搜索",
+      "短信",
+      "平面广告"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": "85%",
+      "center": [
+        "38%",
+        "72%"
+      ],
+      "startAngle": 90,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 1060,
+          "name": "网络研讨会"
+        },
+        {
+          "value": 919,
+          "name": "付费搜索"
+        },
+        {
+          "value": 602,
+          "name": "短信"
+        },
+        {
+          "value": 980,
+          "name": "平面广告"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{b}: {d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

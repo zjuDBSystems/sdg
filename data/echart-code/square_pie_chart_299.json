@@ -1,0 +1,49 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "1%",
+    "left": "center",
+    "data": [
+      "视频博客",
+      "电视",
+      "广播"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": "94%",
+      "center": [
+        "26%",
+        "88%"
+      ],
+      "startAngle": 90,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 825,
+          "name": "视频博客"
+        },
+        {
+          "value": 714,
+          "name": "电视"
+        },
+        {
+          "value": 932,
+          "name": "广播"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

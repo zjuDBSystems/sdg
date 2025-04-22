@@ -1,0 +1,77 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "3%",
+    "left": "center",
+    "data": [
+      "直播",
+      "电子竞技",
+      "旅游",
+      "电影",
+      "动漫",
+      "视频博客",
+      "体育",
+      "派对"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "29%",
+        "79%"
+      ],
+      "center": [
+        "47%",
+        "68%"
+      ],
+      "startAngle": 180,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 863,
+          "name": "直播"
+        },
+        {
+          "value": 1018,
+          "name": "电子竞技"
+        },
+        {
+          "value": 692,
+          "name": "旅游"
+        },
+        {
+          "value": 596,
+          "name": "电影"
+        },
+        {
+          "value": 495,
+          "name": "动漫"
+        },
+        {
+          "value": 762,
+          "name": "视频博客"
+        },
+        {
+          "value": 766,
+          "name": "体育"
+        },
+        {
+          "value": 313,
+          "name": "派对"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{b}"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

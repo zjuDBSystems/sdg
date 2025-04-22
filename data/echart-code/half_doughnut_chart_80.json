@@ -1,0 +1,57 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "2%",
+    "left": "center",
+    "data": [
+      "游戏",
+      "视频博客",
+      "体育",
+      "虚拟偶像"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "26%",
+        "77%"
+      ],
+      "center": [
+        "49%",
+        "66%"
+      ],
+      "startAngle": 180,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 210,
+          "name": "游戏"
+        },
+        {
+          "value": 418,
+          "name": "视频博客"
+        },
+        {
+          "value": 308,
+          "name": "体育"
+        },
+        {
+          "value": 917,
+          "name": "虚拟偶像"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "inside",
+        "formatter": "{d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

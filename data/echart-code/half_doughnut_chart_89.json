@@ -1,0 +1,52 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "3%",
+    "left": "center",
+    "data": [
+      "学生评估",
+      "在线教育",
+      "教育改革"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "53%",
+        "84%"
+      ],
+      "center": [
+        "49%",
+        "63%"
+      ],
+      "startAngle": 180,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 472,
+          "name": "学生评估"
+        },
+        {
+          "value": 543,
+          "name": "在线教育"
+        },
+        {
+          "value": 165,
+          "name": "教育改革"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

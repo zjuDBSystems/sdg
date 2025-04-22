@@ -1,0 +1,47 @@
+{
+  "polar": {
+    "radius": [
+      28,
+      "80%"
+    ]
+  },
+  "angleAxis": {
+    "max": 4,
+    "startAngle": 71
+  },
+  "radiusAxis": {
+    "type": "category",
+    "data": [
+      "投资策略",
+      "风险管理",
+      "企业文化"
+    ],
+    "axisLabel": {
+      "show": true,
+      "interval": 0,
+      "rotate": 0,
+      "margin": 8
+    }
+  },
+  "tooltip": {
+    "trigger": "item"
+  },
+  "series": {
+    "type": "bar",
+    "data": [
+      1.2,
+      3,
+      2.4
+    ],
+    "color": [
+      "#91CC75"
+    ],
+    "coordinateSystem": "polar",
+    "label": {
+      "show": true,
+      "position": "middle",
+      "formatter": "{c}"
+    }
+  },
+  "backgroundColor": "#fff"
+}

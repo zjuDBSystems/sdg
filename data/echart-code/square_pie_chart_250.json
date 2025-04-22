@@ -1,0 +1,54 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "2%",
+    "left": "center",
+    "data": [
+      "联盟广告",
+      "网络研讨会",
+      "病毒营销",
+      "社交媒体"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": "87%",
+      "center": [
+        "42%",
+        "69%"
+      ],
+      "startAngle": 90,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 319,
+          "name": "联盟广告"
+        },
+        {
+          "value": 806,
+          "name": "网络研讨会"
+        },
+        {
+          "value": 871,
+          "name": "病毒营销"
+        },
+        {
+          "value": 245,
+          "name": "社交媒体"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

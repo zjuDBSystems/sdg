@@ -1,0 +1,64 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "4%",
+    "left": "center",
+    "data": [
+      "展览",
+      "网络红人",
+      "电视",
+      "派对",
+      "博物馆",
+      "节日"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": "86%",
+      "center": [
+        "46%",
+        "84%"
+      ],
+      "startAngle": 90,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 737,
+          "name": "展览"
+        },
+        {
+          "value": 114,
+          "name": "网络红人"
+        },
+        {
+          "value": 638,
+          "name": "电视"
+        },
+        {
+          "value": 1001,
+          "name": "派对"
+        },
+        {
+          "value": 430,
+          "name": "博物馆"
+        },
+        {
+          "value": 567,
+          "name": "节日"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{b}: {d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

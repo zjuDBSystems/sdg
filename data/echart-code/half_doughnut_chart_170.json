@@ -1,0 +1,72 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "0%",
+    "left": "39%",
+    "data": [
+      "派对",
+      "艺术",
+      "节日",
+      "虚拟偶像",
+      "电子竞技",
+      "播客",
+      "综艺节目"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "52%",
+        "83%"
+      ],
+      "center": [
+        "57%",
+        "73%"
+      ],
+      "startAngle": 180,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 1086,
+          "name": "派对"
+        },
+        {
+          "value": 262,
+          "name": "艺术"
+        },
+        {
+          "value": 943,
+          "name": "节日"
+        },
+        {
+          "value": 378,
+          "name": "虚拟偶像"
+        },
+        {
+          "value": 578,
+          "name": "电子竞技"
+        },
+        {
+          "value": 892,
+          "name": "播客"
+        },
+        {
+          "value": 373,
+          "name": "综艺节目"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{b}: {d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

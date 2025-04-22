@@ -2,6 +2,7 @@ from enum import Enum
 from dataclasses import dataclass
 import os
 import shutil
+from uuid import uuid4
 
 from ..config import settings
 
@@ -28,6 +29,8 @@ class DataType(Enum):
     VIDEO = 'video'
     TABLE = 'table'
     GRAPH = 'graph'
+    ECHARTS = 'echarts'
+    CODE = 'code'
 
 
 class ScoreCollector:
@@ -260,16 +263,16 @@ class Dataset:
         return score_dict
 
 
-def copy_dataset(src: Dataset, prefix: str):
+def copy_dataset(src: Dataset):
     dirs: list[Datadir] = []
     for dir in src.dirs:
-        relative_data_path = prefix + dir.relative_data_path
+        relative_data_path = str(uuid4())
         data_type = dir.data_type
         target_dir = Datadir(relative_data_path, data_type)
         # os.mkdir(target_dir.data_path)
         shutil.copytree(dir.data_path, target_dir.data_path)
         dirs.append(target_dir)
-    meta_path = prefix + src.relative_meta_path
+    meta_path = str(uuid4()) + '.metadata'
     dataset: Dataset = Dataset(dirs, meta_path)
     shutil.copy(src.meta_path, dataset.meta_path)
     return dataset

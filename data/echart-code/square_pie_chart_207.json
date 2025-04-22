@@ -1,0 +1,54 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "2%",
+    "left": "center",
+    "data": [
+      "教育交流",
+      "教育资源",
+      "语言学习",
+      "教育评估"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": "94%",
+      "center": [
+        "30%",
+        "78%"
+      ],
+      "startAngle": 90,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 286,
+          "name": "教育交流"
+        },
+        {
+          "value": 198,
+          "name": "教育资源"
+        },
+        {
+          "value": 284,
+          "name": "语言学习"
+        },
+        {
+          "value": 1087,
+          "name": "教育评估"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

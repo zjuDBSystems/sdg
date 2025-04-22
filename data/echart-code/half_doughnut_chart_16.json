@@ -1,0 +1,77 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": false,
+    "top": "3%",
+    "left": "center",
+    "data": [
+      "团队建设",
+      "质量管理",
+      "绿色营销",
+      "可持续发展",
+      "领导力",
+      "创新管理",
+      "供应链管理",
+      "竞争分析"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "32%",
+        "62%"
+      ],
+      "center": [
+        "43%",
+        "63%"
+      ],
+      "startAngle": 180,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 1006,
+          "name": "团队建设"
+        },
+        {
+          "value": 893,
+          "name": "质量管理"
+        },
+        {
+          "value": 233,
+          "name": "绿色营销"
+        },
+        {
+          "value": 356,
+          "name": "可持续发展"
+        },
+        {
+          "value": 663,
+          "name": "领导力"
+        },
+        {
+          "value": 304,
+          "name": "创新管理"
+        },
+        {
+          "value": 1060,
+          "name": "供应链管理"
+        },
+        {
+          "value": 907,
+          "name": "竞争分析"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{b}: {d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

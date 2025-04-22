@@ -1,0 +1,54 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "0%",
+    "left": "center",
+    "data": [
+      "客户满意度",
+      "领导力",
+      "绿色营销",
+      "组织结构"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": "85%",
+      "center": [
+        "35%",
+        "81%"
+      ],
+      "startAngle": 90,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 212,
+          "name": "客户满意度"
+        },
+        {
+          "value": 952,
+          "name": "领导力"
+        },
+        {
+          "value": 396,
+          "name": "绿色营销"
+        },
+        {
+          "value": 963,
+          "name": "组织结构"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

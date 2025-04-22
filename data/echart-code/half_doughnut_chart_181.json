@@ -1,0 +1,62 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "2%",
+    "left": "center",
+    "data": [
+      "教育政策",
+      "继续教育",
+      "教育投资",
+      "教育公平",
+      "奖学金"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "55%",
+        "81%"
+      ],
+      "center": [
+        "44%",
+        "65%"
+      ],
+      "startAngle": 180,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 567,
+          "name": "教育政策"
+        },
+        {
+          "value": 911,
+          "name": "继续教育"
+        },
+        {
+          "value": 292,
+          "name": "教育投资"
+        },
+        {
+          "value": 467,
+          "name": "教育公平"
+        },
+        {
+          "value": 800,
+          "name": "奖学金"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{b}"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

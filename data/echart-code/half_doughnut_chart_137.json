@@ -1,0 +1,52 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "2%",
+    "left": "34%",
+    "data": [
+      "5G技术",
+      "可穿戴技术",
+      "预测分析"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "33%",
+        "68%"
+      ],
+      "center": [
+        "60%",
+        "55%"
+      ],
+      "startAngle": 180,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 237,
+          "name": "5G技术"
+        },
+        {
+          "value": 106,
+          "name": "可穿戴技术"
+        },
+        {
+          "value": 462,
+          "name": "预测分析"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{b}"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

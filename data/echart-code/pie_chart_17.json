@@ -1,0 +1,61 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "top": "5%",
+    "left": "center",
+    "textStyle": {
+      "fontSize": 14,
+      "color": "#666"
+    }
+  },
+  "series": [
+    {
+      "type": "pie",
+      "radius": [
+        "60%",
+        "70%"
+      ],
+      "itemStyle": {
+        "borderRadius": 5,
+        "borderColor": "#fff",
+        "borderWidth": 3
+      },
+      "label": {
+        "show": false,
+        "position": "center",
+        "formatter": "{c}: {d}%",
+        "fontSize": 28,
+        "fontWeight": "bold",
+        "color": "#333"
+      },
+      "emphasis": {
+        "label": {
+          "show": true,
+          "color": "#000"
+        }
+      },
+      "data": [
+        {
+          "name": "电影",
+          "value": 712
+        },
+        {
+          "name": "音乐",
+          "value": 1268
+        },
+        {
+          "name": "电视",
+          "value": 849
+        },
+        {
+          "name": "广播",
+          "value": 1151
+        }
+      ],
+      "animation": false
+    }
+  ],
+  "backgroundColor": "#fff"
+}

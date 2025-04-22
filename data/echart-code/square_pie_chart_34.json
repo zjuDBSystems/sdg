@@ -1,0 +1,64 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "0%",
+    "left": "29%",
+    "data": [
+      "直接访问",
+      "付费搜索",
+      "病毒营销",
+      "视频广告",
+      "网络研讨会",
+      "活动营销"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": "92%",
+      "center": [
+        "47%",
+        "76%"
+      ],
+      "startAngle": 90,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 717,
+          "name": "直接访问"
+        },
+        {
+          "value": 863,
+          "name": "付费搜索"
+        },
+        {
+          "value": 927,
+          "name": "病毒营销"
+        },
+        {
+          "value": 157,
+          "name": "视频广告"
+        },
+        {
+          "value": 478,
+          "name": "网络研讨会"
+        },
+        {
+          "value": 1044,
+          "name": "活动营销"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

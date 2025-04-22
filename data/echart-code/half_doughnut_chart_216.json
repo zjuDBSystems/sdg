@@ -1,0 +1,52 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "3%",
+    "left": "center",
+    "data": [
+      "在线教育",
+      "科学普及",
+      "教育资源"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "43%",
+        "81%"
+      ],
+      "center": [
+        "59%",
+        "79%"
+      ],
+      "startAngle": 180,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 374,
+          "name": "在线教育"
+        },
+        {
+          "value": 333,
+          "name": "科学普及"
+        },
+        {
+          "value": 459,
+          "name": "教育资源"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "inside",
+        "formatter": "{d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

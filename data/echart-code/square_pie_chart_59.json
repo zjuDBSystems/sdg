@@ -1,0 +1,69 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "3%",
+    "left": "center",
+    "data": [
+      "播客",
+      "展览",
+      "电视",
+      "社交活动",
+      "网络红人",
+      "体育",
+      "纪录片"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": "89%",
+      "center": [
+        "45%",
+        "60%"
+      ],
+      "startAngle": 90,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 426,
+          "name": "播客"
+        },
+        {
+          "value": 306,
+          "name": "展览"
+        },
+        {
+          "value": 318,
+          "name": "电视"
+        },
+        {
+          "value": 1017,
+          "name": "社交活动"
+        },
+        {
+          "value": 853,
+          "name": "网络红人"
+        },
+        {
+          "value": 467,
+          "name": "体育"
+        },
+        {
+          "value": 508,
+          "name": "纪录片"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "inside",
+        "formatter": "{b}: {d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

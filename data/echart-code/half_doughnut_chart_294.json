@@ -1,0 +1,52 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": false,
+    "top": "0%",
+    "left": "45%",
+    "data": [
+      "教育创新",
+      "学生评估",
+      "教育资源"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "53%",
+        "78%"
+      ],
+      "center": [
+        "44%",
+        "59%"
+      ],
+      "startAngle": 159,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 672,
+          "name": "教育创新"
+        },
+        {
+          "value": 873,
+          "name": "学生评估"
+        },
+        {
+          "value": 610,
+          "name": "教育资源"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{b}: {d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

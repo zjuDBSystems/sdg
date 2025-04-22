@@ -1,0 +1,77 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "4%",
+    "left": "center",
+    "data": [
+      "网络研讨会",
+      "广播广告",
+      "社交媒体",
+      "活动营销",
+      "搜索引擎优化",
+      "其他",
+      "推荐",
+      "内容营销"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "25%",
+        "80%"
+      ],
+      "center": [
+        "48%",
+        "55%"
+      ],
+      "startAngle": 186,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 436,
+          "name": "网络研讨会"
+        },
+        {
+          "value": 478,
+          "name": "广播广告"
+        },
+        {
+          "value": 1026,
+          "name": "社交媒体"
+        },
+        {
+          "value": 276,
+          "name": "活动营销"
+        },
+        {
+          "value": 733,
+          "name": "搜索引擎优化"
+        },
+        {
+          "value": 952,
+          "name": "其他"
+        },
+        {
+          "value": 542,
+          "name": "推荐"
+        },
+        {
+          "value": 687,
+          "name": "内容营销"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "inside",
+        "formatter": "{b}"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

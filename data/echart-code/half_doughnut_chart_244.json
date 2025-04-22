@@ -1,0 +1,62 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": false,
+    "top": "0%",
+    "left": "center",
+    "data": [
+      "智能音箱",
+      "可穿戴技术",
+      "生物识别",
+      "区块链",
+      "语音助手"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "44%",
+        "76%"
+      ],
+      "center": [
+        "54%",
+        "80%"
+      ],
+      "startAngle": 180,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 780,
+          "name": "智能音箱"
+        },
+        {
+          "value": 970,
+          "name": "可穿戴技术"
+        },
+        {
+          "value": 1061,
+          "name": "生物识别"
+        },
+        {
+          "value": 801,
+          "name": "区块链"
+        },
+        {
+          "value": 723,
+          "name": "语音助手"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{b}: {d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

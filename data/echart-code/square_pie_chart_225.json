@@ -1,0 +1,54 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "1%",
+    "left": "center",
+    "data": [
+      "游击营销",
+      "推送通知",
+      "搜索引擎营销",
+      "推荐"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": "94%",
+      "center": [
+        "43%",
+        "75%"
+      ],
+      "startAngle": 90,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 859,
+          "name": "游击营销"
+        },
+        {
+          "value": 966,
+          "name": "推送通知"
+        },
+        {
+          "value": 962,
+          "name": "搜索引擎营销"
+        },
+        {
+          "value": 918,
+          "name": "推荐"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{b}"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

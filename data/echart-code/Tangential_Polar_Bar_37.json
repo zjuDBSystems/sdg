@@ -1,0 +1,47 @@
+{
+  "polar": {
+    "radius": [
+      33,
+      "87%"
+    ]
+  },
+  "angleAxis": {
+    "max": 4,
+    "startAngle": 82
+  },
+  "radiusAxis": {
+    "type": "category",
+    "data": [
+      "直播",
+      "庆典",
+      "动漫"
+    ],
+    "axisLabel": {
+      "show": true,
+      "interval": 0,
+      "rotate": 0,
+      "margin": 8
+    }
+  },
+  "tooltip": {
+    "trigger": "item"
+  },
+  "series": {
+    "type": "bar",
+    "data": [
+      1.6,
+      3.5,
+      1.1
+    ],
+    "color": [
+      "#FF4500"
+    ],
+    "coordinateSystem": "polar",
+    "label": {
+      "show": true,
+      "position": "middle",
+      "formatter": "{c}"
+    }
+  },
+  "backgroundColor": "#fff"
+}

@@ -1,0 +1,57 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": false,
+    "top": "3%",
+    "left": "center",
+    "data": [
+      "电视",
+      "博物馆",
+      "音乐",
+      "餐饮"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "46%",
+        "79%"
+      ],
+      "center": [
+        "40%",
+        "77%"
+      ],
+      "startAngle": 180,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 162,
+          "name": "电视"
+        },
+        {
+          "value": 467,
+          "name": "博物馆"
+        },
+        {
+          "value": 915,
+          "name": "音乐"
+        },
+        {
+          "value": 599,
+          "name": "餐饮"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{b}: {d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

@@ -1,0 +1,67 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "1%",
+    "left": "center",
+    "data": [
+      "教学方法",
+      "教育政策",
+      "特殊教育",
+      "教育资源",
+      "教育评估",
+      "教育技术"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "26%",
+        "56%"
+      ],
+      "center": [
+        "43%",
+        "56%"
+      ],
+      "startAngle": 180,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 699,
+          "name": "教学方法"
+        },
+        {
+          "value": 797,
+          "name": "教育政策"
+        },
+        {
+          "value": 567,
+          "name": "特殊教育"
+        },
+        {
+          "value": 273,
+          "name": "教育资源"
+        },
+        {
+          "value": 547,
+          "name": "教育评估"
+        },
+        {
+          "value": 156,
+          "name": "教育技术"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "inside",
+        "formatter": "{b}: {d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

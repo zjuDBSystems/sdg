@@ -1,0 +1,59 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": false,
+    "top": "0%",
+    "left": "center",
+    "data": [
+      "客户关系管理",
+      "企业文化",
+      "企业社会责任",
+      "危机管理",
+      "组织结构"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": "90%",
+      "center": [
+        "31%",
+        "75%"
+      ],
+      "startAngle": 90,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 722,
+          "name": "客户关系管理"
+        },
+        {
+          "value": 565,
+          "name": "企业文化"
+        },
+        {
+          "value": 1018,
+          "name": "企业社会责任"
+        },
+        {
+          "value": 879,
+          "name": "危机管理"
+        },
+        {
+          "value": 415,
+          "name": "组织结构"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "inside",
+        "formatter": "{b}"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

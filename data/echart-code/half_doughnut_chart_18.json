@@ -1,0 +1,67 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "4%",
+    "left": "center",
+    "data": [
+      "播客",
+      "演出",
+      "社交活动",
+      "综艺节目",
+      "直播",
+      "旅游"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "28%",
+        "80%"
+      ],
+      "center": [
+        "40%",
+        "52%"
+      ],
+      "startAngle": 180,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 712,
+          "name": "播客"
+        },
+        {
+          "value": 487,
+          "name": "演出"
+        },
+        {
+          "value": 386,
+          "name": "社交活动"
+        },
+        {
+          "value": 527,
+          "name": "综艺节目"
+        },
+        {
+          "value": 950,
+          "name": "直播"
+        },
+        {
+          "value": 570,
+          "name": "旅游"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "inside",
+        "formatter": "{b}"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

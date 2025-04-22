@@ -1,0 +1,49 @@
+{
+  "polar": {
+    "radius": [
+      23,
+      "89%"
+    ]
+  },
+  "angleAxis": {
+    "max": 4,
+    "startAngle": 71
+  },
+  "radiusAxis": {
+    "type": "category",
+    "data": [
+      "定价策略",
+      "客户细分",
+      "领导力",
+      "危机管理"
+    ],
+    "axisLabel": {
+      "show": true,
+      "interval": 0,
+      "rotate": 0,
+      "margin": 8
+    }
+  },
+  "tooltip": {
+    "trigger": "item"
+  },
+  "series": {
+    "type": "bar",
+    "data": [
+      1.7,
+      1.7,
+      2.8,
+      1
+    ],
+    "color": [
+      "#FAC858"
+    ],
+    "coordinateSystem": "polar",
+    "label": {
+      "show": true,
+      "position": "middle",
+      "formatter": "{c}"
+    }
+  },
+  "backgroundColor": "#fff"
+}

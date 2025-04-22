@@ -1,0 +1,67 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "1%",
+    "left": "center",
+    "data": [
+      "搜索引擎",
+      "赞助",
+      "推荐",
+      "短信",
+      "播客",
+      "社交媒体"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "28%",
+        "73%"
+      ],
+      "center": [
+        "40%",
+        "73%"
+      ],
+      "startAngle": 180,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 1093,
+          "name": "搜索引擎"
+        },
+        {
+          "value": 1021,
+          "name": "赞助"
+        },
+        {
+          "value": 689,
+          "name": "推荐"
+        },
+        {
+          "value": 1015,
+          "name": "短信"
+        },
+        {
+          "value": 185,
+          "name": "播客"
+        },
+        {
+          "value": 1051,
+          "name": "社交媒体"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": false,
+        "position": "outside",
+        "formatter": "{d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

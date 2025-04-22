@@ -1,0 +1,67 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "3%",
+    "left": "center",
+    "data": [
+      "企业社会责任",
+      "品牌定位",
+      "投资策略",
+      "领导力",
+      "危机管理",
+      "客户满意度"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "31%",
+        "71%"
+      ],
+      "center": [
+        "52%",
+        "74%"
+      ],
+      "startAngle": 152,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 705,
+          "name": "企业社会责任"
+        },
+        {
+          "value": 686,
+          "name": "品牌定位"
+        },
+        {
+          "value": 705,
+          "name": "投资策略"
+        },
+        {
+          "value": 938,
+          "name": "领导力"
+        },
+        {
+          "value": 410,
+          "name": "危机管理"
+        },
+        {
+          "value": 1039,
+          "name": "客户满意度"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "inside",
+        "formatter": "{d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

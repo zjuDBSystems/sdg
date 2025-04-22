@@ -1,0 +1,53 @@
+{
+  "polar": {
+    "radius": [
+      20,
+      "89%"
+    ]
+  },
+  "angleAxis": {
+    "max": 3,
+    "startAngle": 86
+  },
+  "radiusAxis": {
+    "type": "category",
+    "data": [
+      "网络安全",
+      "区块链",
+      "加密货币",
+      "自然语言处理",
+      "自动驾驶",
+      "聊天机器人"
+    ],
+    "axisLabel": {
+      "show": true,
+      "interval": 0,
+      "rotate": 0,
+      "margin": 8
+    }
+  },
+  "tooltip": {
+    "trigger": "item"
+  },
+  "series": {
+    "type": "bar",
+    "data": [
+      1.3,
+      2.3,
+      1.2,
+      2.7,
+      1.8,
+      1
+    ],
+    "color": [
+      "#FF1493"
+    ],
+    "coordinateSystem": "polar",
+    "label": {
+      "show": true,
+      "position": "middle",
+      "formatter": "{c}"
+    }
+  },
+  "backgroundColor": "#fff"
+}

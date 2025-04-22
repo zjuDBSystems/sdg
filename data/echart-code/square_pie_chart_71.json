@@ -1,0 +1,74 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "4%",
+    "left": "center",
+    "data": [
+      "电子邮件",
+      "推荐",
+      "电视广告",
+      "平面广告",
+      "网红营销",
+      "广播广告",
+      "视频广告",
+      "付费搜索"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": "89%",
+      "center": [
+        "14%",
+        "72%"
+      ],
+      "startAngle": 86,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 237,
+          "name": "电子邮件"
+        },
+        {
+          "value": 849,
+          "name": "推荐"
+        },
+        {
+          "value": 1096,
+          "name": "电视广告"
+        },
+        {
+          "value": 674,
+          "name": "平面广告"
+        },
+        {
+          "value": 261,
+          "name": "网红营销"
+        },
+        {
+          "value": 609,
+          "name": "广播广告"
+        },
+        {
+          "value": 726,
+          "name": "视频广告"
+        },
+        {
+          "value": 918,
+          "name": "付费搜索"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{b}"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

@@ -1,0 +1,59 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "2%",
+    "left": "center",
+    "data": [
+      "教育技术",
+      "职业培训",
+      "特殊教育",
+      "实习",
+      "学术研究"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": "89%",
+      "center": [
+        "14%",
+        "89%"
+      ],
+      "startAngle": 90,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 845,
+          "name": "教育技术"
+        },
+        {
+          "value": 855,
+          "name": "职业培训"
+        },
+        {
+          "value": 489,
+          "name": "特殊教育"
+        },
+        {
+          "value": 162,
+          "name": "实习"
+        },
+        {
+          "value": 764,
+          "name": "学术研究"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "inside",
+        "formatter": "{b}"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

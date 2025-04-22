@@ -1,0 +1,49 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "1%",
+    "left": "center",
+    "data": [
+      "艺术",
+      "旅游",
+      "广播"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": "86%",
+      "center": [
+        "42%",
+        "63%"
+      ],
+      "startAngle": 90,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 394,
+          "name": "艺术"
+        },
+        {
+          "value": 434,
+          "name": "旅游"
+        },
+        {
+          "value": 306,
+          "name": "广播"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{b}"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

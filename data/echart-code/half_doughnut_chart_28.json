@@ -1,0 +1,52 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "2%",
+    "left": "center",
+    "data": [
+      "联盟广告",
+      "电子邮件",
+      "网红营销"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "40%",
+        "77%"
+      ],
+      "center": [
+        "45%",
+        "56%"
+      ],
+      "startAngle": 180,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 599,
+          "name": "联盟广告"
+        },
+        {
+          "value": 542,
+          "name": "电子邮件"
+        },
+        {
+          "value": 774,
+          "name": "网红营销"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

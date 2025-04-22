@@ -1,0 +1,77 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "1%",
+    "left": "center",
+    "data": [
+      "教学方法",
+      "技能提升",
+      "继续教育",
+      "成人教育",
+      "奖学金",
+      "教师培训",
+      "教育改革",
+      "学术研究"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "51%",
+        "81%"
+      ],
+      "center": [
+        "50%",
+        "80%"
+      ],
+      "startAngle": 180,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 784,
+          "name": "教学方法"
+        },
+        {
+          "value": 848,
+          "name": "技能提升"
+        },
+        {
+          "value": 1079,
+          "name": "继续教育"
+        },
+        {
+          "value": 108,
+          "name": "成人教育"
+        },
+        {
+          "value": 1001,
+          "name": "奖学金"
+        },
+        {
+          "value": 331,
+          "name": "教师培训"
+        },
+        {
+          "value": 1059,
+          "name": "教育改革"
+        },
+        {
+          "value": 1086,
+          "name": "学术研究"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "inside",
+        "formatter": "{b}: {d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

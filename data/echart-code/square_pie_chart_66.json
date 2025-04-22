@@ -1,0 +1,69 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "1%",
+    "left": "center",
+    "data": [
+      "教育合作",
+      "技能提升",
+      "教育技术",
+      "继续教育",
+      "教育公平",
+      "教育资源",
+      "教育交流"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": "89%",
+      "center": [
+        "32%",
+        "73%"
+      ],
+      "startAngle": 90,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 529,
+          "name": "教育合作"
+        },
+        {
+          "value": 787,
+          "name": "技能提升"
+        },
+        {
+          "value": 612,
+          "name": "教育技术"
+        },
+        {
+          "value": 318,
+          "name": "继续教育"
+        },
+        {
+          "value": 724,
+          "name": "教育公平"
+        },
+        {
+          "value": 665,
+          "name": "教育资源"
+        },
+        {
+          "value": 905,
+          "name": "教育交流"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{b}"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

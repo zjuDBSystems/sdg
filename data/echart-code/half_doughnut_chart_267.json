@@ -1,0 +1,62 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "4%",
+    "left": "center",
+    "data": [
+      "人工智能",
+      "无人机",
+      "增强现实",
+      "区块链",
+      "计算机视觉"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "44%",
+        "82%"
+      ],
+      "center": [
+        "41%",
+        "52%"
+      ],
+      "startAngle": 180,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 122,
+          "name": "人工智能"
+        },
+        {
+          "value": 863,
+          "name": "无人机"
+        },
+        {
+          "value": 455,
+          "name": "增强现实"
+        },
+        {
+          "value": 464,
+          "name": "区块链"
+        },
+        {
+          "value": 739,
+          "name": "计算机视觉"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "inside",
+        "formatter": "{b}: {d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

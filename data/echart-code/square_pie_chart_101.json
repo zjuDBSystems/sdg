@@ -1,0 +1,59 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "2%",
+    "left": "center",
+    "data": [
+      "变革管理",
+      "竞争分析",
+      "客户关系管理",
+      "企业社会责任",
+      "绿色营销"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": "95%",
+      "center": [
+        "40%",
+        "88%"
+      ],
+      "startAngle": 90,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 718,
+          "name": "变革管理"
+        },
+        {
+          "value": 1004,
+          "name": "竞争分析"
+        },
+        {
+          "value": 662,
+          "name": "客户关系管理"
+        },
+        {
+          "value": 334,
+          "name": "企业社会责任"
+        },
+        {
+          "value": 391,
+          "name": "绿色营销"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "inside",
+        "formatter": "{b}"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

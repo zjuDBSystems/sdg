@@ -1,0 +1,67 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "2%",
+    "left": "center",
+    "data": [
+      "原生广告",
+      "应用内广告",
+      "直接访问",
+      "短信",
+      "电视广告",
+      "推送通知"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "29%",
+        "56%"
+      ],
+      "center": [
+        "55%",
+        "53%"
+      ],
+      "startAngle": 180,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 831,
+          "name": "原生广告"
+        },
+        {
+          "value": 108,
+          "name": "应用内广告"
+        },
+        {
+          "value": 236,
+          "name": "直接访问"
+        },
+        {
+          "value": 553,
+          "name": "短信"
+        },
+        {
+          "value": 845,
+          "name": "电视广告"
+        },
+        {
+          "value": 1000,
+          "name": "推送通知"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{b}: {d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

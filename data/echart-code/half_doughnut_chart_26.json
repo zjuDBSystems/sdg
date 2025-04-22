@@ -1,0 +1,62 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "2%",
+    "left": "center",
+    "data": [
+      "物联网",
+      "深度学习",
+      "非同质化代币",
+      "聊天机器人",
+      "增强现实"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "33%",
+        "72%"
+      ],
+      "center": [
+        "60%",
+        "61%"
+      ],
+      "startAngle": 139,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 281,
+          "name": "物联网"
+        },
+        {
+          "value": 959,
+          "name": "深度学习"
+        },
+        {
+          "value": 400,
+          "name": "非同质化代币"
+        },
+        {
+          "value": 340,
+          "name": "聊天机器人"
+        },
+        {
+          "value": 982,
+          "name": "增强现实"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{b}: {d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

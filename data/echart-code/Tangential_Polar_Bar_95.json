@@ -1,0 +1,51 @@
+{
+  "polar": {
+    "radius": [
+      31,
+      "77%"
+    ]
+  },
+  "angleAxis": {
+    "max": 4,
+    "startAngle": 51
+  },
+  "radiusAxis": {
+    "type": "category",
+    "data": [
+      "实习",
+      "教学方法",
+      "教育创新",
+      "课程开发",
+      "教育公平"
+    ],
+    "axisLabel": {
+      "show": true,
+      "interval": 0,
+      "rotate": 0,
+      "margin": 8
+    }
+  },
+  "tooltip": {
+    "trigger": "item"
+  },
+  "series": {
+    "type": "bar",
+    "data": [
+      3,
+      2,
+      1.5,
+      2,
+      2.1
+    ],
+    "color": [
+      "#32CD32"
+    ],
+    "coordinateSystem": "polar",
+    "label": {
+      "show": true,
+      "position": "middle",
+      "formatter": "{c}"
+    }
+  },
+  "backgroundColor": "#fff"
+}

@@ -1,0 +1,52 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "1%",
+    "left": "center",
+    "data": [
+      "组织结构",
+      "竞争分析",
+      "企业社会责任"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "41%",
+        "69%"
+      ],
+      "center": [
+        "43%",
+        "69%"
+      ],
+      "startAngle": 180,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 201,
+          "name": "组织结构"
+        },
+        {
+          "value": 358,
+          "name": "竞争分析"
+        },
+        {
+          "value": 501,
+          "name": "企业社会责任"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{b}"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

@@ -1,0 +1,67 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "2%",
+    "left": "center",
+    "data": [
+      "区块链",
+      "增强现实",
+      "生物识别",
+      "数据分析",
+      "数据隐私",
+      "自动驾驶"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "53%",
+        "80%"
+      ],
+      "center": [
+        "56%",
+        "54%"
+      ],
+      "startAngle": 180,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 229,
+          "name": "区块链"
+        },
+        {
+          "value": 362,
+          "name": "增强现实"
+        },
+        {
+          "value": 293,
+          "name": "生物识别"
+        },
+        {
+          "value": 481,
+          "name": "数据分析"
+        },
+        {
+          "value": 252,
+          "name": "数据隐私"
+        },
+        {
+          "value": 1010,
+          "name": "自动驾驶"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "inside",
+        "formatter": "{d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

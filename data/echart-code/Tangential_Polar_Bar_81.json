@@ -1,0 +1,51 @@
+{
+  "polar": {
+    "radius": [
+      38,
+      "87%"
+    ]
+  },
+  "angleAxis": {
+    "max": 4,
+    "startAngle": 48
+  },
+  "radiusAxis": {
+    "type": "category",
+    "data": [
+      "病毒营销",
+      "电子邮件",
+      "付费搜索",
+      "直接访问",
+      "赞助"
+    ],
+    "axisLabel": {
+      "show": true,
+      "interval": 0,
+      "rotate": 0,
+      "margin": 8
+    }
+  },
+  "tooltip": {
+    "trigger": "item"
+  },
+  "series": {
+    "type": "bar",
+    "data": [
+      2.6,
+      1.1,
+      0.7,
+      3.4,
+      1.2
+    ],
+    "color": [
+      "#32CD32"
+    ],
+    "coordinateSystem": "polar",
+    "label": {
+      "show": true,
+      "position": "middle",
+      "formatter": "{c}"
+    }
+  },
+  "backgroundColor": "#fff"
+}

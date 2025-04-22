@@ -1,0 +1,53 @@
+{
+  "polar": {
+    "radius": [
+      37,
+      "80%"
+    ]
+  },
+  "angleAxis": {
+    "max": 4,
+    "startAngle": 48
+  },
+  "radiusAxis": {
+    "type": "category",
+    "data": [
+      "艺术",
+      "电影",
+      "短视频",
+      "体育",
+      "视频博客",
+      "电视"
+    ],
+    "axisLabel": {
+      "show": true,
+      "interval": 0,
+      "rotate": 0,
+      "margin": 8
+    }
+  },
+  "tooltip": {
+    "trigger": "item"
+  },
+  "series": {
+    "type": "bar",
+    "data": [
+      2.2,
+      2.7,
+      0.6,
+      2.5,
+      3.6,
+      2.8
+    ],
+    "color": [
+      "#91CC75"
+    ],
+    "coordinateSystem": "polar",
+    "label": {
+      "show": true,
+      "position": "middle",
+      "formatter": "{c}"
+    }
+  },
+  "backgroundColor": "#fff"
+}

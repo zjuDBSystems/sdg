@@ -1,0 +1,72 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "0%",
+    "left": "center",
+    "data": [
+      "网络红人",
+      "真人秀",
+      "派对",
+      "视频博客",
+      "电视",
+      "直播",
+      "庆典"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "33%",
+        "70%"
+      ],
+      "center": [
+        "44%",
+        "65%"
+      ],
+      "startAngle": 180,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 265,
+          "name": "网络红人"
+        },
+        {
+          "value": 811,
+          "name": "真人秀"
+        },
+        {
+          "value": 452,
+          "name": "派对"
+        },
+        {
+          "value": 232,
+          "name": "视频博客"
+        },
+        {
+          "value": 507,
+          "name": "电视"
+        },
+        {
+          "value": 806,
+          "name": "直播"
+        },
+        {
+          "value": 779,
+          "name": "庆典"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{b}: {d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

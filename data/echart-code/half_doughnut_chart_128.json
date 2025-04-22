@@ -1,0 +1,62 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "0%",
+    "left": "center",
+    "data": [
+      "领导力",
+      "质量管理",
+      "项目管理",
+      "市场分析",
+      "团队建设"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "28%",
+        "79%"
+      ],
+      "center": [
+        "58%",
+        "66%"
+      ],
+      "startAngle": 180,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 681,
+          "name": "领导力"
+        },
+        {
+          "value": 1075,
+          "name": "质量管理"
+        },
+        {
+          "value": 224,
+          "name": "项目管理"
+        },
+        {
+          "value": 552,
+          "name": "市场分析"
+        },
+        {
+          "value": 303,
+          "name": "团队建设"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{b}"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

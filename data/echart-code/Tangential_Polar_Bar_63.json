@@ -1,0 +1,53 @@
+{
+  "polar": {
+    "radius": [
+      24,
+      "86%"
+    ]
+  },
+  "angleAxis": {
+    "max": 4,
+    "startAngle": 61
+  },
+  "radiusAxis": {
+    "type": "category",
+    "data": [
+      "市场分析",
+      "企业文化",
+      "绿色营销",
+      "定价策略",
+      "客户关系管理",
+      "绩效管理"
+    ],
+    "axisLabel": {
+      "show": true,
+      "interval": 0,
+      "rotate": 0,
+      "margin": 8
+    }
+  },
+  "tooltip": {
+    "trigger": "item"
+  },
+  "series": {
+    "type": "bar",
+    "data": [
+      2.3,
+      0.8,
+      0.9,
+      0.5,
+      2.8,
+      3.4
+    ],
+    "color": [
+      "#FF6347"
+    ],
+    "coordinateSystem": "polar",
+    "label": {
+      "show": false,
+      "position": "middle",
+      "formatter": "{c}"
+    }
+  },
+  "backgroundColor": "#fff"
+}
