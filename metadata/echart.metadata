@@ -8,7 +8,7 @@ Tangential_Polar_Bar_6.png,Tangential_Polar_Bar_6.json,Tangential_Polar_Bar
 Tangential_Polar_Bar_7.png,Tangential_Polar_Bar_7.json,Tangential_Polar_Bar
 Tangential_Polar_Bar_8.png,Tangential_Polar_Bar_8.json,Tangential_Polar_Bar
 Tangential_Polar_Bar_9.png,Tangential_Polar_Bar_9.json,Tangential_Polar_Bar
-Tangential_Polar_Bar_10.png,Tangential_Polar_Bar_10.json,Tangential_Polar_Bar
+Tangential_Polar_Bar_10.png,,Tangential_Polar_Bar
 Tangential_Polar_Bar_11.png,Tangential_Polar_Bar_11.json,Tangential_Polar_Bar
 Tangential_Polar_Bar_12.png,Tangential_Polar_Bar_12.json,Tangential_Polar_Bar
 Tangential_Polar_Bar_13.png,Tangential_Polar_Bar_13.json,Tangential_Polar_Bar
@@ -82,7 +82,7 @@ Tangential_Polar_Bar_80.png,Tangential_Polar_Bar_80.json,Tangential_Polar_Bar
 Tangential_Polar_Bar_81.png,Tangential_Polar_Bar_81.json,Tangential_Polar_Bar
 Tangential_Polar_Bar_82.png,Tangential_Polar_Bar_82.json,Tangential_Polar_Bar
 Tangential_Polar_Bar_83.png,Tangential_Polar_Bar_83.json,Tangential_Polar_Bar
-Tangential_Polar_Bar_84.png,Tangential_Polar_Bar_84.json,Tangential_Polar_Bar
+Tangential_Polar_Bar_84.png,,Tangential_Polar_Bar
 Tangential_Polar_Bar_85.png,Tangential_Polar_Bar_85.json,Tangential_Polar_Bar
 Tangential_Polar_Bar_86.png,Tangential_Polar_Bar_86.json,Tangential_Polar_Bar
 Tangential_Polar_Bar_87.png,Tangential_Polar_Bar_87.json,Tangential_Polar_Bar
@@ -166,14 +166,14 @@ pie_chart_64.png,pie_chart_64.json,pie_chart
 pie_chart_65.png,pie_chart_65.json,pie_chart
 pie_chart_66.png,pie_chart_66.json,pie_chart
 pie_chart_67.png,pie_chart_67.json,pie_chart
-pie_chart_68.png,pie_chart_68.json,pie_chart
+,pie_chart_68.json,pie_chart
 pie_chart_69.png,pie_chart_69.json,pie_chart
 pie_chart_70.png,pie_chart_70.json,pie_chart
 pie_chart_71.png,pie_chart_71.json,pie_chart
 pie_chart_72.png,pie_chart_72.json,pie_chart
 pie_chart_73.png,pie_chart_73.json,pie_chart
 pie_chart_74.png,pie_chart_74.json,pie_chart
-pie_chart_75.png,pie_chart_75.json,pie_chart
+pie_chart_75.png,,pie_chart
 pie_chart_76.png,pie_chart_76.json,pie_chart
 pie_chart_77.png,pie_chart_77.json,pie_chart
 pie_chart_78.png,pie_chart_78.json,pie_chart
@@ -207,7 +207,7 @@ square_pie_chart_5.png,square_pie_chart_5.json,square_pie
 square_pie_chart_6.png,square_pie_chart_6.json,square_pie
 square_pie_chart_7.png,square_pie_chart_7.json,square_pie
 square_pie_chart_8.png,square_pie_chart_8.json,square_pie
-square_pie_chart_9.png,square_pie_chart_9.json,square_pie
+,square_pie_chart_9.json,square_pie
 square_pie_chart_10.png,square_pie_chart_10.json,square_pie
 square_pie_chart_11.png,square_pie_chart_11.json,square_pie
 square_pie_chart_12.png,square_pie_chart_12.json,square_pie
@@ -283,7 +283,7 @@ square_pie_chart_81.png,square_pie_chart_81.json,square_pie
 square_pie_chart_82.png,square_pie_chart_82.json,square_pie
 square_pie_chart_83.png,square_pie_chart_83.json,square_pie
 square_pie_chart_84.png,square_pie_chart_84.json,square_pie
-square_pie_chart_85.png,square_pie_chart_85.json,square_pie
+,square_pie_chart_85.json,square_pie
 square_pie_chart_86.png,square_pie_chart_86.json,square_pie
 square_pie_chart_87.png,square_pie_chart_87.json,square_pie
 square_pie_chart_88.png,square_pie_chart_88.json,square_pie
@@ -374,11 +374,11 @@ square_pie_chart_172.png,square_pie_chart_172.json,square_pie
 square_pie_chart_173.png,square_pie_chart_173.json,square_pie
 square_pie_chart_174.png,square_pie_chart_174.json,square_pie
 square_pie_chart_175.png,square_pie_chart_175.json,square_pie
-square_pie_chart_176.png,square_pie_chart_176.json,square_pie
+square_pie_chart_176.png,,square_pie
 square_pie_chart_177.png,square_pie_chart_177.json,square_pie
 square_pie_chart_178.png,square_pie_chart_178.json,square_pie
 square_pie_chart_179.png,square_pie_chart_179.json,square_pie
-square_pie_chart_180.png,square_pie_chart_180.json,square_pie
+,square_pie_chart_180.json,square_pie
 square_pie_chart_181.png,square_pie_chart_181.json,square_pie
 square_pie_chart_182.png,square_pie_chart_182.json,square_pie
 square_pie_chart_183.png,square_pie_chart_183.json,square_pie
@@ -418,7 +418,7 @@ square_pie_chart_216.png,square_pie_chart_216.json,square_pie
 square_pie_chart_217.png,square_pie_chart_217.json,square_pie
 square_pie_chart_218.png,square_pie_chart_218.json,square_pie
 square_pie_chart_219.png,square_pie_chart_219.json,square_pie
-square_pie_chart_220.png,square_pie_chart_220.json,square_pie
+square_pie_chart_220.png,,square_pie
 square_pie_chart_221.png,square_pie_chart_221.json,square_pie
 square_pie_chart_222.png,square_pie_chart_222.json,square_pie
 square_pie_chart_223.png,square_pie_chart_223.json,square_pie
@@ -431,7 +431,7 @@ square_pie_chart_229.png,square_pie_chart_229.json,square_pie
 square_pie_chart_230.png,square_pie_chart_230.json,square_pie
 square_pie_chart_231.png,square_pie_chart_231.json,square_pie
 square_pie_chart_232.png,square_pie_chart_232.json,square_pie
-square_pie_chart_233.png,square_pie_chart_233.json,square_pie
+square_pie_chart_233.png,,square_pie
 square_pie_chart_234.png,square_pie_chart_234.json,square_pie
 square_pie_chart_235.png,square_pie_chart_235.json,square_pie
 square_pie_chart_236.png,square_pie_chart_236.json,square_pie
@@ -474,7 +474,7 @@ square_pie_chart_272.png,square_pie_chart_272.json,square_pie
 square_pie_chart_273.png,square_pie_chart_273.json,square_pie
 square_pie_chart_274.png,square_pie_chart_274.json,square_pie
 square_pie_chart_275.png,square_pie_chart_275.json,square_pie
-square_pie_chart_276.png,square_pie_chart_276.json,square_pie
+,square_pie_chart_276.json,square_pie
 square_pie_chart_277.png,square_pie_chart_277.json,square_pie
 square_pie_chart_278.png,square_pie_chart_278.json,square_pie
 square_pie_chart_279.png,square_pie_chart_279.json,square_pie
@@ -535,7 +535,7 @@ half_doughnut_chart_33.png,half_doughnut_chart_33.json,half_doughnut
 half_doughnut_chart_34.png,half_doughnut_chart_34.json,half_doughnut
 half_doughnut_chart_35.png,half_doughnut_chart_35.json,half_doughnut
 half_doughnut_chart_36.png,half_doughnut_chart_36.json,half_doughnut
-half_doughnut_chart_37.png,half_doughnut_chart_37.json,half_doughnut
+,half_doughnut_chart_37.json,half_doughnut
 half_doughnut_chart_38.png,half_doughnut_chart_38.json,half_doughnut
 half_doughnut_chart_39.png,half_doughnut_chart_39.json,half_doughnut
 half_doughnut_chart_40.png,half_doughnut_chart_40.json,half_doughnut
@@ -550,7 +550,7 @@ half_doughnut_chart_48.png,half_doughnut_chart_48.json,half_doughnut
 half_doughnut_chart_49.png,half_doughnut_chart_49.json,half_doughnut
 half_doughnut_chart_50.png,half_doughnut_chart_50.json,half_doughnut
 half_doughnut_chart_51.png,half_doughnut_chart_51.json,half_doughnut
-half_doughnut_chart_52.png,half_doughnut_chart_52.json,half_doughnut
+half_doughnut_chart_52.png,,half_doughnut
 half_doughnut_chart_53.png,half_doughnut_chart_53.json,half_doughnut
 half_doughnut_chart_54.png,half_doughnut_chart_54.json,half_doughnut
 half_doughnut_chart_55.png,half_doughnut_chart_55.json,half_doughnut
@@ -649,7 +649,7 @@ half_doughnut_chart_147.png,half_doughnut_chart_147.json,half_doughnut
 half_doughnut_chart_148.png,half_doughnut_chart_148.json,half_doughnut
 half_doughnut_chart_149.png,half_doughnut_chart_149.json,half_doughnut
 half_doughnut_chart_150.png,half_doughnut_chart_150.json,half_doughnut
-half_doughnut_chart_151.png,half_doughnut_chart_151.json,half_doughnut
+,half_doughnut_chart_151.json,half_doughnut
 half_doughnut_chart_152.png,half_doughnut_chart_152.json,half_doughnut
 half_doughnut_chart_153.png,half_doughnut_chart_153.json,half_doughnut
 half_doughnut_chart_154.png,half_doughnut_chart_154.json,half_doughnut
@@ -718,7 +718,7 @@ half_doughnut_chart_216.png,half_doughnut_chart_216.json,half_doughnut
 half_doughnut_chart_217.png,half_doughnut_chart_217.json,half_doughnut
 half_doughnut_chart_218.png,half_doughnut_chart_218.json,half_doughnut
 half_doughnut_chart_219.png,half_doughnut_chart_219.json,half_doughnut
-half_doughnut_chart_220.png,half_doughnut_chart_220.json,half_doughnut
+half_doughnut_chart_220.png,,half_doughnut
 half_doughnut_chart_221.png,half_doughnut_chart_221.json,half_doughnut
 half_doughnut_chart_222.png,half_doughnut_chart_222.json,half_doughnut
 half_doughnut_chart_223.png,half_doughnut_chart_223.json,half_doughnut
@@ -729,7 +729,7 @@ half_doughnut_chart_227.png,half_doughnut_chart_227.json,half_doughnut
 half_doughnut_chart_228.png,half_doughnut_chart_228.json,half_doughnut
 half_doughnut_chart_229.png,half_doughnut_chart_229.json,half_doughnut
 half_doughnut_chart_230.png,half_doughnut_chart_230.json,half_doughnut
-half_doughnut_chart_231.png,half_doughnut_chart_231.json,half_doughnut
+half_doughnut_chart_231.png,,half_doughnut
 half_doughnut_chart_232.png,half_doughnut_chart_232.json,half_doughnut
 half_doughnut_chart_233.png,half_doughnut_chart_233.json,half_doughnut
 half_doughnut_chart_234.png,half_doughnut_chart_234.json,half_doughnut
@@ -795,7 +795,7 @@ half_doughnut_chart_293.png,half_doughnut_chart_293.json,half_doughnut
 half_doughnut_chart_294.png,half_doughnut_chart_294.json,half_doughnut
 half_doughnut_chart_295.png,half_doughnut_chart_295.json,half_doughnut
 half_doughnut_chart_296.png,half_doughnut_chart_296.json,half_doughnut
-half_doughnut_chart_297.png,half_doughnut_chart_297.json,half_doughnut
+,half_doughnut_chart_297.json,half_doughnut
 half_doughnut_chart_298.png,half_doughnut_chart_298.json,half_doughnut
 half_doughnut_chart_299.png,half_doughnut_chart_299.json,half_doughnut
 half_doughnut_chart_300.png,half_doughnut_chart_300.json,half_doughnut
