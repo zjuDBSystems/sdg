@@ -1,0 +1,52 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "1%",
+    "left": "center",
+    "data": [
+      "财务规划",
+      "公共关系",
+      "企业文化"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "41%",
+        "77%"
+      ],
+      "center": [
+        "50%",
+        "51%"
+      ],
+      "startAngle": 180,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 979,
+          "name": "财务规划"
+        },
+        {
+          "value": 620,
+          "name": "公共关系"
+        },
+        {
+          "value": 1089,
+          "name": "企业文化"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": false,
+        "position": "outside",
+        "formatter": "{b}"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

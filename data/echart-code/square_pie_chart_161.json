@@ -1,0 +1,54 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "1%",
+    "left": "center",
+    "data": [
+      "加密货币",
+      "边缘计算",
+      "5G技术",
+      "人工智能"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": "91%",
+      "center": [
+        "39%",
+        "62%"
+      ],
+      "startAngle": 90,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 978,
+          "name": "加密货币"
+        },
+        {
+          "value": 853,
+          "name": "边缘计算"
+        },
+        {
+          "value": 641,
+          "name": "5G技术"
+        },
+        {
+          "value": 952,
+          "name": "人工智能"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "inside",
+        "formatter": "{b}"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

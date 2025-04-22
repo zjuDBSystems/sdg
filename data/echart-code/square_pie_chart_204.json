@@ -1,0 +1,69 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "0%",
+    "left": "center",
+    "data": [
+      "产品开发",
+      "客户关系管理",
+      "供应链管理",
+      "项目管理",
+      "客户细分",
+      "公共关系",
+      "竞争分析"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": "91%",
+      "center": [
+        "48%",
+        "87%"
+      ],
+      "startAngle": 90,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 853,
+          "name": "产品开发"
+        },
+        {
+          "value": 638,
+          "name": "客户关系管理"
+        },
+        {
+          "value": 647,
+          "name": "供应链管理"
+        },
+        {
+          "value": 598,
+          "name": "项目管理"
+        },
+        {
+          "value": 1020,
+          "name": "客户细分"
+        },
+        {
+          "value": 1041,
+          "name": "公共关系"
+        },
+        {
+          "value": 724,
+          "name": "竞争分析"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{b}"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

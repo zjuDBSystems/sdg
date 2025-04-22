@@ -16,6 +16,7 @@ class DataType(Enum):
     TABLE = 'table'
     GRAPH = 'graph'
     ECHARTS = 'echarts'
+    CODE = 'code'
 
 
 @dataclass

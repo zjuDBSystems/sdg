@@ -1,0 +1,69 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "1%",
+    "left": "center",
+    "data": [
+      "搜索引擎营销",
+      "游击营销",
+      "展示广告",
+      "直接访问",
+      "视频广告",
+      "电子邮件",
+      "推送通知"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": "95%",
+      "center": [
+        "46%",
+        "72%"
+      ],
+      "startAngle": 90,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 234,
+          "name": "搜索引擎营销"
+        },
+        {
+          "value": 343,
+          "name": "游击营销"
+        },
+        {
+          "value": 537,
+          "name": "展示广告"
+        },
+        {
+          "value": 628,
+          "name": "直接访问"
+        },
+        {
+          "value": 608,
+          "name": "视频广告"
+        },
+        {
+          "value": 330,
+          "name": "电子邮件"
+        },
+        {
+          "value": 297,
+          "name": "推送通知"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{b}: {d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

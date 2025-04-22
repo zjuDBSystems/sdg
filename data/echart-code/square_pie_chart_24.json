@@ -1,0 +1,59 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "1%",
+    "left": "center",
+    "data": [
+      "领导力",
+      "质量管理",
+      "可持续发展",
+      "财务规划",
+      "品牌定位"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": "90%",
+      "center": [
+        "45%",
+        "90%"
+      ],
+      "startAngle": 91,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 836,
+          "name": "领导力"
+        },
+        {
+          "value": 150,
+          "name": "质量管理"
+        },
+        {
+          "value": 152,
+          "name": "可持续发展"
+        },
+        {
+          "value": 793,
+          "name": "财务规划"
+        },
+        {
+          "value": 1097,
+          "name": "品牌定位"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{b}: {d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

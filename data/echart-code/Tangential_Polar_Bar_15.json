@@ -1,0 +1,47 @@
+{
+  "polar": {
+    "radius": [
+      20,
+      "82%"
+    ]
+  },
+  "angleAxis": {
+    "max": 3,
+    "startAngle": 72
+  },
+  "radiusAxis": {
+    "type": "category",
+    "data": [
+      "特殊教育",
+      "学术研究",
+      "教育创新"
+    ],
+    "axisLabel": {
+      "show": true,
+      "interval": 0,
+      "rotate": 0,
+      "margin": 8
+    }
+  },
+  "tooltip": {
+    "trigger": "item"
+  },
+  "series": {
+    "type": "bar",
+    "data": [
+      2.6,
+      1.2,
+      1.9
+    ],
+    "color": [
+      "#8A2BE2"
+    ],
+    "coordinateSystem": "polar",
+    "label": {
+      "show": true,
+      "position": "middle",
+      "formatter": "{c}"
+    }
+  },
+  "backgroundColor": "#fff"
+}

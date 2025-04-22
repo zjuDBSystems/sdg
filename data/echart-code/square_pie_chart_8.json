@@ -1,0 +1,59 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "4%",
+    "left": "center",
+    "data": [
+      "边缘计算",
+      "增强现实",
+      "预测分析",
+      "虚拟现实",
+      "加密货币"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": "95%",
+      "center": [
+        "44%",
+        "82%"
+      ],
+      "startAngle": 90,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 359,
+          "name": "边缘计算"
+        },
+        {
+          "value": 1032,
+          "name": "增强现实"
+        },
+        {
+          "value": 1094,
+          "name": "预测分析"
+        },
+        {
+          "value": 1098,
+          "name": "虚拟现实"
+        },
+        {
+          "value": 306,
+          "name": "加密货币"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

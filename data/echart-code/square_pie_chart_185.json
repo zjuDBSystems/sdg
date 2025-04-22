@@ -1,0 +1,74 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": false,
+    "top": "3%",
+    "left": "center",
+    "data": [
+      "量子计算",
+      "边缘计算",
+      "语音助手",
+      "深度学习",
+      "自然语言处理",
+      "聊天机器人",
+      "大数据",
+      "自动驾驶"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": "90%",
+      "center": [
+        "34%",
+        "70%"
+      ],
+      "startAngle": 90,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 202,
+          "name": "量子计算"
+        },
+        {
+          "value": 448,
+          "name": "边缘计算"
+        },
+        {
+          "value": 524,
+          "name": "语音助手"
+        },
+        {
+          "value": 342,
+          "name": "深度学习"
+        },
+        {
+          "value": 837,
+          "name": "自然语言处理"
+        },
+        {
+          "value": 106,
+          "name": "聊天机器人"
+        },
+        {
+          "value": 531,
+          "name": "大数据"
+        },
+        {
+          "value": 542,
+          "name": "自动驾驶"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{b}: {d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

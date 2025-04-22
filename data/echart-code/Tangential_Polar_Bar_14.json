@@ -1,0 +1,51 @@
+{
+  "polar": {
+    "radius": [
+      22,
+      "73%"
+    ]
+  },
+  "angleAxis": {
+    "max": 4,
+    "startAngle": 84
+  },
+  "radiusAxis": {
+    "type": "category",
+    "data": [
+      "病毒营销",
+      "应用内广告",
+      "社交媒体",
+      "活动营销",
+      "自然搜索"
+    ],
+    "axisLabel": {
+      "show": true,
+      "interval": 0,
+      "rotate": 0,
+      "margin": 8
+    }
+  },
+  "tooltip": {
+    "trigger": "item"
+  },
+  "series": {
+    "type": "bar",
+    "data": [
+      1.5,
+      1.2,
+      0.5,
+      0.6,
+      3
+    ],
+    "color": [
+      "#EE6666"
+    ],
+    "coordinateSystem": "polar",
+    "label": {
+      "show": true,
+      "position": "middle",
+      "formatter": "{c}"
+    }
+  },
+  "backgroundColor": "#fff"
+}

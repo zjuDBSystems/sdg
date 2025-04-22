@@ -1,0 +1,51 @@
+{
+  "polar": {
+    "radius": [
+      34,
+      "75%"
+    ]
+  },
+  "angleAxis": {
+    "max": 4,
+    "startAngle": 45
+  },
+  "radiusAxis": {
+    "type": "category",
+    "data": [
+      "付费搜索",
+      "推荐",
+      "电子邮件",
+      "网络研讨会",
+      "横幅广告"
+    ],
+    "axisLabel": {
+      "show": true,
+      "interval": 0,
+      "rotate": 0,
+      "margin": 8
+    }
+  },
+  "tooltip": {
+    "trigger": "item"
+  },
+  "series": {
+    "type": "bar",
+    "data": [
+      1.7,
+      1.2,
+      3.1,
+      0.7,
+      2.2
+    ],
+    "color": [
+      "#8A2BE2"
+    ],
+    "coordinateSystem": "polar",
+    "label": {
+      "show": false,
+      "position": "middle",
+      "formatter": "{c}"
+    }
+  },
+  "backgroundColor": "#fff"
+}

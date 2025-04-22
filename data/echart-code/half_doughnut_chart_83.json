@@ -1,0 +1,62 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "1%",
+    "left": "center",
+    "data": [
+      "项目管理",
+      "客户满意度",
+      "渠道管理",
+      "企业社会责任",
+      "创新管理"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "36%",
+        "74%"
+      ],
+      "center": [
+        "48%",
+        "61%"
+      ],
+      "startAngle": 180,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 815,
+          "name": "项目管理"
+        },
+        {
+          "value": 212,
+          "name": "客户满意度"
+        },
+        {
+          "value": 426,
+          "name": "渠道管理"
+        },
+        {
+          "value": 807,
+          "name": "企业社会责任"
+        },
+        {
+          "value": 563,
+          "name": "创新管理"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{b}"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

@@ -1,0 +1,57 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": false,
+    "top": "3%",
+    "left": "center",
+    "data": [
+      "艺术",
+      "广播",
+      "演出",
+      "电子竞技"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "51%",
+        "76%"
+      ],
+      "center": [
+        "40%",
+        "59%"
+      ],
+      "startAngle": 180,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 120,
+          "name": "艺术"
+        },
+        {
+          "value": 413,
+          "name": "广播"
+        },
+        {
+          "value": 146,
+          "name": "演出"
+        },
+        {
+          "value": 110,
+          "name": "电子竞技"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{b}: {d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

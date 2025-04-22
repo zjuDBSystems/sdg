@@ -1,0 +1,64 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "0%",
+    "left": "center",
+    "data": [
+      "财务规划",
+      "团队建设",
+      "竞争分析",
+      "绿色营销",
+      "公共关系",
+      "风险管理"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": "94%",
+      "center": [
+        "29%",
+        "67%"
+      ],
+      "startAngle": 90,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 436,
+          "name": "财务规划"
+        },
+        {
+          "value": 368,
+          "name": "团队建设"
+        },
+        {
+          "value": 868,
+          "name": "竞争分析"
+        },
+        {
+          "value": 643,
+          "name": "绿色营销"
+        },
+        {
+          "value": 174,
+          "name": "公共关系"
+        },
+        {
+          "value": 951,
+          "name": "风险管理"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

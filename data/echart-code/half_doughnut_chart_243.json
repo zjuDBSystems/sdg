@@ -1,0 +1,77 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "4%",
+    "left": "48%",
+    "data": [
+      "忠诚度计划",
+      "市场分析",
+      "危机管理",
+      "风险管理",
+      "绿色营销",
+      "客户满意度",
+      "渠道管理",
+      "客户关系管理"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "51%",
+        "78%"
+      ],
+      "center": [
+        "59%",
+        "50%"
+      ],
+      "startAngle": 180,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 101,
+          "name": "忠诚度计划"
+        },
+        {
+          "value": 732,
+          "name": "市场分析"
+        },
+        {
+          "value": 1063,
+          "name": "危机管理"
+        },
+        {
+          "value": 598,
+          "name": "风险管理"
+        },
+        {
+          "value": 929,
+          "name": "绿色营销"
+        },
+        {
+          "value": 318,
+          "name": "客户满意度"
+        },
+        {
+          "value": 146,
+          "name": "渠道管理"
+        },
+        {
+          "value": 309,
+          "name": "客户关系管理"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{b}"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

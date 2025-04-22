@@ -1,0 +1,64 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "2%",
+    "left": "34%",
+    "data": [
+      "电子邮件",
+      "电视广告",
+      "内容营销",
+      "活动营销",
+      "户外广告牌",
+      "平面广告"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": "85%",
+      "center": [
+        "14%",
+        "70%"
+      ],
+      "startAngle": 90,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 443,
+          "name": "电子邮件"
+        },
+        {
+          "value": 849,
+          "name": "电视广告"
+        },
+        {
+          "value": 828,
+          "name": "内容营销"
+        },
+        {
+          "value": 511,
+          "name": "活动营销"
+        },
+        {
+          "value": 1090,
+          "name": "户外广告牌"
+        },
+        {
+          "value": 242,
+          "name": "平面广告"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "inside",
+        "formatter": "{d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

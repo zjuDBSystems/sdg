@@ -1,0 +1,74 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "3%",
+    "left": "27%",
+    "data": [
+      "区块链",
+      "加密货币",
+      "无人机",
+      "可穿戴技术",
+      "网络安全",
+      "智能音箱",
+      "人工智能",
+      "大数据"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": "87%",
+      "center": [
+        "35%",
+        "89%"
+      ],
+      "startAngle": 90,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 417,
+          "name": "区块链"
+        },
+        {
+          "value": 571,
+          "name": "加密货币"
+        },
+        {
+          "value": 174,
+          "name": "无人机"
+        },
+        {
+          "value": 779,
+          "name": "可穿戴技术"
+        },
+        {
+          "value": 407,
+          "name": "网络安全"
+        },
+        {
+          "value": 670,
+          "name": "智能音箱"
+        },
+        {
+          "value": 1095,
+          "name": "人工智能"
+        },
+        {
+          "value": 630,
+          "name": "大数据"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{b}: {d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

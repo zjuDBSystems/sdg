@@ -1,0 +1,72 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "3%",
+    "left": "44%",
+    "data": [
+      "旅游",
+      "出版",
+      "游戏",
+      "播客",
+      "时尚",
+      "直播",
+      "博物馆"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "51%",
+        "83%"
+      ],
+      "center": [
+        "59%",
+        "74%"
+      ],
+      "startAngle": 180,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 644,
+          "name": "旅游"
+        },
+        {
+          "value": 962,
+          "name": "出版"
+        },
+        {
+          "value": 567,
+          "name": "游戏"
+        },
+        {
+          "value": 890,
+          "name": "播客"
+        },
+        {
+          "value": 543,
+          "name": "时尚"
+        },
+        {
+          "value": 1055,
+          "name": "直播"
+        },
+        {
+          "value": 1031,
+          "name": "博物馆"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{b}"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

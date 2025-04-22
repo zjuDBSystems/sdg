@@ -1,0 +1,69 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "2%",
+    "left": "center",
+    "data": [
+      "餐饮",
+      "电影",
+      "节日",
+      "虚拟偶像",
+      "时尚",
+      "旅游",
+      "真人秀"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": "95%",
+      "center": [
+        "13%",
+        "65%"
+      ],
+      "startAngle": 90,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 1055,
+          "name": "餐饮"
+        },
+        {
+          "value": 1029,
+          "name": "电影"
+        },
+        {
+          "value": 450,
+          "name": "节日"
+        },
+        {
+          "value": 500,
+          "name": "虚拟偶像"
+        },
+        {
+          "value": 973,
+          "name": "时尚"
+        },
+        {
+          "value": 866,
+          "name": "旅游"
+        },
+        {
+          "value": 788,
+          "name": "真人秀"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

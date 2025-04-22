@@ -1,0 +1,59 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "3%",
+    "left": "center",
+    "data": [
+      "创新管理",
+      "供应链管理",
+      "质量管理",
+      "项目管理",
+      "竞争分析"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": "93%",
+      "center": [
+        "24%",
+        "83%"
+      ],
+      "startAngle": 90,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 300,
+          "name": "创新管理"
+        },
+        {
+          "value": 612,
+          "name": "供应链管理"
+        },
+        {
+          "value": 1035,
+          "name": "质量管理"
+        },
+        {
+          "value": 211,
+          "name": "项目管理"
+        },
+        {
+          "value": 876,
+          "name": "竞争分析"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{b}"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

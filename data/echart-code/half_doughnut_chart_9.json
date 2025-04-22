@@ -1,0 +1,67 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "1%",
+    "left": "center",
+    "data": [
+      "动漫",
+      "展览",
+      "社交活动",
+      "庆典",
+      "电子竞技",
+      "音乐"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "38%",
+        "83%"
+      ],
+      "center": [
+        "52%",
+        "79%"
+      ],
+      "startAngle": 180,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 952,
+          "name": "动漫"
+        },
+        {
+          "value": 529,
+          "name": "展览"
+        },
+        {
+          "value": 226,
+          "name": "社交活动"
+        },
+        {
+          "value": 426,
+          "name": "庆典"
+        },
+        {
+          "value": 123,
+          "name": "电子竞技"
+        },
+        {
+          "value": 858,
+          "name": "音乐"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": false,
+        "position": "outside",
+        "formatter": "{b}: {d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

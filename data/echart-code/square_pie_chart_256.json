@@ -1,0 +1,54 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "0%",
+    "left": "center",
+    "data": [
+      "深度学习",
+      "云计算",
+      "网络安全",
+      "自然语言处理"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": "95%",
+      "center": [
+        "29%",
+        "79%"
+      ],
+      "startAngle": 90,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 528,
+          "name": "深度学习"
+        },
+        {
+          "value": 216,
+          "name": "云计算"
+        },
+        {
+          "value": 100,
+          "name": "网络安全"
+        },
+        {
+          "value": 477,
+          "name": "自然语言处理"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{b}"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

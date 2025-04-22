@@ -1,0 +1,57 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "0%",
+    "left": "center",
+    "data": [
+      "科学普及",
+      "教育合作",
+      "教育公平",
+      "学术研究"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "26%",
+        "66%"
+      ],
+      "center": [
+        "44%",
+        "72%"
+      ],
+      "startAngle": 180,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 279,
+          "name": "科学普及"
+        },
+        {
+          "value": 916,
+          "name": "教育合作"
+        },
+        {
+          "value": 915,
+          "name": "教育公平"
+        },
+        {
+          "value": 619,
+          "name": "学术研究"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

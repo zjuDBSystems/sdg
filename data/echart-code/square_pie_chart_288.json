@@ -1,0 +1,69 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": false,
+    "top": "2%",
+    "left": "center",
+    "data": [
+      "餐饮",
+      "出版",
+      "艺术",
+      "社交活动",
+      "短视频",
+      "电视",
+      "庆典"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": "93%",
+      "center": [
+        "37%",
+        "63%"
+      ],
+      "startAngle": 90,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 807,
+          "name": "餐饮"
+        },
+        {
+          "value": 411,
+          "name": "出版"
+        },
+        {
+          "value": 660,
+          "name": "艺术"
+        },
+        {
+          "value": 324,
+          "name": "社交活动"
+        },
+        {
+          "value": 750,
+          "name": "短视频"
+        },
+        {
+          "value": 1040,
+          "name": "电视"
+        },
+        {
+          "value": 110,
+          "name": "庆典"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "inside",
+        "formatter": "{b}"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

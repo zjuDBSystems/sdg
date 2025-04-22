@@ -1,0 +1,64 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "2%",
+    "left": "center",
+    "data": [
+      "真人秀",
+      "动漫",
+      "庆典",
+      "体育",
+      "博物馆",
+      "社交活动"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": "85%",
+      "center": [
+        "43%",
+        "85%"
+      ],
+      "startAngle": 90,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 713,
+          "name": "真人秀"
+        },
+        {
+          "value": 245,
+          "name": "动漫"
+        },
+        {
+          "value": 954,
+          "name": "庆典"
+        },
+        {
+          "value": 564,
+          "name": "体育"
+        },
+        {
+          "value": 151,
+          "name": "博物馆"
+        },
+        {
+          "value": 635,
+          "name": "社交活动"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

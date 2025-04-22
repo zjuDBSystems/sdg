@@ -1,0 +1,54 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "3%",
+    "left": "center",
+    "data": [
+      "无人机",
+      "机器人",
+      "数据隐私",
+      "元宇宙"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": "86%",
+      "center": [
+        "50%",
+        "80%"
+      ],
+      "startAngle": 94,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 966,
+          "name": "无人机"
+        },
+        {
+          "value": 766,
+          "name": "机器人"
+        },
+        {
+          "value": 1057,
+          "name": "数据隐私"
+        },
+        {
+          "value": 497,
+          "name": "元宇宙"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{b}"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

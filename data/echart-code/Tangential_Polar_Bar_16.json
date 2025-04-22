@@ -1,0 +1,53 @@
+{
+  "polar": {
+    "radius": [
+      33,
+      "79%"
+    ]
+  },
+  "angleAxis": {
+    "max": 4,
+    "startAngle": 69
+  },
+  "radiusAxis": {
+    "type": "category",
+    "data": [
+      "企业文化",
+      "企业社会责任",
+      "危机管理",
+      "定价策略",
+      "组织结构",
+      "公共关系"
+    ],
+    "axisLabel": {
+      "show": true,
+      "interval": 0,
+      "rotate": 0,
+      "margin": 8
+    }
+  },
+  "tooltip": {
+    "trigger": "item"
+  },
+  "series": {
+    "type": "bar",
+    "data": [
+      3.1,
+      2.5,
+      2.3,
+      1.2,
+      2,
+      3.2
+    ],
+    "color": [
+      "#40E0D0"
+    ],
+    "coordinateSystem": "polar",
+    "label": {
+      "show": true,
+      "position": "middle",
+      "formatter": "{c}"
+    }
+  },
+  "backgroundColor": "#fff"
+}

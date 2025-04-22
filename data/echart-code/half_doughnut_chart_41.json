@@ -1,0 +1,77 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "2%",
+    "left": "center",
+    "data": [
+      "广播",
+      "视频博客",
+      "时尚",
+      "节日",
+      "网络红人",
+      "博物馆",
+      "播客",
+      "动漫"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "53%",
+        "83%"
+      ],
+      "center": [
+        "55%",
+        "58%"
+      ],
+      "startAngle": 180,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 943,
+          "name": "广播"
+        },
+        {
+          "value": 172,
+          "name": "视频博客"
+        },
+        {
+          "value": 281,
+          "name": "时尚"
+        },
+        {
+          "value": 246,
+          "name": "节日"
+        },
+        {
+          "value": 167,
+          "name": "网络红人"
+        },
+        {
+          "value": 177,
+          "name": "博物馆"
+        },
+        {
+          "value": 610,
+          "name": "播客"
+        },
+        {
+          "value": 925,
+          "name": "动漫"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "inside",
+        "formatter": "{d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

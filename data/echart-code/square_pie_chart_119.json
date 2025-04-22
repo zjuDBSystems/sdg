@@ -1,0 +1,54 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "3%",
+    "left": "center",
+    "data": [
+      "区块链",
+      "非同质化代币",
+      "数据分析",
+      "计算机视觉"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": "90%",
+      "center": [
+        "25%",
+        "67%"
+      ],
+      "startAngle": 90,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 803,
+          "name": "区块链"
+        },
+        {
+          "value": 675,
+          "name": "非同质化代币"
+        },
+        {
+          "value": 827,
+          "name": "数据分析"
+        },
+        {
+          "value": 940,
+          "name": "计算机视觉"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "inside",
+        "formatter": "{b}: {d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

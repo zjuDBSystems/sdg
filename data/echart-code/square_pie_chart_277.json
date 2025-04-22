@@ -1,0 +1,49 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "2%",
+    "left": "center",
+    "data": [
+      "社交媒体",
+      "病毒营销",
+      "搜索引擎优化"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": "93%",
+      "center": [
+        "28%",
+        "61%"
+      ],
+      "startAngle": 95,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 1010,
+          "name": "社交媒体"
+        },
+        {
+          "value": 479,
+          "name": "病毒营销"
+        },
+        {
+          "value": 596,
+          "name": "搜索引擎优化"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "inside",
+        "formatter": "{d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

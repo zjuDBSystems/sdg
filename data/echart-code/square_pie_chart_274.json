@@ -1,0 +1,59 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "3%",
+    "left": "24%",
+    "data": [
+      "人工智能",
+      "自然语言处理",
+      "加密货币",
+      "虚拟现实",
+      "深度学习"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": "85%",
+      "center": [
+        "22%",
+        "72%"
+      ],
+      "startAngle": 90,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 214,
+          "name": "人工智能"
+        },
+        {
+          "value": 858,
+          "name": "自然语言处理"
+        },
+        {
+          "value": 546,
+          "name": "加密货币"
+        },
+        {
+          "value": 177,
+          "name": "虚拟现实"
+        },
+        {
+          "value": 574,
+          "name": "深度学习"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

@@ -1,0 +1,59 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "2%",
+    "left": "center",
+    "data": [
+      "教育创新",
+      "学校管理",
+      "在线教育",
+      "奖学金",
+      "教育改革"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": "90%",
+      "center": [
+        "45%",
+        "69%"
+      ],
+      "startAngle": 90,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 460,
+          "name": "教育创新"
+        },
+        {
+          "value": 434,
+          "name": "学校管理"
+        },
+        {
+          "value": 269,
+          "name": "在线教育"
+        },
+        {
+          "value": 271,
+          "name": "奖学金"
+        },
+        {
+          "value": 898,
+          "name": "教育改革"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

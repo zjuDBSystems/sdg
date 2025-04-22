@@ -1,0 +1,54 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "4%",
+    "left": "center",
+    "data": [
+      "元宇宙",
+      "可穿戴技术",
+      "加密货币",
+      "人工智能"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": "91%",
+      "center": [
+        "42%",
+        "64%"
+      ],
+      "startAngle": 90,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 1043,
+          "name": "元宇宙"
+        },
+        {
+          "value": 716,
+          "name": "可穿戴技术"
+        },
+        {
+          "value": 239,
+          "name": "加密货币"
+        },
+        {
+          "value": 669,
+          "name": "人工智能"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{b}"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

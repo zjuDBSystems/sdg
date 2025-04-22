@@ -1,0 +1,59 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "4%",
+    "left": "30%",
+    "data": [
+      "机器人",
+      "预测分析",
+      "可穿戴技术",
+      "5G技术",
+      "数据隐私"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": "93%",
+      "center": [
+        "16%",
+        "80%"
+      ],
+      "startAngle": 90,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 963,
+          "name": "机器人"
+        },
+        {
+          "value": 164,
+          "name": "预测分析"
+        },
+        {
+          "value": 1079,
+          "name": "可穿戴技术"
+        },
+        {
+          "value": 748,
+          "name": "5G技术"
+        },
+        {
+          "value": 615,
+          "name": "数据隐私"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{b}"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

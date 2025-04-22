@@ -1,0 +1,69 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": false,
+    "top": "2%",
+    "left": "center",
+    "data": [
+      "并购",
+      "质量管理",
+      "客户关系管理",
+      "竞争分析",
+      "市场分析",
+      "绩效管理",
+      "企业社会责任"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": "95%",
+      "center": [
+        "32%",
+        "77%"
+      ],
+      "startAngle": 90,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 511,
+          "name": "并购"
+        },
+        {
+          "value": 551,
+          "name": "质量管理"
+        },
+        {
+          "value": 940,
+          "name": "客户关系管理"
+        },
+        {
+          "value": 551,
+          "name": "竞争分析"
+        },
+        {
+          "value": 778,
+          "name": "市场分析"
+        },
+        {
+          "value": 180,
+          "name": "绩效管理"
+        },
+        {
+          "value": 584,
+          "name": "企业社会责任"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{b}: {d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

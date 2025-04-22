@@ -1,0 +1,54 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "3%",
+    "left": "20%",
+    "data": [
+      "投资策略",
+      "创新管理",
+      "忠诚度计划",
+      "定价策略"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": "94%",
+      "center": [
+        "31%",
+        "90%"
+      ],
+      "startAngle": 90,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 465,
+          "name": "投资策略"
+        },
+        {
+          "value": 868,
+          "name": "创新管理"
+        },
+        {
+          "value": 234,
+          "name": "忠诚度计划"
+        },
+        {
+          "value": 245,
+          "name": "定价策略"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

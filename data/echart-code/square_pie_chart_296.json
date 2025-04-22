@@ -1,0 +1,59 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "0%",
+    "left": "37%",
+    "data": [
+      "边缘计算",
+      "云计算",
+      "自然语言处理",
+      "物联网",
+      "量子计算"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": "89%",
+      "center": [
+        "35%",
+        "72%"
+      ],
+      "startAngle": 90,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 791,
+          "name": "边缘计算"
+        },
+        {
+          "value": 658,
+          "name": "云计算"
+        },
+        {
+          "value": 951,
+          "name": "自然语言处理"
+        },
+        {
+          "value": 371,
+          "name": "物联网"
+        },
+        {
+          "value": 810,
+          "name": "量子计算"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

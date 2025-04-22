@@ -1,0 +1,57 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "0%",
+    "left": "41%",
+    "data": [
+      "课程开发",
+      "留学",
+      "职业指导",
+      "继续教育"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "54%",
+        "84%"
+      ],
+      "center": [
+        "52%",
+        "65%"
+      ],
+      "startAngle": 180,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 973,
+          "name": "课程开发"
+        },
+        {
+          "value": 308,
+          "name": "留学"
+        },
+        {
+          "value": 767,
+          "name": "职业指导"
+        },
+        {
+          "value": 844,
+          "name": "继续教育"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{b}"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

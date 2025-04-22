@@ -1,0 +1,59 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "0%",
+    "left": "center",
+    "data": [
+      "视频博客",
+      "电子竞技",
+      "动漫",
+      "综艺节目",
+      "餐饮"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": "94%",
+      "center": [
+        "23%",
+        "66%"
+      ],
+      "startAngle": 83,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 480,
+          "name": "视频博客"
+        },
+        {
+          "value": 500,
+          "name": "电子竞技"
+        },
+        {
+          "value": 403,
+          "name": "动漫"
+        },
+        {
+          "value": 207,
+          "name": "综艺节目"
+        },
+        {
+          "value": 169,
+          "name": "餐饮"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

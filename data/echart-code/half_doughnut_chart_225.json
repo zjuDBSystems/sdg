@@ -1,0 +1,52 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "1%",
+    "left": "37%",
+    "data": [
+      "搜索引擎",
+      "搜索引擎营销",
+      "网络研讨会"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "47%",
+        "78%"
+      ],
+      "center": [
+        "54%",
+        "61%"
+      ],
+      "startAngle": 180,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 108,
+          "name": "搜索引擎"
+        },
+        {
+          "value": 1087,
+          "name": "搜索引擎营销"
+        },
+        {
+          "value": 755,
+          "name": "网络研讨会"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

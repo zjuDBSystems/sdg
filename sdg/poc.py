@@ -2,6 +2,7 @@
 """
 
 import pprint
+import os
 
 from .data_operator.operator import Meta, Operator, OperatorMeta
 from . import data_operator
@@ -136,11 +137,26 @@ def total_aug_test():
     ], TaskType.AUGMENTATION, dataset)
     add_noise_task.run()
 
+def describe_data(datadir: Datadir):
+    dir_path = datadir.data_path
+    count = len([f for f in os.listdir(dir_path) if os.path.isfile(os.path.join(dir_path, f))])
+    data_type = datadir.data_type.value
+    global_message_queue.put(EventResponse(EventType.REASONING, f'{data_type} data in {dir_path} has {count} files!'))
+    
+def describe_metadata(metadata_path: str):
+    with open(metadata_path, 'r') as f:
+        lines = f.readlines()
+    global_message_queue.put(EventResponse(EventType.REASONING, f'multimodal dataset contains {len(lines) - 1} data pairs!'))
 
+def run_echart_task():
+    global_message_queue.put(EventResponse(event=EventType.REQUEST, data="Load multimodal dataset, include code and image!"))
+    code_dir = Datadir('echart-code', DataType.CODE)
+    describe_data(code_dir)
+    image_dir = Datadir('echart-image', DataType.IMAGE)
+    describe_data(image_dir)
+    data_set = Dataset([code_dir, image_dir], 'echart.metadata')
+    describe_metadata(data_set.meta_path)
+    global_message_queue.put(EventResponse(event=EventType.RESPONSE, data="Load multimodal dataset done!"))
 
 if __name__ == '__main__':
-    # poc()
-    # img_aug()
-    # mutation_test()
-    # add_noise_test()
-    total_aug_test()
+    run_echart_task()

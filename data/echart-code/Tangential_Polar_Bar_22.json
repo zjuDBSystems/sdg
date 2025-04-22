@@ -1,0 +1,53 @@
+{
+  "polar": {
+    "radius": [
+      33,
+      "85%"
+    ]
+  },
+  "angleAxis": {
+    "max": 5,
+    "startAngle": 73
+  },
+  "radiusAxis": {
+    "type": "category",
+    "data": [
+      "自然搜索",
+      "视频广告",
+      "其他",
+      "平面广告",
+      "原生广告",
+      "游击营销"
+    ],
+    "axisLabel": {
+      "show": true,
+      "interval": 0,
+      "rotate": 0,
+      "margin": 8
+    }
+  },
+  "tooltip": {
+    "trigger": "item"
+  },
+  "series": {
+    "type": "bar",
+    "data": [
+      2.3,
+      2.1,
+      2.4,
+      2.5,
+      3.8,
+      1.1
+    ],
+    "color": [
+      "#40E0D0"
+    ],
+    "coordinateSystem": "polar",
+    "label": {
+      "show": false,
+      "position": "middle",
+      "formatter": "{c}"
+    }
+  },
+  "backgroundColor": "#fff"
+}

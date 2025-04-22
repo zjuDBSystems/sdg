@@ -1,0 +1,62 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": false,
+    "top": "0%",
+    "left": "center",
+    "data": [
+      "语言学习",
+      "职业培训",
+      "教育交流",
+      "在线教育",
+      "教育政策"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "27%",
+        "82%"
+      ],
+      "center": [
+        "44%",
+        "66%"
+      ],
+      "startAngle": 180,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 1072,
+          "name": "语言学习"
+        },
+        {
+          "value": 354,
+          "name": "职业培训"
+        },
+        {
+          "value": 932,
+          "name": "教育交流"
+        },
+        {
+          "value": 457,
+          "name": "在线教育"
+        },
+        {
+          "value": 239,
+          "name": "教育政策"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{b}: {d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

@@ -1,0 +1,49 @@
+{
+  "polar": {
+    "radius": [
+      29,
+      "77%"
+    ]
+  },
+  "angleAxis": {
+    "max": 5,
+    "startAngle": 60
+  },
+  "radiusAxis": {
+    "type": "category",
+    "data": [
+      "创新管理",
+      "质量管理",
+      "渠道管理",
+      "客户满意度"
+    ],
+    "axisLabel": {
+      "show": true,
+      "interval": 0,
+      "rotate": 0,
+      "margin": 8
+    }
+  },
+  "tooltip": {
+    "trigger": "item"
+  },
+  "series": {
+    "type": "bar",
+    "data": [
+      3.7,
+      2.7,
+      3.8,
+      3.1
+    ],
+    "color": [
+      "#FF1493"
+    ],
+    "coordinateSystem": "polar",
+    "label": {
+      "show": true,
+      "position": "middle",
+      "formatter": "{c}"
+    }
+  },
+  "backgroundColor": "#fff"
+}

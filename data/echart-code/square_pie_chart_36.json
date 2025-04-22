@@ -1,0 +1,69 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "4%",
+    "left": "center",
+    "data": [
+      "教育创新",
+      "教育交流",
+      "教学方法",
+      "职业培训",
+      "教育评估",
+      "教育质量",
+      "教师培训"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": "86%",
+      "center": [
+        "24%",
+        "69%"
+      ],
+      "startAngle": 90,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 550,
+          "name": "教育创新"
+        },
+        {
+          "value": 169,
+          "name": "教育交流"
+        },
+        {
+          "value": 517,
+          "name": "教学方法"
+        },
+        {
+          "value": 1038,
+          "name": "职业培训"
+        },
+        {
+          "value": 861,
+          "name": "教育评估"
+        },
+        {
+          "value": 1003,
+          "name": "教育质量"
+        },
+        {
+          "value": 266,
+          "name": "教师培训"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{b}: {d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

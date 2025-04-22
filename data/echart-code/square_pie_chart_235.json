@@ -1,0 +1,54 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "3%",
+    "left": "center",
+    "data": [
+      "旅游",
+      "播客",
+      "博物馆",
+      "展览"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": "94%",
+      "center": [
+        "13%",
+        "79%"
+      ],
+      "startAngle": 90,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 726,
+          "name": "旅游"
+        },
+        {
+          "value": 916,
+          "name": "播客"
+        },
+        {
+          "value": 562,
+          "name": "博物馆"
+        },
+        {
+          "value": 891,
+          "name": "展览"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{b}: {d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

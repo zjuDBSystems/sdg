@@ -1,0 +1,67 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": false,
+    "top": "1%",
+    "left": "center",
+    "data": [
+      "质量管理",
+      "变革管理",
+      "产品开发",
+      "组织结构",
+      "品牌定位",
+      "投资策略"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "52%",
+        "79%"
+      ],
+      "center": [
+        "54%",
+        "62%"
+      ],
+      "startAngle": 180,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 701,
+          "name": "质量管理"
+        },
+        {
+          "value": 316,
+          "name": "变革管理"
+        },
+        {
+          "value": 258,
+          "name": "产品开发"
+        },
+        {
+          "value": 240,
+          "name": "组织结构"
+        },
+        {
+          "value": 555,
+          "name": "品牌定位"
+        },
+        {
+          "value": 231,
+          "name": "投资策略"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{b}: {d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

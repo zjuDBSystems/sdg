@@ -1,0 +1,47 @@
+{
+  "polar": {
+    "radius": [
+      22,
+      "88%"
+    ]
+  },
+  "angleAxis": {
+    "max": 5,
+    "startAngle": 57
+  },
+  "radiusAxis": {
+    "type": "category",
+    "data": [
+      "可穿戴技术",
+      "虚拟现实",
+      "智能音箱"
+    ],
+    "axisLabel": {
+      "show": true,
+      "interval": 0,
+      "rotate": 0,
+      "margin": 8
+    }
+  },
+  "tooltip": {
+    "trigger": "item"
+  },
+  "series": {
+    "type": "bar",
+    "data": [
+      2.5,
+      1.7,
+      3.7
+    ],
+    "color": [
+      "#73C0DE"
+    ],
+    "coordinateSystem": "polar",
+    "label": {
+      "show": true,
+      "position": "middle",
+      "formatter": "{c}"
+    }
+  },
+  "backgroundColor": "#fff"
+}

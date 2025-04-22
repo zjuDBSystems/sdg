@@ -1,0 +1,53 @@
+{
+  "polar": {
+    "radius": [
+      35,
+      "76%"
+    ]
+  },
+  "angleAxis": {
+    "max": 4,
+    "startAngle": 73
+  },
+  "radiusAxis": {
+    "type": "category",
+    "data": [
+      "智能音箱",
+      "5G技术",
+      "元宇宙",
+      "无人机",
+      "语音助手",
+      "人工智能"
+    ],
+    "axisLabel": {
+      "show": true,
+      "interval": 0,
+      "rotate": 0,
+      "margin": 8
+    }
+  },
+  "tooltip": {
+    "trigger": "item"
+  },
+  "series": {
+    "type": "bar",
+    "data": [
+      2,
+      2.9,
+      2.3,
+      2.8,
+      1.7,
+      2.8
+    ],
+    "color": [
+      "#91CC75"
+    ],
+    "coordinateSystem": "polar",
+    "label": {
+      "show": true,
+      "position": "middle",
+      "formatter": "{c}"
+    }
+  },
+  "backgroundColor": "#fff"
+}

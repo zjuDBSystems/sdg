@@ -1,0 +1,62 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "0%",
+    "left": "center",
+    "data": [
+      "留学",
+      "技能提升",
+      "教育资源",
+      "教育改革",
+      "教育评估"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "55%",
+        "84%"
+      ],
+      "center": [
+        "49%",
+        "50%"
+      ],
+      "startAngle": 180,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 1002,
+          "name": "留学"
+        },
+        {
+          "value": 457,
+          "name": "技能提升"
+        },
+        {
+          "value": 265,
+          "name": "教育资源"
+        },
+        {
+          "value": 294,
+          "name": "教育改革"
+        },
+        {
+          "value": 659,
+          "name": "教育评估"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

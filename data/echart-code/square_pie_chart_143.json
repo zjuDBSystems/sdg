@@ -1,0 +1,49 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "1%",
+    "left": "center",
+    "data": [
+      "动漫",
+      "游戏",
+      "综艺节目"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": "89%",
+      "center": [
+        "38%",
+        "69%"
+      ],
+      "startAngle": 94,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 931,
+          "name": "动漫"
+        },
+        {
+          "value": 235,
+          "name": "游戏"
+        },
+        {
+          "value": 343,
+          "name": "综艺节目"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{b}"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

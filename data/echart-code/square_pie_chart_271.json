@@ -1,0 +1,69 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "1%",
+    "left": "center",
+    "data": [
+      "语音助手",
+      "量子计算",
+      "智能音箱",
+      "无人机",
+      "自动驾驶",
+      "区块链",
+      "自然语言处理"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": "85%",
+      "center": [
+        "28%",
+        "67%"
+      ],
+      "startAngle": 90,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 326,
+          "name": "语音助手"
+        },
+        {
+          "value": 242,
+          "name": "量子计算"
+        },
+        {
+          "value": 542,
+          "name": "智能音箱"
+        },
+        {
+          "value": 485,
+          "name": "无人机"
+        },
+        {
+          "value": 899,
+          "name": "自动驾驶"
+        },
+        {
+          "value": 651,
+          "name": "区块链"
+        },
+        {
+          "value": 1069,
+          "name": "自然语言处理"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "inside",
+        "formatter": "{d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

@@ -1,0 +1,52 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": false,
+    "top": "4%",
+    "left": "center",
+    "data": [
+      "付费搜索",
+      "赞助",
+      "自然搜索"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "40%",
+        "70%"
+      ],
+      "center": [
+        "54%",
+        "71%"
+      ],
+      "startAngle": 180,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 269,
+          "name": "付费搜索"
+        },
+        {
+          "value": 115,
+          "name": "赞助"
+        },
+        {
+          "value": 686,
+          "name": "自然搜索"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{b}: {d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

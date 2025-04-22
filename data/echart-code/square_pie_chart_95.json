@@ -1,0 +1,54 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "0%",
+    "left": "center",
+    "data": [
+      "旅游",
+      "电影",
+      "动漫",
+      "庆典"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": "87%",
+      "center": [
+        "26%",
+        "61%"
+      ],
+      "startAngle": 90,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 737,
+          "name": "旅游"
+        },
+        {
+          "value": 673,
+          "name": "电影"
+        },
+        {
+          "value": 164,
+          "name": "动漫"
+        },
+        {
+          "value": 283,
+          "name": "庆典"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{b}: {d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

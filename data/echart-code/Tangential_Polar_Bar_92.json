@@ -1,0 +1,53 @@
+{
+  "polar": {
+    "radius": [
+      40,
+      "77%"
+    ]
+  },
+  "angleAxis": {
+    "max": 4,
+    "startAngle": 71
+  },
+  "radiusAxis": {
+    "type": "category",
+    "data": [
+      "忠诚度计划",
+      "危机管理",
+      "质量管理",
+      "可持续发展",
+      "创新管理",
+      "渠道管理"
+    ],
+    "axisLabel": {
+      "show": true,
+      "interval": 0,
+      "rotate": 0,
+      "margin": 8
+    }
+  },
+  "tooltip": {
+    "trigger": "item"
+  },
+  "series": {
+    "type": "bar",
+    "data": [
+      3.3,
+      2.1,
+      1,
+      3.2,
+      3.2,
+      2.4
+    ],
+    "color": [
+      "#FF1493"
+    ],
+    "coordinateSystem": "polar",
+    "label": {
+      "show": true,
+      "position": "middle",
+      "formatter": "{c}"
+    }
+  },
+  "backgroundColor": "#fff"
+}

@@ -1,0 +1,57 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "2%",
+    "left": "center",
+    "data": [
+      "电视广告",
+      "原生广告",
+      "联盟营销",
+      "其他"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "47%",
+        "79%"
+      ],
+      "center": [
+        "50%",
+        "57%"
+      ],
+      "startAngle": 162,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 923,
+          "name": "电视广告"
+        },
+        {
+          "value": 798,
+          "name": "原生广告"
+        },
+        {
+          "value": 374,
+          "name": "联盟营销"
+        },
+        {
+          "value": 898,
+          "name": "其他"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "inside",
+        "formatter": "{d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

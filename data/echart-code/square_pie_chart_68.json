@@ -1,0 +1,74 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": false,
+    "top": "4%",
+    "left": "center",
+    "data": [
+      "渠道管理",
+      "并购",
+      "品牌定位",
+      "客户满意度",
+      "创新管理",
+      "绩效管理",
+      "团队建设",
+      "投资策略"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": "92%",
+      "center": [
+        "23%",
+        "65%"
+      ],
+      "startAngle": 90,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 508,
+          "name": "渠道管理"
+        },
+        {
+          "value": 606,
+          "name": "并购"
+        },
+        {
+          "value": 377,
+          "name": "品牌定位"
+        },
+        {
+          "value": 891,
+          "name": "客户满意度"
+        },
+        {
+          "value": 528,
+          "name": "创新管理"
+        },
+        {
+          "value": 975,
+          "name": "绩效管理"
+        },
+        {
+          "value": 977,
+          "name": "团队建设"
+        },
+        {
+          "value": 540,
+          "name": "投资策略"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{b}: {d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

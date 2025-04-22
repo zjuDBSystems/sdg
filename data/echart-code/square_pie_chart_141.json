@@ -1,0 +1,64 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "2%",
+    "left": "40%",
+    "data": [
+      "可持续发展",
+      "变革管理",
+      "定价策略",
+      "竞争分析",
+      "供应链管理",
+      "风险管理"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": "94%",
+      "center": [
+        "44%",
+        "84%"
+      ],
+      "startAngle": 90,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 676,
+          "name": "可持续发展"
+        },
+        {
+          "value": 929,
+          "name": "变革管理"
+        },
+        {
+          "value": 563,
+          "name": "定价策略"
+        },
+        {
+          "value": 518,
+          "name": "竞争分析"
+        },
+        {
+          "value": 551,
+          "name": "供应链管理"
+        },
+        {
+          "value": 787,
+          "name": "风险管理"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "inside",
+        "formatter": "{b}"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

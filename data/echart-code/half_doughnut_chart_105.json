@@ -1,0 +1,67 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "3%",
+    "left": "center",
+    "data": [
+      "生物识别",
+      "网络安全",
+      "深度学习",
+      "机器人",
+      "可穿戴技术",
+      "5G技术"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "49%",
+        "74%"
+      ],
+      "center": [
+        "53%",
+        "72%"
+      ],
+      "startAngle": 180,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 112,
+          "name": "生物识别"
+        },
+        {
+          "value": 523,
+          "name": "网络安全"
+        },
+        {
+          "value": 700,
+          "name": "深度学习"
+        },
+        {
+          "value": 716,
+          "name": "机器人"
+        },
+        {
+          "value": 433,
+          "name": "可穿戴技术"
+        },
+        {
+          "value": 458,
+          "name": "5G技术"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{b}"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

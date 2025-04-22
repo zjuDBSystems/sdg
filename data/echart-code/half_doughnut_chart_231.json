@@ -1,0 +1,72 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "4%",
+    "left": "center",
+    "data": [
+      "加密货币",
+      "区块链",
+      "机器学习",
+      "数据分析",
+      "数据隐私",
+      "人工智能",
+      "机器人"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "36%",
+        "71%"
+      ],
+      "center": [
+        "43%",
+        "58%"
+      ],
+      "startAngle": 180,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 530,
+          "name": "加密货币"
+        },
+        {
+          "value": 837,
+          "name": "区块链"
+        },
+        {
+          "value": 254,
+          "name": "机器学习"
+        },
+        {
+          "value": 495,
+          "name": "数据分析"
+        },
+        {
+          "value": 980,
+          "name": "数据隐私"
+        },
+        {
+          "value": 456,
+          "name": "人工智能"
+        },
+        {
+          "value": 381,
+          "name": "机器人"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

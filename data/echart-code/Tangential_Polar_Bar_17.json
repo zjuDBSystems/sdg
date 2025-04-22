@@ -1,0 +1,47 @@
+{
+  "polar": {
+    "radius": [
+      24,
+      "77%"
+    ]
+  },
+  "angleAxis": {
+    "max": 5,
+    "startAngle": 52
+  },
+  "radiusAxis": {
+    "type": "category",
+    "data": [
+      "危机管理",
+      "客户关系管理",
+      "公共关系"
+    ],
+    "axisLabel": {
+      "show": true,
+      "interval": 0,
+      "rotate": 0,
+      "margin": 8
+    }
+  },
+  "tooltip": {
+    "trigger": "item"
+  },
+  "series": {
+    "type": "bar",
+    "data": [
+      2.2,
+      3.9,
+      2.7
+    ],
+    "color": [
+      "#40E0D0"
+    ],
+    "coordinateSystem": "polar",
+    "label": {
+      "show": true,
+      "position": "middle",
+      "formatter": "{c}"
+    }
+  },
+  "backgroundColor": "#fff"
+}
