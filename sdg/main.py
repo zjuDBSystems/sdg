@@ -15,5 +15,5 @@ async def hello() -> dict[str, str]:
     return {"message": "Hello World"}
 
 @app.post("/poc")
-async def test():
+def test():
     run_echart_task()

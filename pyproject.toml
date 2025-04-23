@@ -7,11 +7,22 @@ requires-python = ">=3.13"
 dependencies = [
     "black>=25.1.0",
     "fastapi>=0.115.12",
+    "imagehash>=4.3.2",
+    "matplotlib>=3.10.1",
     "openai>=1.75.0",
+    "opencv-python>=4.11.0.86",
     "pandas>=2.2.3",
     "pillow>=11.2.1",
     "playwright>=1.51.0",
     "pydantic-settings>=2.8.1",
+    "scikit-image>=0.25.2",
+    "scikit-learn>=1.6.1",
     "sse-starlette>=2.2.1",
+    "torch>=2.7.0",
     "uvicorn>=0.34.0",
 ]
+
+[[tool.uv.index]]
+url = "https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple"
+default = true
+

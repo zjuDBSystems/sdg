@@ -18,6 +18,11 @@ class EventResponse():
     event: EventType
     data: str
 
+    def __init__(self, event, data):
+        self.event = event
+        self.data = data
+        self.time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
 router = APIRouter(
     prefix="/events",
     tags=["events"],
@@ -35,7 +40,7 @@ async def event_generator():
         yield {
             "event": event.event.value,
             "data": event.data,
-            "comment": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            "comment": event.time
         }
 
 

@@ -3,6 +3,10 @@
 
 import pprint
 import os
+from textwrap import indent
+from openai import OpenAI
+from pkg_resources import ensure_directory
+import json
 
 from .data_operator.operator import Meta, Operator, OperatorMeta
 from . import data_operator
@@ -10,6 +14,7 @@ from .storage.dataset import Dataset, DataType, Datadir, copy_dataset
 from .task.task_type import TaskType
 from .task.task import Task
 from .event import global_message_queue, EventType, EventResponse
+from .data_insights_identify import calculate_top_metrics
 
 
 registry = OperatorMeta.get_registry()
@@ -163,16 +168,34 @@ def describe_metadata(metadata_path: str):
         lines = f.readlines()
     global_message_queue.put(EventResponse(EventType.REASONING, f'multimodal dataset contains {len(lines) - 1} data pairs!'))
 
+def extract_secondary_metrics(result):
+    secondary_metrics = {}
+    for category, metrics in result["二级指标"].items():
+        secondary_metrics.update(metrics)
+    return secondary_metrics
+
 def run_echart_task():
     # load echart example dataset
     global_message_queue.put(EventResponse(event=EventType.REQUEST, data="Load multimodal dataset, include code and image!"))
-    code_dir = Datadir('echart-code', DataType.CODE)
+    code_dir = Datadir('echart-code-sample', DataType.CODE)
     describe_data(code_dir)
-    image_dir = Datadir('echart-image', DataType.IMAGE)
+    image_dir = Datadir('echart-image-sample', DataType.IMAGE)
     describe_data(image_dir)
-    data_set = Dataset([code_dir, image_dir], 'echart.metadata')
+    data_set = Dataset([code_dir, image_dir], 'echart-sample.metadata','key_configurations.md')
     describe_metadata(data_set.meta_path)
     global_message_queue.put(EventResponse(event=EventType.RESPONSE, data="Load multimodal dataset done!"))
+
+
+    result = data_set.evaluate_image_code_quality()
+
+    global_message_queue.put(EventResponse(event=EventType.REQUEST, data="数据洞察发现靶点"))
+    result = extract_secondary_metrics(result)
+    # print(json.dumps(result, indent=4, ensure_ascii=False))
+    # client = OpenAI(api_key="your key", base_url="https://api.deepseek.com")
+    # calculate_top_metrics(client, result, 1)
+    global_message_queue.put(EventResponse(event=EventType.REASONING, data="远端大模型分析..."))
+    global_message_queue.put(EventResponse(event=EventType.REASONING, data="本地经验模型分析..."))
+    global_message_queue.put(EventResponse(event=EventType.RESPONSE, data="数据洞察发现靶点完成, 靶点为[数据量， 配置项多样性， 图像与渲染截图的SSIM]"))
 
     # build task workflow
     # 1st step: Randomly modify echarts configuration code to generate new code file
@@ -180,7 +203,11 @@ def run_echart_task():
     # 3rd step: Generate echart configuration code for image without associated code
     # 4th step: Add noise to echarts image and generate new data pair
     task = Task(
-        [registry['EchartsToImageOperator'](),registry['EChartMutationOperator'](), registry['ImgToEchartsOperator'](), registry['ImageRobustnessEnhancer']()],
+        [
+            registry['EChartMutationOperator'](), 
+            registry['ImgToEchartsOperator'](), 
+            registry['ImageRobustnessEnhancer']()
+        ],
         data_set
         )
     task.run()

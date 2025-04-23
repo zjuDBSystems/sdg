@@ -1,0 +1,49 @@
+{
+  "polar": {
+    "radius": [
+      33,
+      "74%"
+    ]
+  },
+  "angleAxis": {
+    "max": 4,
+    "startAngle": 62
+  },
+  "radiusAxis": {
+    "type": "category",
+    "data": [
+      "学校管理",
+      "教育合作",
+      "学生评估",
+      "学术研究"
+    ],
+    "axisLabel": {
+      "show": true,
+      "interval": 0,
+      "rotate": 0,
+      "margin": 8
+    }
+  },
+  "tooltip": {
+    "trigger": "item"
+  },
+  "series": {
+    "type": "bar",
+    "data": [
+      2.7,
+      1.4,
+      3.4,
+      1.7
+    ],
+    "color": [
+      "#8A2BE2"
+    ],
+    "coordinateSystem": "polar",
+    "label": {
+      "show": true,
+      "position": "middle",
+      "formatter": "{c}"
+    }
+  },
+  "backgroundColor": "#fff"
+}
