@@ -65,6 +65,19 @@ def poc():
     augmentation_task.run()
     global_message_queue.put(EventResponse(event=EventType.RESPONSE, data="Execute operators done!"))
 
+def code_to_img():
+    code_dir = Datadir('code', DataType.CODE)
+    describe_data(code_dir)
+    image_dir = Datadir('image', DataType.IMAGE)
+    describe_data(image_dir)
+    data_set = Dataset([code_dir, image_dir], 'metadata')
+    describe_metadata(data_set.meta_path)
+
+    task = Task(
+        [registry['EchartsToImageOperator']()],
+        data_set
+        )
+    task.run()
 
 def img_aug():
 
@@ -75,13 +88,15 @@ def img_aug():
         describe_operator(operator_name)
     print('----------------------------------------------')
 
-    img_dir = Datadir('raw/images', DataType.IMAGE)
-    code_dir = Datadir('raw/echarts', DataType.ECHARTS)
-    raw_dataset: Dataset = Dataset([img_dir, code_dir], 'raw/metadata.csv')
+    img_dir = Datadir('image', DataType.IMAGE)
+    code_dir = Datadir('code', DataType.CODE)
+    raw_dataset: Dataset = Dataset([img_dir, code_dir], 'metadata')
 
     augmentation_task = Task([
-        registry['ImgToEchartsOperator'](),
-    ], TaskType.AUGMENTATION, raw_dataset)
+        registry['ImgToEchartsOperator'](
+            api_key=""
+        ),registry['EChartMutationOperator'](),registry['EchartsToImageOperator'](),registry['ImageRobustnessEnhancer']()
+    ], raw_dataset)
     augmentation_task.run()
 
 def mutation_test():
@@ -191,10 +206,13 @@ def run_echart_task():
         [
             registry['EChartMutationOperator'](), 
             registry['ImgToEchartsOperator'](), 
-            registry['ImageRobustnessEnhancer']()],
+            registry['ImageRobustnessEnhancer']()
+        ],
         data_set
         )
     task.run()
 
 if __name__ == '__main__':
-    run_echart_task()
+    # run_echart_task()
+    # code_to_img()
+    img_aug()
