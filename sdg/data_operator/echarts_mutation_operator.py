@@ -30,7 +30,7 @@ class EChartMutationOperator(Operator):
     @classmethod
     @override
     def accept(cls, data_type, task_type) -> bool:
-        if data_type == DataType.ECHARTS and task_type == TaskType.AUGMENTATION:
+        if data_type == DataType.CODE and task_type == TaskType.AUGMENTATION:
             return True
         return False
     
@@ -57,10 +57,11 @@ class EChartMutationOperator(Operator):
     
     @override
     def execute(self, dataset) -> None:
-        
+
         df = pd.read_csv(dataset.meta_path)
         code_dir = [dir for dir in dataset.dirs if dir.data_type == DataType.CODE][0]
         code_files = df[DataType.CODE.value].tolist()
+        type_name = df["type"].tolist()
         
         for index, file_name in enumerate(code_files):
 
@@ -85,21 +86,18 @@ class EChartMutationOperator(Operator):
                 # 异常时至少保留参数变异结果
 
             # Convert to JSON string and ensure normal display of Chinese characters
-            echarts_mutation_json = self.convert_to_js(echarts_config)
+            echarts_mutation_json = self.convert_to_json(echarts_config)
 
-
-            parent_dir = os.path.dirname(code_dir.data_path)
-            img_dir_path = os.path.join(parent_dir, "images")
-            if not os.path.exists(img_dir_path):
-                os.mkdir(img_dir_path)
-            mutation_img_path = os.path.join(img_dir_path, file_name[:-3]+".jpg")
-
+            mutation_file_path = os.path.join(code_dir.data_path, "m_"+file_name)
             # store json
-            with open(file_path, 'wb') as f:
+            with open(mutation_file_path, 'wb') as f:
                 f.write(echarts_mutation_json.encode('utf-8'))
-            # store image
-            # with open(mutation_img_path, 'wb') as f:
-            #     f.write(self.generate_echarts_jpg(echarts_mutation_json))
+                # 变异的代码写入csv
+                new_data = pd.DataFrame({"image": [""], "code": ["m_"+file_name], "type": [type_name[index]]})
+                df = pd.concat([df, new_data], ignore_index=True)  # 合并数据[1,6](@ref)
+        
+        # 保存新数据
+        df.to_csv(dataset.meta_path, index=False)
 
             
     '''
@@ -283,12 +281,12 @@ class EChartMutationOperator(Operator):
             return None
     
     '''
-    python字典转换为.js文件内容
+    python字典转换为.json文件内容
     '''
     @staticmethod
-    def convert_to_js(config):
+    def convert_to_json(config):
         json_str = json.dumps(config, indent=2, ensure_ascii=False)
-        js_content = f"option = {json_str};"
+        js_content = f"{json_str}"
         return js_content
     
     

@@ -16,7 +16,7 @@ class DataType(Enum):
     VIDEO = 'video'
     TABLE = 'table'
     GRAPH = 'graph'
-    ECHARTS = 'echarts'
+    # ECHARTS = 'echarts'
     CODE = 'code'
 
 

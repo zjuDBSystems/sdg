@@ -55,16 +55,16 @@ class ImgToEchartsOperator(Operator):
         # files
         df = pd.read_csv(dataset.meta_path)
         img_dir = [dir for dir in dataset.dirs if dir.data_type == DataType.IMAGE][0]
-        code_dir = [dir for dir in dataset.dirs if dir.data_type == DataType.ECHARTS][0]
+        code_dir = [dir for dir in dataset.dirs if dir.data_type == DataType.CODE][0]
         img_files = df[DataType.IMAGE.value].tolist()
-        code_files = df[DataType.ECHARTS.value].tolist()
+        code_files = df[DataType.CODE.value].tolist()
 
         # process
         for index, img_file_name in enumerate(img_files):
-            print("img_file : " + img_file_name)
+            # print("img_file : " + img_file_name)
             # For images without corresponding echarts code files
-            code_file_name = os.path.splitext(img_file_name)[0]+'.js'
-            print("code_file : " + code_file_name)
+            code_file_name = os.path.splitext(img_file_name)[0]+'.json'
+            # print("code_file : " + code_file_name)
             if not self.check_file_existence(code_file_name, code_files):
                 # Generate echarts code files
                 img_file_path = os.path.join(img_dir.data_path, img_file_name)
@@ -81,7 +81,7 @@ class ImgToEchartsOperator(Operator):
                         code_f.write(answer_content.encode('utf-8'))
                 
                 # modify csv file
-                df.at[index, DataType.ECHARTS.value] = code_file_name
+                df.at[index, DataType.CODE.value] = code_file_name
 
         # save the modified csv
         df.to_csv(dataset.meta_path, index=False)
@@ -103,9 +103,9 @@ class ImgToEchartsOperator(Operator):
         # print("收到的结果为：" + response_text)
         start = response_text.find("{")
         end = response_text.rfind("}")
-        js_text = "option=" + response_text[start:end+1]
+        json_text = response_text[start:end+1]
 
-        return js_text
+        return json_text
     
     @staticmethod
     def check_file_existence(file, file_array):
