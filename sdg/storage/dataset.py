@@ -1,5 +1,6 @@
 from enum import Enum
 from dataclasses import dataclass
+import json
 import os
 import shutil
 from uuid import uuid4
@@ -17,6 +18,7 @@ from .image_code_data.code_duplication import evaluate_code_duplicate
 from .image_code_data.image_duplication import evaluate_image_duplicate
 from .image_code_data.joint_duplicate import evaluate_joint_duplicate
 from .image_code_data.config_complete import evaluate_completeness
+from ..event import EventType, EventResponse, global_message_queue
 
 import pandas as pd
 
@@ -164,6 +166,7 @@ class Dataset:
 
 
     def evaluate_image_code_quality(self):
+        global_message_queue.put(EventResponse(EventType.REQUEST, "开始评估数据集质量"))
         code_file_path = self.dirs[0].data_path  # 代码路径
         image_file_path = self.dirs[1].data_path  # 图像路径
         pair_file_path = self.meta_path  # 图像代码配对文件路径
@@ -177,37 +180,47 @@ class Dataset:
         collector = ScoreCollector(pair_file_path)
 
         # 首先是数据量的计算
+        global_message_queue.put(EventResponse(EventType.REASONING, "开始评估数据量"))
         min_size = 1000  # 1k数据得0分
         max_size = 10 ** 5  # 100K数据得100分
         data_size_score = calculate_score_from_csv(pair_file_path, min_size, max_size)
+        global_message_queue.put(EventResponse(EventType.REASONING, "数据量评估完成, 得分为" + str(data_size_score)))
         print("dataset_score:",data_size_score)
         # 接下来是代码质量的计算
         # 首先是语法检测
+        global_message_queue.put(EventResponse(EventType.REASONING, "开始进行语法检测"))
         syntax_score, syntax_score_details = evaluate_js_folder(code_file_path)
         collector.add_scores("syntax_score", syntax_score_details)
+        global_message_queue.put(EventResponse(EventType.REASONING, "语法检测完成, 得分为" + str(syntax_score)))
         print("syntax_score:",syntax_score)
         # print(0)
         # 接着是可渲染性检测
         print('start renderable test')
+        global_message_queue.put(EventResponse(EventType.REASONING, "开始进行可渲染性检测"))
         renderable_score, renderable_score_details = evaluate_renderability(code_file_path,
                                                                             screenshot_path)  # 文件内部需要提供一个浏览器的所在地址
         collector.add_scores("renderable_score", renderable_score_details)
+        global_message_queue.put(EventResponse(EventType.REASONING, "可渲染性检测完成, 得分为" + str(renderable_score)))
         print("renderable_score:",renderable_score)
         print(renderable_score)
         # 之后是配置项完整性检测
+        global_message_queue.put(EventResponse(EventType.REASONING, "开始进行配置项完整性检测"))
         configuration_complete_score, configuration_complete_score_details = evaluate_completeness(md_path,
                                                                                                    pair_file_path,
                                                                                                    code_file_path)
         collector.add_scores("configuration_complete_score", configuration_complete_score_details)
+        global_message_queue.put(EventResponse(EventType.REASONING, "配置项完整性检测完成, 得分为" + str(configuration_complete_score)))
         print("configuration_complete_score:",configuration_complete_score)
         # print("配置项完整")
         # print(configuration_complete_score)
         # 接下来是图像代码对齐
         # 首先是原图像与截图的SSIM
+        global_message_queue.put(EventResponse(EventType.REASONING, "开始进行原图像与截图的SSIM检测"))
         ssim_score, ssim_score_details = evaluate_ssim(pair_file_path, image_file_path, screenshot_path)#不能有中文路径
 
         collector.add_scores("ssim_score", ssim_score_details, key_type="image")
         print("ssim_score:",ssim_score)
+        global_message_queue.put(EventResponse(EventType.REASONING, "原图像与截图的SSIM检测完成, 得分为" + str(ssim_score)))
 
 
         # print(ssim_score)
@@ -217,31 +230,41 @@ class Dataset:
         # 接下来是数据集多样性
         # 首先是图表类型均衡性
         # print(1)
+        global_message_queue.put(EventResponse(EventType.REASONING, "开始进行图表类型均衡性检测"))
         chart_type_score = evaluate_chart_type(pair_file_path)
         print("chart_type_score:",chart_type_score)
+        global_message_queue.put(EventResponse(EventType.REASONING, "图表类型均衡性检测完成, 得分为" + str(chart_type_score)))
         # 接着是配置项均衡性
         # print(2)
+        global_message_queue.put(EventResponse(EventType.REASONING, "开始进行配置项多样性检测"))
         option_diversity_score = evaluate_option_diversity(code_file_path, pair_file_path)
         print("option_diversity_score:",option_diversity_score)
+        global_message_queue.put(EventResponse(EventType.REASONING, "配置项多样性检测完成, 得分为" + str(option_diversity_score)))
         # print(option_diversity_score)
         # 接下来是重复检测
         # 首先是代码重复检测
         # print(3)
+        global_message_queue.put(EventResponse(EventType.REASONING, "开始进行代码重复检测"))
         code_duplicate_score, duplicate_code_files = evaluate_code_duplicate(code_file_path)
         print("code_duplicate_score:",code_duplicate_score)
+        global_message_queue.put(EventResponse(EventType.REASONING, "代码重复检测完成, 得分为" + str(code_duplicate_score)))
         # print(code_duplicate_score)
         # print(duplicate_code_files)
         # 接下来是图像重复检测
         # print(4)
+        global_message_queue.put(EventResponse(EventType.REASONING, "开始进行图像重复检测"))
         image_duplicate_score, duplicate_image_files = evaluate_image_duplicate(image_file_path)
         print("image_duplicate_score:",image_duplicate_score)
+        global_message_queue.put(EventResponse(EventType.REASONING, "图像重复检测完成, 得分为" + str(image_duplicate_score)))
         # print(image_duplicate_score)
         # print(duplicate_image_files)
         # 之后是联合重复检测
         # print(5)
+        global_message_queue.put(EventResponse(EventType.REASONING, "开始进行联合重复检测"))
         joint_duplicate_score, duplicate_joint_files = evaluate_joint_duplicate(duplicate_code_files,
                                                                                 duplicate_image_files, pair_file_path)
         print("joint_duplicate_score:",joint_duplicate_score)
+        global_message_queue.put(EventResponse(EventType.REASONING, "联合重复检测完成, 得分为" + str(joint_duplicate_score)))
         # print(joint_duplicate_score)
         # print(duplicate_joint_files)
         # print(6)
@@ -290,7 +313,8 @@ class Dataset:
                 }
             }
         }
-
+        global_message_queue.put(EventResponse(EventType.RESPONSE, "数据集质量评估完成"))
+        global_message_queue.put(EventResponse(EventType.REASONING, json.dumps(score_dict, indent=4, ensure_ascii=False)))
         # 结果文档
         final_df = collector.generate_report(result_path)#需要填写结果文档所处位置
         # print(final_df)
