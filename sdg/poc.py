@@ -197,6 +197,7 @@ def run_echart_task():
     global_message_queue.put(EventResponse(event=EventType.REASONING, data="本地经验模型分析..."))
     global_message_queue.put(EventResponse(event=EventType.RESPONSE, data="数据洞察发现靶点完成, 靶点为[数据量， 配置项多样性， 图像与渲染截图的SSIM]"))
 
+
     # build task workflow
     # 1st step: Randomly modify echarts configuration code to generate new code file
     # 2nd step: Generate echarts image for code without associated images
@@ -205,12 +206,15 @@ def run_echart_task():
     task = Task(
         [
             registry['EChartMutationOperator'](), 
+            registry['EchartsToImageOperator'](),
             registry['ImgToEchartsOperator'](), 
             registry['ImageRobustnessEnhancer']()
         ],
         data_set
         )
     task.run()
+
+    result = data_set.evaluate_image_code_quality()
 
 if __name__ == '__main__':
     # run_echart_task()

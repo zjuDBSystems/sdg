@@ -7,6 +7,7 @@ from typing import override
 from .operator import Operator, Field, Meta
 from ..storage.dataset import DataType
 from ..task.task_type import TaskType
+from ..event import global_message_queue, EventType, EventResponse
 
 class EchartsToImageOperator(Operator):
     """EchartsToImageOperator is an operator that generates images from echarts code.
@@ -58,7 +59,10 @@ class EchartsToImageOperator(Operator):
                 img_file_path = os.path.join(img_dir.data_path, img_file_name)
 
                 with open(img_file_path, 'wb') as f:
-                    f.write(self.generate_echarts_png(code))
+                    bytes = self.generate_echarts_png(code)
+                    if bytes is None:
+                        continue
+                    f.write(bytes)
 
                 # modify csv file
                 df.at[index, DataType.IMAGE.value] = img_file_name
@@ -114,7 +118,7 @@ class EchartsToImageOperator(Operator):
                 page.wait_for_function('''() => {
                     return document.title === 'RENDER_DONE' &&
                         document.querySelector('#chart canvas').clientWidth > 0
-                }''', timeout=100_000)  # 等待渲染标记
+                }''', timeout=10_000)  # 等待渲染标记
                 
                 # 先检测canvas元素是否存在
                 page.wait_for_selector('#chart canvas', state='attached', timeout=10_000)
@@ -136,9 +140,11 @@ class EchartsToImageOperator(Operator):
                 # quality=95
                 )
                 browser.close()
+                global_message_queue.put(EventResponse(event=EventType.REASONING, data="✅ 图片数据制备成功"))
                 print("✅ 成功生成 png")
                 return screenshot_bytes
             except Exception as e:
+                global_message_queue.put(EventResponse(event=EventType.REASONING, data="❌ 图片数据制备失败"))
                 print(f"❌ 生成失败: {str(e)}")
                 # 生成调试文件
                 with open('error_debug.html', 'w') as f:

@@ -63,6 +63,8 @@ class ImgToEchartsOperator(Operator):
         for index, img_file_name in enumerate(img_files):
             # print("img_file : " + img_file_name)
             # For images without corresponding echarts code files
+            if pd.isna(img_file_name):
+                continue
             code_file_name = os.path.splitext(img_file_name)[0]+'.json'
             # print("code_file : " + code_file_name)
             if not self.check_file_existence(code_file_name, code_files):

@@ -65,8 +65,9 @@ class ImageRobustnessEnhancer(Operator):
         type_name = df["type"].tolist()
 
         for index, img_name in enumerate(img_files):
-            if not img_name :
+            if pd.isna(img_name):
                 continue
+            print(img_name)
             file_path = os.path.join(img_dir.data_path, img_name)
             with open(file_path, 'rb') as f:
                 img_data = f.read()

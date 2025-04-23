@@ -50,7 +50,7 @@ class Task:
         """Executes the task by applying the operators to the input dataset."""
         dataset: Dataset = self.in_dataset
         for operator in self.operators:
-            global_message_queue.put(EventResponse(event=EventType.REQUEST, data=f'execute operator {operator.get_meta().name}'))
+            global_message_queue.put(EventResponse(event=EventType.REQUEST, data=f'执行制备算子 {operator.get_meta().name}'))
             start = time.time()
             dataset = copy_dataset(dataset)
             print(dataset.dirs[0].data_path)
