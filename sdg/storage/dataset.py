@@ -188,11 +188,12 @@ class Dataset:
         print("syntax_score:",syntax_score)
         # print(0)
         # 接着是可渲染性检测
+        print('start renderable test')
         renderable_score, renderable_score_details = evaluate_renderability(code_file_path,
                                                                             screenshot_path)  # 文件内部需要提供一个浏览器的所在地址
         collector.add_scores("renderable_score", renderable_score_details)
         print("renderable_score:",renderable_score)
-        # print(renderable_score)
+        print(renderable_score)
         # 之后是配置项完整性检测
         configuration_complete_score, configuration_complete_score_details = evaluate_completeness(md_path,
                                                                                                    pair_file_path,

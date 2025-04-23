@@ -151,11 +151,11 @@ def describe_metadata(metadata_path: str):
 def run_echart_task():
     # load echart example dataset
     global_message_queue.put(EventResponse(event=EventType.REQUEST, data="Load multimodal dataset, include code and image!"))
-    code_dir = Datadir('echart-code', DataType.CODE)
+    code_dir = Datadir('echart-code-sample', DataType.CODE)
     describe_data(code_dir)
-    image_dir = Datadir('echart-image', DataType.IMAGE)
+    image_dir = Datadir('echart-image-sample', DataType.IMAGE)
     describe_data(image_dir)
-    data_set = Dataset([code_dir, image_dir], 'echart.metadata','key_configurations.md')
+    data_set = Dataset([code_dir, image_dir], 'echart-sample.metadata','key_configurations.md')
     describe_metadata(data_set.meta_path)
     global_message_queue.put(EventResponse(event=EventType.RESPONSE, data="Load multimodal dataset done!"))
 
