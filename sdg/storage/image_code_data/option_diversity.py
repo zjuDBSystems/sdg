@@ -21,21 +21,19 @@ def extract_field_names(js_path):
     global error_count, error_files
     try:
         with open(js_path, 'r', encoding='utf-8') as f:
-            js_code = f.read()
+            js_data = json.load(f)
 
-        # 预处理代码
-        js_code = re.sub(r'//.*', '', js_code)  # 移除单行注释
-        js_code = re.sub(r'/\*.*?\*/', '', js_code, flags=re.DOTALL)  # 移除多行注释
-
-        # 匹配所有option对象（包括option1, option2等变体）
-        option_blocks = re.findall(r'\boption\w*\s*=\s*(\{.*?\});', js_code, flags=re.DOTALL)
-
-        # 提取所有顶级字段名
         fields = set()
-        for block in option_blocks:
-            # 提取字段名（匹配 key: 模式）
-            block_fields = re.findall(r'(?<=[{,])\s*(\b\w+\b)\s*(?=:[\s\[]*?)', block)
-            fields.update(block_fields)
+        def traverse_json(data):
+            if isinstance(data, dict):
+                for key in data.keys():
+                    fields.add(key)
+                    traverse_json(data[key])
+            elif isinstance(data, list):
+                for item in data:
+                    traverse_json(item)
+
+        traverse_json(js_data)
 
         return list(fields)
 
@@ -46,6 +44,7 @@ def extract_field_names(js_path):
         return []
 
 
+
 def build_feature_matrix(js_dir):
     """构建字段存在性特征矩阵"""
     # 第一阶段：收集所有可能的字段
@@ -54,7 +53,7 @@ def build_feature_matrix(js_dir):
 
     for root, _, files in os.walk(js_dir):
         for file in files:
-            if file.endswith('.js'):
+            if file.endswith('.json'):
                 js_path = os.path.join(root, file)
                 fields = extract_field_names(js_path)
                 file_records.append((file, fields))
@@ -81,15 +80,15 @@ def build_feature_matrix(js_dir):
 
 
 def calculate_diversity_score(data, n_clusters):
-    # 执行聚类
     kmeans = KMeans(n_clusters=n_clusters, random_state=42)
     labels = kmeans.fit_predict(data)
-
-    # 计算 DBI
+    #
+    # # 计算 DBI
     dbi = davies_bouldin_score(data, labels)
-    # print("dbi",dbi)
+    # print("dbi", dbi)
     # 转换为 0-100 得分
-    score = (1 / (1 + dbi)) * 100
+    max_k = 10
+    score = min(dbi * 180, 70) + (n_clusters / max_k) * 30
     return score, labels
 
 
@@ -170,23 +169,23 @@ def evaluate_option_diversity(js_dir, csv_path):
     # print("\n=== 聚类结果分布 ===")
     # for cluster_id in sorted(cluster_files.keys()):
     #     print(f"簇 {cluster_id}: {len(cluster_files[cluster_id])} 个文件")
-
-    # 详细输出每个簇的文件列表
+    #
+    # # 详细输出每个簇的文件列表
     # print("\n=== 详细文件分布 ===")
     # for cluster_id, files in cluster_files.items():
     #     print(f"\n簇 {cluster_id} 包含以下 {len(files)} 个文件：")
     #     for idx, filename in enumerate(files, 1):
     #         print(f"{idx}. {filename}")
-
-    # 保存结果到文件
-    with open("cluster_results.txt", "w", encoding="utf-8") as f:
-        for cluster_id in sorted(cluster_files.keys()):
-            f.write(f"=== 簇 {cluster_id} ===\n")
-            for filename in cluster_files[cluster_id]:
-                f.write(f"{filename}\n")
-            f.write("\n")
-
-    # # 可视化（保持不变）
+    #
+    # # 保存结果到文件
+    # with open("cluster_results.txt", "w", encoding="utf-8") as f:
+    #     for cluster_id in sorted(cluster_files.keys()):
+    #         f.write(f"=== 簇 {cluster_id} ===\n")
+    #         for filename in cluster_files[cluster_id]:
+    #             f.write(f"{filename}\n")
+    #         f.write("\n")
+    #
+    # # # 可视化（保持不变）
     # plt.figure(figsize=(10, 6))
     # plt.scatter(reduced_data[:, 0], reduced_data[:, 1], c=labels, cmap='tab20', alpha=0.7)
     # plt.title(f"配置项字段聚类 (多样性评分: {score:.1f}/100)")

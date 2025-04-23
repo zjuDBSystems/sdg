@@ -28,7 +28,7 @@ def calculate_score(entropy, num_types):
 
 def evaluate_chart_type(csv_path):
     df = pd.read_csv(csv_path)
-    chart_types = df['chart_type'].tolist()
+    chart_types = df['type'].tolist()
     # print(chart_types)
     entropy = calculate_shannon_entropy(chart_types)
     num_types = len(set(chart_types))

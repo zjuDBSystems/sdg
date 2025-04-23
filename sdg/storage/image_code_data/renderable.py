@@ -1,6 +1,7 @@
 
 import os
 from time import sleep
+from concurrent.futures import ThreadPoolExecutor
 
 from playwright.sync_api import sync_playwright
 def test_renderability(js_code_path: str, screenshot_folder: str) -> bool:
@@ -8,7 +9,9 @@ def test_renderability(js_code_path: str, screenshot_folder: str) -> bool:
         # 从文件中读取JavaScript代码
         with open(js_code_path, "r", encoding="utf-8") as f:
             js_code = f.read()
-
+        # print(js_code_path)
+        if js_code.strip().startswith("{") and js_code.strip().endswith("}"):
+            js_code = "option = " + js_code
 
         with sync_playwright() as p:
             browser = p.chromium.launch(headless=True, args=["--no-sandbox"])
@@ -32,9 +35,9 @@ def test_renderability(js_code_path: str, screenshot_folder: str) -> bool:
 
             page.wait_for_function('document.querySelector("#main canvas").clientWidth > 0',
                                            timeout=10000)  # 等待Canvas有宽度
-            sleep(0.8)
+            sleep(0.7)
                     # 截图保存到指定文件夹，截图名与代码文件名相同
-            screenshot_name = os.path.basename(js_code_path).replace('.js', '.png')
+            screenshot_name = os.path.basename(js_code_path).replace('.json', '.png')
             screenshot_path = os.path.join(screenshot_folder, screenshot_name)
             page.screenshot(path=screenshot_path)
 
@@ -56,7 +59,7 @@ def test_renderability(js_code_path: str, screenshot_folder: str) -> bool:
 def process_js_folder(js_folder: str, screenshot_folder: str) :
     """遍历代码文件夹并评判每个文件的渲染结果"""
     # 获取文件夹中的所有JS文件
-    js_files = [f for f in os.listdir(js_folder) if f.endswith(".js")]
+    js_files = [f for f in os.listdir(js_folder) if f.endswith(".json")]
 
     total_files = len(js_files)
     if total_files == 0:
@@ -70,13 +73,25 @@ def process_js_folder(js_folder: str, screenshot_folder: str) :
     file_scores = {}
     passed_count = 0
 
-    for js_file in js_files:
-        js_path = os.path.join(js_folder, js_file)
-        success = test_renderability(js_path, screenshot_folder)
-        score = 100 if success else 0
-        file_scores[js_file] = score
-        passed_count += 1 if success else 0
+    # for js_file in js_files:
+    #     js_path = os.path.join(js_folder, js_file)
+    #     success = test_renderability(js_path, screenshot_folder)
+    #     score = 100 if success else 0
+    #     file_scores[js_file] = score
+    #     passed_count += 1 if success else 0
+    with ThreadPoolExecutor() as executor:
+        futures = []
+        for js_file in js_files:
+            js_path = os.path.join(js_folder, js_file)
+            future = executor.submit(test_renderability, js_path, screenshot_folder)
+            futures.append(future)
 
+        for i, future in enumerate(futures):
+            js_file = js_files[i]
+            success = future.result()
+            score = 100 if success else 0
+            file_scores[js_file] = score
+            passed_count += 1 if success else 0
 
 
     # 计算可渲染通过率

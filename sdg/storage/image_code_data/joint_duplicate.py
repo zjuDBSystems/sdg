@@ -12,8 +12,8 @@ def evaluate_joint_duplicate(duplicate_code_files, duplicate_image_files, csv_fi
     duplicate_codes = set()  # 使用集合自动去重
     # 遍历每对配对，检查图像和代码是否都在重复列表中
     for _, row in df.iterrows():
-        image_filename = row['image_file']
-        code_filename = row['code_file']
+        image_filename = row['image']
+        code_filename = row['code']
         # print(image_filename)
         # print(code_filename)
         # 判断图像和代码是否都为重复

@@ -155,9 +155,11 @@ def run_echart_task():
     describe_data(code_dir)
     image_dir = Datadir('echart-image', DataType.IMAGE)
     describe_data(image_dir)
-    data_set = Dataset([code_dir, image_dir], 'echart.metadata')
+    data_set = Dataset([code_dir, image_dir], 'echart.metadata','key_configurations.md')
     describe_metadata(data_set.meta_path)
     global_message_queue.put(EventResponse(event=EventType.RESPONSE, data="Load multimodal dataset done!"))
+
+    result = data_set.evaluate_image_code_quality()
 
     # build task workflow
     # 1st step: Randomly modify echarts configuration code to generate new code file

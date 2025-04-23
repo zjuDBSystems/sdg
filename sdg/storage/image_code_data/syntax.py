@@ -31,7 +31,7 @@ def validate_js_syntax(file_path: str) -> bool:
 
         # 输出错误信息便于调试
         if result.returncode != 0:
-            print(f"语法错误 ({file_path}):\n{result.stderr.strip()}")
+            print(f"语法错误 ({file_path}):\n")
 
         return result.returncode == 0
 
@@ -55,9 +55,10 @@ def evaluate_js_folder(folder_path: str) :
         float: 编译通过的得分（0-100）
     """
     # 获取文件夹中的所有文件
-    js_files = [f for f in os.listdir(folder_path) if f.endswith(".js")]
+    js_files = [f for f in os.listdir(folder_path) if f.endswith(".json")]
 
     total_files = len(js_files)
+    # print(total_files)
     if total_files == 0:
         print("该文件夹没有JavaScript文件.")
         return 0.0
@@ -68,10 +69,26 @@ def evaluate_js_folder(folder_path: str) :
 
     for js_file in js_files:
         file_path = os.path.join(folder_path, js_file)
-        is_valid = validate_js_syntax(file_path)
+        # print(file_path)
+        # 读取文件内容
+        with open(file_path, 'r', encoding='utf-8') as file:
+            content = file.read()
+
+        # 如果内容看起来像JSON格式，将其包裹在option =中
+        if content.startswith("{") and content.endswith("}"):
+            content = "option = " + content
+        temp_file_path = os.path.join(folder_path, f"temp_{js_file}")
+        # print(temp_file_path)
+        with open(temp_file_path, 'w', encoding='utf-8') as temp_file:
+            temp_file.write(content)
+
+        is_valid = validate_js_syntax(temp_file_path)
+        # is_valid = validate_js_syntax(file_path)
         score = 100 if is_valid else 0
         file_scores[js_file] = score
         passed_count += 1 if is_valid else 0
+        # 删除临时文件
+        os.remove(temp_file_path)
 
     score = (passed_count / total_files) * 100
 
