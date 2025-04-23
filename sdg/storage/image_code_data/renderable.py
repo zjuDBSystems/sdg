@@ -3,10 +3,13 @@ import os
 from time import sleep
 from concurrent.futures import ThreadPoolExecutor
 
+from ...event import global_message_queue, EventType, EventResponse
+
 from playwright.sync_api import sync_playwright
 def test_renderability(js_code_path: str, screenshot_folder: str) -> bool:
     try:
-        print('test file: ' + js_code_path)
+        # print('test file: ' + js_code_path)
+        global_message_queue.put(EventResponse(EventType.REASONING, f'渲染测试 {js_code_path}...'))
         # 从文件中读取JavaScript代码
         with open(js_code_path, "r", encoding="utf-8") as f:
             js_code = f.read()
@@ -30,7 +33,8 @@ def test_renderability(js_code_path: str, screenshot_folder: str) -> bool:
                             var chart = echarts.init(document.getElementById('main'));
                             chart.setOption(option);
                             """
-            print('waiting rendering: ' + js_code_path)
+            # print('waiting rendering: ' + js_code_path)
+            global_message_queue.put(EventResponse(EventType.REASONING, f'等待渲染完成 {js_code_path}...'))
             page.evaluate(initialization_code)
                     # 等待图表渲染完成
             page.wait_for_selector('#main canvas')  # 等待Canvas渲染
@@ -45,6 +49,7 @@ def test_renderability(js_code_path: str, screenshot_folder: str) -> bool:
 
                     # 检查渲染是否成功（检查页面内容）
             content = page.evaluate('document.getElementById("main").innerHTML')
+            global_message_queue.put(EventResponse(EventType.REASONING, f'渲染完成 {js_code_path}...'))
         if content:
 
             # browser.close()

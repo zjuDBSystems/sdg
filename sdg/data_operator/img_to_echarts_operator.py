@@ -55,7 +55,7 @@ class ImgToEchartsOperator(Operator):
         # files
         df = pd.read_csv(dataset.meta_path)
         img_dir = [dir for dir in dataset.dirs if dir.data_type == DataType.IMAGE][0]
-        code_dir = [dir for dir in dataset.dirs if dir.data_type == DataType.ECHARTS][0]
+        code_dir = [dir for dir in dataset.dirs if dir.data_type == DataType.CODE][0]
         img_files = df[DataType.IMAGE.value].tolist()
         code_files = df[DataType.ECHARTS.value].tolist()
 

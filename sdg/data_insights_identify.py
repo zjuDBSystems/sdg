@@ -193,27 +193,27 @@ def calculate_top_metrics(client, code_quality_analysis, llm_weight):
         total_weights[string] = order_weight * llm_weight
     # print(total_weights)
     # 准备神经网络输入
-    all_metrics = [
-        "语法检测", "可渲染性检测", "配置项完整检测",
-        "图像与渲染截图的SSIM", "图像OCR检测的文字与配置项的余弦相似度",
-        "图表类型均衡性", "配置项多样性",
-        "代码重复", "图像重复", "联合重复",
-        "数据量"
-    ]
+    # all_metrics = [
+    #     "语法检测", "可渲染性检测", "配置项完整检测",
+    #     "图像与渲染截图的SSIM", "图像OCR检测的文字与配置项的余弦相似度",
+    #     "图表类型均衡性", "配置项多样性",
+    #     "代码重复", "图像重复", "联合重复",
+    #     "数据量"
+    # ]
 
-    X = [code_quality_analysis[metric] for metric in all_metrics]
+    # X = [code_quality_analysis[metric] for metric in all_metrics]
 
-    # 获取神经网络预测值
-    predictor = MLP(input_dim=11, hidden_dim=20, output_dim=11)
-    nn_scores = predictor(X)
+    # # 获取神经网络预测值
+    # predictor = MLP(input_dim=11, hidden_dim=20, output_dim=11)
+    # nn_scores = predictor(X)
 
-    # 创建指标-得分映射
-    metric_score_map = {metric: score for metric, score in zip(all_metrics, nn_scores)}
-    # print(metric_score_map)
+    # # 创建指标-得分映射
+    # metric_score_map = {metric: score for metric, score in zip(all_metrics, nn_scores)}
+    # # print(metric_score_map)
 
-    for string, dict_weight in metric_score_map.items():
-        total_weights[string] += dict_weight * (1-llm_weight)
-    # print(total_weights)
+    # for string, dict_weight in metric_score_map.items():
+    #     total_weights[string] += dict_weight * (1-llm_weight)
+    # # print(total_weights)
 
     sorted_strings = sorted(total_weights.keys(), key=lambda x: total_weights[x], reverse=True)
 
