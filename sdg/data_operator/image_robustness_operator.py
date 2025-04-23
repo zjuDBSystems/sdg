@@ -62,8 +62,9 @@ class ImageRobustnessEnhancer(Operator):
         df = pd.read_csv(dataset.meta_path)
         img_dir = [dir for dir in dataset.dirs if dir.data_type == DataType.IMAGE][0]
         img_files = df[DataType.IMAGE.value].tolist()
+        type_name = df["type"].tolist()
 
-        for img_name in img_files:
+        for index, img_name in enumerate(img_files):
             if not img_name :
                 continue
             file_path = os.path.join(img_dir.data_path, img_name)
@@ -85,6 +86,11 @@ class ImageRobustnessEnhancer(Operator):
 
                 with open(file_path, 'wb') as f:
                     f.write(img_byte_arr)
+                    new_data = pd.DataFrame({"image": ["m_"+img_name], "code": [""], "type": [type_name[index]]})
+                    df = pd.concat([df, new_data], ignore_index=True)  # 合并数据
+        
+        # 保存新数据
+        df.to_csv(dataset.meta_path, index=False)
 
 
     def _add_watermark(self, img):
