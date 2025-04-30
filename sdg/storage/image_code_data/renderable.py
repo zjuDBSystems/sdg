@@ -3,13 +3,29 @@ import os
 from time import sleep
 from concurrent.futures import ThreadPoolExecutor
 
-from ...event import global_message_queue, EventType, EventResponse
-
 from playwright.sync_api import sync_playwright
+from PIL import Image
+import numpy as np
+
+def analyze_screenshot(image_path: str, white_threshold: float = 0.95) -> bool:
+    """分析截图中的纯白像素比例"""
+    try:
+        img = Image.open(image_path)
+        # 转换为RGB数组
+        img_array = np.array(img.convert('RGB'))
+
+        # 计算纯白像素数量
+        white_pixels = np.all(img_array == [255, 255, 255], axis=2)
+        white_ratio = np.mean(white_pixels)
+
+        return white_ratio < white_threshold
+    except Exception as e:
+        print(f"Image analysis error: {str(e)}")
+        return False
+
+
 def test_renderability(js_code_path: str, screenshot_folder: str) -> bool:
     try:
-        # print('test file: ' + js_code_path)
-        global_message_queue.put(EventResponse(EventType.REASONING, f'渲染测试 {js_code_path}...'))
         # 从文件中读取JavaScript代码
         with open(js_code_path, "r", encoding="utf-8") as f:
             js_code = f.read()
@@ -22,45 +38,54 @@ def test_renderability(js_code_path: str, screenshot_folder: str) -> bool:
             page = browser.new_page()
 
 
-            page.set_content('<div id="main" style="width: 600px;height:400px;"></div>')  # 设置容器
+            page.set_content('<div id="main" style="width:1200px;height:800px;background:white;"></div>')  # 设置容器
 
             # 在页面中引入 ECharts 和用户的代码
             page.add_script_tag(
-                url='https://cdn.jsdelivr.net/npm/echarts@5.1.0/dist/echarts.min.js')  # 加载 ECharts 库
+                url='https://cdn.jsdelivr.net/npm/echarts@5.6.0/dist/echarts.min.js')  # 加载 ECharts 库
             page.add_script_tag(content=js_code)  # 加载用户的 ECharts 配置代码
             # page.set_content(html_content)
             initialization_code = """
                             var chart = echarts.init(document.getElementById('main'));
                             chart.setOption(option);
                             """
-            # print('waiting rendering: ' + js_code_path)
-            global_message_queue.put(EventResponse(EventType.REASONING, f'等待渲染完成 {js_code_path}...'))
             page.evaluate(initialization_code)
-                    # 等待图表渲染完成
-            page.wait_for_selector('#main canvas')  # 等待Canvas渲染
 
-            page.wait_for_function('document.querySelector("#main canvas").clientWidth > 0'
-                                           )  # 等待Canvas有宽度
-            sleep(0.7)
+
+                    # 等待图表渲染完成
+            page.wait_for_selector('#main canvas', timeout=5000)  # 等待Canvas渲染
+            # page.wait_for_selector('#chart canvas', state='attached', timeout=10_000)
+            # page.wait_for_function('document.querySelector("#main canvas").clientWidth > 0',
+            #                                timeout=10000)  # 等待Canvas有宽度
+            sleep(2)
                     # 截图保存到指定文件夹，截图名与代码文件名相同
             screenshot_name = os.path.basename(js_code_path).replace('.json', '.png')
             screenshot_path = os.path.join(screenshot_folder, screenshot_name)
-            page.screenshot(path=screenshot_path)
+            # page.screenshot(path=screenshot_path)
+
+            chart_div = page.locator('#main')
+            chart_div.screenshot(
+                path=screenshot_path
+            )
 
                     # 检查渲染是否成功（检查页面内容）
             content = page.evaluate('document.getElementById("main").innerHTML')
-            global_message_queue.put(EventResponse(EventType.REASONING, f'渲染完成 {js_code_path}...'))
         if content:
 
             # browser.close()
+            print(js_code_path)
+            print("渲染成功")
             return True  # 渲染成功
         else:
-
+            print(js_code_path)
+            print("渲染失败")
             # browser.close()
             return False  # 渲染失败
 
     except Exception as e:
         print(f"Execution error: {e}")
+        print(js_code_path)
+        print("渲染失败")
         return False
 
 def process_js_folder(js_folder: str, screenshot_folder: str) :

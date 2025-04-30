@@ -9,6 +9,7 @@ from sklearn.metrics.pairwise import euclidean_distances
 import matplotlib.pyplot as plt
 from sklearn.metrics import davies_bouldin_score
 from sklearn.metrics import silhouette_score
+
 error_count = 0
 error_files = []
 
@@ -38,11 +39,10 @@ def extract_field_names(js_path):
         return list(fields)
 
     except Exception as e:
-        print(f"处理 {js_path} 时出错: {e}")
+        # print(f"处理 {js_path} 时出错: {e}")
         error_count += 1
         error_files.append(js_path)
         return []
-
 
 
 def build_feature_matrix(js_dir):
@@ -76,20 +76,16 @@ def build_feature_matrix(js_dir):
     return pd.DataFrame(feature_rows, columns=field_columns, index=filenames)
 
 
-
-
-
 def calculate_diversity_score(data, n_clusters):
     kmeans = KMeans(n_clusters=n_clusters, random_state=42)
     labels = kmeans.fit_predict(data)
-    #
-    # # 计算 DBI
+    sil_score = silhouette_score(data, labels)
     dbi = davies_bouldin_score(data, labels)
-    # print("dbi", dbi)
+
     # 转换为 0-100 得分
     max_k = 10
-    score = min(dbi * 180, 70) + (n_clusters / max_k) * 30
-    return score, labels
+    score = min(dbi * 100, 50) + min((-sil_score + 1) * 50, 50)
+    return score, labels, sil_score, dbi
 
 
 def find_optimal_k(data, max_k=10):
@@ -99,27 +95,24 @@ def find_optimal_k(data, max_k=10):
     :param max_k: 最大尝试的 K 值
     :return: 最佳 K 值
     """
-    silhouette_scores = []
-
-    # 尝试 K 从 2 到 max_k
-    for k in range(2, max_k + 1):
-        kmeans = KMeans(n_clusters=k, random_state=42)
+    n_samples = data.shape[0]
+    if n_samples < 3:
+        print("样本数量过少，无法进行聚类评估。")
+        return None
+    optimal_k = None
+    best_score = -1
+    for k in range(2, min(max_k + 1, n_samples)):
+        kmeans = KMeans(n_clusters=k)
         labels = kmeans.fit_predict(data)
-
-        # 计算轮廓系数（仅当有至少两个簇）
-        if len(np.unique(labels)) >= 2:
+        try:
             sil_score = silhouette_score(data, labels)
-        else:
-            sil_score = -1  # 无效值
-        silhouette_scores.append(sil_score)
-    # 自动选择最佳 K
-    # 策略：轮廓系数最高且 SSE 下降平缓
-    best_k_sil = np.argmax(silhouette_scores) + 2  # +2 因为从k=2开始
-
-    # print(best_k_sil)
-
-
-    return best_k_sil
+            if sil_score > best_score:
+                best_score = sil_score
+                optimal_k = k
+        except ValueError as e:
+            print(e)
+            continue
+    return optimal_k
 
 
 def _find_elbow_point(sse):
@@ -135,26 +128,17 @@ def _find_elbow_point(sse):
     return np.argmax(second_deriv)
 
 
-
 def evaluate_option_diversity(js_dir, csv_path):
     # 构建二进制特征矩阵
-    # 构建二进制特征矩阵
     df = build_feature_matrix(js_dir)
-
-    # print("\n=== 特征维度分析 ===")
-    # print(f"总字段数: {df.shape[1]}")
-    # print(f"示例字段: {df.columns.tolist()[:5]}...")
 
     # 降维可视化
     pca = PCA(n_components=2)
     reduced_data = pca.fit_transform(df)
 
-    # 计算得分（假设有5种图表类型）
-    # chart_type_count = 3
-    chart_type_count = find_optimal_k(df.values, max_k=10)
-    # print("最佳k值",chart_type_count)
-    score, labels = calculate_diversity_score(reduced_data, chart_type_count)
-    # print(score)
+    chart_type_count = find_optimal_k(reduced_data, max_k=10)
+    score, labels, sil_score, dbi = calculate_diversity_score(df.values, chart_type_count)
+
     # 获取文件名列表
     filenames = df.index.tolist()
 
@@ -165,37 +149,39 @@ def evaluate_option_diversity(js_dir, csv_path):
             cluster_files[label] = []
         cluster_files[label].append(filename)
 
-    # # 打印聚类结果
-    # print("\n=== 聚类结果分布 ===")
-    # for cluster_id in sorted(cluster_files.keys()):
-    #     print(f"簇 {cluster_id}: {len(cluster_files[cluster_id])} 个文件")
-    #
-    # # 详细输出每个簇的文件列表
-    # print("\n=== 详细文件分布 ===")
-    # for cluster_id, files in cluster_files.items():
-    #     print(f"\n簇 {cluster_id} 包含以下 {len(files)} 个文件：")
-    #     for idx, filename in enumerate(files, 1):
-    #         print(f"{idx}. {filename}")
-    #
-    # # 保存结果到文件
-    # with open("cluster_results.txt", "w", encoding="utf-8") as f:
-    #     for cluster_id in sorted(cluster_files.keys()):
-    #         f.write(f"=== 簇 {cluster_id} ===\n")
-    #         for filename in cluster_files[cluster_id]:
-    #             f.write(f"{filename}\n")
-    #         f.write("\n")
-    #
-    # # # 可视化（保持不变）
-    # plt.figure(figsize=(10, 6))
-    # plt.scatter(reduced_data[:, 0], reduced_data[:, 1], c=labels, cmap='tab20', alpha=0.7)
-    # plt.title(f"配置项字段聚类 (多样性评分: {score:.1f}/100)")
-    # plt.xlabel("主成分1")
-    # plt.ylabel("主成分2")
-    # plt.show()
+    print("========== 配置项多样性指标评估结果 ==========")
+    print(f"配置项多样性最终得分: {score:.2f} 分。")
+    print(f"最佳聚类数 K 值: {chart_type_count}。")
+    print(f"轮廓系数 (Silhouette Score): {sil_score:.4f}。")
+    print(f" Davies-Bouldin 指数 (DBI): {dbi:.4f}。")
 
-    # 错误报告（保持不变）
+    if score >= 80:
+        print("配置项多样性非常高，簇与簇之间的平均相似性较低，进一步说明了配置项之间的差异显著且合理。")
+
+    elif score >= 60:
+        print("配置项多样性处于较好水平，表明簇与簇之间的相似性不是很高，配置项之间有一定的差异。")
+
+    elif score >= 40:
+        print("配置项多样性一般，表示簇与簇之间的平均相似性较高，配置项之间的差异不够显著，存在一定的相似性或冗余。")
+
+    else:
+        print("配置项多样性较低，表明簇与簇之间的平均相似性很高，配置项之间缺乏足够的多样性，大部分配置项较为相似。")
+
+
+    print(f"\n聚类得到的簇数量: {len(cluster_files)}。")
+    print(f"总字段数: {df.shape[1]}。")
+
+    # 分析不同簇的字段分布差异
+    print("\n不同簇的字段分布差异分析：")
+    for cluster_id in sorted(cluster_files.keys()):
+        cluster_data = df.loc[cluster_files[cluster_id]]
+        cluster_fields = set(cluster_data.columns[cluster_data.sum() > 0])
+        print(f"簇 {cluster_id}: 包含 {len(cluster_files[cluster_id])} 个文件，特有字段数: {len(cluster_fields)}")
+        print(f"  特有字段示例: {list(cluster_fields)[:5]}...")
+
+    # 错误报告
     # print("\n=== 错误统计 ===")
     # print(f"出错文件数: {error_count}")
     # print("典型错误文件:" + ("\n - ".join(error_files[:3]) if error_files else "无"))
-    return score
 
+    return score

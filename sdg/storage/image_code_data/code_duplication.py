@@ -1,83 +1,60 @@
-import ast
-import difflib
+import json
+import hashlib
 import os
-import numpy as np
-import re
-from hashlib import md5
+import difflib
 from collections import defaultdict
-def remove_comments(code):
-    """删除代码中的注释"""
-    # 移除单行注释
-    code = re.sub(r'//.*', '', code)
-    # 移除多行注释
-    code = re.sub(r'/\*.*?\*/', '', code, flags=re.DOTALL)
-    return code
 
 
+def normalize_json(json_data):
+    """标准化JSON数据"""
+    return json.dumps(json_data, sort_keys=True)
 
 
-def parse_code_to_ast(code):
-    """将代码解析为AST"""
-    # print(code)
-    try:
-        if code.strip().startswith("{") and code.strip().endswith("}"):
-            code = "option = " + code
+def calculate_hash(json_str):
+    """计算标准化JSON字符串的哈希值"""
+    return hashlib.md5(json_str.encode('utf-8')).hexdigest()
 
-        return ast.parse(code)
-    except SyntaxError as e:
-        print("存在语法错误")
-        print(e)
-        return None
 
-def ast_to_str(node):
-    """将AST节点转换为标准化的字符串"""
-    return ast.dump(node, annotate_fields=False)
+def calculate_similarity(json_str1, json_str2):
+    """计算两个标准化JSON字符串的相似度"""
+    return difflib.SequenceMatcher(None, json_str1, json_str2).ratio()
 
-def calculate_similarity(ast1, ast2):
-    """计算两棵AST树的相似度"""
-    # 将AST转换为字符串
-    ast1_str = ast_to_str(ast1)
-    ast2_str = ast_to_str(ast2)
-
-    # 使用difflib计算字符串的相似度
-    similarity = difflib.SequenceMatcher(None, ast1_str, ast2_str).ratio()
-    return similarity
 
 def process_dataset(dataset_path):
-    """遍历数据集中的所有JS配置文件并计算相似度"""
+    """遍历数据集中的所有JSON文件并计算相似度"""
     all_code = []
-    all_asts = []
-    js_files = []
+    all_json = []
+    json_files = []
+
     # 遍历指定路径下的所有文件
     for root, _, files in os.walk(dataset_path):
         for file in files:
-            if file.endswith(".json"):  # 只处理 JS 文件
-                js_code_path = os.path.join(root, file)
-                js_files.append(file)  # 存储文件名
-                # print(f"Processing: {js_code_path}")
+            if file.endswith(".json"):  # 只处理 JSON 文件
+                json_code_path = os.path.join(root, file)
+                json_files.append(file)  # 存储文件名
 
-                # 读取代码并解析为AST
-                with open(js_code_path, 'r', encoding='utf-8') as f:
-                    code = f.read()
-                # print(js_code_path)
-                # 将代码解析为AST
-                ast_node = parse_code_to_ast(code)
-                # print(ast_node)
-                if ast_node:
-                    all_code.append(code)
-                    all_asts.append(ast_node)
+                # 读取代码并解析为JSON
+                with open(json_code_path, 'r', encoding='utf-8') as f:
+                    try:
+                        code = f.read()
+                        json_data = json.loads(code)
+                        normalized_json = normalize_json(json_data)  # 标准化JSON
+                        all_code.append(code)
+                        all_json.append(normalized_json)  # 存储标准化后的JSON
+                    except json.JSONDecodeError as e:
+                        # print(f"Error decoding JSON file {json_code_path}: {e}")
+                        continue
 
-    return js_files, all_code, all_asts
+    return json_files, all_code, all_json
 
-def calculate_duplicate_rate(all_asts, js_files, threshold=0.8):
+
+def calculate_duplicate_rate(all_json, json_files):
     """计算代码的重复率，并返回重复代码的文件名"""
     hash_groups = defaultdict(list)
 
     # 生成哈希指纹
-    for idx, ast_node in enumerate(all_asts):
-        ast_str = ast_to_str(ast_node)
-        # 生成128位MD5哈希
-        hashed = md5(ast_str.encode()).hexdigest()
+    for idx, json_str in enumerate(all_json):
+        hashed = calculate_hash(json_str)  # 计算哈希值
         hash_groups[hashed].append(idx)
 
     duplicate_count = 0
@@ -90,19 +67,13 @@ def calculate_duplicate_rate(all_asts, js_files, threshold=0.8):
 
         # 组内两两比较
         for i in range(len(group)):
-            for j in range(i + 1, len(group)):
-                idx1, idx2 = group[i], group[j]
-                similarity = calculate_similarity(all_asts[idx1], all_asts[idx2])
+            idx1 = group[i]
+            duplicate_count += 1
+            duplicate_files.add(json_files[idx1])
 
-                if similarity > threshold:
-                    duplicate_count += 1
-                    duplicate_files.add(js_files[idx1])
-                    duplicate_files.add(js_files[idx2])
-
-    # 后续处理保持不变
     duplicate_files = list(duplicate_files)
-    total_pairs = len(all_asts) * (len(all_asts) - 1) / 2
-    duplicate_rate = duplicate_count / total_pairs if total_pairs > 0 else 0
+    total_pairs = len(all_json) * (len(all_json) - 1) / 2
+    duplicate_rate = duplicate_count / len(all_json)
 
     return duplicate_rate, duplicate_files
 
@@ -112,11 +83,28 @@ def calculate_quality_score(duplicate_rate):
     score = max(0, min(100, (1 - duplicate_rate) * 100))  # 重复率越高，得分越低
     return score
 
+
 def evaluate_code_duplicate(dataset_path):
-    js_files, all_code, all_asts = process_dataset(dataset_path)
-    duplicate_rate, duplicate_files = calculate_duplicate_rate(all_asts, js_files)
+    json_files, all_code, all_json = process_dataset(dataset_path)
+    duplicate_rate, duplicate_files = calculate_duplicate_rate(all_json, json_files)
     quality_score = calculate_quality_score(duplicate_rate)
-    return quality_score,duplicate_files
 
+    print("========== 代码重复率指标评估结果 ==========")
+    print(f"代码重复率: {duplicate_rate * 100:.2f}%")
+    print(f"代码质量得分: {quality_score} 分")
 
+    if quality_score >= 90:
+        print(f"代码质量非常高，代码重复率很低，说明代码的编写具有较高的独立性和原创性，重复的代码很少。")
+    elif quality_score >= 60:
+        print(f"代码质量处于较好水平，代码重复率相对较低，代码之间的重复部分不是很多，整体较为良好。")
+    elif quality_score >= 40:
+        print(f"代码质量一般，代码重复率适中，存在一定量的重复代码，可能会影响代码的维护性和可读性。")
+    else:
+        print(f"代码质量较低，代码重复率较高，大量的代码存在重复，这会增加代码的维护成本，降低代码的质量。")
 
+    if duplicate_files:
+        print(f"\n存在重复的文件有: {duplicate_files}")
+    # else:
+    #     print("\n没有发现重复的文件。")
+
+    return quality_score, duplicate_files
