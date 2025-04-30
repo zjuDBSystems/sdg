@@ -3,7 +3,6 @@ import math
 import re
 from collections import Counter
 import os
-
 import pandas as pd
 
 
@@ -55,19 +54,6 @@ def extract_option_from_js(js_path):
         return {}
 
 
-# def count_config_items(config):
-#     count = 0
-#     if isinstance(config, dict):
-#         for key, value in config.items():
-#             count += 1
-#             if isinstance(value, dict):
-#                 count += count_config_items(value)
-#     elif isinstance(config, list):
-#         for item in config:
-#             if isinstance(item, dict):
-#                 count += count_config_items(item)
-#     return count
-
 def count_config_items(config):
     """统计目标配置的总项数（键和基本类型值均为独立项）"""
     count = 0
@@ -101,7 +87,6 @@ def match_config(js_config, target_config):
         for key in target_config:
             if key in js_config:
                 match_count += 1  # 键匹配成功
-                # print(key)
                 # 递归处理值
                 match_count += match_config(js_config[key], target_config[key])
 
@@ -112,7 +97,6 @@ def match_config(js_config, target_config):
         # 逐个匹配列表元素
         for t_item, j_item in zip(target_config, js_config):
             match_count += match_config(j_item, t_item)
-            # print(j_item,t_item)
 
     # 处理基本类型（值必须严格相等）
     else:
@@ -124,33 +108,24 @@ def match_config(js_config, target_config):
     return match_count
 
 
-
 def check_config_completeness(js_option, target_config):
     target_count = count_config_items(target_config)
-    # print(target_config)
-    # print(target_count)
-    # print(js_option)
     match_count = match_config(js_option, target_config)
-    # print(match_count)
     score = (match_count / target_count) * 100 if target_count > 0 else 0
     return score
 
 
-# def classify_js_config(js_option, configurations):
-#     for config in configurations:
-#         if match_config(js_option, config['config']):
-#             return config['name']
-#     return '其他类别'
-
-
-def evaluate_completeness( md_path, csv_path,js_dir):
+def evaluate_completeness(md_path, csv_path, js_dir):
     """返回元组 (平均分, {代码文件名: 得分})"""
     configurations = load_configurations(md_path)
-    # print(configurations)
     df = pd.read_csv(csv_path)
     score_dict = {}  # 新增：存储文件名和得分的字典
     total_score = 0
+    file_count = 0
+    low_score_files = []  # 新增：用于记录匹配度得分较低的文件列表
+    score_threshold = 90  # 设定得分阈值，可根据实际情况调整
 
+    print("========== 配置完整性指标评估结果 ==========")
     for root, _, files in os.walk(js_dir):
         for file in files:
             if file.endswith('.json'):
@@ -168,45 +143,37 @@ def evaluate_completeness( md_path, csv_path,js_dir):
                         for config in configurations:
                             if config['name'] == chart_type:
                                 # 计算得分
-
-
                                 score = check_config_completeness(js_option, config['config'])
-                                # if(score>100 or score<100):
-                                #     print(js_path)
-                                #     print(score)
                                 score_dict[file] = score  # 记录到字典
                                 total_score += score
+                                file_count += 1
+                                if score < score_threshold:
+                                    low_score_files.append((file, score))  # 将得分较低的文件及其分数以元组形式添加到列表中
                                 break
-                        else:
-                            print(f"警告：未找到{chart_type}的配置")
-                            score_dict[file] = 0.0
-                    else:
-                        print(f"未在CSV中找到{file}对应记录")
-                        score_dict[file] = 0.0
+                        # else:
+                            # print(f"警告：未找到{chart_type}的配置")
+                    # else:
+                        # print(f"未在CSV中找到{file}对应记录")
                 except Exception as e:
-                    print(f"处理 {file} 出错: {str(e)}")
-                    score_dict[file] = 0.0
+                    # print(f"处理 {file} 出错: {str(e)}")
+                    continue
 
     # 计算平均分
-    avg_score = total_score / len(score_dict) if score_dict else 0.0
+    avg_score = total_score / file_count if file_count > 0 else 0.0
+    print(f"\n所有文件的配置完整性平均得分: {avg_score:.2f}%")
+    if avg_score == 100:
+        print("整体而言，所有文件的配置与目标配置完全匹配，表明配置的完整性极高，在配置方面无需进行额外的修改和完善。")
+    elif avg_score > 70:
+        print("整体的配置完整性处于较好水平，大部分文件的配置能够与目标配置相匹配，但仍有部分文件存在一定程度的配置缺失或不匹配情况。建议对这些文件的配置进行细致检查，补充缺失项或修正不匹配的地方，以进一步提升配置完整性。")
+        if low_score_files:
+            print(f"以下是匹配度得分低于 {score_threshold} 分的文件及其分数：")
+            for file, score in low_score_files:
+                print(f"文件名: {file}, 分数: {score}")
+    else:
+        print("整体的配置完整性较低，多数文件的配置与目标配置之间存在显著差异。这可能会影响到后续对这些配置的使用和依赖配置的功能实现。需要全面且深入地审查所有文件的配置内容，逐一分析并修正配置差异，以提高整体的配置完整性。")
+        if low_score_files:
+            print(f"以下是匹配度得分低于 {score_threshold} 分的文件及其分数：")
+            for file, score in low_score_files:
+                print(f"文件名: {file}, 分数: {score}")
+
     return avg_score, score_dict
-
-
-# def main():
-#     # 请根据实际情况修改这些路径
-#     js_dir = './monishujuji'
-#     md_path = '关键配置.md'
-#     csv_path = 'pair.csv'
-#
-#     scores,average_score = evaluate_completeness(js_dir, md_path, csv_path)
-#
-#
-#
-#     print("\n配置项完整性得分:")
-#     for i, score in enumerate(scores, 1):
-#         print(f"文件 {i}: {score} 分")
-#     print(average_score)
-#
-#
-# if __name__ == "__main__":
-#     main()

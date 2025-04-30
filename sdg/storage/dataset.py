@@ -11,7 +11,7 @@ from ..config import settings
 from .image_code_data.data_size import calculate_score_from_csv
 from .image_code_data.syntax import evaluate_js_folder
 from .image_code_data.renderable import evaluate_renderability
-from .image_code_data.ssim import evaluate_ssim
+from .image_code_data.ncc import evaluate_ncc
 from .image_code_data.chart_type import evaluate_chart_type
 from .image_code_data.option_diversity import evaluate_option_diversity
 from .image_code_data.code_duplication import evaluate_code_duplicate
@@ -19,6 +19,7 @@ from .image_code_data.image_duplication import evaluate_image_duplicate
 from .image_code_data.joint_duplicate import evaluate_joint_duplicate
 from .image_code_data.config_complete import evaluate_completeness
 from ..event import EventType, EventResponse, global_message_queue
+from .image_code_data.missing_rate_detection import evaluate_miss
 
 import pandas as pd
 
@@ -180,106 +181,66 @@ class Dataset:
         # 最终的结果文档创造d
         collector = ScoreCollector(pair_file_path)
 
-        # 首先是数据量的计算
-        global_message_queue.put(EventResponse(EventType.REASONING, "开始评估数据量"))
+        # 1、首先是数据量的计算
         min_size = 1000  # 1k数据得0分
         max_size = 10 ** 5  # 100K数据得100分
         data_size_score = calculate_score_from_csv(pair_file_path, min_size, max_size)
-        global_message_queue.put(EventResponse(EventType.REASONING, "数据量评估完成, 得分为" + str(data_size_score)))
-        # print("dataset_score:",data_size_score)
-        # 接下来是代码质量的计算
+        data_size_score = round(data_size_score, 2)  # 保留两位小数
+
+        # 2、接下来是代码质量的计算
         # 首先是语法检测
-        global_message_queue.put(EventResponse(EventType.REASONING, "开始进行语法检测"))
         syntax_score, syntax_score_details = evaluate_js_folder(code_file_path)
+        syntax_score = round(syntax_score, 2)  # 保留两位小数
         collector.add_scores("syntax_score", syntax_score_details)
-        global_message_queue.put(EventResponse(EventType.REASONING, "语法检测完成, 得分为" + str(syntax_score)))
-        # print("syntax_score:",syntax_score)
-        # print(0)
         # 接着是可渲染性检测
-        # print('start renderable test')
-        global_message_queue.put(EventResponse(EventType.REASONING, "开始进行可渲染性检测"))
-        renderable_score, renderable_score_details = evaluate_renderability(code_file_path,
-                                                                            screenshot_path)  # 文件内部需要提供一个浏览器的所在地址
-        collector.add_scores("renderable_score", renderable_score_details)
-        global_message_queue.put(EventResponse(EventType.REASONING, "可渲染性检测完成, 得分为" + str(renderable_score)))
-        # print("renderable_score:",renderable_score)
-        # print(renderable_score)
-        # 之后是配置项完整性检测
-        global_message_queue.put(EventResponse(EventType.REASONING, "开始进行配置项完整性检测"))
+
+        # 3、之后是配置项完整性检测
         configuration_complete_score, configuration_complete_score_details = evaluate_completeness(md_path,
                                                                                                    pair_file_path,
                                                                                                    code_file_path)
+        configuration_complete_score = round(configuration_complete_score, 2)  # 保留两位小数
         collector.add_scores("configuration_complete_score", configuration_complete_score_details)
-        global_message_queue.put(EventResponse(EventType.REASONING, "配置项完整性检测完成, 得分为" + str(configuration_complete_score)))
-        # print("configuration_complete_score:",configuration_complete_score)
-        # print("配置项完整")
-        # print(configuration_complete_score)
         # 接下来是图像代码对齐
-        # 首先是原图像与截图的SSIM
-        global_message_queue.put(EventResponse(EventType.REASONING, "开始进行原图像与截图的SSIM检测"))
-        ssim_score, ssim_score_details = evaluate_ssim(pair_file_path, image_file_path, screenshot_path)#不能有中文路径
-
-        collector.add_scores("ssim_score", ssim_score_details, key_type="image")
-        # print("ssim_score:",ssim_score)
-        global_message_queue.put(EventResponse(EventType.REASONING, "原图像与截图的SSIM检测完成, 得分为" + str(ssim_score)))
-
-
-        # print(ssim_score)
-
-
+        # 4、首先是原图像与截图的匹配度（NCC归一化互相关指数）
+        ncc_score, ncc_score_details = evaluate_ncc(pair_file_path, image_file_path, screenshot_path, code_file_path)
+        ncc_score = round(ncc_score, 2)  # 保留两位小数
+        collector.add_scores("ncc_score", ncc_score_details, key_type="image")
+        # 9、缺失率
+        miss_score = evaluate_miss(pair_file_path)
+        miss_score = round(float(miss_score), 2)  # 保留两位小数
 
         # 接下来是数据集多样性
-        # 首先是图表类型均衡性
+        # 5、首先是图表类型均衡性
         # print(1)
-        global_message_queue.put(EventResponse(EventType.REASONING, "开始进行图表类型均衡性检测"))
         chart_type_score = evaluate_chart_type(pair_file_path)
-        # print("chart_type_score:",chart_type_score)
-        global_message_queue.put(EventResponse(EventType.REASONING, "图表类型均衡性检测完成, 得分为" + str(chart_type_score)))
-        # 接着是配置项均衡性
+        chart_type_score = round(chart_type_score, 2)  # 保留两位小数
+        # 6、接着是配置项均衡性
         # print(2)
-        global_message_queue.put(EventResponse(EventType.REASONING, "开始进行配置项多样性检测"))
         option_diversity_score = evaluate_option_diversity(code_file_path, pair_file_path)
-        # print("option_diversity_score:",option_diversity_score)
-        global_message_queue.put(EventResponse(EventType.REASONING, "配置项多样性检测完成, 得分为" + str(option_diversity_score)))
-        # print(option_diversity_score)
+        option_diversity_score = round(float(option_diversity_score), 2)  # 保留两位小数
+
         # 接下来是重复检测
-        # 首先是代码重复检测
+        # 7、首先是代码重复检测
         # print(3)
-        global_message_queue.put(EventResponse(EventType.REASONING, "开始进行代码重复检测"))
         code_duplicate_score, duplicate_code_files = evaluate_code_duplicate(code_file_path)
-        # print("code_duplicate_score:",code_duplicate_score)
-        global_message_queue.put(EventResponse(EventType.REASONING, "代码重复检测完成, 得分为" + str(code_duplicate_score)))
-        # print(code_duplicate_score)
-        # print(duplicate_code_files)
-        # 接下来是图像重复检测
+        code_duplicate_score = round(code_duplicate_score, 2)  # 保留两位小数
+        # 8、接下来是图像重复检测
         # print(4)
-        global_message_queue.put(EventResponse(EventType.REASONING, "开始进行图像重复检测"))
         image_duplicate_score, duplicate_image_files = evaluate_image_duplicate(image_file_path)
-        # print("image_duplicate_score:",image_duplicate_score)
-        global_message_queue.put(EventResponse(EventType.REASONING, "图像重复检测完成, 得分为" + str(image_duplicate_score)))
-        # print(image_duplicate_score)
-        # print(duplicate_image_files)
-        # 之后是联合重复检测
-        # print(5)
-        global_message_queue.put(EventResponse(EventType.REASONING, "开始进行联合重复检测"))
-        joint_duplicate_score, duplicate_joint_files = evaluate_joint_duplicate(duplicate_code_files,
-                                                                                duplicate_image_files, pair_file_path)
-        # print("joint_duplicate_score:",joint_duplicate_score)
-        global_message_queue.put(EventResponse(EventType.REASONING, "联合重复检测完成, 得分为" + str(joint_duplicate_score)))
-        # print(joint_duplicate_score)
-        # print(duplicate_joint_files)
-        # print(6)
+        image_duplicate_score = round(image_duplicate_score, 2)  # 保留两位小数
+
         collector.add_exclusion_list('code_duplicate_score', duplicate_code_files, key_type='code')
         collector.add_exclusion_list('image_duplicate_score', duplicate_image_files, key_type='image')
-        collector.add_exclusion_list('joint_duplicate_score', duplicate_joint_files, key_type='code')
+
+        # collector.add_exclusion_list('joint_duplicate_score', duplicate_joint_files, key_type='code')
         # print(7)
 
         # 一级指标得分
-
-        code_quality_score = (syntax_score + renderable_score + configuration_complete_score) / 3
-        image_code_alignment_score = ssim_score
-        dataset_diversity_score = (chart_type_score + option_diversity_score) / 2
-        data_repeatability_score = (code_duplicate_score + image_duplicate_score + joint_duplicate_score) / 3
+        # 一级指标得分
+        code_quality_score = round((syntax_score + configuration_complete_score) / 2, 2)
+        image_code_alignment_score = round((ncc_score + miss_score) / 2, 2)
+        dataset_diversity_score = round((chart_type_score + option_diversity_score) / 2, 2)
+        data_repeatability_score = round((code_duplicate_score + image_duplicate_score) / 2, 2)
 
         # 构建分数字典
         score_dict = {
@@ -293,12 +254,11 @@ class Dataset:
             "二级指标": {
                 "代码质量": {
                     "语法检测": syntax_score,
-                    "可渲染性检测": renderable_score,
                     "配置项完整检测": configuration_complete_score
                 },
                 "图像代码对齐": {
-                    "图像与渲染截图的SSIM": ssim_score
-
+                    "图像与渲染截图的匹配度": ncc_score,
+                    "缺失率得分": miss_score
                 },
                 "数据集多样性": {
                     "图表类型均衡性": chart_type_score,
@@ -306,18 +266,16 @@ class Dataset:
                 },
                 "数据重复性": {
                     "代码重复": code_duplicate_score,
-                    "图像重复": image_duplicate_score,
-                    "联合重复": joint_duplicate_score
+                    "图像重复": image_duplicate_score
                 },
                 "数据量": {
                     "数据量": data_size_score
                 }
             }
         }
-        global_message_queue.put(EventResponse(EventType.RESPONSE, "数据集质量评估完成"))
-        global_message_queue.put(EventResponse(EventType.REASONING, json.dumps(score_dict, indent=4, ensure_ascii=False)))
+
         # 结果文档
-        final_df = collector.generate_report(result_path)#需要填写结果文档所处位置
+        final_df = collector.generate_report("./detailed_scores.csv")
         # print(final_df)
         return score_dict
 
