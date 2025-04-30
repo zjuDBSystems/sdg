@@ -1,0 +1,62 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": false,
+    "top": "3%",
+    "left": "center",
+    "data": [
+      "电视",
+      "出版",
+      "演出",
+      "社交活动",
+      "电影"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "39%",
+        "69%"
+      ],
+      "center": [
+        "43%",
+        "55%"
+      ],
+      "startAngle": 180,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 984,
+          "name": "电视"
+        },
+        {
+          "value": 230,
+          "name": "出版"
+        },
+        {
+          "value": 556,
+          "name": "演出"
+        },
+        {
+          "value": 888,
+          "name": "社交活动"
+        },
+        {
+          "value": 659,
+          "name": "电影"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{b}"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

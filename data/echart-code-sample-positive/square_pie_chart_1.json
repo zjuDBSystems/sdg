@@ -1,0 +1,102 @@
+{
+    "tooltip": {
+        "trigger": "item",
+        "backgroundColor": "rgba(0, 0, 0, 0.8)",
+        "textStyle": {
+            "color": "#fff"
+        },
+        "padding": 10
+    },
+    "legend": {
+        "show": true,
+        "top": "5%",
+        "right": "10%",
+        "orient": "vertical",
+        "textStyle": {
+            "fontSize": 12,
+            "color": "#888"
+        },
+        "data": [
+            "电视广告",
+            "网红营销",
+            "内容营销",
+            "直接访问",
+            "电子邮件",
+            "其他",
+            "展示广告"
+        ]
+    },
+    "series": [
+        {
+            "name": "Access From",
+            "type": "pie",
+            "radius": [
+                "70%",
+                "90%"
+            ],
+            "center": [
+                "40%",
+                "60%"
+            ],
+            "startAngle": 90,
+            "endAngle": 360,
+            "data": [
+                {
+                    "value": 1200,
+                    "name": "电视广告"
+                },
+                {
+                    "value": 800,
+                    "name": "网红营销"
+                },
+                {
+                    "value": 400,
+                    "name": "内容营销"
+                },
+                {
+                    "value": 200,
+                    "name": "直接访问"
+                },
+                {
+                    "value": 600,
+                    "name": "电子邮件"
+                },
+                {
+                    "value": 300,
+                    "name": "其他"
+                },
+                {
+                    "value": 100,
+                    "name": "展示广告"
+                }
+            ],
+            "itemStyle": {
+                "borderColor": "#fff",
+                "borderWidth": 2,
+                "opacity": 0.9
+            },
+            "label": {
+                "show": true,
+                "position": "outside",
+                "formatter": "{b}: {c} ({d}%)",
+                "fontSize": 14,
+                "color": "#555"
+            },
+            "emphasis": {
+                "itemStyle": {
+                    "opacity": 1
+                },
+                "label": {
+                    "fontWeight": "bold"
+                }
+            }
+        }
+    ],
+    "backgroundColor": "#f5f5f5",
+    "toolbox": {
+        "show": true,
+        "feature": {
+            "saveAsImage": {}
+        }
+    }
+}

@@ -1,0 +1,77 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "2%",
+    "left": "45%",
+    "data": [
+      "客户满意度",
+      "品牌定位",
+      "项目管理",
+      "忠诚度计划",
+      "绿色营销",
+      "组织结构",
+      "产品开发",
+      "可持续发展"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "42%",
+        "79%"
+      ],
+      "center": [
+        "58%",
+        "52%"
+      ],
+      "startAngle": 180,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 406,
+          "name": "客户满意度"
+        },
+        {
+          "value": 288,
+          "name": "品牌定位"
+        },
+        {
+          "value": 836,
+          "name": "项目管理"
+        },
+        {
+          "value": 608,
+          "name": "忠诚度计划"
+        },
+        {
+          "value": 690,
+          "name": "绿色营销"
+        },
+        {
+          "value": 905,
+          "name": "组织结构"
+        },
+        {
+          "value": 224,
+          "name": "产品开发"
+        },
+        {
+          "value": 820,
+          "name": "可持续发展"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "inside",
+        "formatter": "{d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

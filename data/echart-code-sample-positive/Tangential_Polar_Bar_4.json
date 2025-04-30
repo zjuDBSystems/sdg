@@ -1,0 +1,92 @@
+{
+    "polar": {
+        "radius": [
+            25,
+            "80%"
+        ],
+        "center": ["55%", "45%"]
+    },
+    "angleAxis": {
+        "max": 4,
+        "startAngle": 95,
+        "axisLine": {
+            "show": true,
+            "lineStyle": {
+                "color": "#bbb",
+                "width": 1
+            }
+        },
+        "splitLine": {
+            "show": true,
+            "lineStyle": {
+                "color": "#f0f0f0",
+                "type": "dotted"
+            }
+        }
+    },
+    "radiusAxis": {
+        "type": "category",
+        "data": [
+            "教育交流",
+            "教育投资",
+            "教育质量",
+            "科学普及"
+        ],
+        "axisLabel": {
+            "show": true,
+            "interval": 0,
+            "rotate": 0,
+            "margin": 15,
+            "textStyle": {
+                "color": "#777",
+                "fontSize": 14
+            }
+        },
+        "axisTick": {
+            "show": false
+        }
+    },
+    "tooltip": {
+        "trigger": "item",
+        "position": "left",
+        "textStyle": {
+            "fontWeight": "bold"
+        }
+    },
+    "series": {
+        "type": "bar",
+        "data": [
+            1.0,
+            1.8,
+            3.2,
+            2.0
+        ],
+        "color": [
+            "#D2691E"
+        ],
+        "coordinateSystem": "polar",
+        "label": {
+            "show": true,
+            "position": "middle",
+            "formatter": "{c}",
+            "fontSize": 16,
+            "color": "#fff"
+        },
+        "barWidth": 14,
+        "itemStyle": {
+            "opacity": 0.8
+        }
+    },
+    "backgroundColor": "#fcfcfc",
+    "visualMap": {
+        "show": false,
+        "min": 0,
+        "max": 5,
+        "inRange": {
+            "color": [
+                "#e0e0e0",
+                "#ccc"
+            ]
+        }
+    }
+}

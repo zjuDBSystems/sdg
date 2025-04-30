@@ -1,0 +1,85 @@
+{
+  "tooltip": {
+    "trigger": "item",
+    "extraCssText": "box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);",
+    "position": "inside",
+    "formatter": "function (params) {return params.name + ': ' + params.value;}"
+  },
+  "legend": {
+    "show": false,
+    "top": "3%",
+    "left": "center",
+    "data": [
+      "电视",
+      "出版",
+      "演出",
+      "社交活动",
+      "电影"
+    ],
+    "icon": "rect",
+    "itemWidth": 15,
+    "itemHeight": 10
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "30%",
+        "70%"
+      ],
+      "center": [
+        "40%",
+        "60%"
+      ],
+      "startAngle": 180,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 800,
+          "name": "电视"
+        },
+        {
+          "value": 100,
+          "name": "出版"
+        },
+        {
+          "value": 400,
+          "name": "演出"
+        },
+        {
+          "value": 900,
+          "name": "社交活动"
+        },
+        {
+          "value": 500,
+          "name": "电影"
+        }
+      ],
+      "itemStyle": {
+        "normal": {
+          "color": "function (params) {var colorList = ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF'];return colorList[params.dataIndex];}"
+        }
+      },
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{b}",
+        "fontSize": 16,
+        "color": "#666",
+        "distance": 10
+      },
+      "emphasis": {
+        "label": {
+          "fontWeight": "bold"
+        }
+      }
+    }
+  ],
+  "backgroundColor": "#fff",
+  "grid": {
+    "left": "10%",
+    "right": "10%",
+    "bottom": "10%"
+  }
+}

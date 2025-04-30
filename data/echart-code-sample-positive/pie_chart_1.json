@@ -1,0 +1,71 @@
+{
+    "tooltip": {
+        "trigger": "item",
+        "backgroundColor": "rgba(0, 0, 0, 0.7)",
+        "textStyle": {
+            "color": "#fff"
+        },
+        "padding": 10
+    },
+    "legend": {
+        "top": "3%",
+        "left": "left",
+        "orient": "vertical",
+        "textStyle": {
+            "fontSize": 12,
+            "color": "#888"
+        },
+        "itemWidth": 10,
+        "itemHeight": 10
+    },
+    "series": [
+        {
+            "type": "pie",
+            "radius": [
+                "50%",
+                "75%"
+            ],
+            "center": [
+                "50%",
+                "55%"
+            ],
+            "itemStyle": {
+                "borderRadius": 8,
+                "borderColor": "#eee",
+                "borderWidth": 2
+            },
+            "label": {
+                "show": true,
+                "position": "outside",
+                "formatter": "{b}: {c} ({d}%)",
+                "fontSize": 16,
+                "fontWeight": "normal",
+                "color": "#555"
+            },
+            "emphasis": {
+                "label": {
+                    "show": true,
+                    "color": "#ff0000",
+                    "fontSize": 18
+                }
+            },
+            "data": [
+                {
+                    "name": "搜索引擎",
+                    "value": 300
+                },
+                {
+                    "name": "直接访问",
+                    "value": 1500
+                },
+                {
+                    "name": "电子邮件",
+                    "value": 200
+                }
+            ],
+            "animation": false,
+            "roseType": "radius"
+        }
+    ],
+    "backgroundColor": "#f9f9f9"
+}

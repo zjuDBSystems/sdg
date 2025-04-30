@@ -1,0 +1,49 @@
+{
+  "polar": {
+    "radius": [
+      22,
+      "83%"
+    ]
+  },
+  "angleAxis": {
+    "max": 4,
+    "startAngle": 90
+  },
+  "radiusAxis": {
+    "type": "category",
+    "data": [
+      "教育交流",
+      "教育投资",
+      "教育质量",
+      "科学普及"
+    ],
+    "axisLabel": {
+      "show": true,
+      "interval": 0,
+      "rotate": 0,
+      "margin": 8
+    }
+  },
+  "tooltip": {
+    "trigger": "item"
+  },
+  "series": {
+    "type": "bar",
+    "data": [
+      0.7,
+      1.4,
+      2.8,
+      1.6
+    ],
+    "color": [
+      "#D2691E"
+    ],
+    "coordinateSystem": "polar",
+    "label": {
+      "show": true,
+      "position": "middle",
+      "formatter": "{c}"
+    }
+  },
+  "backgroundColor": "#fff"
+}

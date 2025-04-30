@@ -1,0 +1,49 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "4%",
+    "left": "center",
+    "data": [
+      "客户细分",
+      "绿色营销",
+      "并购"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "line",
+      "radius": "89%",
+      "center": [
+        "24%",
+        "86%"
+      ],
+      "startAngle": 90,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 795,
+          "name": "客户细分"
+        },
+        {
+          "value": 882,
+          "name": "绿色营销"
+        },
+        {
+          "value": 813,
+          "name": "并购"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "inside",
+        "formatter": "{d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

@@ -216,6 +216,19 @@ def run_echart_task():
 
     result = data_set.evaluate_image_code_quality()
 
+def data_evaluation():
+    negative_code_dir = Datadir('echart-code-sample-negative', DataType.CODE)
+    negative_image_dir = Datadir('echart-image-sample-negative', DataType.IMAGE)
+    negative_dataset = Dataset([negative_code_dir, negative_image_dir], 'echart-sample-negative.metadata','key_configurations.md')
+    result = negative_dataset.evaluate_image_code_quality()
+    print(json.dumps(result, indent=4, ensure_ascii=False))
+
+    positive_code_dir = Datadir('echart-code-sample-positive', DataType.CODE)
+    positive_image_dir = Datadir('echart-image-sample-positive', DataType.IMAGE)
+    positive_dataset = Dataset([positive_code_dir, positive_image_dir], 'echart-sample-positive.metadata','key_configurations.md')
+    result = positive_dataset.evaluate_image_code_quality()
+    print(json.dumps(result, indent=4, ensure_ascii=False))
+
 if __name__ == '__main__':
     # run_echart_task()
     # code_to_img()

@@ -1,0 +1,104 @@
+{
+    "tooltip": {
+        "trigger": "item",
+        "transitionDuration": 0.3,
+        "textStyle": {
+            "fontFamily": "Arial"
+        }
+    },
+    "legend": {
+        "show": true,
+        "top": "right",
+        "left": "center",
+        "orient": "vertical",
+        "textStyle": {
+            "fontSize": 15,
+            "color": "#444"
+        },
+        "selectedMode": "single",
+        "data": [
+            "量子计算",
+            "非同质化代币",
+            "自然语言处理",
+            "机器人",
+            "智能音箱",
+            "聊天机器人",
+            "网络安全"
+        ]
+    },
+    "series": [
+        {
+            "name": "Access From",
+            "type": "pie",
+            "radius": [
+                "65%",
+                "90%"
+            ],
+            "center": [
+                "35%",
+                "75%"
+            ],
+            "startAngle":90,
+            "endAngle": 360,
+            "data": [
+                {
+                    "value": 200,
+                    "name": "量子计算"
+                },
+                {
+                    "value": 400,
+                    "name": "非同质化代币"
+                },
+                {
+                    "value": 800,
+                    "name": "自然语言处理"
+                },
+                {
+                    "value": 1000,
+                    "name": "机器人"
+                },
+                {
+                    "value": 300,
+                    "name": "智能音箱"
+                },
+                {
+                    "value": 900,
+                    "name": "聊天机器人"
+                },
+                {
+                    "value": 100,
+                    "name": "网络安全"
+                }
+            ],
+            "itemStyle": {
+                "borderColor": "#ddd",
+                "borderWidth": 3,
+                "shadowBlur": 8,
+                "shadowColor": "rgba(0, 0, 0, 0.2)"
+            },
+            "label": {
+                "show": true,
+                "position": "outside",
+                "formatter": "{b}: {d}%",
+                "fontSize": 16,
+                "color": "#555"
+            },
+            "emphasis": {
+                "itemStyle": {
+                    "scale": 1.05
+                },
+                "label": {
+                    "color": "#ff6600"
+                }
+            }
+        }
+    ],
+    "backgroundColor": "#f8f8f8",
+    "toolbox": {
+        "show": true,
+        "feature": {
+            "dataZoom": {},
+            "restore": {}
+        }
+    }
+}

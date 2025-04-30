@@ -1,0 +1,84 @@
+{
+    "tooltip": {
+        "trigger": "item",
+        "position": "top",
+        "textStyle": {
+            "fontWeight": "bold"
+        }
+    },
+    "legend": {
+        "show": true,
+        "top": "2%",
+        "left": "left",
+        "orient": "vertical",
+        "textStyle": {
+            "fontSize": 13,
+            "color": "#777"
+        },
+        "data": [
+            "社交媒体",
+            "展示广告",
+            "网红营销",
+            "网络研讨会"
+        ]
+    },
+    "series": [
+        {
+            "name": "Access From",
+            "type": "pie",
+            "radius": [
+                "55%",
+                "80%"
+            ],
+            "center": [
+                "45%",
+                "65%"
+            ],
+            "startAngle": 90,
+            "endAngle": 360,
+            "data": [
+                {
+                    "value": 1100,
+                    "name": "社交媒体"
+                },
+                {
+                    "value": 200,
+                    "name": "展示广告"
+                },
+                {
+                    "value": 400,
+                    "name": "网红营销"
+                },
+                {
+                    "value": 300,
+                    "name": "网络研讨会"
+                }
+            ],
+            "itemStyle": {
+                "borderColor": "#fff",
+                "borderWidth": 1,
+                "opacity": 0.8
+            },
+            "label": {
+                "show": true,
+                "position": "inside",
+                "formatter": "{c}",
+                "fontSize": 14,
+                "color": "#fff"
+            },
+            "emphasis": {
+                "itemStyle": {
+                    "opacity": 1
+                },
+                "label": {
+                    "fontSize": 16
+                }
+            }
+        }
+    ],
+    "backgroundColor": "#fcfcfc",
+    "animation": {
+        "duration": 1500,
+        "easing": "cubicOut"
+    }
+}
