@@ -168,7 +168,7 @@ class Dataset:
         md_path = settings.LOCAL_META_STORAGE_PATH + '/' + md_path
         result_path = settings.LOCAL_STORAGE_PATH + '/result.csv'
         self.md_path = md_path
-
+        self.type_percentage={}
         self.evaluation = {
             "screenshot_path": screenshot_path,
             "md_path": md_path,
@@ -224,10 +224,12 @@ class Dataset:
         # print(1)
         chart_type_score,type_percentage = evaluate_chart_type(pair_file_path)
         chart_type_score = round(chart_type_score, 2)  # 保留两位小数
+        self.type_percentage=type_percentage
         # 6、接着是配置项均衡性
         # print(2)
         option_diversity_score,file_to_cluster_center_distance = evaluate_option_diversity(code_file_path, pair_file_path)
         option_diversity_score = round(float(option_diversity_score), 2)  # 保留两位小数
+        collector.add_scores("distance", file_to_cluster_center_distance, key_type="code")
 
         # 接下来是重复检测
         # 7、首先是代码重复检测
@@ -287,7 +289,7 @@ class Dataset:
         # 结果文档
         final_df = collector.generate_report("./detailed_scores.csv")
         # print(final_df)
-        return score_dict,type_percentage,file_to_cluster_center_distance
+        return score_dict
 
 
 def copy_dataset(src: Dataset):
