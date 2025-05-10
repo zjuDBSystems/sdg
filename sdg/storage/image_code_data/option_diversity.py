@@ -1,6 +1,8 @@
 import re
 import json
 import os
+import time
+
 import pandas as pd
 import numpy as np
 from sklearn.decomposition import PCA
@@ -184,4 +186,42 @@ def evaluate_option_diversity(js_dir, csv_path):
     # print(f"出错文件数: {error_count}")
     # print("典型错误文件:" + ("\n - ".join(error_files[:3]) if error_files else "无"))
 
-    return score
+        # 计算样本到簇中心的距离并输出字典
+    kmeans = KMeans(n_clusters=chart_type_count, random_state=42)
+    kmeans.fit(df.values)
+    cluster_centers = kmeans.cluster_centers_
+
+        # 字典：文件名 -> 到其所属簇中心的距离
+    file_to_cluster_center_distance = {}
+    for idx, file in enumerate(filenames):
+            # 获取该文件的簇标签
+        # print(file)
+        cluster_label = labels[idx]
+            # 计算该文件到簇中心的距离
+        distance = euclidean_distances([df.iloc[idx].values], [cluster_centers[cluster_label]])[0][0]
+        file_to_cluster_center_distance[file] = float(distance)
+        # print(distance)
+
+            # 打印每个文件到簇中心的距离
+            # 打印每个簇的文件及其到簇中心的距离
+    # print("\n每个簇的文件到簇中心的距离：")
+    # for cluster_id, files in sorted(cluster_files.items()):
+    #     print(f"\n簇 {cluster_id}: 包含 {len(files)} 个文件")
+    #     for file in files:
+    #         print(f"  文件: {file}, 距离簇中心: {file_to_cluster_center_distance[file]:.4f}")
+    #         time.sleep(0.05)
+    #
+    #
+    #     # 输出每个簇中，样本到簇中心的平均距离
+    # print("\n每个簇中，各个样本到簇中心距离的平均值：")
+    # cluster_avg_distances = {}
+    # for cluster_id in sorted(cluster_files.keys()):
+    #         # 获取该簇所有文件的索引
+    #     cluster_indices = [filenames.index(file) for file in cluster_files[cluster_id]]
+    #     cluster_distances = [file_to_cluster_center_distance[filenames[i]] for i in cluster_indices]
+    #     avg_distance = np.mean(cluster_distances)
+    #     cluster_avg_distances[cluster_id] = avg_distance
+    #     print(f"簇 {cluster_id}: 平均距离 = {avg_distance:.4f}")
+
+    # print(file_to_cluster_center_distance)
+    return score,file_to_cluster_center_distance

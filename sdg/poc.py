@@ -186,7 +186,7 @@ def run_echart_task():
     global_message_queue.put(EventResponse(event=EventType.RESPONSE, data="Load multimodal dataset done!"))
 
 
-    result = data_set.evaluate_image_code_quality()
+    result,type_percentage,file_to_cluster_center_distance = data_set.evaluate_image_code_quality()
 
     global_message_queue.put(EventResponse(event=EventType.REQUEST, data="数据洞察发现靶点"))
     result = extract_secondary_metrics(result)
