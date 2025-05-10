@@ -33,6 +33,11 @@ def evaluate_chart_type(csv_path):
     num_types = len(set(chart_types))
     score = calculate_score(entropy, num_types)
 
+    # 计算每种类别所占比例
+    type_counts = Counter(chart_types)
+    total = len(chart_types)
+    type_percentages = {type_: (count / total) * 100 for type_, count in type_counts.items()}
+
     print("========== 图表类型均衡性指标评估结果 ==========")
     print(f"总共有 {num_types} 种不同的图表类型。")
     print(f"计算得到的香农熵值为: {entropy:.2f}。")
@@ -47,7 +52,12 @@ def evaluate_chart_type(csv_path):
     else:
         print("图表类型分布极不均衡，大部分图表集中在少数几种类型上，多样性严重不足。")
 
-    return score
+        # 输出每种类别所占比例
+    print("\n各类图表所占比例:")
+    for type_, percentage in sorted(type_percentages.items(), key=lambda x: x[1], reverse=True):
+        print(f"- {type_}: {percentage:.2f}%")
+
+    return score,type_percentages
 
 # if __name__ == '__main__':
 #     CSV_FILE = "pair.csv"

@@ -45,6 +45,15 @@ class ScoreCollector:
             # 'completeness': {},
             # # 添加其他指标...
         }
+        self.missing_data = {}
+
+
+    def add_missing_data(self, miss_dict):
+        """
+        将缺失的数据类型添加到 missing_data 字典
+        :param miss_dict: 缺失数据字典，包含行索引和缺失类型（'code'、'image'等）
+        """
+        self.missing_data = miss_dict
 
     def add_exclusion_list(self, metric_name: str, exclusion_list: list, key_type: str = 'code'):
         """
@@ -92,7 +101,7 @@ class ScoreCollector:
             # 根据键类型选择映射列
             map_column = 'code' if key_type == 'code' else 'image'
             self.df[metric] = self.df[map_column].map(scores_dict)
-
+        self.df['missing_data'] = self.df.index.map(lambda idx: ','.join(self.missing_data.get(idx, ['perfect'])))
         # 保存并返回结果
         self.df.to_csv(output_file, index=False)
         return self.df
@@ -159,7 +168,7 @@ class Dataset:
         md_path = settings.LOCAL_META_STORAGE_PATH + '/' + md_path
         result_path = settings.LOCAL_STORAGE_PATH + '/result.csv'
         self.md_path = md_path
-
+        self.type_percentage={}
         self.evaluation = {
             "screenshot_path": screenshot_path,
             "md_path": md_path,
@@ -206,18 +215,21 @@ class Dataset:
         ncc_score = round(ncc_score, 2)  # 保留两位小数
         collector.add_scores("ncc_score", ncc_score_details, key_type="image")
         # 9、缺失率
-        miss_score = evaluate_miss(pair_file_path)
+        miss_score, missing_dict = evaluate_miss(pair_file_path)
         miss_score = round(float(miss_score), 2)  # 保留两位小数
+        collector.add_missing_data(missing_dict)
 
         # 接下来是数据集多样性
         # 5、首先是图表类型均衡性
         # print(1)
-        chart_type_score = evaluate_chart_type(pair_file_path)
+        chart_type_score,type_percentage = evaluate_chart_type(pair_file_path)
         chart_type_score = round(chart_type_score, 2)  # 保留两位小数
+        self.type_percentage=type_percentage
         # 6、接着是配置项均衡性
         # print(2)
-        option_diversity_score = evaluate_option_diversity(code_file_path, pair_file_path)
+        option_diversity_score,file_to_cluster_center_distance = evaluate_option_diversity(code_file_path, pair_file_path)
         option_diversity_score = round(float(option_diversity_score), 2)  # 保留两位小数
+        collector.add_scores("distance", file_to_cluster_center_distance, key_type="code")
 
         # 接下来是重复检测
         # 7、首先是代码重复检测
