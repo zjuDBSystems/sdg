@@ -5,6 +5,7 @@ from typing import override
 import openai
 import os
 import pandas as pd
+import random
 
 from .operator import Meta, Operator, Field
 from ..storage.dataset import DataType
@@ -14,6 +15,7 @@ class DiversityAmendOperator(Operator):
     def __init__(self, **kwargs):
         self.api_key = kwargs.get('api_key',"")
         self.model = kwargs.get('model', "gpt-4o")
+        self.probability = kwargs.get('probability', 0.5)
 
     @classmethod
     @override
@@ -26,7 +28,6 @@ class DiversityAmendOperator(Operator):
     @override
     def get_config(cls) -> list[Field]:
         return [
-
             Field('api-key', Field.FieldType.STRING, 'OpenAI API key', ""),
             Field('model', Field.FieldType.STRING, 'OpenAI model name', "gpt-4o")
         ]
@@ -52,11 +53,18 @@ class DiversityAmendOperator(Operator):
         # files
         code_dir = [dir for dir in dataset.dirs if dir.data_type == DataType.CODE][0]
         # code_files = ['half_doughnut_chart_1.json','square_pie_chart_1.json']
-        code_files = self.get_pending_files('./detailed_scores.csv', 'syntax_score', 'code')
+        df = pd.read_csv(dataset.meta_path)
+        code_files = df[DataType.CODE.value].tolist()
 
         for index, code_file_name in enumerate(code_files):
             
             if pd.isna(code_file_name):
+                continue
+            
+            probability = self.probability
+            ran_pro = random.random()
+            if (ran_pro < probability):
+                print(f"随机{ran_pro}，小于概率{probability}")
                 continue
 
             code_file_path = os.path.join(code_dir.data_path,code_file_name)
@@ -65,6 +73,12 @@ class DiversityAmendOperator(Operator):
                 code_data = f.read().decode('utf-8')
 
             new_code_data = self.call_gpt4o(client, code_data)
+            # try:
+            #     new_code_data = self.call_gpt4o(client, code_data, 60)
+            # except Exception as e:
+            #     print(f"调用超时")
+            #     # 异常时至少保留参数变异结果
+            #     continue
 
             with open(code_file_path, 'wb') as f:
                 f.write(new_code_data.encode('utf-8'))
@@ -78,7 +92,7 @@ class DiversityAmendOperator(Operator):
                 # {"role": "system", "content": "你是一个熟悉 ECharts 的前端开发专家"},
                 {"role": "user", "content": "以下的echarts配置json代码中的配置项多样性不够，请为其增加些有合理性的，更为细节的配置。请只输出json代码，不需要描述与分析。"},
                 {"role": "user", "content": code_data}
-            ]
+            ],
         )
 
         response_text = response.choices[0].message.content

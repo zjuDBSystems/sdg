@@ -23,7 +23,7 @@ class EChartMutationOperator(Operator):
     """
     def __init__(self, **kwargs):
 
-        self.mutation_prob = kwargs.get('mutation_prob', 0.7)
+        self.mutation_prob = kwargs.get('mutation_prob', 1)
         self.mutation_range = kwargs.get('mutation_range', 0.5)
         self.non_core_fields = ['animation', 'backgroundColor']
 
@@ -69,21 +69,21 @@ class EChartMutationOperator(Operator):
             if pd.isna(file_name):
                 continue
 
-            file_path = os.path.join(code_dir.data_path, file_name)
-            with open(file_path,'rb') as f:
-                code = f.read().decode('utf-8')
-            # print(code)
-            start = code.find("{")
-            end = code.rfind("}")
-            echarts_config = json.loads(code[start:end+1])
-
             try:
+                file_path = os.path.join(code_dir.data_path, file_name)
+                with open(file_path,'rb') as f:
+                    code = f.read().decode('utf-8')
+                # print(code)
+                start = code.find("{")
+                end = code.rfind("}")
+                echarts_config = json.loads(code[start:end+1])
                 echarts_config = self.mutate_echarts_option(echarts_config)
                 echarts_config = self.transform_echart_equal(echarts_config)
                 # echarts_config = self.mutate_non_core_items(echarts_config)
             except Exception as e:
                 print(f"变异过程异常: {e}")
                 # 异常时至少保留参数变异结果
+                continue
 
             # Convert to JSON string and ensure normal display of Chinese characters
             echarts_mutation_json = self.convert_to_json(echarts_config)

@@ -58,10 +58,11 @@ class EchartsToImageOperator(Operator):
             
                 img_file_path = os.path.join(img_dir.data_path, img_file_name)
 
+                bytes = self.generate_echarts_png(code)
+                if bytes is None:
+                    continue
                 with open(img_file_path, 'wb') as f:
-                    bytes = self.generate_echarts_png(code)
-                    if bytes is None:
-                        continue
+                    print(f"已保存至{img_file_path}")
                     f.write(bytes)
 
                 # modify csv file

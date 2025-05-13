@@ -72,8 +72,13 @@ class ImgToEchartsOperator(Operator):
                 img_file_path = os.path.join(img_dir.data_path, img_file_name)
                 with open(img_file_path,'rb+') as image_f :
                     image=image_f.read()
-
                 answer_content = self.call_gpt4o(client, image)
+                # try:
+                #     answer_content = self.call_gpt4o(client, image, 90)
+                # except Exception as e:
+                #     print(f"调用超时")
+                #     # 异常时至少保留参数变异结果
+                #     continue
                 if not answer_content :
                     print('调用api获取数据失败')
                 else :
@@ -89,7 +94,6 @@ class ImgToEchartsOperator(Operator):
         df.to_csv(dataset.meta_path, index=False)
 
     
-
     def call_gpt4o (self, client, img_data):
 
         response = client.chat.completions.create(
@@ -98,11 +102,11 @@ class ImgToEchartsOperator(Operator):
                 # {"role": "system", "content": "你是一个熟悉 ECharts 的前端开发专家"},
                 {"role": "user", "content": "Compose the ECharts code to achieve the same design and content as this chart screenshot.\n\n## Cautions\n- Write the json with ECharts directly. No html in the code.\n- Make sure the rendered chart looks exactly the same as the given image.\n- DO NOT miss the legend if it is in the image.\n- Just output the json code without description and analysis.\n\nLet's begin!\n"},
                 {"role": "user", "content": [{"type": "image_url", "image_url": {"url": "data:image/png;base64," + base64.b64encode(img_data).decode()}}]}
-            ]
+            ],
         )
 
         response_text = response.choices[0].message.content
-        # print("收到的结果为：" + response_text)
+        print("收到的结果为：" + response_text)
         start = response_text.find("{")
         end = response_text.rfind("}")
         json_text = response_text[start:end+1]

@@ -51,7 +51,8 @@ class SyntaxAmendOperator(Operator):
 
         # files
         code_dir = [dir for dir in dataset.dirs if dir.data_type == DataType.CODE][0]
-        code_files = ['half_doughnut_chart_1.json','square_pie_chart_1.json']
+        # code_files = ['half_doughnut_chart_1.json','square_pie_chart_1.json']
+        code_files = self.get_pending_files('./scores.csv', 'syntax_score', 'code')
 
         for index, code_file_name in enumerate(code_files):
             
@@ -87,3 +88,16 @@ class SyntaxAmendOperator(Operator):
         json_text = response_text[start:end+1]
 
         return json_text
+    
+    @staticmethod
+    def get_pending_files(csv_path, score_name, file_type):
+        # 读取 CSV 文件（处理可能存在的空值）
+        df = pd.read_csv(csv_path, na_values=['', ' ', 'NA'], dtype={score_name: float})
+
+        # 筛选 syntax_score < 100 的行（自动排除 NaN 值）
+        filtered_df = df[df[score_name] < 100]
+
+        # 提取 code 字段并转换为列表
+        code_list = filtered_df[file_type].dropna().tolist()  # 同时过滤 code 列可能的空值
+
+        return code_list
