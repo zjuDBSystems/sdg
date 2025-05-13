@@ -165,6 +165,7 @@ class Dataset:
         self.relative_meta_path = meta_path
         self.meta_path = settings.LOCAL_META_STORAGE_PATH + '/' + meta_path
         screenshot_path = settings.LOCAL_STORAGE_PATH + '/screenshot'
+        self.relative_md_path = md_path
         md_path = settings.LOCAL_META_STORAGE_PATH + '/' + md_path
         result_path = settings.LOCAL_STORAGE_PATH + '/result.csv'
         self.md_path = md_path
@@ -302,6 +303,6 @@ def copy_dataset(src: Dataset):
         shutil.copytree(dir.data_path, target_dir.data_path)
         dirs.append(target_dir)
     meta_path = str(uuid4()) + '.metadata'
-    dataset: Dataset = Dataset(dirs, meta_path, src.md_path)
+    dataset: Dataset = Dataset(dirs, meta_path, src.relative_md_path)
     shutil.copy(src.meta_path, dataset.meta_path)
     return dataset
