@@ -143,7 +143,8 @@ class EChartMutationOperator(Operator):
                     # 递归处理嵌套的字典或列表
                     if isinstance(value, dict):
                         config[key] = self.mutate_echarts_option( value)
-                    elif isinstance(value, list) and key != 'data':  #TODO 是否不改变数据点的值？
+                    # elif isinstance(value, list) and key != 'data':  #TODO 是否不改变数据点的值？
+                    elif isinstance(value, list): # m目前的版本会改变数值
                         config[key] = [self.mutate_echarts_option( item) if isinstance(item, (dict, list)) else self.mutate_value(item, mutation_prob, mutation_range) for item in value]
         elif isinstance(config, list):
             config = [self.mutate_echarts_option(item) if isinstance(item, (dict, list)) else self.mutate_value(item, mutation_prob, mutation_range) for item in config]
@@ -338,7 +339,7 @@ class EChartMutationOperator(Operator):
                 page.wait_for_function('''() => {
                     return document.title === 'RENDER_DONE' &&
                         document.querySelector('#chart canvas').clientWidth > 0
-                }''', timeout=100_000)  # 等待渲染标记
+                }''', timeout=50_000)  # 等待渲染标记
                 
                 # 先检测canvas元素是否存在
                 page.wait_for_selector('#chart canvas', state='attached', timeout=10_000)

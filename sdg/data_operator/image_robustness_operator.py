@@ -85,9 +85,10 @@ class ImageRobustnessEnhancer(Operator):
                 img.save(img_byte_arr, format='PNG')
                 img_byte_arr = img_byte_arr.getvalue()
 
-                with open(file_path, 'wb') as f:
+                new_file_path = os.path.join(img_dir.data_path, "r_"+img_name)
+                with open(new_file_path, 'wb') as f:
                     f.write(img_byte_arr)
-                    new_data = pd.DataFrame({"image": ["m_"+img_name], "code": [""], "type": [type_name[index]]})
+                    new_data = pd.DataFrame({"image": ["r_"+img_name], "code": [""], "type": [type_name[index]]})
                     df = pd.concat([df, new_data], ignore_index=True)  # 合并数据
         
         # 保存新数据
