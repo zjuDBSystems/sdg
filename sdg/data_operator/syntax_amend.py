@@ -5,6 +5,7 @@ from typing import override
 import openai
 import os
 import pandas as pd
+from ..config import settings
 
 from .operator import Meta, Operator, Field
 from ..storage.dataset import DataType
@@ -46,7 +47,8 @@ class SyntaxAmendOperator(Operator):
         # gpt-4o (github版)
         client = openai.OpenAI(
             api_key = self.api_key,
-            base_url = "https://models.inference.ai.azure.com"
+            # base_url = "https://models.inference.ai.azure.com"
+            base_url = settings.GPT_URL
         )
 
         # files

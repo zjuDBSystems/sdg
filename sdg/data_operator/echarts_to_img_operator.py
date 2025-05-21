@@ -62,14 +62,15 @@ class EchartsToImageOperator(Operator):
                 if bytes is None:
                     continue
                 with open(img_file_path, 'wb') as f:
-                    print(f"已保存至{img_file_path}")
                     f.write(bytes)
+                    print(f"已保存至{img_file_path}")
 
                 # modify csv file
                 df.at[index, DataType.IMAGE.value] = img_file_name
 
         # save the modified csv
         df.to_csv(dataset.meta_path, index=False)
+        print(f"csv文件已更新，保存至{dataset.meta_path}")
 
     @staticmethod
     def generate_echarts_png(echarts_option):

@@ -41,7 +41,7 @@ class EChartMutationOperator(Operator):
         return [
 
             Field('mutation_prob', Field.FieldType.NUMBER,
-                'Mutation probability of configuration parameters', 0.7),
+                'Mutation probability of configuration parameters', 1),
             Field('mutation_range', Field.FieldType.NUMBER,
                 'Mutation range of configuration parameters', 0.5),    
             
