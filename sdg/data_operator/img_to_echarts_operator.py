@@ -6,6 +6,7 @@ import openai
 import os
 import base64
 import pandas as pd
+from tqdm import tqdm
 from ..config import settings
 
 from .operator import Meta, Operator, Field
@@ -62,7 +63,7 @@ class ImgToEchartsOperator(Operator):
         code_files = df[DataType.CODE.value].tolist()
 
         # process
-        for index, img_file_name in enumerate(img_files):
+        for index, img_file_name in enumerate(tqdm(img_files, desc="修复进度")):
             # print("img_file : " + img_file_name)
             # For images without corresponding echarts code files
             if pd.isna(img_file_name):
@@ -108,7 +109,7 @@ class ImgToEchartsOperator(Operator):
         )
 
         response_text = response.choices[0].message.content
-        print("收到的结果为：" + response_text)
+        # print("收到的结果为：" + response_text)
         start = response_text.find("{")
         end = response_text.rfind("}")
         json_text = response_text[start:end+1]

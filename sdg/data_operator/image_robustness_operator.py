@@ -5,6 +5,7 @@ import io
 import pandas as pd
 import os
 import shutil
+from tqdm import tqdm
 
 from .operator import Meta, Operator, Field
 from ..storage.dataset import DataType
@@ -67,7 +68,7 @@ class ImageRobustnessEnhancer(Operator):
         code_files = df[DataType.CODE.value].tolist()
         type_name = df["type"].tolist()
 
-        for index, img_name in enumerate(img_files):
+        for index, img_name in enumerate(tqdm(img_files, desc="扰动进度")):
             if pd.isna(img_name):
                 continue
             print(img_name)
@@ -92,20 +93,20 @@ class ImageRobustnessEnhancer(Operator):
             new_img_path = os.path.join(img_dir.data_path, "r_"+img_name)
             with open(new_img_path, 'wb') as f:
                 f.write(img_byte_arr)
-                print(f"扰动后的图像已保存至{new_img_path}")
+                # print(f"扰动后的图像已保存至{new_img_path}")
 
             # old code
             code_name = code_files[index]
-            print(code_name)
-            if pd.isna(code_name):
-                code_name=""
-                print("该扰动图像没有原代码文件")
-            else:
-                old_code_path = os.path.join(code_dir.data_path, code_name)
-                copy_old_code_path = os.path.join(code_dir.data_path, "r_"+code_name)
-                shutil.copy2(old_code_path, copy_old_code_path)
-                code_name = "r_"+code_name
-                print(f"该扰动图像的原代码文件已复制到{copy_old_code_path}")
+            # print(code_name)
+            # if pd.isna(code_name):
+            #     code_name=""
+            #     print("该扰动图像没有原代码文件")
+            # else:
+            #     old_code_path = os.path.join(code_dir.data_path, code_name)
+            #     copy_old_code_path = os.path.join(code_dir.data_path, "r_"+code_name)
+            #     shutil.copy2(old_code_path, copy_old_code_path)
+            #     code_name = "r_"+code_name
+            #     print(f"该扰动图像的原代码文件已复制到{copy_old_code_path}")
 
 
             new_data = pd.DataFrame({"image": ["r_"+img_name], "code": [code_name], "type": [type_name[index]]})

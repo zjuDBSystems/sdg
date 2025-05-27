@@ -2,9 +2,11 @@
 '''
 
 from typing import override
-import openai
 import os
 import pandas as pd
+from tqdm import tqdm
+from llama_cpp import Llama
+from transformers import AutoTokenizer
 from ..config import settings
 
 from .operator import Meta, Operator, Field
@@ -13,8 +15,8 @@ from ..task.task_type import TaskType
 
 class SyntaxAmendOperator(Operator):
     def __init__(self, **kwargs):
-        self.api_key = kwargs.get('api_key',"")
-        self.model = kwargs.get('model', "gpt-4o")
+
+        self.score_file = kwargs.get('score_file', "./scores.csv")
 
     @classmethod
     @override
@@ -28,8 +30,7 @@ class SyntaxAmendOperator(Operator):
     def get_config(cls) -> list[Field]:
         return [
 
-            Field('api-key', Field.FieldType.STRING, 'OpenAI API key', ""),
-            Field('model', Field.FieldType.STRING, 'OpenAI model name', "gpt-4o")
+            Field('score_file', Field.FieldType.STRING, 'Score result file path', "./scores.csv")
         ]
     
 
@@ -43,20 +44,20 @@ class SyntaxAmendOperator(Operator):
     
     @override
     def execute(self, dataset):
-        
-        # gpt-4o (github版)
-        client = openai.OpenAI(
-            api_key = self.api_key,
-            # base_url = "https://models.inference.ai.azure.com"
-            base_url = settings.GPT_URL
+
+        # 加载qwen模型
+        llm = Llama(
+            model_path="./sdg/data_operator/model/qwen1_5-0_5b-chat-q4_k_m.gguf",
+            n_ctx=2048,  # 上下文窗口大小，适合小模型
+            n_threads=4  # 设置为你的 CPU 核心数
         )
 
         # files
         code_dir = [dir for dir in dataset.dirs if dir.data_type == DataType.CODE][0]
         # code_files = ['half_doughnut_chart_1.json','square_pie_chart_1.json']
-        code_files = self.get_pending_files('./scores.csv', 'syntax_score', 'code')
+        code_files = self.get_pending_files(self.score_file, 'syntax_score', 'code')
 
-        for index, code_file_name in enumerate(code_files):
+        for index, code_file_name in enumerate(tqdm(code_files, desc="修复进度")):
             
             if pd.isna(code_file_name):
                 continue
@@ -66,31 +67,38 @@ class SyntaxAmendOperator(Operator):
             with open(code_file_path, 'rb') as f:
                 code_data = f.read().decode('utf-8')
 
-            new_code_data = self.call_gpt4o(client, code_data)
+            new_code_data = self.fix_by_llm_chat(llm, code_data)
 
-            with open(code_file_path, 'wb') as f:
-                f.write(new_code_data.encode('utf-8'))
-            
+            if (new_code_data):
+                print(f"成功修复{code_file_name}")
+                with open(code_file_path, 'wb') as f:
+                    f.write(new_code_data.encode('utf-8'))
+            else:
+                print(f"{code_file_name}未修复")
+                
 
-    def call_gpt4o (self, client, code_data):
+    @staticmethod
+    def fix_by_llm_chat(llm, bad_json):
 
-        response = client.chat.completions.create(
-            model="gpt-4o",
-            messages=[
-                # {"role": "system", "content": "你是一个熟悉 ECharts 的前端开发专家"},
-                {"role": "user", "content": "以下的echarts配置json代码无法编译成功，可能是语法存在错误，请对该json文件进行检测和修正。请只输出json代码，不需要描述与分析。"},
-                {"role": "user", "content": code_data}
-            ]
-        )
+        messages = [
+            {"role": "system", "content": "你是一个echarts专家，简洁、有逻辑地回答问题。"},
+            {"role": "user", "content": f"请修复以下无效的echarts配置的JSON，并返回合法的echarts配置JSON，请只输出json代码，不需要描述与分析：{bad_json}"}
+        ]
 
-        response_text = response.choices[0].message.content
-        print("收到的结果为：" + response_text)
-        start = response_text.find("{")
-        end = response_text.rfind("}")
-        json_text = response_text[start:end+1]
+        # tokenizer = AutoTokenizer.from_pretrained("Qwen/Qwen1.5-0.5B-Chat")
+        # tokens = tokenizåer(str(bad_json), add_special_tokens=False)
+        # input_tokens_len = len(tokens['input_ids'])
+        # print(f"Token 数量：{input_tokens_len}")
 
-        return json_text
-    
+        response = llm.create_chat_completion(messages=messages, max_tokens=512)
+        output = response['choices'][0]['message']['content']
+        # print("Completion tokens:", response['usage']['completion_tokens'])
+        # print(f"修复前后tokens差值{response['usage']['completion_tokens']-input_tokens_len}")
+        # print(f"获得修正结果{output}")
+        start = output.find("{")
+        end = output.rfind("}")
+        return output[start:end+1]
+
     @staticmethod
     def get_pending_files(csv_path, score_name, file_type):
         # 读取 CSV 文件（处理可能存在的空值）

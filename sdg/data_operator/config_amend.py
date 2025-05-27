@@ -5,6 +5,7 @@ from typing import override
 import openai
 import os
 import pandas as pd
+import json
 from ..config import settings
 
 from .operator import Meta, Operator, Field
@@ -13,8 +14,7 @@ from ..task.task_type import TaskType
 
 class ConfigAmendOperator(Operator):
     def __init__(self, **kwargs):
-        self.api_key = kwargs.get('api_key',"")
-        self.model = kwargs.get('model', "gpt-4o")
+        self.score_file = kwargs.get('score_file', "./scores.csv")
 
     @classmethod
     @override
@@ -28,8 +28,7 @@ class ConfigAmendOperator(Operator):
     def get_config(cls) -> list[Field]:
         return [
 
-            Field('api-key', Field.FieldType.STRING, 'OpenAI API key', ""),
-            Field('model', Field.FieldType.STRING, 'OpenAI model name', "gpt-4o")
+            Field('score_file', Field.FieldType.STRING, 'Score result file path', "./scores.csv")
         ]
     
 
@@ -44,21 +43,11 @@ class ConfigAmendOperator(Operator):
     @override
     def execute(self, dataset):
         
-        # gpt-4o (github版)
-        client = openai.OpenAI(
-            api_key = self.api_key,
-            # base_url = "https://models.inference.ai.azure.com"
-            base_url = settings.GPT_URL
-        )
 
         # files
         code_dir = [dir for dir in dataset.dirs if dir.data_type == DataType.CODE][0]
         # code_files = ['sqaure_pie_chart_2.json','sqaure_pie_chart_3.json']
-        poc_files = self.get_pending_files('./scores.csv', 'configuration_complete_score', 'code')
-
-        key_config_path = "./metadata/key_configurations.md"
-        with open(key_config_path, 'r', encoding='utf-8') as file:
-            key_config = file.read()
+        poc_files = self.get_pending_files(self.score_file, 'configuration_complete_score', 'code')
         
 
         for index, (code_file_name,chart_type) in enumerate(poc_files):
@@ -71,32 +60,79 @@ class ConfigAmendOperator(Operator):
             with open(code_file_path, 'rb') as f:
                 code_data = f.read().decode('utf-8')
 
-            new_code_data = self.call_gpt4o(client, code_data, chart_type, key_config)
+            new_code_data = self.fix_config(code_data, chart_type)
+
 
             with open(code_file_path, 'wb') as f:
                 f.write(new_code_data.encode('utf-8'))
             
 
-    def call_gpt4o (self, client, code_data, chart_type, config):
+    # 更新 series 配置函数
+    @staticmethod
+    def update_series_config(series_item, type):
+        if (type == "half_doughnut"):
+            series_item["type"] = "pie"
+            series_item["startAngle"] = 180
+            series_item["endAngle"] = 360
+        elif (type == "pie_chart"):
+            series_item["type"] = "pie"
+        elif (type == "square_pie"):
+            series_item["type"] = "pie"
+            series_item["startAngle"] = 90
+            series_item["endAngle"] = 360
+        elif (type == "tangential_polar_bar"):
+            series_item["type"] = "bar"
+            series_item["coordinateSystem"] = 'polar'
+        elif (type == "tangential_polar_bar-radiusaxis"):
+            series_item["type"] = "category"
 
-        response = client.chat.completions.create(
-            model="gpt-4o",
-            messages=[
-                # {"role": "system", "content": "你是一个熟悉 ECharts 的前端开发专家"},
-                {"role": "user", "content": f"以下是echarts配置json代码，以及echarts不同类型代码的关键配置文档。echarts的json代码的配置项可能存在一定程度的缺失，以及具体取值与相应配置项不匹配的情况，需要对该echarts配置进行修改。该json配置的echarts类型为{chart_type},在关键配置文档中找到相应类型，将不符合该文档中相应配置取值的配置，改为要求的取值。请只输出json代码，不需要描述与分析。"},
-                {"role": "user", "content": code_data},
-                {"role": "user", "content": config}
+    def fix_config(self, coda_data, chart_type):
 
-            ]
-        )
+        print(f"开始修复的图表类型为{chart_type}")
 
-        response_text = response.choices[0].message.content
-        print("收到的结果为：" + response_text)
-        start = response_text.find("{")
-        end = response_text.rfind("}")
-        json_text = response_text[start:end+1]
+        # 转为dict
+        data_dict = json.loads(coda_data)
 
-        return json_text
+        half_doughnut = "half_doughnut".strip().lower()
+        pie_chart = "pie_chart".strip().lower()
+        square_pie = "square_pie".strip().lower()
+        Tangential_Polar_Bar = "Tangential_Polar_Bar".strip().lower()
+
+        chart_type = chart_type.strip().lower()
+        # 处理series
+        if chart_type in (half_doughnut,pie_chart,square_pie,Tangential_Polar_Bar):
+            # 如果 series 不存在，则添加一个默认的 dict
+            if "series" not in data_dict or data_dict["series"] is None:
+                data_dict["series"] = [{}]  # 默认加一个空 dict 再修改
+                self.update_series_config(data_dict["series"][0], chart_type)
+            # list
+            elif isinstance(data_dict["series"], list):
+                if len(data_dict["series"]) == 0:
+                    data_dict["series"].append({})
+                if isinstance(data_dict["series"][0], dict):
+                    self.update_series_config(data_dict["series"][0], chart_type)
+                else:
+                    print("series[0] 不是 dict，跳过处理")
+            # dict
+            elif isinstance(data_dict["series"], dict):
+                self.update_series_config(data_dict["series"], chart_type)
+            else:
+                print("series 格式不支持：既不是列表也不是字典")
+        # 处理Tangential_Polar_Bar的radiusAxis
+        elif chart_type in (Tangential_Polar_Bar):
+            # 如果 radiusAxis 不存在，则添加一个默认的 dict
+            if "radiusAxis" not in data_dict or data_dict["radiusAxis"] is None:
+                data_dict["radiusAxis"] = {}  # 默认加一个空 dict 再修改
+                self.update_series_config(data_dict["radiusAxis"], chart_type+"-radiusaxis")
+            # dict
+            elif isinstance(data_dict["radiusAxis"], dict):
+                self.update_series_config(data_dict["radiusAxis"], chart_type+"-radiusaxis")
+            else:
+                print("radiusAxis 格式不支持")
+
+        # 返回json字符串
+        return json.dumps(data_dict, ensure_ascii=False, indent=2)
+
 
     @staticmethod
     def get_pending_files(csv_path, score_name, file_type):

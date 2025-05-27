@@ -62,10 +62,13 @@ class EChartMutationOperator(Operator):
         code_dir = [dir for dir in dataset.dirs if dir.data_type == DataType.CODE][0]
         code_files = df[DataType.CODE.value].tolist()
         type_name = df["type"].tolist()
+
+        # 记录异常数
+        error_count = 0
         
         for index, file_name in enumerate(code_files):
 
-            print(file_name)
+            # print(file_name)
             if pd.isna(file_name):
                 continue
 
@@ -81,8 +84,9 @@ class EChartMutationOperator(Operator):
                 echarts_config = self.transform_echart_equal(echarts_config)
                 # echarts_config = self.mutate_non_core_items(echarts_config)
             except Exception as e:
-                print(f"变异过程异常: {e}")
+                # print(f"变异过程异常: {e}")
                 # 异常时至少保留参数变异结果
+                error_count = error_count+1
                 continue
 
             # Convert to JSON string and ensure normal display of Chinese characters
@@ -98,6 +102,7 @@ class EChartMutationOperator(Operator):
         
         # 保存新数据
         df.to_csv(dataset.meta_path, index=False)
+        print(f"代码变异结束，过程中有{error_count}次变异异常")
 
             
     '''
@@ -128,23 +133,23 @@ class EChartMutationOperator(Operator):
                     # 检查是否为十六进制颜色代码，是，则有一定几率修改
                     if random.random() < mutation_prob:
                         config[key] = random_hex_color()
-                        print("改变了颜色")
-                        print(config[key])
+                        # print("改变了颜色")
+                        # print(config[key])
                 elif isinstance(value, str) and key == 'color':
                     # 检查是否为十六进制颜色代码，是，则有一定几率修改
                     if random.random() < mutation_prob:
                         config[key] = random_hex_color()
-                        print("改变了颜色")
-                        print(config[key])
+                        # print("改变了颜色")
+                        # print(config[key])
                 elif isinstance(value, int) and key == 'fontSize':
-                    print(value)
+                    # print(f"改变字号为{value}")
                     config[key] = self.mutate_value(value, mutation_prob, mutation_range)
                 elif isinstance(value, (dict, list)):
                     # 递归处理嵌套的字典或列表
                     if isinstance(value, dict):
                         config[key] = self.mutate_echarts_option( value)
                     # elif isinstance(value, list) and key != 'data':  #TODO 是否不改变数据点的值？
-                    elif isinstance(value, list): # m目前的版本会改变数值
+                    elif isinstance(value, list): # 目前的版本会改变数值
                         config[key] = [self.mutate_echarts_option( item) if isinstance(item, (dict, list)) else self.mutate_value(item, mutation_prob, mutation_range) for item in value]
         elif isinstance(config, list):
             config = [self.mutate_echarts_option(item) if isinstance(item, (dict, list)) else self.mutate_value(item, mutation_prob, mutation_range) for item in config]
