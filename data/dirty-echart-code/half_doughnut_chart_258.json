@@ -1,0 +1,67 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "1%",
+    "left": "center",
+    "data": [
+      "领导力",
+      "供应链管理",
+      "风险管理",
+      "质量管理",
+      "客户满意度",
+      "市场分析"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "40%",
+        "81%"
+      ],
+      "center": [
+        "41%",
+        "61%"
+      ],
+      "startAngle": 180,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 185,
+          "name": "领导力"
+        },
+        {
+          "value": 558,
+          "name": "供应链管理"
+        },
+        {
+          "value": 1063,
+          "name": "风险管理"
+        },
+        {
+          "value": 350,
+          "name": "质量管理"
+        },
+        {
+          "value": 1010,
+          "name": "客户满意度"
+        },
+        {
+          "value": 180,
+          "name": "市场分析"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{b}: {d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

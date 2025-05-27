@@ -1,0 +1,27 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true
+          "name": 
+        },
+        {
+          "value": 827,
+          "name": "数据分析"
+        },
+        {
+          "value": 940,
+          "name": "计算机视觉"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "inside",
+        "formatter": "{b}: {d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

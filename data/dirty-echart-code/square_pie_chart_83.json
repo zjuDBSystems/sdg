@@ -1,0 +1,59 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "1%",
+    "left": "center",
+    "data": [
+      "机器人",
+      "虚拟现实",
+      "数据隐私",
+      "机器学习",
+      "5G技术"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": "91%",
+      "center": [
+        "26%",
+        "79%"
+      ],
+      "startAngle": 97,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 815,
+          "name": "机器人"
+        },
+        {
+          "value": 942,
+          "name": "虚拟现实"
+        },
+        {
+          "value": 459,
+          "name": "数据隐私"
+        },
+        {
+          "value": 1092,
+          "name": "机器学习"
+        },
+        {
+          "value": 640,
+          "name": "5G技术"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

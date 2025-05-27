@@ -1,0 +1,77 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "4%",
+    "left": "47%",
+    "data": [
+      "投资策略",
+      "公共关系",
+      "忠诚度计划",
+      "客户满意度",
+      "创新管理",
+      "品牌定位",
+      "渠道管理",
+      "竞争分析"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "37%",
+        "77%"
+      ],
+      "center": [
+        "41%",
+        "56%"
+      ],
+      "startAngle": 180,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 619,
+          "name": "投资策略"
+        },
+        {
+          "value": 188,
+          "name": "公共关系"
+        },
+        {
+          "value": 940,
+          "name": "忠诚度计划"
+        },
+        {
+          "value": 321,
+          "name": "客户满意度"
+        },
+        {
+          "value": 320,
+          "name": "创新管理"
+        },
+        {
+          "value": 1029,
+          "name": "品牌定位"
+        },
+        {
+          "value": 379,
+          "name": "渠道管理"
+        },
+        {
+          "value": 678,
+          "name": "竞争分析"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{b}"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

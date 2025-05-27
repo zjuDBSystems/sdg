@@ -1,0 +1,64 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  ,},
+  "legend": {
+    "show": true,
+    "top": "1%",
+    "left": "center",
+    "data": [
+      "项目管理",
+      "财务规划",
+      "客户细分",
+      "可持续发展",
+      "客户关系管理",
+      "定价策略"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": "94%",
+      "center": [
+        "21%",
+        "90%"
+      ],
+      "startAngle": 90,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 335,
+          "name": "项目管理"
+        },
+        {
+          "value": 486,
+          "name": "财务规划"
+        },
+        {
+          "value": 1033,
+          "name": "客户细分"
+        },
+        {
+          "value": 530,
+          "name": "可持续发展"
+        },
+        {
+          "value": 325,
+          "name": "客户关系管理"
+        },
+        {
+          "value": 733,
+          "name": "定价策略"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{b}: {d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

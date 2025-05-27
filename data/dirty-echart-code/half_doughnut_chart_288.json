@@ -1,0 +1,72 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "4%",
+    "left": "center",
+    "data": [
+      "纪录片",
+      "广播",
+      "动漫",
+      "音乐",
+      "餐饮",
+      "节日",
+      "体育"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "31%",
+        "64%"
+      ],
+      "center": [
+        "53%",
+        "80%"
+      ],
+      "startAngle": 144,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 204,
+          "name": "纪录片"
+        },
+        {
+          "value": 142,
+          "name": "广播"
+        },
+        {
+          "value": 1057,
+          "name": "动漫"
+        },
+        {
+          "value": 605,
+          "name": "音乐"
+        },
+        {
+          "value": 1052,
+          "name": "餐饮"
+        },
+        {
+          "value": 156,
+          "name": "节日"
+        },
+        {
+          "value": 482,
+          "name": "体育"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{b}"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

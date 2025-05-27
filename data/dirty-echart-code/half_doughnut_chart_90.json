@@ -1,0 +1,72 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": false,
+    "top": "4%",
+    "left": "center",
+    "data": [
+      "虚拟偶像",
+      "博物馆",
+      "真人秀",
+      "社交活动",
+      "音乐",
+      "短视频",
+      "直播"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "37%",
+        "79%"
+      ],
+      "center": [
+        "55%",
+        "52%"
+      ],
+      "startAngle": 180,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 507,
+          "name": "虚拟偶像"
+        },
+        {
+          "value": 667,
+          "name": "博物馆"
+        },
+        {
+          "value": 544,
+          "name": "真人秀"
+        },
+        {
+          "value": 355,
+          "name": "社交活动"
+        },
+        {
+          "value": 844,
+          "name": "音乐"
+        },
+        {
+          "value": 922,
+          "name": "短视频"
+        },
+        {
+          "value": 818,
+          "name": "直播"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "inside",
+        "formatter": "{b}"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

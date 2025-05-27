@@ -1,0 +1,35 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "3%",
+    "left": "center",
+    "data": [
+      "音乐"
+          "name": "出版"
+        },
+        {
+          "value": 726,
+          "name": "网络红人"
+        },
+        {
+          "value": 670,
+          "name": "综艺节目"
+        },
+        {
+          "value": 635,
+          "name": "展览"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "inside",
+        "formatter": "{b}: {d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

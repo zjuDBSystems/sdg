@@ -1,0 +1,74 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "3%",
+    "left": "center",
+    "data": [
+      "职业指导",
+      "教育改革",
+      "教育质量",
+      "技能提升",
+      "留学",
+      "教育投资",
+      "教育政策",
+      "教育创新"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": "88%",
+      "center": [
+        "32%",
+        "88%"
+      ],
+      "startAngle": 90,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 296,
+          "name": "职业指导"
+        },
+        {
+          "value": 992,
+          "name": "教育改革"
+        },
+        {
+          "value": 1090,
+          "name": "教育质量"
+        },
+        {
+          "value": 979,
+          "name": "技能提升"
+        },
+        {
+          "value": 688,
+          "name": "留学"
+        },
+        {
+          "value": 691,
+          "name": "教育投资"
+        },
+        {
+          "value": 598,
+          "name": "教育政策"
+        },
+        {
+          "value": 1000,
+          "name": "教育创新"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "inside",
+        "formatter": "{d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

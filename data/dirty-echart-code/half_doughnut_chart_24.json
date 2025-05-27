@@ -1,0 +1,59 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "2%",
+    "left": "center",
+    "data": [
+      "原生广告",
+      "游击营销",
+      "推送通知",
+      "付费搜索",
+      "户外广告牌"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": "89%",
+      "center": [
+        "24%",
+        "76%"
+      ],
+      "startAngle": 90,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 749,
+          "name": "原生广告"
+        },
+        {
+          "value": 1003,
+          "name": "游击营销"
+        },
+        {
+          "value": 383,
+          "name": "推送通知"
+        },
+        {
+          "value": 484,
+          "name": "付费搜索"
+        },
+        {
+          "value": 683,
+          "name": "户外广告牌"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

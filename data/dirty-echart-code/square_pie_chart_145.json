@@ -1,0 +1,64 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "2%",
+    "left": "36%",
+    "data": [
+      "音乐",
+      "餐饮",
+      "时尚",
+      "庆典",
+      "综艺节目",
+      "播客"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": "92%",
+      "center": [
+        "25%",
+        "74%"
+      ],
+      "startAngle": 90,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 1056,
+          "name": "音乐"
+        },
+        {
+          "value": 794,
+          "name": "餐饮"
+        },
+        {
+          "value": 429,
+          "name": "时尚"
+        },
+        {
+          "value": 1044,
+          "name": "庆典"
+        },
+        {
+          "value": 358,
+          "name": "综艺节目"
+        },
+        {
+          "value": 650,
+          "name": "播客"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "inside",
+        "formatter": "{b}: {d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

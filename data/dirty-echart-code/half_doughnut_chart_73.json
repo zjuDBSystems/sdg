@@ -1,0 +1,62 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "0%",
+    "left": "center",
+    "data": [
+      "公共关系",
+      "企业社会责任",
+      "企业文化",
+      "市场分析",
+      "投资策略"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "31%",
+        "83%"
+      ],
+      "center": [
+        "60%",
+        "53%"
+      ],
+      "startAngle": 180,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 319,
+          "name": "公共关系"
+        },
+        {
+          "value": 726,
+          "name": "企业社会责任"
+        },
+        {
+          "value": 713,
+          "name": "企业文化"
+        },
+        {
+          "value": 502,
+          "name": "市场分析"
+        },
+        {
+          "value": 797,
+          "name": "投资策略"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "inside",
+        "formatter": "{d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

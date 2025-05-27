@@ -1,0 +1,49 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  ,},
+  "legend": {
+    "show": false,
+    "top": "2%",
+    "left": "center",
+    "data": [
+      "教育合作",
+      "技能提升",
+      "学校管理"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": "87%",
+      "center": [
+        "43%",
+        "75%"
+      ],
+      "startAngle": 90,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 530,
+          "name": "教育合作"
+        },
+        {
+          "value": 1072,
+          "name": "技能提升"
+        },
+        {
+          "value": 428,
+          "name": "学校管理"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "inside",
+        "formatter": "{b}: {d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

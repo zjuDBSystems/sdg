@@ -1,0 +1,77 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "1%",
+    "left": "center",
+    "data": [
+      "企业社会责任",
+      "忠诚度计划",
+      "组织结构",
+      "质量管理",
+      "供应链管理",
+      "投资策略",
+      "企业文化",
+      "产品开发"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "34%",
+        "73%"
+      ],
+      "center": [
+        "44%",
+        "64%"
+      ],
+      "startAngle": 180,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 230,
+          "name": "企业社会责任"
+        },
+        {
+          "value": 798,
+          "name": "忠诚度计划"
+        },
+        {
+          "value": 747,
+          "name": "组织结构"
+        },
+        {
+          "value": 408,
+          "name": "质量管理"
+        },
+        {
+          "value": 1065,
+          "name": "供应链管理"
+        },
+        {
+          "value": 190,
+          "name": "投资策略"
+        },
+        {
+          "value": 302,
+          "name": "企业文化"
+        },
+        {
+          "value": 141,
+          "name": "产品开发"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{b}"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

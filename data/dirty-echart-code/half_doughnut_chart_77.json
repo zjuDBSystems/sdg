@@ -1,0 +1,72 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "4%",
+    "left": "center",
+    "data": [
+      "语音助手",
+      "计算机视觉",
+      "增强现实",
+      "智能音箱",
+      "边缘计算",
+      "自然语言处理",
+      "5G技术"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "55%",
+        "84%"
+      ],
+      "center": [
+        "52%",
+        "75%"
+      ],
+      "startAngle": 180,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 645,
+          "name": "语音助手"
+        },
+        {
+          "value": 340,
+          "name": "计算机视觉"
+        },
+        {
+          "value": 482,
+          "name": "增强现实"
+        },
+        {
+          "value": 781,
+          "name": "智能音箱"
+        },
+        {
+          "value": 871,
+          "name": "边缘计算"
+        },
+        {
+          "value": 685,
+          "name": "自然语言处理"
+        },
+        {
+          "value": 1023,
+          "name": "5G技术"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": false,
+        "position": "outside",
+        "formatter": "{d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

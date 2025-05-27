@@ -1,0 +1,54 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  ,},
+  "legend": {
+    "show": true,
+    "top": "1%",
+    "left": "center",
+    "data": [
+      "财务规划",
+      "创新管理",
+      "组织结构",
+      "变革管理"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": "85%",
+      "center": [
+        "14%",
+        "71%"
+      ],
+      "startAngle": 90,
+      "endAngle": ,
+      "data": [
+        {
+          "value": 682,
+          "name": "财务规划"
+        },
+        {
+          "value": 502,
+          "name": "创新管理"
+        },
+        {
+          "value": 975,
+          "name": "组织结构"
+        },
+        {
+          "value": 386,
+          "name": "变革管理"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{b}: {d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

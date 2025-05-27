@@ -1,0 +1,52 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "3%",
+    "left": "center",
+    "data": [
+      "可持续发展",
+      "创新管理",
+      "领导力"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "49%",
+        "75%"
+      ],
+      "center": [
+        "57%",
+        "70%"
+      ],
+      "startAngle": 180,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 866,
+          "name": "可持续发展"
+        },
+        {
+          "value": 122,
+          "name": "创新管理"
+        },
+        {
+          "value": 522,
+          "name": "领导力"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "inside",
+        "formatter": "{b}"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

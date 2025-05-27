@@ -1,0 +1,56 @@
+{
+    "tooltip": {
+        "trigger": "item"
+    },
+    "legend": {
+        "show": true,
+        "top": "4%",
+        "left": "center",
+        "data": [
+            "无人机",
+            "生物识别",
+            "自动驾驶",
+            "网络安全"
+        ]
+    },
+    "series": [
+        {
+            "name": "Access From",
+            "type": "pie",
+            "radius": [
+                "38%",
+                "82%"
+            ],
+            "center": [
+                "60%",
+                "77%"
+            ],
+            "endAngle": 360,
+            "data": [
+                {
+                    "value": 912,
+                    "name": "无人机"
+                },
+                {
+                    "value": 398,
+                    "name": "生物识别"
+                },
+                {
+                    "value": 946,
+                    "name": "自动驾驶"
+                },
+                {
+                    "value": 547,
+                    "name": "网络安全"
+                }
+            ],
+            "itemStyle": {},
+            "label": {
+                "show": true,
+                "position": "outside",
+                "formatter": "{d}%"
+            }
+        }
+    ],
+    "backgroundColor": "#fff"
+}

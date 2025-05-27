@@ -1,0 +1,51 @@
+{
+    "tooltip": {
+        "trigger": "item"
+    },
+    "legend": {
+        "show": true,
+        "top": "3%",
+        "left": "center",
+        "data": [
+            "深度学习",
+            "自动驾驶",
+            "无人机"
+        ]
+    },
+    "series": [
+        {
+            "name": "Access From",
+            "radius": [
+                "34%",
+                "84%"
+            ],
+            "center": [
+                "51%",
+                "66%"
+            ],
+            "startAngle": 180,
+            "endAngle": 360,
+            "data": [
+                {
+                    "value": 301,
+                    "name": "深度学习"
+                },
+                {
+                    "value": 289,
+                    "name": "自动驾驶"
+                },
+                {
+                    "value": 1095,
+                    "name": "无人机"
+                }
+            ],
+            "itemStyle": {},
+            "label": {
+                "show": true,
+                "position": "outside",
+                "formatter": "{b}"
+            }
+        }
+    ],
+    "backgroundColor": "#fff"
+}

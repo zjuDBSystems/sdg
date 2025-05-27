@@ -1,0 +1,66 @@
+{
+    "tooltip": {
+        "trigger": "item"
+    },
+    "legend": {
+        "show": true,
+        "top": "0%",
+        "left": "center",
+        "data": [
+            "特殊教育",
+            "实习",
+            "学术研究",
+            "教育评估",
+            "教育创新",
+            "教学方法"
+        ]
+    },
+    "series": [
+        {
+            "name": "Access From",
+            "type": "pie",
+            "radius": [
+                "54%",
+                "79%"
+            ],
+            "center": [
+                "55%",
+                "72%"
+            ],
+            "endAngle": 360,
+            "data": [
+                {
+                    "value": 370,
+                    "name": "特殊教育"
+                },
+                {
+                    "value": 976,
+                    "name": "实习"
+                },
+                {
+                    "value": 389,
+                    "name": "学术研究"
+                },
+                {
+                    "value": 598,
+                    "name": "教育评估"
+                },
+                {
+                    "value": 844,
+                    "name": "教育创新"
+                },
+                {
+                    "value": 651,
+                    "name": "教学方法"
+                }
+            ],
+            "itemStyle": {},
+            "label": {
+                "show": false,
+                "position": "outside",
+                "formatter": "{d}%"
+            }
+        }
+    ],
+    "backgroundColor": "#fff"
+}

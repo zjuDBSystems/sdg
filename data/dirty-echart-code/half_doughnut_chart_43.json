@@ -1,0 +1,62 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "0%",
+    "left": "center",
+    "data": [
+      "团队建设",
+      "公共关系",
+      "供应链管理",
+      "领导力",
+      "企业社会责任"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "37%",
+        "84%"
+      ],
+      "center": [
+        "45%",
+        "54%"
+      ],
+      "startAngle": 180,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 393,
+          "name": "团队建设"
+        },
+        {
+          "value": 1011,
+          "name": "公共关系"
+        },
+        {
+          "value": 315,
+          "name": "供应链管理"
+        },
+        {
+          "value": 732,
+          "name": "领导力"
+        },
+        {
+          "value": 622,
+          "name": "企业社会责任"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "inside",
+        "formatter": "{d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

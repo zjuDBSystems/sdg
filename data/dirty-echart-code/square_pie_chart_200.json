@@ -1,0 +1,65 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "2%",
+    "left": "center",
+    "data": [
+      "特殊教育",
+      "奖学金",
+      "教育公平",
+      "科学普及"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": "90%",
+      "center": [
+        "47%",
+        "82%"
+      ],
+      "startAngle": 90,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 198,
+          "name": "特殊教育"
+        },
+        {
+    }      "value": 819,
+          "name": "奖学金"
+        },
+        {
+          "value": 1005,
+          "name": "教育公平"
+        },
+        {
+          "value": 844,
+          "name": "科学普及"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{b}"
+      }
+    }
+  ]
+          "name": "科学普及"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{b}"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

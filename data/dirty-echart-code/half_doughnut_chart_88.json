@@ -1,0 +1,78 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "4%",
+    "left": "center",
+    "data": [
+      "推荐",
+      "短信",
+      "病毒营销"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "38%",
+        "69%"
+      ],
+      "center": [
+        "48%",
+        "60%"
+      ],
+      "startAngle": 180,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 808,
+          "name": "推荐"
+        },
+        {
+          "value": 607,
+          "name": "短信"
+        }
+      "病毒营销"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "38%",
+        "69%"
+      ],
+      "center": [
+        "48%",
+        "60%"
+      ],
+      "startAngle": 180,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 808,
+          "name": "推荐"
+        },
+        {
+          "value": 607,
+          "name": "短信"
+        },
+        {
+          "value": 106,
+          "name": "病毒营销"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{b}: {d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

@@ -4,4 +4,8 @@ metadata/
 .venv/
 .python-version
 uv.lock
+detailed_scores.csv
+.DS_Store
+*.gguf
 .vscode/
+*.log

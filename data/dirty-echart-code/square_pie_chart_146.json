@@ -1,0 +1,74 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "0%",
+    "left": "21%",
+    "data": [
+      "忠诚度计划",
+      "绩效管理",
+      "企业文化",
+      "渠道管理",
+      "变革管理",
+      "绿色营销",
+      "组织结构",
+      "产品开发"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": "86%",
+      "center": [
+        "21%",
+        "89%"
+      ],
+      "startAngle": 90,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 123,
+          "name": "忠诚度计划"
+        },
+        {
+          "value": 797,
+          "name": "绩效管理"
+        },
+        {
+          "value": 565,
+          "name": "企业文化"
+        },
+        {
+          "value": 246,
+          "name": "渠道管理"
+        },
+        {
+          "value": 787,
+          "name": "变革管理"
+        },
+        {
+          "value": 896,
+          "name": "绿色营销"
+        },
+        {
+          "value": 986,
+          "name": "组织结构"
+        },
+        {
+          "value": 1011,
+          "name": "产品开发"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{b}"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

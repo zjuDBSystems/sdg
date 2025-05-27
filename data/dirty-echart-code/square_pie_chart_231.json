@@ -1,0 +1,54 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "3%",
+    "left": "25%",
+    "data": [
+      "餐饮",
+      "音乐",
+      "网络红人",
+      "电影"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": "93%",
+      "center": [
+        "39%",
+        "85%"
+      ],
+      "startAngle": 90,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 1044,
+          "name": "餐饮"
+        },
+        {
+          "value": 156,
+          "name": "音乐"
+        },
+        {
+          "value": 214,
+          "name": "网络红人"
+        },
+        {
+          "value": 364,
+          "name": "电影"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

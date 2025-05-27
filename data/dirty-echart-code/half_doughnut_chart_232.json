@@ -1,0 +1,34 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "1%",
+    "left": "center",
+    "data": [
+      "社交媒体",
+      "户外广告牌",
+      "推荐",
+      "内容营销"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": ,
+      "radius": [
+        "36%",
+        "68%"
+      ],
+      "center": [
+        "42%",
+        "77%"
+      ],
+      "startAngle": 180
+        "formatter": "{b}"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

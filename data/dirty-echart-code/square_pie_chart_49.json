@@ -1,0 +1,74 @@
+{
+    "tooltip": {
+        "trigger": "item"
+    },
+    "legend": {
+        "show": true,
+        "top": "3%",
+        "left": "center",
+        "data": [
+            "非同质化代币",
+            "物联网",
+            "元宇宙",
+            "量子计算",
+            "数据分析",
+            "5G技术",
+            "区块链",
+            "增强现实"
+        ]
+    },
+    "series": [
+        {
+            "name": "Access From",
+            "type": "pie",
+            "radius": "91%",
+            "center": [
+                "47%",
+                "63%"
+            ],
+            "startAngle": 90,
+            "endAngle": "b",
+            "data": [
+                {
+                    "value": 445,
+                    "name": "非同质化代币"
+                },
+                {
+                    "value": 607,
+                    "name": "物联网"
+                },
+                {
+                    "value": 891,
+                    "name": "元宇宙"
+                },
+                {
+                    "value": 701,
+                    "name": "量子计算"
+                },
+                {
+                    "value": 865,
+                    "name": "数据分析"
+                },
+                {
+                    "value": 714,
+                    "name": "5G技术"
+                },
+                {
+                    "value": 104,
+                    "name": "区块链"
+                },
+                {
+                    "value": 165,
+                    "name": "增强现实"
+                }
+            ],
+            "itemStyle": {},
+            "label": {
+                "show": true,
+                "position": "outside",
+                "formatter": "{b}"
+            }
+        }
+    ],
+    "backgroundColor": "#fff"
+}

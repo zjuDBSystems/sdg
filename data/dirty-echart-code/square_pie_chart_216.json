@@ -1,0 +1,59 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "2%",
+    "left": "center",
+    "data": [
+      "留学",
+      "实习",
+      "教育改革",
+      "语言学习",
+      "奖学金"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": "90%",
+      "center": [
+        "35%",
+        "90%"
+      ],
+      "startAngle": 90,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 511,
+          "name": "留学"
+        },
+        {
+          "value": 328,
+          "name": "实习"
+        },
+        {
+          "value": 279,
+          "name": "教育改革"
+        },
+        {
+          "value": 893,
+          "name": "语言学习"
+        },
+        {
+          "value": 411,
+          "name": "奖学金"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

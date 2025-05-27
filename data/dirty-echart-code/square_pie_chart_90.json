@@ -1,0 +1,59 @@
+{
+    "tooltip": {
+        "trigger": "item"
+    },
+    "legend": {
+        "show": true,
+        "top": "0%",
+        "left": "30%",
+        "data": [
+            "科学普及",
+            "教育创新",
+            "职业指导",
+            "教育合作",
+            "技能提升"
+        ]
+    },
+    "series": [
+        {
+            "name": "Access From",
+            "type": "pie",
+            "radius": "88%",
+            "center": [
+                "11%",
+                "73%"
+            ],
+            "startAngle": 90,
+            "endAngle": 44,
+            "data": [
+                {
+                    "value": 849,
+                    "name": "科学普及"
+                },
+                {
+                    "value": 684,
+                    "name": "教育创新"
+                },
+                {
+                    "value": 744,
+                    "name": "职业指导"
+                },
+                {
+                    "value": 446,
+                    "name": "教育合作"
+                },
+                {
+                    "value": 916,
+                    "name": "技能提升"
+                }
+            ],
+            "itemStyle": {},
+            "label": {
+                "show": true,
+                "position": "outside",
+                "formatter": "{b}: {d}%"
+            }
+        }
+    ],
+    "backgroundColor": "#fff"
+}

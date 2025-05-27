@@ -1,0 +1,52 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": false,
+    "top": "0%",
+    "left": "40%",
+    "data": [
+      "供应链管理",
+      "财务规划",
+      "创新管理"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "37%",
+        "79%"
+      ],
+      "center": [
+        "46%",
+        "55%"
+      ],
+      "startAngle": 139,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 747,
+          "name": "供应链管理"
+        },
+        {
+          "value": 920,
+          "name": "财务规划"
+        },
+        {
+          "value": 788,
+          "name": "创新管理"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{b}"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

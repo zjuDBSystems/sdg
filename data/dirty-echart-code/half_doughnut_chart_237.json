@@ -1,0 +1,52 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "2%",
+    "left": "center",
+    "data": [
+      "学术研究",
+      "语言学习",
+      "教育合作"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "30%",
+        "67%"
+      ],
+      "center": [
+        "42%",
+        "63%"
+      ],
+      "startAngle": 178,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 508,
+          "name": "学术研究"
+        },
+        {
+          "value": 1084,
+          "name": "语言学习"
+        },
+        {
+          "value": 622,
+          "name": "教育合作"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "inside",
+        "formatter": "{b}: {d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

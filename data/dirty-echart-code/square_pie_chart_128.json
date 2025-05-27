@@ -1,0 +1,74 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "0%",
+    "left": "center",
+    "data": [
+      "聊天机器人",
+      "量子计算",
+      "元宇宙",
+      "数据分析",
+      "机器人",
+      "加密货币",
+      "智能音箱",
+      "机器学习"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": "95%",
+      "center": [
+        "15%",
+        "81%"
+      ],
+      "startAngle": 94,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 1032,
+          "name": "聊天机器人"
+        },
+        {
+          "value": 674,
+          "name": "量子计算"
+        },
+        {
+          "value": 604,
+          "name": "元宇宙"
+        },
+        {
+          "value": 921,
+          "name": "数据分析"
+        },
+        {
+          "value": 978,
+          "name": "机器人"
+        },
+        {
+          "value": 484,
+          "name": "加密货币"
+        },
+        {
+          "value": 1051,
+          "name": "智能音箱"
+        },
+        {
+          "value": 386,
+          "name": "机器学习"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{b}"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

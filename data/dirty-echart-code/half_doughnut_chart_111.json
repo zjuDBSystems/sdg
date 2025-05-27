@@ -1,0 +1,62 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "1%",
+    "left": "center",
+    "data": [
+      "网络红人",
+      "博物馆",
+      "社交活动",
+      "综艺节目",
+      "动漫"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "26%",
+        "59%"
+      ],
+      "center": [
+        "45%",
+        "71%"
+      ],
+      "startAngle": 180,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 823,
+          "name": "网络红人"
+        },
+        {
+          "value": 545,
+          "name": "博物馆"
+        },
+        {
+          "value": 832,
+          "name": "社交活动"
+        },
+        {
+          "value": 850,
+          "name": "综艺节目"
+        },
+        {
+          "value": 610,
+          "name": "动漫"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{b}"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

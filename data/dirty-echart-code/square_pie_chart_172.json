@@ -1,0 +1,64 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "0%",
+    "left": "32%",
+    "data": [
+      "生物识别",
+      "深度学习",
+      "计算机视觉",
+      "智能音箱",
+      "网络安全",
+      "无人机"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": "95%",
+      "center": [
+        "41%",
+        "70%"
+      ],
+      "startAngle": 98,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 603,
+          "name": "生物识别"
+        },
+        {
+          "value": 878,
+          "name": "深度学习"
+        },
+        {
+          "value": 760,
+          "name": "计算机视觉"
+        },
+        {
+          "value": 549,
+          "name": "智能音箱"
+        },
+        {
+          "value": 666,
+          "name": "网络安全"
+        },
+        {
+          "value": 266,
+          "name": "无人机"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{b}"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

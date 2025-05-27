@@ -1,0 +1,59 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "4%",
+    "left": "center",
+    "data": [
+      "搜索引擎营销",
+      "展示广告",
+      "社交媒体",
+      "网红营销",
+      "游击营销"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": "90%",
+      "center": [
+        "16%",
+        "67%"
+      ],
+      "startAngle": 90,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 151,
+          "name": "搜索引擎营销"
+        },
+        {
+          "value": 732,
+          "name": "展示广告"
+        },
+        {
+          "value": 546,
+          "name": "社交媒体"
+        },
+        {
+          "value": 561,
+          "name": "网红营销"
+        },
+        {
+          "value": 1064,
+          "name": "游击营销"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{b}: {d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

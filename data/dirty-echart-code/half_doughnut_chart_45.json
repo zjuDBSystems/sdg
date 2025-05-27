@@ -1,0 +1,93 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  ,},
+  "legend": {
+    "show": false,
+    "top": "4%",
+    "left": "center",
+    "data": [
+      "原生广告",
+      "搜索引擎",
+      "推荐",
+      "电子邮件",
+      "病毒营销",
+      "网红营销"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "50%",
+        "81%"
+      ],
+      "center": [
+        "48%",
+        "59%"
+      ],
+      "startAngle": 180,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 1019,
+          "name": "原生广告"
+        },
+        {
+          "value": 208,
+          "name": "搜索引擎"
+        },
+        {
+          "value": 312,
+          "name": "推荐"
+        },
+        {
+          "value": 397,
+          "name": "电子邮件"
+        },
+        {
+          "value": 792,
+          "name": "病毒营销"
+        },
+        {
+          "value": 708,
+          "name": "网红营销"
+        }
+      ]
+      "data": [
+        {
+          "value": 1019,
+          "name": "原生广告"
+        },
+        {
+          "value": 208,
+          "name": "搜索引擎"
+        },
+        {
+          "value": 312,
+          "name": "推荐"
+        },
+        {
+          "value": 397,
+          "name": "电子邮件"
+        },
+        {
+          "value": 792,
+          "name": "病毒营销"
+        },
+        {
+          "value": 708,
+          "name": "网红营销"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "inside",
+        "formatter": "{b}: {d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

@@ -1,0 +1,68 @@
+{
+    "tooltip": {
+        "trigger": "item"
+    },
+    "legend": {
+        "show": true,
+        "top": "4%",
+        "left": "center",
+        "data": [
+            "并购",
+            "企业文化",
+            "忠诚度计划",
+            "定价策略",
+            "渠道管理",
+            "供应链管理",
+            "变革管理"
+        ]
+    },
+    "series": [
+        {
+            "name": "Access From",
+            "radius": "86%",
+            "center": [
+                "14%",
+                "83%"
+            ],
+            "startAngle": 90,
+            "endAngle": 360,
+            "data": [
+                {
+                    "value": 158,
+                    "name": "并购"
+                },
+                {
+                    "value": 437,
+                    "name": "企业文化"
+                },
+                {
+                    "value": 286,
+                    "name": "忠诚度计划"
+                },
+                {
+                    "value": 184,
+                    "name": "定价策略"
+                },
+                {
+                    "value": 513,
+                    "name": "渠道管理"
+                },
+                {
+                    "value": 560,
+                    "name": "供应链管理"
+                },
+                {
+                    "value": 762,
+                    "name": "变革管理"
+                }
+            ],
+            "itemStyle": {},
+            "label": {
+                "show": true,
+                "position": "outside",
+                "formatter": "{d}%"
+            }
+        }
+    ],
+    "backgroundColor": "#fff"
+}

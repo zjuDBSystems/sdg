@@ -1,0 +1,77 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": false,
+    "top": "0%",
+    "left": "center",
+    "data": [
+      "自然搜索",
+      "网络研讨会",
+      "搜索引擎优化",
+      "社交媒体",
+      "联盟营销",
+      "户外广告牌",
+      "搜索引擎营销",
+      "付费搜索"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "47%",
+        "80%"
+      ],
+      "center": [
+        "56%",
+        "68%"
+      ],
+      "startAngle": 180,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 597,
+          "name": "自然搜索"
+        },
+        {
+          "value": 686,
+          "name": "网络研讨会"
+        },
+        {
+          "value": 772,
+          "name": "搜索引擎优化"
+        },
+        {
+          "value": 727,
+          "name": "社交媒体"
+        },
+        {
+          "value": 152,
+          "name": "联盟营销"
+        },
+        {
+          "value": 534,
+          "name": "户外广告牌"
+        },
+        {
+          "value": 1033,
+          "name": "搜索引擎营销"
+        },
+        {
+          "value": 277,
+          "name": "付费搜索"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{b}: {d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

@@ -1,0 +1,52 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": false,
+    "top": "4%",
+    "left": "center",
+    "data": [
+      "生物识别",
+      "数据分析",
+      "深度学习"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "50%",
+        "77%"
+      ],
+      "center": [
+        "46%",
+        "63%"
+      ],
+      "startAngle": 180,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 583,
+          "name": "生物识别"
+        },
+        {
+          "value": 744,
+          "name": "数据分析"
+        },
+        {
+          "value": 939,
+          "name": "深度学习"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "inside",
+        "formatter": "{b}: {d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

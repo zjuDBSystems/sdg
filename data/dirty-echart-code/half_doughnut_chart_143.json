@@ -1,0 +1,57 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "2%",
+    "left": "center",
+    "data": [
+      "旅游",
+      "社交活动",
+      "短视频",
+      "节日"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "27%",
+        "56%"
+      ],
+      "center": [
+        "49%",
+        "60%"
+      ],
+      "startAngle": 180,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 887,
+          "name": "旅游"
+        },
+        {
+          "value": 270,
+          "name": "社交活动"
+        },
+        {
+          "value": 327,
+          "name": "短视频"
+        },
+        {
+          "value": 874,
+          "name": "节日"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "inside",
+        "formatter": "{b}: {d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

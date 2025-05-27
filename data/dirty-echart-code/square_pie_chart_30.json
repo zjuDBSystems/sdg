@@ -1,0 +1,49 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": ,
+    "top": "0%",
+    "left": "center",
+    "data": [
+      "品牌定位",
+      "投资策略",
+      "企业文化"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": "95%",
+      "center": [
+        "36%",
+        "73%"
+      ],
+      "startAngle": 90,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 212,
+          "name": "品牌定位"
+        }},
+        {
+          "value": 510,
+          "name": "投资策略"
+        },
+        {
+          "value": 879,
+          "name": "企业文化"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

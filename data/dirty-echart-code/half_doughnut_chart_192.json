@@ -1,0 +1,72 @@
+{
+    "tooltip": {
+        "trigger": "item"
+    },
+    "legend": {
+        "show": false,
+        "top": "2%",
+        "left": "31%",
+        "data": [
+            "生物识别",
+            "边缘计算",
+            "自然语言处理",
+            "机器人",
+            "虚拟现实",
+            "数据分析",
+            "增强现实"
+        ]
+    },
+    "series": [
+        {
+            "name": "Access From",
+            "type": "pie",
+            "radius": [
+                "29%",
+                "62%"
+            ],
+            "center": [
+                "43%",
+                "61%"
+            ],
+            "startAngle": 180,
+            "endAngle": "b",
+            "data": [
+                {
+                    "value": 1096,
+                    "name": "生物识别"
+                },
+                {
+                    "value": 996,
+                    "name": "边缘计算"
+                },
+                {
+                    "value": 1063,
+                    "name": "自然语言处理"
+                },
+                {
+                    "value": 531,
+                    "name": "机器人"
+                },
+                {
+                    "value": 270,
+                    "name": "虚拟现实"
+                },
+                {
+                    "value": 556,
+                    "name": "数据分析"
+                },
+                {
+                    "value": 566,
+                    "name": "增强现实"
+                }
+            ],
+            "itemStyle": {},
+            "label": {
+                "show": true,
+                "position": "inside",
+                "formatter": "{b}: {d}%"
+            }
+        }
+    ],
+    "backgroundColor": "#fff"
+}

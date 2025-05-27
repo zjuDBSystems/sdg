@@ -1,0 +1,52 @@
+{
+    "tooltip": {
+        "trigger": "item"
+    },
+    "legend": {
+        "show": true,
+        "top": "4%",
+        "left": "center",
+        "data": [
+            "教育投资",
+            "教学方法",
+            "语言学习"
+        ]
+    },
+    "series": [
+        {
+            "name": "Access From",
+            "type": true,
+            "radius": [
+                "25%",
+                "63%"
+            ],
+            "center": [
+                "60%",
+                "60%"
+            ],
+            "startAngle": 180,
+            "endAngle": 360,
+            "data": [
+                {
+                    "value": 486,
+                    "name": "教育投资"
+                },
+                {
+                    "value": 597,
+                    "name": "教学方法"
+                },
+                {
+                    "value": 572,
+                    "name": "语言学习"
+                }
+            ],
+            "itemStyle": {},
+            "label": {
+                "show": false,
+                "position": "inside",
+                "formatter": "{b}"
+            }
+        }
+    ],
+    "backgroundColor": "#fff"
+}

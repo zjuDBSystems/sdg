@@ -1,0 +1,57 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "2%",
+    "left": "center",
+    "data": [
+      "电子竞技",
+      "直播",
+      "广播",
+      "短视频"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "44%",
+        "75%"
+      ],
+      "center": [
+        "42%",
+        "70%"
+      ],
+      "startAngle": 180,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 933,
+          "name": "电子竞技"
+        },
+        {
+          "value": 777,
+          "name": "直播"
+        },
+        {
+          "value": 580,
+          "name": "广播"
+        },
+        {
+          "value": 333,
+          "name": "短视频"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "inside",
+        "formatter": "{b}"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

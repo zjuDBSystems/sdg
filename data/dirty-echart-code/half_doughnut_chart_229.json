@@ -1,0 +1,91 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": false,
+    "top": "3%",
+    "left": "45%",
+    "data": [
+      "危机管理",
+      "定价策略",
+      "质量管理",
+      "公共关系",
+      "绿色营销",
+      "客户细分",
+      "绩效管理"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "38%",
+        "67%"
+      ],
+      "center": [
+        "45%",
+        "74%"
+      ]
+      "质量管理",
+      "公共关系",
+      "绿色营销",
+      "客户细分",
+      "绩效管理"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "38%",
+        "67%"
+      ],
+      "center": [
+        "45%",
+        "74%"
+      ],
+      "startAngle": 180,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 1087,
+          "name": "危机管理"
+        },
+        {
+          "value": 1084,
+          "name": "定价策略"
+        },
+        {
+          "value": 237,
+          "name": "质量管理"
+        },
+        {
+          "value": 664,
+          "name": "公共关系"
+        },
+        {
+          "value": 215,
+          "name": "绿色营销"
+        },
+        {
+          "value": 1015,
+          "name": "客户细分"
+        },
+        {
+          "value": 1073,
+          "name": "绩效管理"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": ,
+        "position": "outside",
+        "formatter": "{b}: {d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

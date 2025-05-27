@@ -1,0 +1,57 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "2%",
+    "left": "center",
+    "data": [
+      "物联网",
+      "机器学习",
+      "量子计算",
+      "网络安全"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "40%",
+        "84%"
+      ],
+      "center": [
+        "60%",
+        "80%"
+      ],
+      "startAngle": 163,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 232,
+          "name": "物联网"
+        },
+        {
+          "value": 380,
+          "name": "机器学习"
+        },
+        {
+          "value": 667,
+          "name": "量子计算"
+        },
+        {
+          "value": 752,
+          "name": "网络安全"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}
