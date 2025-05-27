@@ -9,6 +9,7 @@ Typical usage example:
 
 from uuid import UUID, uuid4
 import time
+import json
 
 from ..storage.dataset import Dataset, copy_dataset
 from ..data_operator.operator import Operator
@@ -50,7 +51,7 @@ class Task:
         """Executes the task by applying the operators to the input dataset."""
         dataset: Dataset = self.in_dataset
         for operator in self.operators:
-            global_message_queue.put(EventResponse(event=EventType.REQUEST, data=f'执行制备算子 {operator.get_meta().name}'))
+            global_message_queue.put(EventResponse(event=EventType.REASONING, data=f'执行制备算子 {operator.get_meta().name}'))
             start = time.time()
             dataset = copy_dataset(dataset)
             print(dataset.dirs[0].data_path)
@@ -58,5 +59,8 @@ class Task:
             self.out_datasets[operator.__class__.__name__] = dataset
             end = time.time()
             cost = end - start
-            global_message_queue.put(EventResponse(event=EventType.RESPONSE, data=f'execute operator {operator.get_meta().name} done! cost: {cost}'))
+            global_message_queue.put(EventResponse(event=EventType.REASONING, data=f'execute operator {operator.get_meta().name} done! cost: {cost}'))
+            result = dataset.evaluate_image_code_quality()
+            global_message_queue.put(EventResponse(event=EventType.REASONING, data=f'operator {operator.get_meta().name} 数据质量评估完成!'))
+            global_message_queue.put(EventResponse(event=EventType.RESPONSE, data=json.dumps(result, indent=4, ensure_ascii=False)))
         self.final_dataset = dataset
