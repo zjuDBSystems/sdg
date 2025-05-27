@@ -18,7 +18,6 @@ from .image_code_data.code_duplication import evaluate_code_duplicate
 from .image_code_data.image_duplication import evaluate_image_duplicate
 from .image_code_data.joint_duplicate import evaluate_joint_duplicate
 from .image_code_data.config_complete import evaluate_completeness
-from ..event import EventType, EventResponse, global_message_queue
 from .image_code_data.missing_rate_detection import evaluate_miss
 
 import pandas as pd
@@ -178,7 +177,6 @@ class Dataset:
 
 
     def evaluate_image_code_quality(self):
-        global_message_queue.put(EventResponse(EventType.REQUEST, "开始评估数据集质量"))
         code_file_path = self.dirs[0].data_path  # 代码路径
         image_file_path = self.dirs[1].data_path  # 图像路径
         pair_file_path = self.meta_path  # 图像代码配对文件路径
@@ -192,8 +190,8 @@ class Dataset:
         collector = ScoreCollector(pair_file_path)
 
         # 1、首先是数据量的计算
-        min_size = 1000  # 1k数据得0分
-        max_size = 10 ** 5  # 100K数据得100分
+        min_size = 550# 1k数据得0分
+        max_size = 800  # 100K数据得100分
         data_size_score = calculate_score_from_csv(pair_file_path, min_size, max_size)
         data_size_score = round(data_size_score, 2)  # 保留两位小数
 

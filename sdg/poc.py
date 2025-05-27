@@ -33,11 +33,11 @@ def extract_secondary_metrics(result):
 def run_echart_task():
     # load echart example dataset
     global_message_queue.put(EventResponse(event=EventType.REQUEST, data="Load multimodal dataset, include code and image!"))
-    code_dir = Datadir('echart-code-sample', DataType.CODE)
+    code_dir = Datadir('dirty-echart-code', DataType.CODE)
     describe_data(code_dir)
-    image_dir = Datadir('echart-image-sample', DataType.IMAGE)
+    image_dir = Datadir('dirty-echart-image', DataType.IMAGE)
     describe_data(image_dir)
-    data_set = Dataset([code_dir, image_dir], 'echart-sample.metadata','key_configurations.md')
+    data_set = Dataset([code_dir, image_dir], 'dirty-echart.metadata','key_configurations.md')
     describe_metadata(data_set.meta_path)
     global_message_queue.put(EventResponse(event=EventType.RESPONSE, data="Load multimodal dataset done!"))
 
@@ -45,7 +45,7 @@ def run_echart_task():
     result = data_set.evaluate_image_code_quality()
 
     global_message_queue.put(EventResponse(event=EventType.REQUEST, data="数据洞察发现靶点"))
-    result = extract_secondary_metrics(result)
+    # result = extract_secondary_metrics(result)
     # print(json.dumps(result, indent=4, ensure_ascii=False))
     # client = OpenAI(api_key="your key", base_url="https://api.deepseek.com")
     # calculate_top_metrics(client, result, 1)
@@ -55,32 +55,30 @@ def run_echart_task():
 
 
     # build task workflow
-    # 1st step: Randomly modify echarts configuration code to generate new code file
-    # 2nd step: Generate echarts image for code without associated images
-    # 3rd step: Generate echart configuration code for image without associated code
-    # 4th step: Add noise to echarts image and generate new data pair
+
     task = Task(
         [
-            registry['EChartMutationOperator'](), 
+            # 配置项修正
+            registry['ConfigAmendOperator'](),
+            # 语法修正
+            registry['SyntaxAmendOperator'](),
+            # 配置项多样性
+            registry['DiversityEnhanceOperator'](
+                api_key = "sk-dC9449cf83366aa25e16e59cf7fa08192a79497025fKY2m9"
+            ),
+            # 图像的echarts代码补全
+            registry['ImgToEchartsOperator'](
+                api_key = "sk-dC9449cf83366aa25e16e59cf7fa08192a79497025fKY2m9"
+            ),
+            # echarts代码随机变异(生成新的突变代码，此步骤只生成代码，没有生成相应的图像)
+            registry['EChartMutationOperator'](),
+            # echarts代码的图像补全
             registry['EchartsToImageOperator'](),
-            registry['ImgToEchartsOperator'](), 
-            registry['ImageRobustnessEnhancer']()
-        ],
-        data_set
+            # 图像随机扰动
+            registry['ImageRobustnessEnhancer'](),
+            ],
+            data_set
         )
     task.run()
 
     result = data_set.evaluate_image_code_quality()
-
-def data_evaluation():
-    negative_code_dir = Datadir('echart-code-sample-negative', DataType.CODE)
-    negative_image_dir = Datadir('echart-image-sample-negative', DataType.IMAGE)
-    negative_dataset = Dataset([negative_code_dir, negative_image_dir], 'echart-sample-negative.metadata','key_configurations.md')
-    result = negative_dataset.evaluate_image_code_quality()
-    print(json.dumps(result, indent=4, ensure_ascii=False))
-
-    positive_code_dir = Datadir('echart-code-sample-positive', DataType.CODE)
-    positive_image_dir = Datadir('echart-image-sample-positive', DataType.IMAGE)
-    positive_dataset = Dataset([positive_code_dir, positive_image_dir], 'echart-sample-positive.metadata','key_configurations.md')
-    result = positive_dataset.evaluate_image_code_quality()
-    print(json.dumps(result, indent=4, ensure_ascii=False))
