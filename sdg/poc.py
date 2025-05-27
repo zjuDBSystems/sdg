@@ -1,161 +1,17 @@
 """PoC code to demonstrate the usage of the data_operator package.
 """
 
-import pprint
 import os
-from textwrap import indent
-from openai import OpenAI
-from pkg_resources import ensure_directory
 import json
 
-from .data_operator.operator import Meta, Operator, OperatorMeta
+from .data_operator.operator import OperatorMeta
 from . import data_operator
-from .storage.dataset import Dataset, DataType, Datadir, copy_dataset
-from .task.task_type import TaskType
+from .storage.dataset import Dataset, DataType, Datadir
 from .task.task import Task
 from .event import global_message_queue, EventType, EventResponse
-from .data_insights_identify import calculate_top_metrics
 
 
 registry = OperatorMeta.get_registry()
-
-
-def get_operators(data_type, task_type) -> list[Operator]:
-    operators: list[Operator] = []
-    for clas_name, cls in registry.items():
-        if cls.accept(data_type, task_type):
-            operators.append(clas_name)
-    return operators
-
-
-def describe_operator(name):
-    operator: Operator = registry[name]
-    meta: Meta = operator.get_meta()
-    global_message_queue.put(EventResponse(event=EventType.REASONING, data=f"Operator name: {meta.name}"))
-    global_message_queue.put(EventResponse(event=EventType.REASONING, data=f"Operator description: {meta.name}"))
-
-def poc():
-    global_message_queue.put(EventResponse(event=EventType.REQUEST, data="List preprocessing operator!"))
-    preprocessing_operators = get_operators(DataType.PYTHON,
-                                            TaskType.PREPROCESSING)
-    for operator_name in preprocessing_operators:
-        describe_operator(operator_name)
-    global_message_queue.put(EventResponse(event=EventType.RESPONSE, data="List preprocessing operator done!"))
-    global_message_queue.put(EventResponse(event=EventType.REQUEST, data="List augmentation operator!"))
-    augmentation_operators = get_operators(DataType.PYTHON,
-                                           TaskType.AUGMENTATION)
-    for operator_name in augmentation_operators:
-        describe_operator(operator_name)
-    global_message_queue.put(EventResponse(event=EventType.RESPONSE, data="List augmentation operator done!"))
-
-    global_message_queue.put(EventResponse(event=EventType.REQUEST, data="Execute operators!"))
-    dir = Datadir('raw', DataType.PYTHON)
-    raw_dataset: Dataset = Dataset([dir], 'raw.metadata')
-
-    dataset = raw_dataset
-    preprocessing_task = Task([registry['PythonFormattingOperator']()],
-                              TaskType.PREPROCESSING, dataset)
-    preprocessing_task.run()
-
-    dataset = preprocessing_task.final_dataset
-    augmentation_task = Task([
-        # registry['PythonReorderOperator'](),
-        registry['PythonDocstringInsertOperator']()
-    ], TaskType.AUGMENTATION, dataset)
-    augmentation_task.run()
-    global_message_queue.put(EventResponse(event=EventType.RESPONSE, data="Execute operators done!"))
-
-def code_to_img():
-    code_dir = Datadir('code', DataType.CODE)
-    describe_data(code_dir)
-    image_dir = Datadir('image', DataType.IMAGE)
-    describe_data(image_dir)
-    data_set = Dataset([code_dir, image_dir], 'metadata')
-    describe_metadata(data_set.meta_path)
-
-    task = Task(
-        [registry['EchartsToImageOperator']()],
-        data_set
-        )
-    task.run()
-
-def img_aug():
-
-    print('Augmentation operator----------------------------------------------')
-    augmentation_operators = get_operators(DataType.IMAGE,
-                                           TaskType.AUGMENTATION)
-    for operator_name in augmentation_operators:
-        describe_operator(operator_name)
-    print('----------------------------------------------')
-
-    img_dir = Datadir('image', DataType.IMAGE)
-    code_dir = Datadir('code', DataType.CODE)
-    raw_dataset: Dataset = Dataset([img_dir, code_dir], 'metadata')
-
-    augmentation_task = Task([
-        registry['ImgToEchartsOperator'](
-            api_key=""
-        ),registry['EChartMutationOperator'](),registry['EchartsToImageOperator'](),registry['ImageRobustnessEnhancer']()
-    ], raw_dataset)
-    augmentation_task.run()
-
-def mutation_test():
-
-    print('Augmentation operator----------------------------------------------')
-    augmentation_operators = get_operators(DataType.ECHARTS,
-                                           TaskType.AUGMENTATION)
-    for operator_name in augmentation_operators:
-        describe_operator(operator_name)
-    print('----------------------------------------------')
-
-    code_dir = Datadir('raw/echarts', DataType.ECHARTS)
-    raw_dataset: Dataset = Dataset([code_dir], 'raw/metadata.csv')
-
-    augmentation_task = Task([
-        registry['EChartMutationOperator'](),
-    ], TaskType.AUGMENTATION, raw_dataset)
-    augmentation_task.run()
-
-def add_noise_test():
-    print('Augmentation operator----------------------------------------------')
-    augmentation_operators = get_operators(DataType.IMAGE,
-                                           TaskType.AUGMENTATION)
-    for operator_name in augmentation_operators:
-        describe_operator(operator_name)
-    print('----------------------------------------------')
-
-    img_dir = Datadir('raw/images', DataType.IMAGE)
-    raw_dataset: Dataset = Dataset([img_dir], 'raw/metadata.csv')
-
-    augmentation_task = Task([
-        registry['ImageRobustnessEnhancer'](),
-    ], TaskType.AUGMENTATION, raw_dataset)
-    augmentation_task.run()
-
-def total_aug_test():
-
-    img_dir = Datadir('raw/images', DataType.IMAGE)
-    code_dir = Datadir('raw/echarts', DataType.ECHARTS)
-    raw_dataset: Dataset = Dataset([img_dir, code_dir], 'raw/metadata.csv')
-
-    img_to_echarts_task = Task([
-        registry['ImgToEchartsOperator'](
-            api_key = ""
-        ),
-    ], TaskType.AUGMENTATION, raw_dataset)
-    img_to_echarts_task.run()
-    dataset = img_to_echarts_task.final_dataset
-    
-    augmentation_task = Task([
-        registry['EChartMutationOperator'](),
-    ], TaskType.AUGMENTATION, dataset)
-    augmentation_task.run()
-    dataset = augmentation_task.final_dataset
-
-    add_noise_task = Task([
-        registry['ImageRobustnessEnhancer'](),
-    ], TaskType.AUGMENTATION, dataset)
-    add_noise_task.run()
 
 def describe_data(datadir: Datadir):
     dir_path = datadir.data_path
@@ -228,45 +84,3 @@ def data_evaluation():
     positive_dataset = Dataset([positive_code_dir, positive_image_dir], 'echart-sample-positive.metadata','key_configurations.md')
     result = positive_dataset.evaluate_image_code_quality()
     print(json.dumps(result, indent=4, ensure_ascii=False))
-
-def aug_process():
-    negative_code_dir = Datadir('echart-code-sample-negative', DataType.CODE)
-    negative_image_dir = Datadir('echart-image-sample-negative', DataType.IMAGE)
-    negative_dataset = Dataset([negative_code_dir, negative_image_dir], 'echart-sample-negative.metadata','key_configurations.md')
-    augmentation_task = Task([
-        # # 配置项修正
-        # registry['ConfigAmendOperator'](
-        #     api_key="api_key"
-        # ),
-        # 语法修正
-        registry['SyntaxAmendOperator'](
-            api_key="api_key"
-        ),
-        # # 配置项多样性
-        # registry['DiversityAmendOperator'](
-        #     api_key="api_key"
-        # ),
-        # 图像的echarts代码补全
-        # registry['ImgToEchartsOperator'](
-        #     api_key="api_key"
-        # ),
-        # echarts代码随机变异(生成新的突变代码，此步骤只生成代码，没有生成相应的图像)
-        # registry['EChartMutationOperator'](),
-        # echarts代码的图像补全
-        # registry['EchartsToImageOperator'](),
-        # 图像随机加噪
-        # registry['ImageRobustnessEnhancer'](),
-
-
-    ], negative_dataset)
-    augmentation_task.run()
-    new_dataset = augmentation_task.final_dataset
-    new_dataset.md_path = 'key_configurations.md'
-    result = new_dataset.evaluate_image_code_quality()
-    print(json.dumps(result, indent=4, ensure_ascii=False))
-
-if __name__ == '__main__':
-    # run_echart_task()
-    # code_to_img()
-    # img_aug()
-    aug_process()
