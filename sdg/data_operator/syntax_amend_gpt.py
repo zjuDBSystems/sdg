@@ -9,9 +9,6 @@ import json5
 import json
 from tqdm import tqdm
 from llama_cpp import Llama
-from rwkv.model import RWKV
-from rwkv.utils import PIPELINE
-from transformers import AutoTokenizer
 from ..config import settings
 
 from .operator import Meta, Operator, Field
@@ -22,7 +19,7 @@ class SyntaxAmendOperatorGPT(Operator):
     def __init__(self, **kwargs):
         self.api_key = kwargs.get('api_key',"")
         self.model = kwargs.get('model', "gpt-4o")
-        self.score_file = kwargs.get('score_file', "./scores.csv")
+        self.score_file = kwargs.get('score_file', "./detailed_scores.csv")
 
     @classmethod
     @override
@@ -38,7 +35,7 @@ class SyntaxAmendOperatorGPT(Operator):
 
             Field('api-key', Field.FieldType.STRING, 'OpenAI API key', ""),
             Field('model', Field.FieldType.STRING, 'OpenAI model name', "gpt-4o"),
-            Field('score_file', Field.FieldType.STRING, 'Score result file path', "./scores.csv")
+            Field('score_file', Field.FieldType.STRING, 'Score result file path', "./detailed_scores.csv")
         ]
     
 

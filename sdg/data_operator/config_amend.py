@@ -14,7 +14,7 @@ from ..task.task_type import TaskType
 
 class ConfigAmendOperator(Operator):
     def __init__(self, **kwargs):
-        self.score_file = kwargs.get('score_file', "./scores.csv")
+        self.score_file = kwargs.get('score_file', "./detailed_scores.csv")
 
     @classmethod
     @override
@@ -28,7 +28,7 @@ class ConfigAmendOperator(Operator):
     def get_config(cls) -> list[Field]:
         return [
 
-            Field('score_file', Field.FieldType.STRING, 'Score result file path', "./scores.csv")
+            Field('score_file', Field.FieldType.STRING, 'Score result file path', "./detailed_scores.csv")
         ]
     
 

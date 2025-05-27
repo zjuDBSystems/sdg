@@ -6,7 +6,6 @@ import os
 import pandas as pd
 from tqdm import tqdm
 from llama_cpp import Llama
-from transformers import AutoTokenizer
 from ..config import settings
 
 from .operator import Meta, Operator, Field
@@ -16,7 +15,7 @@ from ..task.task_type import TaskType
 class SyntaxAmendOperator(Operator):
     def __init__(self, **kwargs):
 
-        self.score_file = kwargs.get('score_file', "./scores.csv")
+        self.score_file = kwargs.get('score_file', "./detailed_scores.csv")
 
     @classmethod
     @override
@@ -30,7 +29,7 @@ class SyntaxAmendOperator(Operator):
     def get_config(cls) -> list[Field]:
         return [
 
-            Field('score_file', Field.FieldType.STRING, 'Score result file path', "./scores.csv")
+            Field('score_file', Field.FieldType.STRING, 'Score result file path', "./detailed_scores.csv")
         ]
     
 

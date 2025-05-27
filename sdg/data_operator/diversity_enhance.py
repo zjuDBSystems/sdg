@@ -17,7 +17,7 @@ class DiversityEnhanceOperator(Operator):
     def __init__(self, **kwargs):
         self.api_key = kwargs.get('api_key',"")
         self.model = kwargs.get('model', "gpt-4o")
-        self.score_file = kwargs.get('score_file', "./scores.csv")
+        self.score_file = kwargs.get('score_file', "./detailed_scores.csv")
 
     @classmethod
     @override
@@ -32,7 +32,7 @@ class DiversityEnhanceOperator(Operator):
         return [
             Field('api-key', Field.FieldType.STRING, 'OpenAI API key', ""),
             Field('model', Field.FieldType.STRING, 'OpenAI model name', "gpt-4o"),
-            Field('score_file', Field.FieldType.STRING, 'Score result file path', "./scores.csv")
+            Field('score_file', Field.FieldType.STRING, 'Score result file path', "./detailed_scores.csv")
         ]
     
 
