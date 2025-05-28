@@ -3,6 +3,7 @@
 
 import os
 import json
+import time
 
 from .data_operator.operator import OperatorMeta
 from . import data_operator
@@ -42,16 +43,22 @@ def run_echart_task():
     global_message_queue.put(EventResponse(event=EventType.RESPONSE, data="Load multimodal dataset done!"))
 
 
+    global_message_queue.put(EventResponse(event=EventType.REQUEST, data="数据质量评估"))
+    start = time.time()
     result = data_set.evaluate_image_code_quality()
+    end = time.time()
+    cost = end - start
+    global_message_queue.put(EventResponse(event=EventType.RESPONSE, data="数据质量评估完成, 耗时: {:.2f}秒".format(cost)))
+    global_message_queue.put(EventResponse(event=EventType.RESPONSE, data=json.dumps(result, indent=4, ensure_ascii=False)))
 
-    global_message_queue.put(EventResponse(event=EventType.REQUEST, data="数据洞察发现靶点"))
-    # result = extract_secondary_metrics(result)
-    # print(json.dumps(result, indent=4, ensure_ascii=False))
-    # client = OpenAI(api_key="your key", base_url="https://api.deepseek.com")
-    # calculate_top_metrics(client, result, 1)
-    global_message_queue.put(EventResponse(event=EventType.REASONING, data="远端大模型分析..."))
-    global_message_queue.put(EventResponse(event=EventType.REASONING, data="本地经验模型分析..."))
-    global_message_queue.put(EventResponse(event=EventType.RESPONSE, data="数据洞察发现靶点完成, 靶点为[数据量， 配置项多样性， 图像与渲染截图的SSIM]"))
+    # global_message_queue.put(EventResponse(event=EventType.REQUEST, data="数据洞察发现靶点"))
+    # # result = extract_secondary_metrics(result)
+    # # print(json.dumps(result, indent=4, ensure_ascii=False))
+    # # client = OpenAI(api_key="your key", base_url="https://api.deepseek.com")
+    # # calculate_top_metrics(client, result, 1)
+    # global_message_queue.put(EventResponse(event=EventType.REASONING, data="远端大模型分析..."))
+    # global_message_queue.put(EventResponse(event=EventType.REASONING, data="本地经验模型分析..."))
+    # global_message_queue.put(EventResponse(event=EventType.RESPONSE, data="数据洞察发现靶点完成, 靶点为[数据量， 配置项多样性， 图像与渲染截图的SSIM]"))
 
 
     # build task workflow
@@ -75,10 +82,13 @@ def run_echart_task():
             # echarts代码的图像补全
             registry['EchartsToImageOperator'](),
             # 图像随机扰动
-            registry['ImageRobustnessEnhancer'](),
+            # registry['ImageRobustnessEnhancer'](),
             ],
             data_set
         )
+    global_message_queue.put(EventResponse(event=EventType.REQUEST, data="开始执行任务流程"))
+    start = time.time()
     task.run()
-
-    result = data_set.evaluate_image_code_quality()
+    end = time.time()
+    cost = end - start
+    global_message_queue.put(EventResponse(event=EventType.RESPONSE, data="任务流程执行完成, 耗时: {:.2f}秒".format(cost)))

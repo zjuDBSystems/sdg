@@ -301,6 +301,9 @@ class EChartMutationOperator(Operator):
         start = echarts_option.find("{")
         end = echarts_option.rfind("}")
         echarts_option_json = echarts_option[start:end+1]
+        echarts_option_json_dict = json.loads(echarts_option_json)
+        echarts_option_json_dict['animation'] = False  # 禁用动画以加快渲染速度
+        echarts_option_json = json.dumps(echarts_option_json_dict, indent=2, ensure_ascii=False)
 
         # 设置页面内容
         html_content = f'''
@@ -351,7 +354,7 @@ class EChartMutationOperator(Operator):
                 # 再检测渲染完成标志
                 page.wait_for_function('document.title === "RENDER_DONE"', timeout=10_000)
                 # 最后添加2秒保险延迟（针对复杂渲染场景）
-                page.wait_for_timeout(2000)  # 等同于 time.sleep(2)
+                # page.wait_for_timeout(2000)  # 等同于 time.sleep(2)
 
                 # 截图配置
                 chart_div = page.locator('#chart')
