@@ -3,8 +3,8 @@ import cv2
 import pandas as pd
 from skimage.metrics import structural_similarity as ssim
 import numpy as np
-from PIL import Image
 from time import sleep
+import json
 from concurrent.futures import ThreadPoolExecutor
 from playwright.sync_api import sync_playwright
 
@@ -42,6 +42,10 @@ def generate_screenshots(js_dir, screenshot_folder):
         try:
             with open(js_path, "r", encoding="utf-8") as f:
                 js_code = f.read()
+            
+            js_code_dict = json.loads(js_code)
+            js_code_dict['animation'] = False  # 禁用动画
+            js_code = json.dumps(js_code_dict, ensure_ascii=False)
 
             if js_code.strip().startswith("{") and js_code.strip().endswith("}"):
                 js_code = "option = " + js_code
@@ -57,7 +61,6 @@ def generate_screenshots(js_dir, screenshot_folder):
                     chart.setOption(option);
                 """)
                 page.wait_for_selector('#main canvas', timeout=5000)
-                sleep(1)
                 screenshot_name = os.path.basename(js_path).replace('.json', '.png')
                 screenshot_path = os.path.join(screenshot_folder, screenshot_name)
                 # page.screenshot(path=screenshot_path)

@@ -1,7 +1,8 @@
 
 import pandas as pd
 import os
-from playwright.sync_api import sync_playwright  
+from playwright.sync_api import sync_playwright
+import json
 
 from typing import override
 from .operator import Operator, Field, Meta
@@ -143,7 +144,7 @@ class EchartsToImageOperator(Operator):
                 # 再检测渲染完成标志
                 page.wait_for_function('document.title === "RENDER_DONE"', timeout=10_000)
                 # 最后添加2秒保险延迟（针对复杂渲染场景）
-                page.wait_for_timeout(2000)  # 等同于 time.sleep(2)
+                # page.wait_for_timeout(2000)  # 等同于 time.sleep(2)
 
                 # 截图配置
                 chart_div = page.locator('#chart')
@@ -188,6 +189,9 @@ class EchartsToImageOperator(Operator):
                     code_content = f.read()
 
                 if code_content.strip().startswith("{") and code_content.strip().endswith("}"):
+                    code_content_dict = json.loads(code_content)
+                    code_content_dict['animation'] = False  # 禁用动画
+                    code_content = json.dumps(code_content_dict, ensure_ascii=False)
                     code_content = "option = " + code_content
                 
                 with sync_playwright() as p:
@@ -201,7 +205,6 @@ class EchartsToImageOperator(Operator):
                         chart.setOption(option);
                     """)
                     page.wait_for_selector('#main canvas', timeout=5000)
-                    sleep(1)
                     img_name = os.path.basename(code_path).replace('.json', '.png')
                     img_path = os.path.join(img_dir, img_name)
                     # page.screenshot(path=img_path)
@@ -278,7 +281,7 @@ class EchartsToImageOperator(Operator):
                     # 再检测渲染完成标志
                     page.wait_for_function('document.title === "RENDER_DONE"', timeout=10_000)
                     # 最后添加2秒保险延迟（针对复杂渲染场景）
-                    page.wait_for_timeout(2000)  # 等同于 time.sleep(2)
+                    # page.wait_for_timeout(2000)  # 等同于 time.sleep(2)
 
                     # 截图配置
                     chart_div = page.locator('#chart')
