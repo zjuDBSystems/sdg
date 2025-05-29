@@ -59,8 +59,12 @@ class Task:
             self.out_datasets[operator.__class__.__name__] = dataset
             end = time.time()
             cost = end - start
-            global_message_queue.put(EventResponse(event=EventType.REASONING, data=f'execute operator {operator.get_meta().name} done! cost: {cost}'))
+            global_message_queue.put(EventResponse(event=EventType.REASONING, data=f'算子 {operator.get_meta().name} 执行完成! 耗时: {cost:.2f}秒'))
+            global_message_queue.put(EventResponse(event=EventType.REASONING, data="数据质量评估"))
+            start = time.time()
             result = dataset.evaluate_image_code_quality()
-            global_message_queue.put(EventResponse(event=EventType.REASONING, data=f'operator {operator.get_meta().name} 数据质量评估完成!'))
-            global_message_queue.put(EventResponse(event=EventType.RESPONSE, data=json.dumps(result, indent=4, ensure_ascii=False)))
+            end = time.time()
+            cost = end - start
+            global_message_queue.put(EventResponse(event=EventType.REASONING, data=f"数据质量评估完成, 耗时: {cost:.2f}秒"))
+            global_message_queue.put(EventResponse(event=EventType.REASONING, data=json.dumps(result, indent=4, ensure_ascii=False)))
         self.final_dataset = dataset
