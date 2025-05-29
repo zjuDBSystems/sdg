@@ -5,8 +5,15 @@ from sse_starlette.sse import EventSourceResponse
 from dataclasses import dataclass
 from enum import Enum
 from datetime import datetime
+import logging
 
 global_message_queue = Queue()
+
+logging.basicConfig(
+    filename='poc.log',
+    level=logging.INFO,
+    format='%(message)s',
+)
 
 class EventType(Enum):
     REQUEST = "request"
@@ -37,6 +44,7 @@ async def event_generator():
             print("No message received, waiting...")
             await asyncio.sleep(1)
             continue
+        logging.info(f"time={event.time}, event={event.event.value}, data={event.data}")
         yield {
             "event": event.event.value,
             "data": event.data,
