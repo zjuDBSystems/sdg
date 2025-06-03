@@ -69,11 +69,11 @@ def run_echart_task():
             registry['SyntaxAmendOperator'](),
             # 配置项多样性
             registry['DiversityEnhanceOperator'](
-                api_key = "sk-dC9449cf83366aa25e16e59cf7fa08192a79497025fKY2m9"
+                api_key = "api_key"
             ),
             # 图像的echarts代码补全
             registry['ImgToEchartsOperator'](
-                api_key = "sk-dC9449cf83366aa25e16e59cf7fa08192a79497025fKY2m9"
+                api_key = "api_key"
             ),
             # echarts代码随机变异(生成新的突变代码，此步骤只生成代码，没有生成相应的图像)
             registry['EChartMutationOperator'](),
@@ -107,40 +107,54 @@ def data_evaluation():
     print(json.dumps(result, indent=4, ensure_ascii=False))
 
 def aug_process():
+    start_time = time.time()  # 记录开始时间
     negative_code_dir = Datadir('dirty-echart-code', DataType.CODE)
     negative_image_dir = Datadir('dirty-echart-image', DataType.IMAGE)
     negative_dataset = Dataset([negative_code_dir, negative_image_dir], 'dirty-echart.metadata','key_configurations.md')
     augmentation_task = Task([
-        # # 配置项修正
-        # registry['ConfigAmendOperator'](
-        #     api_key="api_key"
-        # ),
+        # 配置项修正
+        registry['ConfigAmendOperator'](
+            score_file = './per_scores.csv',
+        ),
         # 语法修正
         registry['SyntaxAmendOperator'](
-            api_key="api_key"
+            score_file = './per_scores.csv',
         ),
-        # # 配置项多样性
+        # registry['SyntaxAmendOperatorGPT'](
+        #     api_key = "api_key",
+        #     score_file = './per_scores.csv',
+        # ),
+        # 配置项多样性 1
         # registry['DiversityAmendOperator'](
-        #     api_key="api_key"
+        #     api_key = "api_key"
         # ),
+        # 配置项多样性 2
+        registry['DiversityEnhanceOperator'](
+            api_key = "api_key",
+            score_file = './per_scores.csv',
+        ),
         # 图像的echarts代码补全
-        # registry['ImgToEchartsOperator'](
-        #     api_key="api_key"
-        # ),
+        registry['ImgToEchartsOperator'](
+            api_key = "api_key"
+        ),
         # echarts代码随机变异(生成新的突变代码，此步骤只生成代码，没有生成相应的图像)
-        # registry['EChartMutationOperator'](),
+        registry['EChartMutationOperator'](),
         # echarts代码的图像补全
-        # registry['EchartsToImageOperator'](),
-        # 图像随机加噪
-        # registry['ImageRobustnessEnhancer'](),
+        registry['EchartsToImageOperator'](),
+        # 图像随机扰动
+        registry['ImageRobustnessEnhancer'](),
 
 
     ], negative_dataset)
     augmentation_task.run()
+    end_time = time.time()  # 记录结束时间
+    execution_time = end_time - start_time  # 计算执行时间
     new_dataset = augmentation_task.final_dataset
-    new_dataset.md_path = 'key_configurations.md'
+    print(f"数据集路径{new_dataset.dirs}")
+    print(f"数据集metadata路径{new_dataset.meta_path}")
     result = new_dataset.evaluate_image_code_quality()
     print(json.dumps(result, indent=4, ensure_ascii=False))
+    print(f"代码运行时间: {execution_time} 秒")
 
 if __name__ == '__main__':
     # run_echart_task()
