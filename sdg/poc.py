@@ -90,3 +90,60 @@ def run_echart_task():
     end = time.time()
     cost = end - start
     global_message_queue.put(EventResponse(event=EventType.RESPONSE, data="任务流程执行完成, 耗时: {:.2f}秒".format(cost)))
+
+    result = data_set.evaluate_image_code_quality()
+
+def data_evaluation():
+    negative_code_dir = Datadir('echart-code-sample-negative', DataType.CODE)
+    negative_image_dir = Datadir('echart-image-sample-negative', DataType.IMAGE)
+    negative_dataset = Dataset([negative_code_dir, negative_image_dir], 'echart-sample-negative.metadata','key_configurations.md')
+    result = negative_dataset.evaluate_image_code_quality()
+    print(json.dumps(result, indent=4, ensure_ascii=False))
+
+    positive_code_dir = Datadir('echart-code-sample-positive', DataType.CODE)
+    positive_image_dir = Datadir('echart-image-sample-positive', DataType.IMAGE)
+    positive_dataset = Dataset([positive_code_dir, positive_image_dir], 'echart-sample-positive.metadata','key_configurations.md')
+    result = positive_dataset.evaluate_image_code_quality()
+    print(json.dumps(result, indent=4, ensure_ascii=False))
+
+def aug_process():
+    negative_code_dir = Datadir('dirty-echart-code', DataType.CODE)
+    negative_image_dir = Datadir('dirty-echart-image', DataType.IMAGE)
+    negative_dataset = Dataset([negative_code_dir, negative_image_dir], 'dirty-echart.metadata','key_configurations.md')
+    augmentation_task = Task([
+        # # 配置项修正
+        # registry['ConfigAmendOperator'](
+        #     api_key="api_key"
+        # ),
+        # 语法修正
+        registry['SyntaxAmendOperator'](
+            api_key="api_key"
+        ),
+        # # 配置项多样性
+        # registry['DiversityAmendOperator'](
+        #     api_key="api_key"
+        # ),
+        # 图像的echarts代码补全
+        # registry['ImgToEchartsOperator'](
+        #     api_key="api_key"
+        # ),
+        # echarts代码随机变异(生成新的突变代码，此步骤只生成代码，没有生成相应的图像)
+        # registry['EChartMutationOperator'](),
+        # echarts代码的图像补全
+        # registry['EchartsToImageOperator'](),
+        # 图像随机加噪
+        # registry['ImageRobustnessEnhancer'](),
+
+
+    ], negative_dataset)
+    augmentation_task.run()
+    new_dataset = augmentation_task.final_dataset
+    new_dataset.md_path = 'key_configurations.md'
+    result = new_dataset.evaluate_image_code_quality()
+    print(json.dumps(result, indent=4, ensure_ascii=False))
+
+if __name__ == '__main__':
+    # run_echart_task()
+    # code_to_img()
+    # img_aug()
+    aug_process()

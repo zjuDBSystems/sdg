@@ -56,7 +56,7 @@ class EchartsToImageOperator(Operator):
 
                 poc_code_files.append((index, code_file_name))
 
-        success_files = self.generate_img_parallel(code_dir.data_path, poc_code_files, img_dir.data_path)
+        success_files = self.generate_imgs(code_dir.data_path, poc_code_files, img_dir.data_path)
 
         # modify csv file
         for file_index, img_file_name in success_files:
@@ -67,8 +67,7 @@ class EchartsToImageOperator(Operator):
         print(f"csv文件已更新，保存至{dataset.meta_path}")
 
     @staticmethod
-    def generate_img_parallel(code_dir, code_files, img_dir):
-
+    def generate_imgs(code_dir, code_files, img_dir):
         # 初始化线程安全的结果容器
         results = []
         results_lock = threading.Lock()
@@ -76,31 +75,30 @@ class EchartsToImageOperator(Operator):
         # 记录生成成功与失败的数量
         success_count= 0
 
-        def gen_single_copy(index, code_path, img_dir):
+        def gen_single(index, code_path, img_dir):
             nonlocal success_count
-            with open(code_path, "r", encoding='utf-8') as f:
-                js_code = f.read()
-            try: 
+            try:
+                with open(code_path, "r", encoding='utf-8') as f:
+                    js_code = f.read()
+                
                 js_code_dict = json.loads(js_code)
-            except Exception as e:
-                return False
-            js_code_dict['animation'] = False  # 禁用动画
-            js_code = json.dumps(js_code_dict, ensure_ascii=False)
+                js_code_dict['animation'] = False  # 禁用动画
+                js_code = json.dumps(js_code_dict, ensure_ascii=False)
 
-            if js_code.strip().startswith("{") and js_code.strip().endswith("}"):
-                js_code = "option = " + js_code
+                if js_code.strip().startswith("{") and js_code.strip().endswith("}"):
+                    js_code = "option = " + js_code
 
-            with sync_playwright() as p:
-                browser = p.chromium.launch(
-                    headless=True,
-                    args=[
-                        '--disable-web-security',  # 禁用同源策略
-                        '--ignore-certificate-errors'  # 忽略证书错误
-                    ]
-                )
-                page = browser.new_page()
+                with sync_playwright() as p:
+                    browser = p.chromium.launch(
+                        headless=True,
+                        args=[
+                            '--disable-web-security',  # 禁用同源策略
+                            '--ignore-certificate-errors'  # 忽略证书错误
+                        ]
+                    )
+                    page = browser.new_page()
 
-                try:
+                
                     # 加载页面内容
                     page.set_content('<div id="main" style="width:600px;height:400px;"></div>')
                     page.add_script_tag(url='https://cdn.jsdelivr.net/npm/echarts@5.6.0/dist/echarts.min.js')
@@ -127,11 +125,10 @@ class EchartsToImageOperator(Operator):
                         results.append((index, img_name))
                         success_count = success_count+1
                     return True
-                except Exception as e:
-                    return False
-                finally:
-                    browser.close()
 
+            except Exception as e:
+                return False
+        
         # 创建输出目录
         if not os.path.exists(img_dir):
             os.makedirs(img_dir)
@@ -142,12 +139,13 @@ class EchartsToImageOperator(Operator):
             poc_code_files.append((code_index, os.path.join(code_dir, f)))
 
         with ThreadPoolExecutor() as executor:
-            futures = [executor.submit(gen_single_copy, code_index, code_path, img_dir) for code_index, code_path in poc_code_files]
+            futures = [executor.submit(gen_single, code_index, code_path, img_dir) for code_index, code_path in poc_code_files]
             [future.result() for future in futures]
 
         print(f"共尝试生成{len(poc_code_files)}张图片，{success_count}张成功，{len(poc_code_files)-success_count}张失败")
         # 返回处理成功的图像信息
         return results
+
 
     @staticmethod
     def check_file_existence(file, file_array):
