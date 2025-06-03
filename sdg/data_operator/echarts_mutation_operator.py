@@ -83,22 +83,23 @@ class EChartMutationOperator(Operator):
                 echarts_config = self.mutate_echarts_option(echarts_config)
                 echarts_config = self.transform_echart_equal(echarts_config)
                 # echarts_config = self.mutate_non_core_items(echarts_config)
+
+                # Convert to JSON string and ensure normal display of Chinese characters
+                echarts_mutation_json = self.convert_to_json(echarts_config)
+
+                mutation_file_path = os.path.join(code_dir.data_path, "m_"+file_name)
+                # store json
+                with open(mutation_file_path, 'wb') as f:
+                    f.write(echarts_mutation_json.encode('utf-8'))
+                    # 变异的代码写入csv
+                    new_data = pd.DataFrame({"image": [""], "code": ["m_"+file_name], "type": [type_name[index]]})
+                    df = pd.concat([df, new_data], ignore_index=True)  
             except Exception as e:
                 # print(f"变异过程异常: {e}")
                 # 异常时至少保留参数变异结果
                 error_count = error_count+1
                 continue
 
-            # Convert to JSON string and ensure normal display of Chinese characters
-            echarts_mutation_json = self.convert_to_json(echarts_config)
-
-            mutation_file_path = os.path.join(code_dir.data_path, "m_"+file_name)
-            # store json
-            with open(mutation_file_path, 'wb') as f:
-                f.write(echarts_mutation_json.encode('utf-8'))
-                # 变异的代码写入csv
-                new_data = pd.DataFrame({"image": [""], "code": ["m_"+file_name], "type": [type_name[index]]})
-                df = pd.concat([df, new_data], ignore_index=True)  # 合并数据[1,6](@ref)
         
         # 保存新数据
         df.to_csv(dataset.meta_path, index=False)
@@ -113,11 +114,34 @@ class EChartMutationOperator(Operator):
         """
         以一定概率对数值进行加或减mutation_range的操作
         """
-        if isinstance(value, (int, float)) and random.random() < mutation_prob:
+        if isinstance(value, int) and random.random() < mutation_prob:
             factor = 1 + (random.uniform(-mutation_range, mutation_range))
             # print(factor)
-            return value * factor
+            return int(value * factor)
+        elif isinstance(value, float) and random.random() < mutation_prob:
+            factor = 1 + (random.uniform(-mutation_range, mutation_range))
+            # print(factor)
+            return round(value * factor,2)
         return value
+
+    @staticmethod
+    def mutate_percent(value, mutation_prob,mutation_range):
+        """
+        以一定概率对百分比进行加或减mutation_range的操作
+        """
+        try:
+            # 提取数值部分并转换为float
+            value = float(value[:-1])
+        except ValueError:
+            # raise ValueError("百分比数值部分必须为数字")
+            return value
+        
+        factor = 1 + (random.uniform(-mutation_range, mutation_range))
+        # print(factor)
+        new_value = int(value * factor)
+        
+        # 返回格式化后的字符串
+        return f"{new_value}%"
 
     '''
     Randomly adjust echart option (colors and size)
@@ -135,6 +159,11 @@ class EChartMutationOperator(Operator):
                         config[key] = random_hex_color()
                         # print("改变了颜色")
                         # print(config[key])
+                elif isinstance(value, str) and value.endswith('%'):
+                    # 尝试改变百分比
+                    # print(value)
+                    config[key] = self.mutate_percent(value, mutation_prob, mutation_range)
+                    # print(f'改变为{config[key]}')
                 elif isinstance(value, str) and key == 'color':
                     # 检查是否为十六进制颜色代码，是，则有一定几率修改
                     if random.random() < mutation_prob:
@@ -143,6 +172,9 @@ class EChartMutationOperator(Operator):
                         # print(config[key])
                 elif isinstance(value, int) and key == 'fontSize':
                     # print(f"改变字号为{value}")
+                    config[key] = self.mutate_value(value, mutation_prob, mutation_range)
+                elif isinstance(value, (int, float)) and key == 'value':
+                    # print(f"改变数值为{value}")
                     config[key] = self.mutate_value(value, mutation_prob, mutation_range)
                 elif isinstance(value, (dict, list)):
                     # 递归处理嵌套的字典或列表
