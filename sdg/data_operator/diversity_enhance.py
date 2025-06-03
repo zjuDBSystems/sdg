@@ -83,8 +83,13 @@ class DiversityEnhanceOperator(Operator):
             for index, new_code_data in enumerate(new_code_list):
                 new_code_file_name = f"d{index}_{code_file_name}"
                 new_code_path = os.path.join(code_dir.data_path,new_code_file_name)
+
+                start = new_code_data.find("{")
+                end = new_code_data.rfind("}")
+                json_text = new_code_data[start:end+1]
+
                 with open(new_code_path, 'wb') as f:
-                    f.write(new_code_data.encode('utf-8'))
+                    f.write(json_text.encode('utf-8'))
                 new_data = pd.DataFrame({"image":"", "code": [new_code_file_name], "type": [type]})
                 df = pd.concat([df, new_data], ignore_index=True)  # 合并数据
             # 保存新数据
@@ -127,7 +132,7 @@ class DiversityEnhanceOperator(Operator):
                 model="gpt-4o",
                 messages=[
                     # {"role": "system", "content": "你是一个熟悉 ECharts 的前端开发专家"},
-                    {"role": "user", "content": "以下的echarts配置json代码中的配置项多样性不够，请模仿给出的代码，在保持图表类型的前提下，为其增加合理的配置，给出四个新的echarts配置json代码，四个代码之间以“@@@”分割。请只输出json代码以及分隔符@@@，不需要描述与分析。"},
+                    {"role": "user", "content": "以下的echarts配置json代码中的配置项多样性不够，请模仿给出的代码，在保持图表类型的前提下，为其增加合理的配置，给出四个新的可运行的echarts配置json代码，四个代码之间以“@@@”分割。请只输出json代码以及分隔符@@@，不需要描述与分析。"},
                     {"role": "user", "content": code_data},
                 ],
             )
