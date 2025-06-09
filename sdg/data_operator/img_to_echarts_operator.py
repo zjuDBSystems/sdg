@@ -61,8 +61,10 @@ class ImgToEchartsOperator(Operator):
         cost["ti"] = 7.61
         # cpi time of one record
         input_token = 165
+        cost["intoken"] = input_token
         output_token = 340
-        cost["ci"] = round( (494+1534*4)*0.000018125 , 4)
+        cost["outtoken"] = output_token
+        cost["ci"] = round( (input_token+output_token*4)*0.000018125 , 4)
         # operator type
         cost["type"] = "LLM"
         return cost

@@ -57,8 +57,10 @@ class DiversityEnhanceOperator(Operator):
         cost["ti"] = 21.5
         # cpi time of one record
         input_token = 494
+        cost["intoken"] = input_token
         output_token = 1534
-        cost["ci"] = round( (494+1534*4)*0.000018125 , 4)
+        cost["outtoken"] = output_token
+        cost["ci"] = round( (input_token+output_token*4)*0.000018125 , 4)
         # operator type
         cost["type"] = "LLM"
         return cost
