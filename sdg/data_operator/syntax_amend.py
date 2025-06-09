@@ -1,7 +1,7 @@
 '''Operators for syntax amend.
 '''
 
-from typing import override
+from typing import override, Dict
 import os
 import pandas as pd
 from tqdm import tqdm
@@ -41,6 +41,20 @@ class SyntaxAmendOperator(Operator):
             description='Synmax amend.'
         )
     
+    def get_cost(self) -> Dict:
+        cost = {}
+        # operator name
+        cost["name"] = "SyntaxAmendOperator"
+        # records count
+        cost["ri"] = len(self.get_pending_files(self.score_file, 'syntax_score', 'code'))
+        # time of one record
+        cost["ti"] = 4.34
+        # cpi time of one record
+        cost["ci"] = 16.69
+        # operator type
+        cost["type"] = "CPU"
+        return cost
+
     @override
     def execute(self, dataset):
 

@@ -51,11 +51,11 @@ class SyntaxAmendOperatorGPT(Operator):
     def execute(self, dataset):
         
         # gpt-4o (github版)
-        # client = openai.OpenAI(
-        #     api_key = self.api_key,
-        #     # base_url = "https://models.inference.ai.azure.com"
-        #     base_url = settings.GPT_URL
-        # )
+        client = openai.OpenAI(
+            api_key = self.api_key,
+            # base_url = "https://models.inference.ai.azure.com"
+            base_url = settings.GPT_URL
+        )
 
         # 调用本地llm模型
         # llm = Llama(
@@ -82,11 +82,11 @@ class SyntaxAmendOperatorGPT(Operator):
         # pipeline = PIPELINE(model, MODEL_TYPE)
 
         # 加载qwen模型
-        llm = Llama(
-            model_path="./sdg/data_operator/model/qwen1_5-0_5b-chat-q4_k_m.gguf",
-            n_ctx=2048,  # 上下文窗口大小，适合小模型
-            n_threads=4  # 设置为你的 CPU 核心数
-        )
+        # llm = Llama(
+        #     model_path="./sdg/data_operator/model/qwen1_5-0_5b-chat-q4_k_m.gguf",
+        #     n_ctx=2048,  # 上下文窗口大小，适合小模型
+        #     n_threads=4  # 设置为你的 CPU 核心数
+        # )
 
         # files
         code_dir = [dir for dir in dataset.dirs if dir.data_type == DataType.CODE][0]
@@ -103,11 +103,11 @@ class SyntaxAmendOperatorGPT(Operator):
             with open(code_file_path, 'rb') as f:
                 code_data = f.read().decode('utf-8')
 
-            # new_code_data = self.call_gpt4o(client, code_data)
+            new_code_data = self.call_gpt4o(client, code_data)
             # new_code_data = self.fix_broken_syntax(code_data)
             # new_code_data = self.fix_by_llm(llm,code_data)
             # new_code_data = self.fix_by_rwkv(pipeline, code_data)
-            new_code_data = self.fix_by_llm_chat(llm, code_data)
+            # new_code_data = self.fix_by_llm_chat(llm, code_data)
 
             if (new_code_data):
                 print(f"成功修复{code_file_name}")

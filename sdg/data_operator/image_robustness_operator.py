@@ -71,7 +71,7 @@ class ImageRobustnessEnhancer(Operator):
         for index, img_name in enumerate(tqdm(img_files, desc="扰动进度")):
             if pd.isna(img_name):
                 continue
-            print(img_name)
+            # print(img_name)
             file_path = os.path.join(img_dir.data_path, img_name)
             with open(file_path, 'rb') as f:
                 img_data = f.read()

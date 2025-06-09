@@ -1,12 +1,13 @@
 '''Operators for diversity amend.
 '''
 
-from typing import override
+from typing import override, Dict
 import openai
 import os
 import pandas as pd
 import random
 import base64
+import tiktoken
 from ..config import settings
 
 from .operator import Meta, Operator, Field
@@ -18,6 +19,8 @@ class DiversityEnhanceOperator(Operator):
         self.api_key = kwargs.get('api_key',"")
         self.model = kwargs.get('model', "gpt-4o")
         self.score_file = kwargs.get('score_file', "./detailed_scores.csv")
+
+        self.token_encoder = tiktoken.encoding_for_model("gpt-4")  # 使用tiktoken进行token计数
 
     @classmethod
     @override
@@ -44,6 +47,26 @@ class DiversityEnhanceOperator(Operator):
             description='Diversity enhance.'
         )
     
+    def get_cost(self, dataset) -> Dict:
+        cost = {}
+        # operator name
+        cost["name"] = "DiversityxEnhanceOperator"
+        # records count
+        cost["ri"] = self.get_type_count(self.score_file) * 4
+        # time of one record
+        cost["ti"] = 21.5
+        # cpi time of one record
+        input_token = 494
+        output_token = 1534
+        cost["ci"] = round( (494+1534*4)*0.000018125 , 4)
+        # operator type
+        cost["type"] = "LLM"
+        return cost
+
+    def count_tokens(self, text):
+        """使用tiktoken计算文本的token数量"""
+        return len(self.token_encoder.encode(text))
+
     @override
     def execute(self, dataset):
         
@@ -125,20 +148,48 @@ class DiversityEnhanceOperator(Operator):
             .items()
         ]
         return result
+    
+    # 获取图表种类数
+    @staticmethod
+    def get_type_count(score_file):
+
+        df = pd.read_csv(score_file)
+        
+        # 筛选出 syntax_score == 100 的记录
+        filtered_df = df[df['syntax_score'] == 100]
+        
+        if filtered_df.empty:
+            return 0
+
+        field_name = 'type'
+        # 统计非空不同值数量
+        num_unique = df[field_name].dropna().nunique()
+
+        return num_unique
+
 
     def call_gpt4o (self, client, code_data):
+
+        message_content = "以下的echarts配置json代码中的配置项多样性不够，请模仿给出的代码，在保持图表类型的前提下，为其增加合理的配置，给出四个新的可运行的echarts配置json代码，四个代码之间以“@@@”分割。请只输出json代码以及分隔符@@@，不需要描述与分析。"
 
         response = client.chat.completions.create(
                 model="gpt-4o",
                 messages=[
                     # {"role": "system", "content": "你是一个熟悉 ECharts 的前端开发专家"},
-                    {"role": "user", "content": "以下的echarts配置json代码中的配置项多样性不够，请模仿给出的代码，在保持图表类型的前提下，为其增加合理的配置，给出四个新的可运行的echarts配置json代码，四个代码之间以“@@@”分割。请只输出json代码以及分隔符@@@，不需要描述与分析。"},
+                    {"role": "user", "content": message_content},
                     {"role": "user", "content": code_data},
                 ],
             )
             
+        # 计算输入token
+        input_tokens = self.count_tokens(message_content) + self.count_tokens(code_data)
+        print(f"输入token数{input_tokens}")
 
         response_text = response.choices[0].message.content
+        
+        # 计算输出token
+        output_tokens = self.count_tokens(response_text)
+        print(f"输出token数{output_tokens}")
         # print("收到的结果为：" + response_text)
         start = response_text.find("{")
         end = response_text.rfind("}")

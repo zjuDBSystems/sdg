@@ -3,7 +3,7 @@ import pandas as pd
 import os
 from playwright.sync_api import sync_playwright
 import json
-from typing import override
+from typing import override, Dict
 
 from .operator import Operator, Field, Meta
 from ..storage.dataset import DataType
@@ -34,6 +34,20 @@ class EchartsToImageOperator(Operator):
             name='EchartsToImageOperator',
             description='Generates images from echarts code.'
         )
+
+    def get_cost(self, dataset) -> Dict:
+        cost = {}
+        # operator name
+        cost["name"] = "EchartsToImageOperator"
+        # records count
+        cost["ri"] = self.get_record_count(dataset.meta_path)
+        # time of one record
+        cost["ti"] = 2.89
+        # cpi time of one record
+        cost["ci"] = 0.055
+        # operator type
+        cost["type"] = "CPU"
+        return cost
 
     @override
     def execute(self, dataset) -> None:
@@ -145,6 +159,21 @@ class EchartsToImageOperator(Operator):
         print(f"共尝试生成{len(poc_code_files)}张图片，{success_count}张成功，{len(poc_code_files)-success_count}张失败")
         # 返回处理成功的图像信息
         return results
+
+     # 获取缺少图像的数据的数量
+    @staticmethod
+    def get_record_count(score_file):
+
+        df = pd.read_csv(score_file)
+        
+        # 筛选出 有code数据 的记录中 没有图像数据 的记录
+        condition = (~df['code'].isna()) & (df['image'].isna())
+        filtered_df = df[condition]
+
+        # 获取数量
+        count = len(filtered_df)
+
+        return count
 
 
     @staticmethod
