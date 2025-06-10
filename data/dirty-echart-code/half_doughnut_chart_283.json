@@ -1,0 +1,72 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  ,
+  "legend": {
+    "show": true,
+    "top": "2%",
+    "left": "center",
+    "data": [
+      "定价策略",
+      "创新管理",
+      "客户关系管理",
+      "危机管理",
+      "竞争分析",
+      "企业社会责任",
+      "客户细分"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "28%",
+        "80%"
+      ],
+      "center": [
+        "44%",
+        "70%"
+      ],
+      "startAngle": 180,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 158,
+          "name": "定价策略"
+        },
+        {
+          "value": 857,
+          "name": "创新管理"
+        },
+        {
+          "value": 555,
+          "name": "客户关系管理"
+        },
+        {
+          "value": 728,
+          "name": "危机管理"
+        },
+        {
+          "value": 946,
+          "name": "竞争分析"
+        },
+        {
+          "value": 515,
+          "name": "企业社会责任"
+        },
+        {
+          "value": 234,
+          "name": "客户细分"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{b}: {d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

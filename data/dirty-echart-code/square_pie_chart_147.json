@@ -1,0 +1,61 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "4%",
+    "left": "center",
+    "data": [
+      "学校管理",
+      "科学普及",
+      "奖学金",
+      "学术研究"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From"
+      "奖学金",
+      "学术研究"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": "91%",
+      "center": [
+        "10%",
+        "64%"
+      ],
+      "startAngle": 97,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 318,
+          "name": "学校管理"
+        },
+        {
+          "value": 234,
+          "name": "科学普及"
+        },
+        {
+          "value": 820,
+          "name": "奖学金"
+        },
+        {
+          "value": 289,
+          "name": "学术研究"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

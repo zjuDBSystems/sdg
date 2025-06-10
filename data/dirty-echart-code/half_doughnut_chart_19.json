@@ -1,0 +1,72 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "1%",
+    "left": "center",
+    "data": [
+      "奖学金",
+      "教育资源",
+      "教育投资",
+      "科学普及",
+      "教育改革",
+      "教育评估",
+      "课程开发"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "54%",
+        "83%"
+      ],
+      "center": [
+        "60%",
+        "67%"
+      ],
+      "startAngle": 180,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 953,
+          "name": "奖学金"
+        },
+        {
+          "value": 834,
+          "name": "教育资源"
+        },
+        {
+          "value": 778,
+          "name": "教育投资"
+        },
+        {
+          "value": 194,
+          "name": "科学普及"
+        },
+        {
+          "value": 966,
+          "name": "教育改革"
+        },
+        {
+          "value": 634,
+          "name": "教育评估"
+        },
+        {
+          "value": 528,
+          "name": "课程开发"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

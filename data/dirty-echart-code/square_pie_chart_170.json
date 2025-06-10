@@ -1,0 +1,69 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "0%",
+    "left": "center",
+    "data": [
+      "电影",
+      "展览",
+      "短视频",
+      "艺术",
+      "电子竞技",
+      "直播",
+      "节日"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": "94%",
+      "center": [
+        "23%",
+        "67%"
+      ],
+      "startAngle": 90,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 320,
+          "name": "电影"
+        },
+        {
+          "value": 224,
+          "name": "展览"
+        },
+        {
+          "value": 389,
+          "name": "短视频"
+        },
+        {
+          "value": 135,
+          "name": "艺术"
+        },
+        {
+          "value": 425,
+          "name": "电子竞技"
+        },
+        {
+          "value": 879,
+          "name": "直播"
+        },
+        {
+          "value": 478,
+          "name": "节日"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "inside",
+        "formatter": "{b}: {d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

@@ -1,0 +1,71 @@
+{
+    "tooltip": {
+        "trigger": "item"
+    },
+    "legend": {
+        "show": true,
+        "top": "3%",
+        "left": "center",
+        "data": [
+            "继续教育",
+            "职业指导",
+            "技能提升",
+            "教育交流",
+            "教育政策",
+            "职业培训",
+            "实习"
+        ]
+    },
+    "series": [
+        {
+            "name": "Access From",
+            "type": "pie",
+            "radius": [
+                "29%",
+                "81%"
+            ],
+            "center": [
+                "59%",
+                "54%"
+            ],
+            "endAngle": 360,
+            "data": [
+                {
+                    "value": 196,
+                    "name": "继续教育"
+                },
+                {
+                    "value": 1030,
+                    "name": "职业指导"
+                },
+                {
+                    "value": 706,
+                    "name": "技能提升"
+                },
+                {
+                    "value": 915,
+                    "name": "教育交流"
+                },
+                {
+                    "value": 773,
+                    "name": "教育政策"
+                },
+                {
+                    "value": 832,
+                    "name": "职业培训"
+                },
+                {
+                    "value": 546,
+                    "name": "实习"
+                }
+            ],
+            "itemStyle": {},
+            "label": {
+                "show": true,
+                "position": "inside",
+                "formatter": "{d}%"
+            }
+        }
+    ],
+    "backgroundColor": "#fff"
+}

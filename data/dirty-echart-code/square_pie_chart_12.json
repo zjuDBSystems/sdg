@@ -1,0 +1,64 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "4%",
+    "left": "center",
+    "data": [
+      "教育公平",
+      "课程开发",
+      "教育投资",
+      "学校管理",
+      "职业培训",
+      "教师培训"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": "94%",
+      "center": [
+        "34%",
+        "78%"
+      ],
+      "startAngle": 90,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 313,
+          "name": "教育公平"
+        },
+        {
+          "value": 974,
+          "name": "课程开发"
+        },
+        {
+          "value": 658,
+          "name": "教育投资"
+        },
+        {
+          "value": 794,
+          "name": "学校管理"
+        },
+        {
+          "value": 705,
+          "name": "职业培训"
+        },
+        {
+          "value": 689,
+          "name": "教师培训"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{b}"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

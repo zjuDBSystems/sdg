@@ -1,0 +1,74 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "1%",
+    "left": "25%",
+    "data": [
+      "纪录片",
+      "动漫",
+      "电影",
+      "综艺节目",
+      "旅游",
+      "真人秀",
+      "直播",
+      "虚拟偶像"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": "94%",
+      "center": [
+        "27%",
+        "66%"
+      ],
+      "startAngle": 90,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 846,
+          "name": "纪录片"
+        },
+        {
+          "value": 275,
+          "name": "动漫"
+        },
+        {
+          "value": 393,
+          "name": "电影"
+        },
+        {
+          "value": 700,
+          "name": "综艺节目"
+        },
+        {
+          "value": 120,
+          "name": "旅游"
+        },
+        {
+          "value": 595,
+          "name": "真人秀"
+        },
+        {
+          "value": 796,
+          "name": "直播"
+        },
+        {
+          "value": 410,
+          "name": "虚拟偶像"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "inside",
+        "formatter": "{d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

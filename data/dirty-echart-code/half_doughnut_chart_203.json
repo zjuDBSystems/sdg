@@ -1,0 +1,62 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "0%",
+    "left": "center",
+    "data": [
+      "定价策略",
+      "团队建设",
+      "客户满意度",
+      "客户细分",
+      "企业文化"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "34%",
+        "66%"
+      ],
+      "center": [
+        "43%",
+        "51%"
+      ],
+      "startAngle": 180,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 677,
+          "name": "定价策略"
+        },
+        {
+          "value": 837,
+          "name": "团队建设"
+        },
+        {
+          "value": 118,
+          "name": "客户满意度"
+        },
+        {
+          "value": 1051,
+          "name": "客户细分"
+        },
+        {
+          "value": 227,
+          "name": "企业文化"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

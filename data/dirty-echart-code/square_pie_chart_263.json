@@ -1,0 +1,54 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "3%",
+    "left": "center",
+    "data": [
+      "公共关系",
+      "领导力",
+      "企业文化",
+      "投资策略"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": "92%",
+      "center": [
+        "28%",
+        "83%"
+      ],
+      "startAngle": 90,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 1097,
+          "name": "公共关系"
+        },
+        {
+          "value": 829,
+          "name": "领导力"
+        },
+        {
+          "value": 203,
+          "name": "企业文化"
+        },
+        {
+          "value": 558,
+          "name": "投资策略"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

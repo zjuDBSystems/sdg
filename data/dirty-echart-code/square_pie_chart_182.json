@@ -1,0 +1,59 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "2%",
+    "left": "center",
+    "data": [
+      "教育交流",
+      "实习",
+      "职业指导",
+      "特殊教育",
+      "教学方法"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": "86%",
+      "center": [
+        "47%",
+        "63%"
+      ],
+      "startAngle": 97,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 821,
+          "name": "教育交流"
+        },
+        {
+          "value": 503,
+          "name": "实习"
+        },
+        {
+          "value": 661,
+          "name": "职业指导"
+        },
+        {
+          "value": 619,
+          "name": "特殊教育"
+        },
+        {
+          "value": 672,
+          "name": "教学方法"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

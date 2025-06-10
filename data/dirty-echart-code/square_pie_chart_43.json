@@ -1,0 +1,58 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "2%",
+    "left": "center",
+    "data": [
+      "客户满意度",
+      "企业社会责任",
+      "客户细分",
+      "领导力",
+      "团队建设",
+      "供应链管理",
+      "投资策略"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": "88%",
+      "center": [
+        "50%",
+        "74%"
+      ],
+      "startAngle": 90,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 992,
+          "name": "客户满意度"
+        },
+        {
+          "value": 652,
+          "name": "企业社会责任"
+        },
+        {
+          "value": 750,
+          "name": "客户细分"
+        },
+        {
+          "value": 555,
+          "name": "领导力"
+        },
+        {
+          "value": 518
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{b}"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

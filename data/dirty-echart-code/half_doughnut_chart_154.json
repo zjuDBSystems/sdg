@@ -1,0 +1,31 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  ,},
+  "legend": {
+    "show": true,
+    "top": "4%",
+    "left": "48%",
+    "data": [
+      "忠诚度计划",
+      "市场分析",
+      "危机管理",
+      "风险管理",
+      "绿色营销",
+      "客户满意度",
+      "渠道管理",
+      "客户关系管理"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "51%",
+        "78%"
+      ],
+      "center": [
+        "59%"
+  "backgroundColor": "#fff"
+}

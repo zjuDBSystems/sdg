@@ -1,0 +1,70 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "4%",
+    "left": "center"
+      "职业培训",
+      "教育公平",
+      "职业指导",
+      "奖学金",
+      "特殊教育"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": "88%",
+      "center": [
+        "14%",
+        "70%"
+      ],
+      "startAngle": 97,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 554,
+          "name": "课程开发"
+        },
+        {
+          "value": 756,
+          "name": "科学普及"
+        },
+        {
+          "value": 1063,
+          "name": "教育评估"
+        },
+        {
+          "value": 161,
+          "name": 
+        },
+        {
+          "value": 540,
+          "name": "教育公平"
+        },
+        {
+          "value": 744,
+          "name": "职业指导"
+        },
+        {
+          "value": 296,
+          "name": "奖学金"
+        },
+        {
+          "value": 584,
+          "name": "特殊教育"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": false,
+        "position": "outside",
+        "formatter": "{b}"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

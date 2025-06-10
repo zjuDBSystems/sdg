@@ -1,0 +1,67 @@
+{
+    "tooltip": {
+        "trigger": "item"
+    },
+    "legend": {
+        "show": true,
+        "top": "3%",
+        "left": "center",
+        "data": [
+            "渠道管理",
+            "绩效管理",
+            "企业社会责任",
+            "公共关系",
+            "品牌定位",
+            "竞争分析"
+        ]
+    },
+    "series": [
+        {
+            "name": "Access From",
+            "type": "a",
+            "radius": [
+                "26%",
+                "81%"
+            ],
+            "center": [
+                "60%",
+                "55%"
+            ],
+            "startAngle": 180,
+            "endAngle": 360,
+            "data": [
+                {
+                    "value": 1014,
+                    "name": "渠道管理"
+                },
+                {
+                    "value": 623,
+                    "name": "绩效管理"
+                },
+                {
+                    "value": 200,
+                    "name": "企业社会责任"
+                },
+                {
+                    "value": 963,
+                    "name": "公共关系"
+                },
+                {
+                    "value": 232,
+                    "name": "品牌定位"
+                },
+                {
+                    "value": 313,
+                    "name": "竞争分析"
+                }
+            ],
+            "itemStyle": {},
+            "label": {
+                "show": true,
+                "position": "outside",
+                "formatter": "{b}: {d}%"
+            }
+        }
+    ],
+    "backgroundColor": "#fff"
+}

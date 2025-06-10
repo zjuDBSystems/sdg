@@ -1,0 +1,72 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  ,
+  "legend": {
+    "show": true,
+    "top": "0%",
+    "left": "center",
+    "data": [
+      "人工智能",
+      "元宇宙",
+      "生物识别",
+      "增强现实",
+      "智能音箱",
+      "自动驾驶",
+      "机器学习"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "35%",
+        "65%"
+      ],
+      "center": [
+        "50%",
+        "54%"
+      ],
+      "startAngle": 180,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 450,
+          "name": "人工智能"
+        },
+        {
+          "value": 991,
+          "name": "元宇宙"
+        },
+        {
+          "value": 989,
+          "name": 
+        },
+        {
+          "value": 169,
+          "name": "增强现实"
+        },
+        {
+          "value": 546,
+          "name": "智能音箱"
+        },
+        {
+          "value": 405,
+          "name": "自动驾驶"
+        },
+        {
+          "value": 953,
+          "name": "机器学习"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "inside",
+        "formatter": "{b}: {d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

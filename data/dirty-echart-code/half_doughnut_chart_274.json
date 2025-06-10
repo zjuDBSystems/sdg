@@ -1,0 +1,72 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "4%",
+    "left": "center",
+    "data": [
+      "直播",
+      "体育",
+      "网络红人",
+      "餐饮",
+      "播客",
+      "游戏",
+      "音乐"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "51%",
+        "77%"
+      ],
+      "center": [
+        "60%",
+        "57%"
+      ],
+      "startAngle": 180,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 873,
+          "name": "直播"
+        },
+        {
+          "value": 108,
+          "name": "体育"
+        },
+        {
+          "value": 140,
+          "name": "网络红人"
+        },
+        {
+          "value": 721,
+          "name": "餐饮"
+        },
+        {
+          "value": 1003,
+          "name": "播客"
+        },
+        {
+          "value": 914,
+          "name": "游戏"
+        },
+        {
+          "value": 940,
+          "name": "音乐"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{b}: {d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

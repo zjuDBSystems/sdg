@@ -1,0 +1,64 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "0%",
+    "left": "20%",
+    "data": [
+      "成人教育",
+      "教育政策",
+      "职业指导",
+      "留学",
+      "教育投资",
+      "教学方法"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": "85%",
+      "center": [
+        "28%",
+        "78%"
+      ],
+      "startAngle": 90,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 406,
+          "name": "成人教育"
+        },
+        {
+          "value": 387,
+          "name": "教育政策"
+        },
+        {
+          "value": 692,
+          "name": "职业指导"
+        },
+        {
+          "value": 406,
+          "name": "留学"
+        },
+        {
+          "value": 311,
+          "name": "教育投资"
+        },
+        {
+          "value": 501,
+          "name": "教学方法"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": false,
+        "position": "inside",
+        "formatter": "{b}"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

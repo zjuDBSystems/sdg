@@ -1,0 +1,62 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": false,
+    "top": "0%",
+    "left": "center",
+    "data": [
+      "虚拟现实",
+      "非同质化代币",
+      "聊天机器人",
+      "云计算",
+      "网络安全"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "44%",
+        "81%"
+      ],
+      "center": [
+        "59%",
+        "65%"
+      ],
+      "startAngle": 180,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 981,
+          "name": "虚拟现实"
+        },
+        {
+          "value": 145,
+          "name": "非同质化代币"
+        },
+        {
+          "value": 1068,
+          "name": "聊天机器人"
+        },
+        {
+          "value": 946,
+          "name": "云计算"
+        },
+        {
+          "value": 700,
+          "name": "网络安全"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "inside",
+        "formatter": "{b}: {d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

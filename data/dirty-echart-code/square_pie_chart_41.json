@@ -1,0 +1,47 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "4%",
+    "left": "center",
+    "data": [
+      "变革管理",
+      "企业社会责任",
+      "并购",
+      "品牌定位",
+      "风险管理"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": "85%",
+      "center": [
+        "35%",
+        "61%"
+      ],
+      "startAngle": 90,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 712,
+          "name": "变革管理"
+        },
+        {
+          "value": 172,
+          "name": "企业社会责任"
+        },
+        {
+          "value": 547
+      "label": {
+        "show": true,
+        "position": "inside",
+        "formatter": "{d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

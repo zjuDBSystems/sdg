@@ -1,0 +1,54 @@
+{
+    "tooltip": {
+        "trigger": "item"
+    },
+    "legend": {
+        "show": true,
+        "top": "1%",
+        "left": "center",
+        "data": [
+            "综艺节目",
+            "短视频",
+            "社交活动",
+            "餐饮"
+        ]
+    },
+    "series": [
+        {
+            "name": "Access From",
+            "type": 37,
+            "radius": "90%",
+            "center": [
+                "26%",
+                "65%"
+            ],
+            "startAngle": 90,
+            "endAngle": 360,
+            "data": [
+                {
+                    "value": 426,
+                    "name": "综艺节目"
+                },
+                {
+                    "value": 425,
+                    "name": "短视频"
+                },
+                {
+                    "value": 764,
+                    "name": "社交活动"
+                },
+                {
+                    "value": 1019,
+                    "name": "餐饮"
+                }
+            ],
+            "itemStyle": {},
+            "label": {
+                "show": true,
+                "position": "outside",
+                "formatter": "{d}%"
+            }
+        }
+    ],
+    "backgroundColor": "#fff"
+}

@@ -1,0 +1,64 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "4%",
+    "left": "center",
+    "data": [
+      "博物馆",
+      "展览",
+      "餐饮",
+      "直播",
+      "电视",
+      "演出"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": "89%",
+      "center": [
+        "16%",
+        "62%"
+      ],
+      "startAngle": 90,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 357,
+          "name": "博物馆"
+        },
+        {
+          "value": 957,
+          "name": "展览"
+        },
+        {
+          "value": 1007,
+          "name": "餐饮"
+        },
+        {
+          "value": 722,
+          "name": "直播"
+        },
+        {
+          "value": 141,
+          "name": "电视"
+        },
+        {
+          "value": 828,
+          "name": "演出"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": false,
+        "position": "outside",
+        "formatter": "{b}: {d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

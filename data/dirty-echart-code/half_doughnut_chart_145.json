@@ -1,0 +1,62 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": false,
+    "top": "3%",
+    "left": "center",
+    "data": [
+      "机器学习",
+      "深度学习",
+      "增强现实",
+      "网络安全",
+      "非同质化代币"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "39%",
+        "66%"
+      ],
+      "center": [
+        "51%",
+        "77%"
+      ],
+      "startAngle": 180,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 180,
+          "name": "机器学习"
+        },
+        {
+          "value": 287,
+          "name": "深度学习"
+        },
+        {
+          "value": 139,
+          "name": "增强现实"
+        },
+        {
+          "value": 390,
+          "name": "网络安全"
+        },
+        {
+          "value": 410,
+          "name": "非同质化代币"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "inside",
+        "formatter": "{b}"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

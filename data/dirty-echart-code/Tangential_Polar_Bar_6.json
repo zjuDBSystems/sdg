@@ -1,0 +1,49 @@
+{
+  "polar": {
+    "radius": [
+      36,
+      "90%"
+    ]
+  },
+  "angleAxis": {
+    "max": 5,
+    "startAngle": 50
+  },
+  "radiusAxis": {
+    "type": "category",
+    "data": [
+      "职业培训",
+      "课程开发",
+      "学术研究",
+      "教育合作"
+    ],
+    "axisLabel": {
+      "show": true,
+      "interval": 0,
+      "rotate": 0,
+      "margin": 8
+    }
+  },
+  "tooltip": {
+    "trigger": "item"
+  },
+  "series": {
+    "type": "bar",
+    "data": [
+      2.1,
+      0.9,
+      3.7,
+      2.6
+    ],
+    "color": [
+      "#FFD700"
+    ],
+    "coordinateSystem": "polar",
+    "label": {
+      "show": true,
+      "position": "middle",
+      "formatter": "{c}"
+    }
+  },
+  "backgroundColor": "#fff"
+}

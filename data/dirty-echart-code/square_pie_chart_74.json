@@ -1,0 +1,54 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "1%",
+    "left": "36%",
+    "data": [
+      "教育公平",
+      "职业培训",
+      "教育合作",
+      "教学方法"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": "93%",
+      "center": [
+        "34%",
+        "77%"
+      ],
+      "startAngle": 90,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 479,
+          "name": "教育公平"
+        },
+        {
+          "value": 788,
+          "name": "职业培训"
+        },
+        {
+          "value": 897,
+          "name": "教育合作"
+        },
+        {
+          "value": 419,
+          "name": "教学方法"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{b}"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

@@ -1,0 +1,67 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "2%",
+    "left": "center",
+    "data": [
+      "在线教育",
+      "实习",
+      "教师培训",
+      "语言学习",
+      "学校管理",
+      "职业培训"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "26%",
+        "85%"
+      ],
+      "center": [
+        "45%",
+        "66%"
+      ],
+      "startAngle": 180,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 661,
+          "name": "在线教育"
+        },
+        {
+          "value": 1079,
+          "name": "实习"
+        },
+        {
+          "value": 552,
+          "name": "教师培训"
+        },
+        {
+          "value": 1040,
+          "name": "语言学习"
+        },
+        {
+          "value": 184,
+          "name": "学校管理"
+        },
+        {
+          "value": 547,
+          "name": "职业培训"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

@@ -1,0 +1,62 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "3%",
+    "left": "center",
+    "data": [
+      "短视频",
+      "视频博客",
+      "旅游",
+      "演出",
+      "游戏"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "51%",
+        "79%"
+      ],
+      "center": [
+        "54%",
+        "80%"
+      ],
+      "startAngle": 180,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 145,
+          "name": "短视频"
+        },
+        {
+          "value": 709,
+          "name": "视频博客"
+        },
+        {
+          "value": 913,
+          "name": "旅游"
+        },
+        {
+          "value": 457,
+          "name": "演出"
+        },
+        {
+          "value": 327,
+          "name": "游戏"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{b}: {d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

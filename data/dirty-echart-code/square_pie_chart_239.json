@@ -1,0 +1,64 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "3%",
+    "left": "center",
+    "data": [
+      "内容营销",
+      "视频广告",
+      "网络研讨会",
+      "活动营销",
+      "应用内广告",
+      "电视广告"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": "92%",
+      "center": [
+        "48%",
+        "60%"
+      ],
+      "startAngle": 90,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 692,
+          "name": "内容营销"
+        },
+        {
+          "value": 916,
+          "name": "视频广告"
+        },
+        {
+          "value": 1092,
+          "name": "网络研讨会"
+        },
+        {
+          "value": 698,
+          "name": "活动营销"
+        },
+        {
+          "value": 429,
+          "name": "应用内广告"
+        },
+        {
+          "value": 475,
+          "name": "电视广告"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{b}"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

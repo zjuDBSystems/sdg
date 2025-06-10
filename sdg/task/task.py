@@ -8,10 +8,12 @@ Typical usage example:
 """
 
 from uuid import UUID, uuid4
+import time
+import json
 
-from .task_type import TaskType
 from ..storage.dataset import Dataset, copy_dataset
 from ..data_operator.operator import Operator
+from ..event import global_message_queue, EventType, EventResponse
 
 
 class Task:
@@ -30,10 +32,9 @@ class Task:
 
     """
 
-    def __init__(self, operators: list[Operator], task_type: TaskType,
+    def __init__(self, operators: list[Operator],
                  in_dataset: Dataset):
-        """Initializes a task with the given operators, task type, data type
-        and input dataset.
+        """Initializes a task with the given operators and input dataset.
 
         Args:
             operators: A list of operators to be applied to the dataset.
@@ -41,7 +42,6 @@ class Task:
             in_dataset: The initial dataset to be processed.
         """
         self.operators: list[Operator] = operators
-        self.task_type: TaskType = task_type
         self.in_dataset: Dataset = in_dataset
         self.id: UUID = uuid4()
         self.out_datasets: dict[str, Dataset] = {}
@@ -51,8 +51,20 @@ class Task:
         """Executes the task by applying the operators to the input dataset."""
         dataset: Dataset = self.in_dataset
         for operator in self.operators:
-            dataset = copy_dataset(dataset, str(uuid4()))
+            global_message_queue.put(EventResponse(event=EventType.REASONING, data=f'执行制备算子 {operator.get_meta().name}'))
+            start = time.time()
+            dataset = copy_dataset(dataset)
             print(dataset.dirs[0].data_path)
             operator.execute(dataset)
             self.out_datasets[operator.__class__.__name__] = dataset
+            end = time.time()
+            cost = end - start
+            global_message_queue.put(EventResponse(event=EventType.REASONING, data=f'算子 {operator.get_meta().name} 执行完成! 耗时: {cost:.2f}秒'))
+            global_message_queue.put(EventResponse(event=EventType.REASONING, data="数据质量评估"))
+            start = time.time()
+            result = dataset.evaluate_image_code_quality()
+            end = time.time()
+            cost = end - start
+            global_message_queue.put(EventResponse(event=EventType.REASONING, data=f"数据质量评估完成, 耗时: {cost:.2f}秒"))
+            global_message_queue.put(EventResponse(event=EventType.REASONING, data=json.dumps(result, indent=4, ensure_ascii=False)))
         self.final_dataset = dataset

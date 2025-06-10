@@ -1,0 +1,52 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": false,
+    "top": "1%",
+    "left": "center",
+    "data": [
+      "电视广告",
+      "搜索引擎营销",
+      "展示广告"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "37%",
+        "64%"
+      ],
+      "center": [
+        "47%",
+        "79%"
+      ],
+      "startAngle": 180,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 1008,
+          "name": "电视广告"
+        },
+        {
+          "value": 579,
+          "name": "搜索引擎营销"
+        },
+        {
+          "value": 782,
+          "name": "展示广告"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{b}"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

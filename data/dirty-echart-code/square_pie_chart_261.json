@@ -1,0 +1,54 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "4%",
+    "left": "center",
+    "data": [
+      "供应链管理",
+      "客户细分",
+      "风险管理",
+      "渠道管理"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": "90%",
+      "center": [
+        "43%",
+        "63%"
+      ],
+      "startAngle": 90,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 342,
+          "name": "供应链管理"
+        },
+        {
+          "value": 1001,
+          "name": "客户细分"
+        },
+        {
+          "value": 1058,
+          "name": "风险管理"
+        },
+        {
+          "value": 548,
+          "name": "渠道管理"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{b}: {d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

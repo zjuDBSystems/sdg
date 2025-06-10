@@ -1,0 +1,69 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "4%",
+    "left": "center",
+    "data": [
+      "教师培训",
+      "教育技术",
+      "在线教育",
+      "教育交流",
+      "成人教育",
+      "语言学习",
+      "奖学金"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": "87%",
+      "center": [
+        "49%",
+        "64%"
+      ],
+      "startAngle": 90,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 442,
+          "name": "教师培训"
+        },
+        {
+          "value": 978,
+          "name": "教育技术"
+        },
+        {
+          "value": 1037,
+          "name": "在线教育"
+        },
+        {
+          "value": 305,
+          "name": "教育交流"
+        },
+        {
+          "value": 994,
+          "name": "成人教育"
+        },
+        {
+          "value": 618,
+          "name": "语言学习"
+        },
+        {
+          "value": 651,
+          "name": "奖学金"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "inside",
+        "formatter": "{d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

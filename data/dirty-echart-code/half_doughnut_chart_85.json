@@ -1,0 +1,51 @@
+{
+    "tooltip": {
+        "trigger": "item"
+    },
+    "legend": {
+        "show": true,
+        "top": "0%",
+        "left": "35%",
+        "data": [
+            "增强现实",
+            "智能音箱",
+            "物联网"
+        ]
+    },
+    "series": [
+        {
+            "name": "Access From",
+            "radius": [
+                "47%",
+                "79%"
+            ],
+            "center": [
+                "52%",
+                "56%"
+            ],
+            "startAngle": 180,
+            "endAngle": 360,
+            "data": [
+                {
+                    "value": 424,
+                    "name": "增强现实"
+                },
+                {
+                    "value": 911,
+                    "name": "智能音箱"
+                },
+                {
+                    "value": 958,
+                    "name": "物联网"
+                }
+            ],
+            "itemStyle": {},
+            "label": {
+                "show": true,
+                "position": "inside",
+                "formatter": "{d}%"
+            }
+        }
+    ],
+    "backgroundColor": "#fff"
+}

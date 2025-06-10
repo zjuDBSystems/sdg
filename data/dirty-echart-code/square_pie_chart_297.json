@@ -1,0 +1,69 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": false,
+    "top": "2%",
+    "left": "center",
+    "data": [
+      "综艺节目",
+      "真人秀",
+      "庆典",
+      "动漫",
+      "出版",
+      "电视",
+      "音乐"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": "93%",
+      "center": [
+        "37%",
+        "90%"
+      ],
+      "startAngle": 96,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 376,
+          "name": "综艺节目"
+        },
+        {
+          "value": 455,
+          "name": "真人秀"
+        },
+        {
+          "value": 556,
+          "name": "庆典"
+        },
+        {
+          "value": 178,
+          "name": "动漫"
+        },
+        {
+          "value": 487,
+          "name": "出版"
+        },
+        {
+          "value": 896,
+          "name": "电视"
+        },
+        {
+          "value": 762,
+          "name": "音乐"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{b}"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

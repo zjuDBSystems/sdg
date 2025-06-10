@@ -1,0 +1,52 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  ,
+  "legend": {
+    "show": true,
+    "top": "1%",
+    "left": "center",
+    "data": [
+      "职业指导",
+      "教育创新",
+      "教育交流"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "53%",
+        "83%"
+      ],
+      "center": [
+        "40%",
+        "74%"
+      ],
+      "startAngle": 180,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 260,
+          "name": "职业指导"
+        },
+        {
+          "value": 984,
+          "name": "教育创新"
+        },
+        {
+          "value": 199,
+          "name": "教育交流"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": false,
+        "position": "outside",
+        "formatter": "{b}"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

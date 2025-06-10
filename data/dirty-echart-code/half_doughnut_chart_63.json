@@ -1,0 +1,67 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  ,
+  "legend": {
+    "show": true,
+    "top": "3%",
+    "left": "center",
+    "data": [
+      "危机管理",
+      "变革管理",
+      "并购",
+      "领导力",
+      "企业社会责任",
+      "绿色营销"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "32%",
+        "85%"
+      ],
+      "center": [
+        "57%",
+        "76%"
+      ],
+      "startAngle": 180,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 788,
+          "name": "危机管理"
+        },
+        {
+          "value": 313,
+          "name": "变革管理"
+        },
+        {
+          "value": 576,
+          "name": "并购"
+        },
+        {
+          "value": 561,
+          "name": "领导力"
+        },
+        {
+          "value": 125,
+          "name": "企业社会责任"
+        },
+        {
+          "value": 165,
+          "name": "绿色营销"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{b}"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

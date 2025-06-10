@@ -1,0 +1,74 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": false,
+    "top": "4%",
+    "left": "center",
+    "data": [
+      "综艺节目",
+      "社交活动",
+      "旅游",
+      "音乐",
+      "出版",
+      "展览",
+      "视频博客",
+      "电子竞技"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": "89%",
+      "center": [
+        "38%",
+        "81%"
+      ],
+      "startAngle": 90,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 1005,
+          "name": "综艺节目"
+        },
+        {
+          "value": 1062,
+          "name": "社交活动"
+        },
+        {
+          "value": 182,
+          "name": "旅游"
+        },
+        {
+          "value": 784,
+          "name": "音乐"
+        },
+        {
+          "value": 772,
+          "name": "出版"
+        },
+        {
+          "value": 972,
+          "name": "展览"
+        },
+        {
+          "value": 1097,
+          "name": "视频博客"
+        },
+        {
+          "value": 668,
+          "name": "电子竞技"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{b}: {d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

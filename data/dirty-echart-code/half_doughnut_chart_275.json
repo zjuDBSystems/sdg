@@ -1,0 +1,57 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "3%",
+    "left": "35%",
+    "data": [
+      "网络红人",
+      "派对",
+      "电影",
+      "广播"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "30%",
+        "76%"
+      ],
+      "center": [
+        "58%",
+        "77%"
+      ],
+      "startAngle": 136,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 276,
+          "name": "网络红人"
+        },
+        {
+          "value": 563,
+          "name": "派对"
+        },
+        {
+          "value": 999,
+          "name": "电影"
+        },
+        {
+          "value": 178,
+          "name": "广播"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

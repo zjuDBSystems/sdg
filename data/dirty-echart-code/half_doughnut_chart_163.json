@@ -1,0 +1,48 @@
+{
+    "tooltip": {
+        "trigger": "item"
+    },
+    "legend": {
+        "show": false,
+        "top": "4%",
+        "left": "center",
+        "data": [
+            "博物馆",
+            "社交活动",
+            "广播"
+        ]
+    },
+    "series": [
+        {
+            "name": "Access From",
+            "radius": "92%",
+            "center": [
+                "47%",
+                "63%"
+            ],
+            "startAngle": 82,
+            "endAngle": 360,
+            "data": [
+                {
+                    "value": 112,
+                    "name": "博物馆"
+                },
+                {
+                    "value": 1079,
+                    "name": "社交活动"
+                },
+                {
+                    "value": 597,
+                    "name": "广播"
+                }
+            ],
+            "itemStyle": {},
+            "label": {
+                "show": true,
+                "position": "inside",
+                "formatter": "{b}: {d}%"
+            }
+        }
+    ],
+    "backgroundColor": "#fff"
+}

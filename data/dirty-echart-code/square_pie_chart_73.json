@@ -1,0 +1,64 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "3%",
+    "left": "30%",
+    "data": [
+      "客户满意度",
+      "并购",
+      "客户关系管理",
+      "供应链管理",
+      "风险管理",
+      "客户细分"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": "90%",
+      "center": [
+        "46%",
+        "78%"
+      ],
+      "startAngle": 90,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 574,
+          "name": "客户满意度"
+        },
+        {
+          "value": 333,
+          "name": "并购"
+        },
+        {
+          "value": 179,
+          "name": "客户关系管理"
+        },
+        {
+          "value": 596,
+          "name": "供应链管理"
+        },
+        {
+          "value": 264,
+          "name": "风险管理"
+        },
+        {
+          "value": 1047,
+          "name": "客户细分"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

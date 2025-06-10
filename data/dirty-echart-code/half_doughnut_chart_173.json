@@ -1,0 +1,57 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "3%",
+    "left": "center",
+    "data": [
+      "户外广告牌",
+      "联盟广告",
+      "展示广告",
+      "其他"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "53%",
+        "82%"
+      ],
+      "center": [
+        "49%",
+        "51%"
+      ],
+      "startAngle": 180,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 1087,
+          "name": "户外广告牌"
+        },
+        {
+          "value": 497,
+          "name": "联盟广告"
+        },
+        {
+          "value": 352,
+          "name": "展示广告"
+        },
+        {
+          "value": 745,
+          "name": "其他"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{b}"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

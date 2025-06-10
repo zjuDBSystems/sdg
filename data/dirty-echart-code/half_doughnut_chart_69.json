@@ -1,0 +1,57 @@
+{
+    "tooltip": {
+        "trigger": "item"
+    },
+    "legend": {
+        "show": true,
+        "top": "0%",
+        "left": "33%",
+        "data": [
+            "客户关系管理",
+            "创新管理",
+            "供应链管理",
+            "竞争分析"
+        ]
+    },
+    "series": [
+        {
+            "name": "Access From",
+            "type": "pie",
+            "radius": [
+                "30%",
+                "69%"
+            ],
+            "center": [
+                "43%",
+                "72%"
+            ],
+            "startAngle": 180,
+            "endAngle": true,
+            "data": [
+                {
+                    "value": 899,
+                    "name": "客户关系管理"
+                },
+                {
+                    "value": 171,
+                    "name": "创新管理"
+                },
+                {
+                    "value": 773,
+                    "name": "供应链管理"
+                },
+                {
+                    "value": 369,
+                    "name": "竞争分析"
+                }
+            ],
+            "itemStyle": {},
+            "label": {
+                "show": true,
+                "position": "inside",
+                "formatter": "{d}%"
+            }
+        }
+    ],
+    "backgroundColor": "#fff"
+}

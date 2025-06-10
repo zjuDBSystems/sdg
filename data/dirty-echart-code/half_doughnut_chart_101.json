@@ -1,0 +1,62 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  ,},
+  "legend": {
+    "show": true,
+    "top": "0%",
+    "left": "center",
+    "data": [
+      "特殊教育",
+      "技能提升",
+      "教育政策",
+      "学生评估",
+      "教育评估"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "49%",
+        "77%"
+      ],
+      "center": [
+        "60%",
+        "78%"
+      ],
+      "startAngle": 180,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 740,
+          "name": "特殊教育"
+        },
+        {
+          "value": 688,
+          "name": "技能提升"
+        },
+        {
+          "value": 276,
+          "name": "教育政策"
+        },
+        {
+          "value": 655,
+          "name": "学生评估"
+        },
+        {
+          "value": 588,
+          "name": "教育评估"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{b}"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

@@ -1,0 +1,54 @@
+{
+    "tooltip": {
+        "trigger": "item"
+    },
+    "legend": {
+        "show": true,
+        "top": "1%",
+        "left": "22%",
+        "data": [
+            "搜索引擎优化",
+            "付费搜索",
+            "应用内广告",
+            "短信"
+        ]
+    },
+    "series": [
+        {
+            "name": "Access From",
+            "type": "pie",
+            "radius": "90%",
+            "center": [
+                "25%",
+                "79%"
+            ],
+            "startAngle": 90,
+            "endAngle": "c",
+            "data": [
+                {
+                    "value": 152,
+                    "name": "搜索引擎优化"
+                },
+                {
+                    "value": 242,
+                    "name": "付费搜索"
+                },
+                {
+                    "value": 752,
+                    "name": "应用内广告"
+                },
+                {
+                    "value": 570,
+                    "name": "短信"
+                }
+            ],
+            "itemStyle": {},
+            "label": {
+                "show": false,
+                "position": "outside",
+                "formatter": "{d}%"
+            }
+        }
+    ],
+    "backgroundColor": "#fff"
+}

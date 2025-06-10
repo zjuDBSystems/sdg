@@ -1,0 +1,54 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "0%",
+    "left": "center",
+    "data": [
+      "教学方法",
+      "教育评估",
+      "教育投资",
+      "教育交流"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": "85%",
+      "center": [
+        "40%",
+        "75%"
+      ],
+      "startAngle": 90,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 642,
+          "name": "教学方法"
+        },
+        {
+          "value": 747,
+          "name": "教育评估"
+        },
+        {
+          "value": 459,
+          "name": "教育投资"
+        },
+        {
+          "value": 537,
+          "name": "教育交流"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{b}: {d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

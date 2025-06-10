@@ -1,0 +1,47 @@
+{
+  "polar": {
+    "radius": [
+      32,
+      "79%"
+    ]
+  },
+  "angleAxis": {
+    "max": 3,
+    "startAngle": 78
+  },
+  "radiusAxis": {
+    "type": "category",
+    "data": [
+      "旅游",
+      "虚拟偶像",
+      "音乐"
+    ],
+    "axisLabel": {
+      "show": true,
+      "interval": 0,
+      "rotate": 0,
+      "margin": 8
+    }
+  },
+  "tooltip": {
+    "trigger": "item"
+  },
+  "series": {
+    "type": "bar",
+    "data": [
+      1.9,
+      0.9,
+      2.7
+    ],
+    "color": [
+      "#FF6347"
+    ],
+    "coordinateSystem": "polar",
+    "label": {
+      "show": true,
+      "position": "middle",
+      "formatter": "{c}"
+    }
+  },
+  "backgroundColor": "#fff"
+}

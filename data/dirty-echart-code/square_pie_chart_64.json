@@ -1,0 +1,59 @@
+{
+    "tooltip": {
+        "trigger": "item"
+    },
+    "legend": {
+        "show": false,
+        "top": "3%",
+        "left": "center",
+        "data": [
+            "付费搜索",
+            "展示广告",
+            "平面广告",
+            "短信",
+            "电视广告"
+        ]
+    },
+    "series": [
+        {
+            "name": "Access From",
+            "type": "pie",
+            "radius": "89%",
+            "center": [
+                "15%",
+                "81%"
+            ],
+            "startAngle": 90,
+            "endAngle": true,
+            "data": [
+                {
+                    "value": 982,
+                    "name": "付费搜索"
+                },
+                {
+                    "value": 225,
+                    "name": "展示广告"
+                },
+                {
+                    "value": 162,
+                    "name": "平面广告"
+                },
+                {
+                    "value": 727,
+                    "name": "短信"
+                },
+                {
+                    "value": 788,
+                    "name": "电视广告"
+                }
+            ],
+            "itemStyle": {},
+            "label": {
+                "show": true,
+                "position": "outside",
+                "formatter": "{b}"
+            }
+        }
+    ],
+    "backgroundColor": "#fff"
+}

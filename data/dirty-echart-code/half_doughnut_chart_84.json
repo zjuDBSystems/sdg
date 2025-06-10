@@ -1,0 +1,57 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "4%",
+    "left": "center",
+    "data": [
+      "教育公平",
+      "教师培训",
+      "学术研究",
+      "继续教育"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "49%",
+        "74%"
+      ],
+      "center": [
+        "54%",
+        "75%"
+      ],
+      "startAngle": 180,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 385,
+          "name": "教育公平"
+        },
+        {
+          "value": 312,
+          "name": "教师培训"
+        },
+        {
+          "value": 984,
+          "name": "学术研究"
+        },
+        {
+          "value": 911,
+          "name": "继续教育"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": false,
+        "position": "inside",
+        "formatter": "{d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

@@ -1,0 +1,19 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "2%",
+    "left": "center",
+    "data": [
+      "网络研讨会",
+      "推荐",
+      "应用内广告"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From"
+  "backgroundColor": "#fff"
+}

@@ -1,0 +1,57 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "2%",
+    "left": "center",
+    "data": [
+      "游击营销",
+      "病毒营销",
+      "短信",
+      "网络研讨会"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": [
+        "41%",
+        "74%"
+      ],
+      "center": [
+        "47%",
+        "74%"
+      ],
+      "startAngle": 146,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 318,
+          "name": "游击营销"
+        }},
+        {
+          "value": 447,
+          "name": "病毒营销"
+        },
+        {
+          "value": 456,
+          "name": "短信"
+        },
+        {
+          "value": 478,
+          "name": "网络研讨会"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "inside",
+        "formatter": "{b}"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

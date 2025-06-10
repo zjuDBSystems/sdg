@@ -1,0 +1,74 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "0%",
+    "left": "center",
+    "data": [
+      "短视频",
+      "真人秀",
+      "旅游",
+      "时尚",
+      "博物馆",
+      "电影",
+      "纪录片",
+      "动漫"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": "95%",
+      "center": [
+        "22%",
+        "69%"
+      ],
+      "startAngle": 97,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 1084,
+          "name": "短视频"
+        },
+        {
+          "value": 450,
+          "name": "真人秀"
+        },
+        {
+          "value": 472,
+          "name": "旅游"
+        },
+        {
+          "value": 675,
+          "name": "时尚"
+        },
+        {
+          "value": 401,
+          "name": "博物馆"
+        },
+        {
+          "value": 691,
+          "name": "电影"
+        },
+        {
+          "value": 951,
+          "name": "纪录片"
+        },
+        {
+          "value": 548,
+          "name": "动漫"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "outside",
+        "formatter": "{b}"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}

@@ -1,0 +1,74 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "legend": {
+    "show": true,
+    "top": "2%",
+    "left": "center",
+    "data": [
+      "语音助手",
+      "网络安全",
+      "元宇宙",
+      "可穿戴技术",
+      "深度学习",
+      "非同质化代币",
+      "数据分析",
+      "物联网"
+    ]
+  },
+  "series": [
+    {
+      "name": "Access From",
+      "type": "pie",
+      "radius": "90%",
+      "center": [
+        "38%",
+        "77%"
+      ],
+      "startAngle": 90,
+      "endAngle": 360,
+      "data": [
+        {
+          "value": 428,
+          "name": "语音助手"
+        },
+        {
+          "value": 828,
+          "name": "网络安全"
+        },
+        {
+          "value": 801,
+          "name": "元宇宙"
+        },
+        {
+          "value": 910,
+          "name": "可穿戴技术"
+        },
+        {
+          "value": 311,
+          "name": "深度学习"
+        },
+        {
+          "value": 230,
+          "name": "非同质化代币"
+        },
+        {
+          "value": 980,
+          "name": "数据分析"
+        },
+        {
+          "value": 893,
+          "name": "物联网"
+        }
+      ],
+      "itemStyle": {},
+      "label": {
+        "show": true,
+        "position": "inside",
+        "formatter": "{d}%"
+      }
+    }
+  ],
+  "backgroundColor": "#fff"
+}
