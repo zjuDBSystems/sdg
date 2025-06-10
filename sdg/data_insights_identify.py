@@ -11,12 +11,17 @@ def get_llm_analysis(client, code_quality_analysis, max_retries=5):
         try:
             # 构造提示词
             prompt = f"""### **任务描述**
-你将收到一份代码数据集的质量评估报告。该报告包含 **9个质量评估维度**，每个维度都有一个分数（范围为 1-100），用于衡量数据集在该维度上的质量表现。所有维度的分数越高，表示该维度的质量越好。
+你将收到一份代码数据集的质量评估报告。该报告包含 **9个质量评估维度**，每个维度都有一个分数（Score0，范围为 1-100），用于衡量数据集在该维度上的质量表现。对于每一个维度，Score越高，表示该维度的质量越好。
 
-你的任务是根据这些维度的分数，分析它们对整体数据质量的影响程度，并返回一个 Python 字典。字典中应包括这 9 个维度（9个维度为字典的key），每个key对应的value是这个维度的整体得分。整体得分需要体现质量得分，并且综合反映这个维度在所有维度的表现情况。
+你的任务是根据这些维度的分数，分析它们对整体数据质量的影响程度，这个影响程度也是一个分数（Score1，范围为 1-100）。Score1和Score0相反，Score1越高，表示这个维度表现越差，越是当前数据的缺点。（所以Score1和Score0一定程度成反比）。Score1需要综合考虑Score0和维度重要性。
 
-这里我们定义，整体得分受到维度本身和该维度质量分数的影响，质量分数越低约影响整体质量，但需要同时考虑维度本身，可能有的维度哪怕分数低，影响也不是特别大，而有的维度哪怕分数没那么低，影响也很大。
+维度越重要，Score1越高；Score0越高，Score1越低。
 
+比如，数据量的Score1为40，这是一个比较低的分数，而数据量又是一个很重要的指标，所以我们的Score1会给出90.
+
+你需要返回一个 Python 字典。字典中应包括这 9 个维度（9个维度为字典的key），每个key对应的value是这个维度的Score1。
+
+请注意，Score0需要综合考虑Score1和维度重要性。Score0越高表示这个维度越有可能成为重大缺点。
 ---
 
 ### **输入说明**
@@ -83,15 +88,15 @@ def get_llm_analysis(client, code_quality_analysis, max_retries=5):
 
 ```python
 {{
-"语法检测": 87,
-"缺失率": 95,
-"配置项完整检测": 74,
-"图像与渲染截图的匹配度": 79,
-"图表类型均衡性": 70,
-"配置项多样性": 85,
-"代码重复": 65,
-"图像重复": 68,
-"数据量": 84
+"语法检测": 30,
+"缺失率": 55,
+"配置项完整检测": 60,
+"图像与渲染截图的匹配度": 40,
+"图表类型均衡性": 30,
+"配置项多样性": 29,
+"代码重复": 80,
+"图像重复": 79,
+"数据量": 40
 }}
 ```
 
@@ -325,7 +330,7 @@ def sort_metrics(client, code_quality_analysis, llm_weight):
     # print(metric_score_map)
 
     for string, dict_weight in metric_score_map.items():
-        total_weights[string] += dict_weight * (1-llm_weight)
+        total_weights[string] += (dict_weight * 100) * (1-llm_weight)
     # print(total_weights)
 
     sorted_strings = sorted(total_weights.keys(), key=lambda x: total_weights[x], reverse=True)
@@ -336,7 +341,7 @@ def sort_metrics(client, code_quality_analysis, llm_weight):
 
 
 if __name__ == "__main__":
-    client = OpenAI(api_key="your-api-key", base_url="https://api.deepseek.com")
+    client = OpenAI(api_key="sk-3955d8823efd4f2483897446b91a7ffb", base_url="https://api.deepseek.com")
     # 使用示例
     sample_scores = {
         '语法检测': 84.53, '配置项完整检测': 93.74, '图像与渲染截图的匹配度': 82.6, '缺失率': 75.0, '图表类型均衡性': 66.65, '配置项多样性': 44,
