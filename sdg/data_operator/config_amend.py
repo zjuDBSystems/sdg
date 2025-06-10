@@ -1,7 +1,7 @@
 '''Operators for syntax amend.
 '''
 
-from typing import override
+from typing import override, Dict
 import openai
 import os
 import pandas as pd
@@ -40,6 +40,21 @@ class ConfigAmendOperator(Operator):
             description='Config amend.'
         )
     
+    def get_cost(self, dataset) -> Dict:
+        cost = {}
+        # operator name
+        cost["name"] = "ConfigAmendOperator"
+        # records count
+        poc_files = self.get_pending_files(self.score_file, 'configuration_complete_score', 'code')
+        cost["ri"] = len(poc_files)
+        # time of one record
+        cost["ti"] = 0.0031
+        # cpi time of one record
+        cost["ci"] = 0.0019
+        # operator type
+        cost["type"] = "CPU"
+        return cost
+
     @override
     def execute(self, dataset):
         
@@ -48,7 +63,7 @@ class ConfigAmendOperator(Operator):
         code_dir = [dir for dir in dataset.dirs if dir.data_type == DataType.CODE][0]
         # code_files = ['sqaure_pie_chart_2.json','sqaure_pie_chart_3.json']
         poc_files = self.get_pending_files(self.score_file, 'configuration_complete_score', 'code')
-        
+        print(f'修复的记录数为{len(poc_files)}')
 
         for index, (code_file_name,chart_type) in enumerate(poc_files):
             
@@ -88,7 +103,7 @@ class ConfigAmendOperator(Operator):
 
     def fix_config(self, coda_data, chart_type):
 
-        print(f"开始修复的图表类型为{chart_type}")
+        # print(f"开始修复的图表类型为{chart_type}")
 
         # 转为dict
         data_dict = json.loads(coda_data)

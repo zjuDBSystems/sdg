@@ -1,6 +1,6 @@
 import random
 from PIL import Image, ImageDraw, ImageFont
-from typing import override
+from typing import override, Dict
 import io
 import pandas as pd
 import os
@@ -58,6 +58,20 @@ class ImageRobustnessEnhancer(Operator):
             description='Enhances the robustness of images by adding random interference elements and text descriptions.'
         )
 
+    def get_cost(self, dataset) -> Dict:
+        cost = {}
+        # operator name
+        cost["name"] = "ImageRobustnessEnhancer"
+        # records count
+        cost["ri"] = self.get_pending_files(dataset.meta_path, "image")
+        # time of one record
+        cost["ti"] = 0.096
+        # cpi time of one record
+        cost["ci"] = 0.095
+        # operator type
+        cost["type"] = "CPU"
+        return cost
+
     @override
     def execute(self, dataset) -> None:
 
@@ -68,10 +82,12 @@ class ImageRobustnessEnhancer(Operator):
         code_files = df[DataType.CODE.value].tolist()
         type_name = df["type"].tolist()
 
+        # self.get_cost(dataset)
+
         for index, img_name in enumerate(tqdm(img_files, desc="扰动进度")):
             if pd.isna(img_name):
                 continue
-            print(img_name)
+            # print(img_name)
             file_path = os.path.join(img_dir.data_path, img_name)
             with open(file_path, 'rb') as f:
                 img_data = f.read()
@@ -202,3 +218,15 @@ class ImageRobustnessEnhancer(Operator):
     #     y = random.randint(0, 50)
     #     draw.text((x, y), text, font=font, fill=(0, 0, 0))
     #     return new_img
+
+    @staticmethod
+    def get_pending_files(csv_path, file_type):
+        # 读取 CSV 文件
+        df = pd.read_csv(csv_path)
+
+        # 统计image字段的不同值数量
+        column_name = file_type 
+        value_counts = df[column_name].nunique()
+
+        print(f"待处理的image数量为{value_counts}")
+        return value_counts

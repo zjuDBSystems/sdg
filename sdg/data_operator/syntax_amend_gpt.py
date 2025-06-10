@@ -1,7 +1,7 @@
 '''Operators for syntax amend.
 '''
 
-from typing import override
+from typing import override, Dict
 import openai
 import os
 import pandas as pd
@@ -9,6 +9,7 @@ import json5
 import json
 from tqdm import tqdm
 from llama_cpp import Llama
+import tiktoken
 from ..config import settings
 
 from .operator import Meta, Operator, Field
@@ -20,6 +21,12 @@ class SyntaxAmendOperatorGPT(Operator):
         self.api_key = kwargs.get('api_key',"")
         self.model = kwargs.get('model', "gpt-4o")
         self.score_file = kwargs.get('score_file', "./detailed_scores.csv")
+
+        self.token_encoder = tiktoken.encoding_for_model("gpt-4")  # 使用tiktoken进行token计数
+        self.input_token_count = 0
+        self.output_token_count = 0
+        self.error_count = 0
+        
 
     @classmethod
     @override
@@ -43,19 +50,37 @@ class SyntaxAmendOperatorGPT(Operator):
     @override
     def get_meta(cls) -> Meta:
         return Meta(
-            name='SyntaxAmendOperator',
+            name='SyntaxAmendOperatorGPT',
             description='Synmax amend.'
         )
     
+    def get_cost(self, dataset) -> Dict:
+        cost = {}
+        # operator name
+        cost["name"] = "SyntaxAmendOperatorGPT"
+        # records count
+        cost["ri"] = len(self.get_pending_files(self.score_file, 'syntax_score', 'code'))
+        # time of one record
+        cost["ti"] = 5.54
+        # cpi time of one record
+        input_token = 387
+        cost["intoken"] = input_token
+        output_token = 310
+        cost["outtoken"] = output_token
+        cost["ci"] = round( (input_token+output_token*4)*0.000018125 , 4)
+        # operator type
+        cost["type"] = "LLM"
+        return cost
+
     @override
     def execute(self, dataset):
         
         # gpt-4o (github版)
-        # client = openai.OpenAI(
-        #     api_key = self.api_key,
-        #     # base_url = "https://models.inference.ai.azure.com"
-        #     base_url = settings.GPT_URL
-        # )
+        client = openai.OpenAI(
+            api_key = self.api_key,
+            # base_url = "https://models.inference.ai.azure.com"
+            base_url = settings.GPT_URL
+        )
 
         # 调用本地llm模型
         # llm = Llama(
@@ -82,11 +107,11 @@ class SyntaxAmendOperatorGPT(Operator):
         # pipeline = PIPELINE(model, MODEL_TYPE)
 
         # 加载qwen模型
-        llm = Llama(
-            model_path="./sdg/data_operator/model/qwen1_5-0_5b-chat-q4_k_m.gguf",
-            n_ctx=2048,  # 上下文窗口大小，适合小模型
-            n_threads=4  # 设置为你的 CPU 核心数
-        )
+        # llm = Llama(
+        #     model_path="./sdg/data_operator/model/qwen1_5-0_5b-chat-q4_k_m.gguf",
+        #     n_ctx=2048,  # 上下文窗口大小，适合小模型
+        #     n_threads=4  # 设置为你的 CPU 核心数
+        # )
 
         # files
         code_dir = [dir for dir in dataset.dirs if dir.data_type == DataType.CODE][0]
@@ -102,12 +127,16 @@ class SyntaxAmendOperatorGPT(Operator):
 
             with open(code_file_path, 'rb') as f:
                 code_data = f.read().decode('utf-8')
-
-            # new_code_data = self.call_gpt4o(client, code_data)
+            try:
+                new_code_data = self.call_gpt4o(client, code_data)
+            except Exception as e:
+                print(f"调用gpt时报错{e}")
+                self.error_count += 1
+                continue
             # new_code_data = self.fix_broken_syntax(code_data)
             # new_code_data = self.fix_by_llm(llm,code_data)
             # new_code_data = self.fix_by_rwkv(pipeline, code_data)
-            new_code_data = self.fix_by_llm_chat(llm, code_data)
+            # new_code_data = self.fix_by_llm_chat(llm, code_data)
 
             if (new_code_data):
                 print(f"成功修复{code_file_name}")
@@ -115,7 +144,10 @@ class SyntaxAmendOperatorGPT(Operator):
                     f.write(new_code_data.encode('utf-8'))
             else:
                 print(f"{code_file_name}未修复")
-                
+        
+        print(f"输入token总数{self.input_token_count}")
+        print(f"输出token总数{self.output_token_count}")
+        
     
     @staticmethod
     def fix_by_rwkv(pipeline, bad_json):
@@ -172,22 +204,39 @@ class SyntaxAmendOperatorGPT(Operator):
         end = response_text.rfind("}")
         return response_text[start:end+1]
 
+    def count_tokens(self, text):
+        """使用tiktoken计算文本的token数量"""
+        return len(self.token_encoder.encode(text))
+
+
     def call_gpt4o (self, client, code_data):
+
+        message_content = "以下的echarts配置json代码无法编译成功，可能是语法存在错误，请对该json文件进行检测和修正。请只输出json代码，不需要描述与分析。"
 
         response = client.chat.completions.create(
             model="gpt-4o",
             messages=[
                 # {"role": "system", "content": "你是一个熟悉 ECharts 的前端开发专家"},
-                {"role": "user", "content": "以下的echarts配置json代码无法编译成功，可能是语法存在错误，请对该json文件进行检测和修正。请只输出json代码，不需要描述与分析。"},
+                {"role": "user", "content": message_content},
                 {"role": "user", "content": code_data}
             ]
         )
 
+        # 计算输入token
+        input_tokens = self.count_tokens(message_content) + self.count_tokens(code_data)
+        print(f"输入token数{input_tokens}")
+        self.input_token_count += input_tokens
+
         response_text = response.choices[0].message.content
-        print("收到的结果为：" + response_text)
+
+        # 计算输出token
+        output_tokens = self.count_tokens(response_text)
+        print(f"输出token数{output_tokens}")
+        self.output_token_count += output_tokens
+        # print("收到的结果为：" + response_text)
         start = response_text.find("{")
         end = response_text.rfind("}")
-        return response_text[start:end+1]
+        json_text = response_text[start:end+1]
 
         return json_text
     
