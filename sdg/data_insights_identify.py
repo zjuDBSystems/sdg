@@ -11,96 +11,73 @@ def get_llm_analysis(client, code_quality_analysis, max_retries=5):
         try:
             # 构造提示词
             prompt = f"""### **任务描述**
-你将收到一份代码数据集的质量评估报告。该报告包含 **9个质量评估维度**，每个维度都有一个分数（Score0，范围为 1-100），用于衡量数据集在该维度上的质量表现。对于每一个维度，Score越高，表示该维度的质量越好。
+你将收到一份代码数据集的质量评估报告。该报告包含 **9个质量评估维度**，每个维度都有一个分数（Score0，范围为 1-100），用于衡量数据集在该维度上的质量表现。对于每一个维度，Score0越高，表示该维度的质量越好。
 
-你的任务是根据这些维度的分数，分析它们对整体数据质量的影响程度，这个影响程度也是一个分数（Score1，范围为 1-100）。Score1和Score0相反，Score1越高，表示这个维度表现越差，越是当前数据的缺点。（所以Score1和Score0一定程度成反比）。Score1需要综合考虑Score0和维度重要性。
+你的任务是根据这些 Score0 得分，生成每个维度的 Score1，Score1 表示这个维度成为“靶点”的可能性。Score1 越高，表示这个维度越有可能是靶点。
 
-维度越重要，Score1越高；Score0越高，Score1越低。
+### **定义：什么是靶点？**
+靶点是指当前数据集中质量表现最差、最需要优先改进的维度。
 
-比如，数据量的Score1为40，这是一个比较低的分数，而数据量又是一个很重要的指标，所以我们的Score1会给出90.
+### **规则：如何计算 Score1？**
+1. **Score1 与 Score0 成线性反比关系**：
+   - Score1 = (100 - Score0) × 维度重要性系数
+   - Score0 越高 → Score1 越低
 
+2. **维度重要性系数如下（必须严格遵守）**：
+```python
+{{
+"数据量": 1.5,
+"代码重复": 1.4,
+"图像重复": 1.0,
+"配置项完整检测": 1.3,
+"图像与渲染截图的匹配度": 1.1,
+"配置项多样性": 1.0,
+"图表类型均衡性": 0.9,
+"语法检测": 0.8,
+"缺失率": 0.7
+}}
+```
+- 举例：两个维度的 Score0 相同，但一个重要性更高，则其 Score1 更高。
+
+3. **最终 Score1 四舍五入取整数**。
+
+### **输出格式**
 你需要返回一个 Python 字典。字典中应包括这 9 个维度（9个维度为字典的key），每个key对应的value是这个维度的Score1。
 
-请注意，Score0需要综合考虑Score1和维度重要性。Score0越高表示这个维度越有可能成为重大缺点。
----
-
-### **输入说明**
-输入是一个包含 9 个维度及其对应分数的字典，格式如下：
-
+### **输入示例**
 ```python
 {{
 "语法检测": 85,
-"缺失率": 92,
-"配置项完整检测": 78,
-"图像与渲染截图的匹配度": 88,
+"缺失率": 90,
+"配置项完整检测": 70,
+"图像与渲染截图的匹配度": 70,
 "图表类型均衡性": 75,
-"配置项多样性": 93,
-"代码重复": 68,
-"图像重复": 72,
-"数据量": 89
+"配置项多样性": 73,
+"代码重复": 60,
+"图像重复": 55,
+"数据量": 43
 }}
 ```
 
----
-
-### **任务要求**
-1. **分析维度重要性**：
-- 根据每个维度的分数，结合其对整体数据质量的影响程度，判断哪些维度更重要。
-
-2. **输出格式**：
-- 返回一个 Python 字典，字典中包含 9 个维度名称，和他们的整体得分。
-- 输出必须严格遵循以下格式：
-
+### **输出示例**
 ```python
 {{
-"语法检测": 87,
-"缺失率": 95,
-"配置项完整检测": 74,
-"图像与渲染截图的匹配度": 79,
-"图表类型均衡性": 70,
-"配置项多样性": 85,
-"代码重复": 65,
-"图像重复": 68,
-"数据量": 84
+"语法检测": 12,   # (100 - 85) × 0.8 = 12
+"缺失率": 10.5 ≈ 11, # (100 - 90) × 0.7 = 7 → 示例中为15，可能因旧逻辑不同
+"配置项完整检测": 39, # (100 - 70) × 1.3 = 39
+"图像与渲染截图的匹配度": 33, # (100 - 70) × 1.1 = 33
+"图表类型均衡性": 22.5 ≈ 23, # (100 - 75) × 0.9 = 22.5
+"配置项多样性": 27, # (100 - 73) × 1.0 = 27
+"代码重复": 40, # (100 - 60) × 1.4 = 40
+"图像重复": 45, # (100 - 55) × 1.0 = 45
+"数据量": 85.5 ≈ 86 # (100 - 43) × 1.5 = 85.5
 }}
 ```
-
----
-
-### **示例**
-假设输入如下：
-
-```python
-{{
-"语法检测": 85,
-"缺失率": 92,
-"配置项完整检测": 78,
-"图像与渲染截图的匹配度": 88,
-"图表类型均衡性": 75,
-"配置项多样性": 93,
-"代码重复": 68,
-"图像重复": 72,
-"数据量": 89
-}}
-```
-
-经过分析后，输出应为：
-
-```python
-{{
-"语法检测": 30,
-"缺失率": 55,
-"配置项完整检测": 60,
-"图像与渲染截图的匹配度": 40,
-"图表类型均衡性": 30,
-"配置项多样性": 29,
-"代码重复": 80,
-"图像重复": 79,
-"数据量": 40
-}}
-```
+> 注意：输出中的 Score1 必须严格按照上述公式计算得出。
 
 ### **你的任务**
+请根据以上规则，对给定的 Score0 计算出每个维度的 Score1，并返回一个 Python 字典
+
 {json.dumps(code_quality_analysis, indent=4, ensure_ascii=False)}
 """
             # 调用 API 获取响应
@@ -110,22 +87,23 @@ def get_llm_analysis(client, code_quality_analysis, max_retries=5):
                     {"role": "system", "content": "You are a helpful assistant"},
                     {"role": "user", "content": prompt},
                 ],
-                stream=False
+                stream=False,
+                temperature=0.0
             )
 
 
             # 提取模型返回的内容
             order = response.choices[0].message.content
 
-            print("LLM 的整体维度得分：")
-            print(order)
+            # print("LLM 的整体维度得分：")
+            # print(order)
 
             # 使用正则表达式提取 JSON 格式内容
             pattern = r'```python(.*?)```'
             match = re.findall(pattern, order, re.DOTALL)
             if match:
                 # 解析 JSON 数据
-                return json.loads(match[0].strip())
+                return json.loads(match[-1].strip())
             else:
                 raise ValueError("Response does not contain valid JSON block.")
 
@@ -162,7 +140,7 @@ def generate_detailed_analysis(client, code_quality_analysis, sorted_metrics, ma
 ---
 
 ### **输入说明**
-输入是一个包含 10 个维度及其对应分数的字典，格式如下：
+输入是一个包含 9 个维度及其对应分数的字典，格式如下：
 
 ```python
 {{
@@ -207,22 +185,23 @@ def generate_detailed_analysis(client, code_quality_analysis, sorted_metrics, ma
                     {"role": "system", "content": "You are a helpful assistant"},
                     {"role": "user", "content": prompt},
                 ],
-                stream=False
+                stream=False,
+                temperature=0.0
             )
 
 
             # 提取模型返回的内容
             order = response.choices[0].message.content
 
-            print("LLM 的靶点解释：")
-            print(order)
+            # print("LLM 的靶点解释：")
+            # print(order)
 
             # 使用正则表达式提取 JSON 格式内容
             pattern = r'```python(.*?)```'
             match = re.findall(pattern, order, re.DOTALL)
             if match:
                 # 解析 JSON 数据
-                return json.loads(match[0].strip())
+                return json.loads(match[-1].strip())
             else:
                 raise ValueError("Response does not contain valid JSON block.")
 
@@ -327,6 +306,7 @@ def sort_metrics(client, code_quality_analysis, llm_weight):
 
     # 创建指标-得分映射
     metric_score_map = {metric: score for metric, score in zip(all_metrics, nn_scores)}
+    # print("神经网络预测")
     # print(metric_score_map)
 
     for string, dict_weight in metric_score_map.items():
@@ -341,7 +321,7 @@ def sort_metrics(client, code_quality_analysis, llm_weight):
 
 
 if __name__ == "__main__":
-    client = OpenAI(api_key="sk-3955d8823efd4f2483897446b91a7ffb", base_url="https://api.deepseek.com")
+    client = OpenAI(api_key="sk-your-api-key", base_url="https://api.deepseek.com")
     # 使用示例
     sample_scores = {
         '语法检测': 84.53, '配置项完整检测': 93.74, '图像与渲染截图的匹配度': 82.6, '缺失率': 75.0, '图表类型均衡性': 66.65, '配置项多样性': 44,
@@ -351,6 +331,7 @@ if __name__ == "__main__":
     sorted_metrics, sorted_total_weights = sort_metrics(client=client, code_quality_analysis=sample_scores, llm_weight=0.7)
     print("最终靶点排序")
     print(sorted_metrics)
+    print(sorted_total_weights)
     analysis = generate_detailed_analysis(client, code_quality_analysis=sample_scores, sorted_metrics=sorted_metrics)
     print("最终分析")
     print(analysis)
