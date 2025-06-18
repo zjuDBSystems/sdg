@@ -10,8 +10,8 @@ import base64
 import tiktoken
 import pandas as pd
 from tqdm import tqdm
-from ..config import settings
 
+from ..config import settings
 from .operator import Meta, Operator, Field
 from ..storage.dataset import DataType
 from ..task.task_type import TaskType

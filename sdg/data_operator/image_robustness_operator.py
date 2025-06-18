@@ -4,7 +4,6 @@ from typing import override, Dict
 import io
 import pandas as pd
 import os
-import shutil
 from tqdm import tqdm
 
 from .operator import Meta, Operator, Field

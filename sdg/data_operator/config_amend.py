@@ -2,11 +2,9 @@
 '''
 
 from typing import override, Dict
-import openai
 import os
 import pandas as pd
 import json
-from ..config import settings
 
 from .operator import Meta, Operator, Field
 from ..storage.dataset import DataType

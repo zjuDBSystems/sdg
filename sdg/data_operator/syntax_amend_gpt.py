@@ -8,10 +8,9 @@ import pandas as pd
 import json5
 import json
 from tqdm import tqdm
-from llama_cpp import Llama
 import tiktoken
-from ..config import settings
 
+from ..config import settings
 from .operator import Meta, Operator, Field
 from ..storage.dataset import DataType
 from ..task.task_type import TaskType
