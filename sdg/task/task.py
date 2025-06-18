@@ -47,9 +47,10 @@ class Task:
         self.out_datasets: dict[str, Dataset] = {}
         self.final_dataset: Dataset | None = None
 
-    def run(self) -> None:
+    def run(self) -> dict:
         """Executes the task by applying the operators to the input dataset."""
         dataset: Dataset = self.in_dataset
+        result=None
         for operator in self.operators:
             global_message_queue.put(EventResponse(event=EventType.REASONING, data=f'执行制备算子 {operator.get_meta().name}'))
             start = time.time()
@@ -68,3 +69,4 @@ class Task:
             global_message_queue.put(EventResponse(event=EventType.REASONING, data=f"数据质量评估完成, 耗时: {cost:.2f}秒"))
             global_message_queue.put(EventResponse(event=EventType.REASONING, data=json.dumps(result, indent=4, ensure_ascii=False)))
         self.final_dataset = dataset
+        return result
