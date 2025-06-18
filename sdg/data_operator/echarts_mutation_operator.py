@@ -1,7 +1,7 @@
 """ Operators for data augment.
 """
 import random
-from typing import override
+from typing import override, Dict
 import json
 import re
 import pandas as pd
@@ -55,6 +55,20 @@ class EChartMutationOperator(Operator):
             description='Mutates ECharts code styles by adjusting parameters , structure transformation and adding/removing non-core items.'
         )
     
+    def get_cost(self, dataset) -> Dict:
+        cost = {}
+        # operator name
+        cost["name"] = 'EChartsMutationOperator'
+        # records count
+        cost["ri"] = self.get_pending_files(dataset.meta_path, "code")
+        # time of one record
+        cost["ti"] = 0.001
+        # cpi time of one record
+        cost["ci"] = 0.0007
+        # operator type
+        cost["type"] = "CPU"
+        return cost
+    
     @override
     def execute(self, dataset) -> None:
 
@@ -62,6 +76,8 @@ class EChartMutationOperator(Operator):
         code_dir = [dir for dir in dataset.dirs if dir.data_type == DataType.CODE][0]
         code_files = df[DataType.CODE.value].tolist()
         type_name = df["type"].tolist()
+
+        self.get_cost(dataset)
 
         # 记录异常数
         error_count = 0
@@ -412,3 +428,15 @@ class EChartMutationOperator(Operator):
                 
             finally:
                 browser.close()
+
+    @staticmethod
+    def get_pending_files(csv_path, file_type):
+        # 读取 CSV 文件
+        df = pd.read_csv(csv_path)
+
+        # 统计image字段的不同值数量
+        column_name = file_type 
+        value_counts = df[column_name].nunique()
+
+        print(f"待处理的code数量为{value_counts}")
+        return value_counts
