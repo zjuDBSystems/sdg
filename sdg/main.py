@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 
-from .poc import run_echart_task
+from .poc import run_echart_task, run_power_task
 from .event import router as events_router
 
 
@@ -17,3 +17,7 @@ async def hello() -> dict[str, str]:
 @app.post("/poc")
 def poc1():
     run_echart_task()
+
+@app.post("/poc2")
+def poc2():
+    run_power_task()

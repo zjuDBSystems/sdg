@@ -5,6 +5,8 @@ import os
 import json
 import time
 
+from openai import OpenAI
+
 from .data_operator.operator import OperatorMeta
 from . import data_operator
 from .storage.dataset import Dataset, DataType, Datadir
@@ -19,7 +21,7 @@ def describe_data(datadir: Datadir):
     count = len([f for f in os.listdir(dir_path) if os.path.isfile(os.path.join(dir_path, f))])
     data_type = datadir.data_type.value
     global_message_queue.put(EventResponse(EventType.REASONING, f'{data_type} data in {dir_path} has {count} files!'))
-    
+
 def describe_metadata(metadata_path: str):
     with open(metadata_path, 'r') as f:
         lines = f.readlines()
@@ -93,6 +95,58 @@ def run_echart_task():
 
     result = data_set.evaluate_image_code_quality()
 
+def run_power_task():
+    # load power example dataset
+    global_message_queue.put(
+        EventResponse(event=EventType.REQUEST, data="Load power table dataset!"))
+    table_dir = Datadir('shanxi-power-table/shanxi_day.csv', DataType.TABLE)
+    data_set = Dataset([table_dir], '', 'key_configurations.md')
+    global_message_queue.put(EventResponse(event=EventType.RESPONSE, data="Load power table dataset done!"))
+
+    global_message_queue.put(EventResponse(event=EventType.REQUEST, data="数据质量评估"))
+    start = time.time()
+    result = data_set.evaluate_table_quality()
+    global_message_queue.put(
+        EventResponse(event=EventType.RESPONSE, data="数据质量评估完成, 耗时: {:.2f}秒".format(time.time() - start)))
+    global_message_queue.put(
+        EventResponse(event=EventType.REASONING, data=json.dumps(result, indent=4, ensure_ascii=False)))
+
+    def target_discovery(client, result):
+        response = client.chat.completions.create(
+            model="deepseek-reasoner",
+            messages=[
+                {"role": "system", "content": "You are a helpful assistant."},
+                {"role": "user", "content": "数据:" + json.dumps(result, indent=4, ensure_ascii=False) + "请根据上述数据，找出较为重要(>=50)的一级指标。\n请参照以下格式：\n<AI>数据洞察发现靶点完成, 靶点为[数据量, 多尺度增强...]\n<AI>"}
+            ],
+            stream=False,
+        )
+        return response.choices[0].message.content
+
+    global_message_queue.put(EventResponse(event=EventType.REQUEST, data="数据洞察发现靶点"))
+    # client = OpenAI(api_key="your key", base_url="https://api.deepseek.com")
+    # result = target_discovery(client, result)
+    # global_message_queue.put(EventResponse(event=EventType.REASONING, data="远端大模型分析..."))
+    # global_message_queue.put(EventResponse(event=EventType.RESPONSE, data=result))
+    global_message_queue.put(EventResponse(event=EventType.RESPONSE, data="数据洞察发现靶点完成, 靶点为[主频提取, 时序特征增强, 多尺度增强, 数据量]"))
+
+    task = Task( # TODO 添加算子
+        [
+
+        ],
+        data_set
+    )
+
+    global_message_queue.put(EventResponse(event=EventType.REQUEST, data="开始执行任务流程"))
+    start = time.time()
+    task.run()
+    end = time.time()
+    cost = end - start
+    global_message_queue.put(
+        EventResponse(event=EventType.RESPONSE, data="任务流程执行完成, 耗时: {:.2f}秒".format(cost)))
+
+    # result = data_set.evaluate_table_quality()
+
+
 def data_evaluation():
     negative_code_dir = Datadir('echart-code-sample-negative', DataType.CODE)
     negative_image_dir = Datadir('echart-image-sample-negative', DataType.IMAGE)
@@ -160,4 +214,5 @@ if __name__ == '__main__':
     # run_echart_task()
     # code_to_img()
     # img_aug()
-    aug_process()
+    # aug_process()
+    run_power_task()
