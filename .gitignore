@@ -9,3 +9,4 @@ detailed_scores.csv
 *.gguf
 .vscode/
 *.log
+.idea/

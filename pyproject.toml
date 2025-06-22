@@ -29,6 +29,7 @@ dependencies = [
     "numpy==1.26.4",
     "timesfm[torch]",
     "yfinance==0.2.63",
+    "statsmodels==0.14.4"
 ]
 
 [[tool.uv.index]]
