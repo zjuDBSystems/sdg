@@ -7,11 +7,11 @@ import time
 
 from openai import OpenAI
 
-from .data_operator.operator import OperatorMeta
-from . import data_operator
-from .storage.dataset import Dataset, DataType, Datadir
-from .task.task import Task
-from .event import global_message_queue, EventType, EventResponse
+from sdg.data_operator.operator import OperatorMeta
+from sdg import data_operator
+from sdg.storage.dataset import Dataset, DataType, Datadir
+from sdg.task.task import Task, Task_SeriesForecast
+from sdg.event import global_message_queue, EventType, EventResponse
 
 
 registry = OperatorMeta.get_registry()
@@ -129,20 +129,31 @@ def run_power_task():
     # global_message_queue.put(EventResponse(event=EventType.RESPONSE, data=result))
     global_message_queue.put(EventResponse(event=EventType.RESPONSE, data="数据洞察发现靶点完成, 靶点为[主频提取, 时序特征增强, 多尺度增强, 数据量]"))
 
-    task = Task( # TODO 添加算子
+    task = Task_SeriesForecast(
         [
-
+            # 提取主频成分作为协变量进行数据增强
+            registry['FrequencyEnhanceOperator'](),
+            # 数据层面进行非平稳处理
+            registry['NonStationaryProcessOperator'](),
+            # 提取时间特征作为协变量进行数据增强
+            registry['TimeFeatureEnhanceOperator'](),
+            # 对特定变量添加多尺度特征进行数据增强
+            registry['MultiscaleEnhanceOperator'](),
+            # 数据量扩增
+            # registry['DataAmplifyOperator'](),
         ],
         data_set
     )
 
     global_message_queue.put(EventResponse(event=EventType.REQUEST, data="开始执行任务流程"))
+    print("开始执行任务流程")
     start = time.time()
     task.run()
     end = time.time()
     cost = end - start
     global_message_queue.put(
         EventResponse(event=EventType.RESPONSE, data="任务流程执行完成, 耗时: {:.2f}秒".format(cost)))
+    print("任务流程执行完成, 耗时: {:.2f}秒".format(cost))
 
     # result = data_set.evaluate_table_quality()
 
@@ -216,3 +227,4 @@ if __name__ == '__main__':
     # img_aug()
     # aug_process()
     run_power_task()
+
