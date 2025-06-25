@@ -139,8 +139,6 @@ def run_power_task():
             registry['TimeFeatureEnhanceOperator'](),
             # 对特定变量添加多尺度特征进行数据增强
             registry['MultiscaleEnhanceOperator'](),
-            # 数据量扩增
-            # registry['DataAmplifyOperator'](),
         ],
         data_set
     )

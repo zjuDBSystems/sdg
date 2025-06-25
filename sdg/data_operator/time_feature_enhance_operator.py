@@ -83,12 +83,12 @@ class TimeFeatureEnhanceOperator(Operator):
         loc = LocationInfo("Yanan", "CN", "Asia/Shanghai", 36.5853932, 109.4828549).observer
 
         df['datetime'] = pd.to_datetime(df['datetime'])
-        df['month'] = df.datetime.apply(lambda row: row.month, 1)
-        df['day'] = df.datetime.apply(lambda row: row.day, 1)
-        df['weekday'] = df.datetime.apply(lambda row: row.weekday(), 1)
-        df['hour'] = df.datetime.apply(lambda row: row.hour, 1)
-        df['minute'] = df.datetime.apply(lambda row: row.minute, 1)
-        df["holiday"] = df.datetime.apply(lambda row: int(chinese_calendar.is_holiday(row)), 1)
+        df['month'] = df.datetime.apply(lambda row: row.month).astype(int)
+        df['day'] = df.datetime.apply(lambda row: row.day).astype(int)
+        df['weekday'] = df.datetime.apply(lambda row: row.weekday()).astype(int)
+        df['hour'] = df.datetime.apply(lambda row: row.hour).astype(int)
+        df['minute'] = df.datetime.apply(lambda row: row.minute).astype(int)
+        df["holiday"] = df.datetime.apply(lambda row: int(chinese_calendar.is_holiday(row))).astype(int)
 
         df["elev"] = [sun.elevation(loc, t) for t in df.datetime]  # 高度角
         df["az"] = [sun.azimuth(loc, t) for t in df.datetime]  # 方位角
