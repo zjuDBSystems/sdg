@@ -35,9 +35,6 @@ def trend_strength_all(csv_path,
                            time_col="datetime",
                            windows=(3, 6, 12, 24, 48),
                            gamma=0.8):
-    """
-    对 CSV 中所有数值型列计算多尺度趋势强度得分。
-    """
     # 1. 读入并预处理
     df = pd.read_csv(csv_path)
     df[time_col] = pd.to_datetime(df[time_col])
@@ -72,9 +69,6 @@ def cross_scale_mi_all(csv_path: str,
                          time_col: str = "datetime",
                          scales: tuple = (2, 4, 8),
                          q: int = 16) -> pd.Series:
-    """
-         MI 越大表示多尺度一致性越强 -> 多尺度特征越显著。
-    """
     df = (pd.read_csv(csv_path, parse_dates=[time_col])
             .select_dtypes(include=[np.number]))
     out = {}

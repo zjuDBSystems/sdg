@@ -6,10 +6,6 @@ from statsmodels.tsa.stattools import adfuller, acf
 
 # ADF
 def adf_nonstationarity_all(csv_path: str, time_col: str = "datetime") -> pd.Series:
-    """
-    对每个数值列做 ADF 单位根检验，
-    返回 p-value * 100，p-value 越大（越非平稳）分数越高；平稳或常数序列得分 0。
-    """
     df = (pd.read_csv(csv_path, parse_dates=[time_col])
             .select_dtypes(include=[np.number]))
     out = {}
@@ -37,10 +33,6 @@ def adf_nonstationarity_all(csv_path: str, time_col: str = "datetime") -> pd.Ser
 # 滚动方差
 def rolling_var_cv_all(csv_path: str, time_col: str = "datetime",
                        window: int = 7 * 24) -> pd.Series:
-    """
-    对每个数值列计算滚动方差序列的 CV（std/mean），
-    CV 越大（方差波动越剧烈）说明越非平稳，分数越高；平稳序列得分接近 0。
-    """
     df = (pd.read_csv(csv_path, parse_dates=[time_col])
             .select_dtypes(include=[np.number]))
     out = {}
@@ -54,10 +46,6 @@ def rolling_var_cv_all(csv_path: str, time_col: str = "datetime",
 
 # 赫斯特指数
 def hurst_all(csv_path: str, time_col: str = "datetime") -> pd.Series:
-    """
-    对每个数值列估计 Hurst 指数 H，
-    |H-0.5|*2*100 越高说明越非平稳（强趋势或反持久性），分数越高；H≈0.5（随机游走）得分越低。
-    """
     df = (pd.read_csv(csv_path, parse_dates=[time_col])
             .select_dtypes(include=[np.number]))
     out = {}

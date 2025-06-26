@@ -191,11 +191,9 @@ class Dataset:
         # 2、主频得分的计算
         energy_ratio_ser = energy_ratio_all(table_file_path)
         spectral_entropy_ser = spectral_entropy_all(table_file_path)
-        snr_ser = snr_all(table_file_path)
 
         energy_ratio_score = energy_ratio_ser.mean()
         spectral_entropy_score = spectral_entropy_ser.mean()
-        snr_score = snr_ser.mean()
 
         # 3、非平稳得分的计算
         adf_pvalue_ser = adf_nonstationarity_all(table_file_path)
@@ -210,7 +208,6 @@ class Dataset:
         temporal_bucket_coverage_score = bucket_coverage_csv(table_file_path)
         holiday_balance_score = holiday_balance_csv(table_file_path)
         season_span_score = season_span_csv(table_file_path)
-        solar_angle_coverage_score = solar_angle_coverage_csv(table_file_path)
 
         # 多尺度得分计算
         acf_multiscale_ser = acf_multiscale_all(table_file_path)
@@ -221,48 +218,37 @@ class Dataset:
         trend_strength_score = trend_strength_ser.mean()
         cross_scale_mi_score = cross_scale_mi_ser.mean()
 
-        # 一级指标得分
-        dominant_frequency_score = (energy_ratio_score + spectral_entropy_score + snr_score) / 3
-        nonstationary_enhancement_score = (adf_pvalue_score + rolling_var_cv_score + hurst_exponent_score) / 3
-        temporal_feature_enhancement_score = (temporal_bucket_coverage_score + holiday_balance_score + season_span_score + solar_angle_coverage_score) / 4
-        multiscale_enhancement_score = (acf_multiscale_divergence_score + trend_strength_score + cross_scale_mi_score) / 3
-        data_size_score = (data_row_score + data_col_score) / 2
-
         # 构建分数字典
         score_dict = {
             "一级指标": {
-                "主频提取价值": round(dominant_frequency_score, 2),
-                "非平稳增强价值": round(nonstationary_enhancement_score, 2),
-                "时序特征增强价值": round(temporal_feature_enhancement_score, 2),
-                "多尺度增强价值": round(multiscale_enhancement_score, 2),
-                "数据量扩增价值": 100 - round(data_size_score, 2),
+                "数据量": 100 - round((data_row_score + data_col_score) / 2, 2),
+                "数据内在质量": round(((energy_ratio_score + spectral_entropy_score) / 2 +
+                                       (adf_pvalue_score + rolling_var_cv_score + hurst_exponent_score) / 3 + trend_strength_score) / 3, 2),
+                "数据表示质量": round((temporal_bucket_coverage_score + holiday_balance_score + season_span_score) / 3, 2),
+                "数据上下文质量": round((acf_multiscale_divergence_score + cross_scale_mi_score) / 2, 2),
+                "数据冗余": 0,
             },
             "二级指标": {
-                "主频提取价值": {
-                    "主频能量占比": round(energy_ratio_score, 2),
-                    "谱熵": round(spectral_entropy_score, 2),
-                    "信噪比": round(snr_score, 2),
+                "数据量": {
+                    "时间点": round(data_row_score, 2),
+                    "特征": round(data_col_score, 2),
                 },
-                "非平稳增强价值": {
-                    "单位根检验": round(adf_pvalue_score, 2),
-                    "滚动方差离散度": round(rolling_var_cv_score, 2),
-                    "赫斯特指数": round(hurst_exponent_score, 2),
-                },
-                "时序特征增强必要性": {
-                    "离散时间覆盖率": round(temporal_bucket_coverage_score, 2),
-                    "工作日/节假日平衡": round(holiday_balance_score, 2),
-                    "跨季节跨度": round(season_span_score, 2),
-                    "太阳辐射角覆盖度": round(solar_angle_coverage_score, 2),
-                },
-                "多尺度增强价值": {
-                    "多尺度自相关差异": round(acf_multiscale_divergence_score, 2),
+                "数据内在质量": {
+                    "周期性强度": round((energy_ratio_score + spectral_entropy_score) / 2, 2),
                     "趋势强度": round(trend_strength_score, 2),
-                    "跨尺度互信息": round(cross_scale_mi_score, 2),
+                    "数据非平稳性": round((adf_pvalue_score + rolling_var_cv_score + hurst_exponent_score) / 3),
                 },
-                "数据量扩增价值": {
-                    "时间点得分": round(data_row_score, 2),
-                    "特征得分": round(data_col_score, 2),
-                }
+                "数据表示质量": {
+                    "时间覆盖率": round(temporal_bucket_coverage_score, 2),
+                    "节假日均衡性": round(holiday_balance_score, 2),
+                    "季节跨度": round(season_span_score, 2),
+                },
+                "数据上下文质量": {
+                    "多重周期性": round(acf_multiscale_divergence_score, 2),
+                    "结构自相似性": round(cross_scale_mi_score, 2),
+                },
+                "数据冗余": {
+                },
             }
         }
 

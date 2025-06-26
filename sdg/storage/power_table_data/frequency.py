@@ -46,34 +46,3 @@ def spectral_entropy_all(csv_path: str, time_col: str = "datetime") -> pd.Series
             score = (1 - entropy(p) / np.log(len(p))) * 100
         out[col] = score
     return pd.Series(out, name="spectral_entropy")
-
-# 信噪比
-def snr_all(csv_path: str,
-            time_col: str = "datetime",
-            k: int = 10) -> pd.Series:
-    df = pd.read_csv(csv_path, parse_dates=[time_col]).select_dtypes(include=[np.number])
-    out = {}
-    eps = 1e-9
-    for col in df.columns:
-        s = df[col].values
-        power = np.abs(rfft(s - s.mean()))**2
-        total = power.sum()
-
-        if total <= 0:
-            # 全零或能量为 0 时，直接得 0 分
-            score = 0.0
-        else:
-            # 取能量最大的 k 个分量
-            if k > len(power):
-                k = len(power)
-            topk = np.partition(power, -k)[-k:]
-            sig = topk.sum()
-            noise = total - sig
-
-            # 计算 SNR（dB），并映射到 [0,100]
-            snr_db = 10 * np.log10((sig + eps) / (noise + eps))
-            score = np.clip(snr_db / 20, 0, 1) * 100
-
-        out[col] = score
-
-    return pd.Series(out, name="snr")

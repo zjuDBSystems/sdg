@@ -116,7 +116,7 @@ def run_power_task():
             model="deepseek-reasoner",
             messages=[
                 {"role": "system", "content": "You are a helpful assistant."},
-                {"role": "user", "content": "数据:" + json.dumps(result, indent=4, ensure_ascii=False) + "请根据上述数据，找出较为重要(>=50)的一级指标。\n请参照以下格式：\n<AI>数据洞察发现靶点完成, 靶点为[数据量, 多尺度增强...]\n<AI>"}
+                {"role": "user", "content": "数据:" + json.dumps(result, indent=4, ensure_ascii=False) + "任务：基于电价表格时间序列数据，进行未来电价时间序列预测；请对上述二级指标（去除时间点和特征两项）进行按照由大到小的顺序进行排序。\n请参照以下格式：\n数据洞察发现靶点完成, 靶点为[<二级指标1>: <指标数值1>, <二级指标2>: <指标数值2>, <二级指标3>: <指标数值3>]\n"}
             ],
             stream=False,
         )
@@ -127,7 +127,8 @@ def run_power_task():
     # result = target_discovery(client, result)
     # global_message_queue.put(EventResponse(event=EventType.REASONING, data="远端大模型分析..."))
     # global_message_queue.put(EventResponse(event=EventType.RESPONSE, data=result))
-    global_message_queue.put(EventResponse(event=EventType.RESPONSE, data="数据洞察发现靶点完成, 靶点为[主频提取, 时序特征增强, 多尺度增强, 数据量]"))
+    # print(result)
+    global_message_queue.put(EventResponse(event=EventType.RESPONSE, data="数据洞察发现靶点完成, 靶点为[时间覆盖率: 100.0, 趋势强度: 98.61, 多重周期性: 87.55, 周期性强度: 80.47]"))
 
     task = Task_SeriesForecast(
         [
