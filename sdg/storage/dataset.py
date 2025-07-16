@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from enum import Enum
 from pprint import pprint
 from uuid import uuid4
-
+from typing import List
 import pandas as pd
 
 from .image_code_data.chart_type import evaluate_chart_type
@@ -180,6 +180,19 @@ class Dataset:
     def evaluate_table_quality(self, path="shanxi_day_train_total_96_96.pkl"):
         table_file_path = os.path.join(self.dirs[0].data_path, path)
         arr_evaluation = pkl.load(open(table_file_path, "rb"))
+
+        def restore_datetime_index_to_column(
+                df_list: List[pd.DataFrame],
+                col_name: str = "datetime") -> List[pd.DataFrame]:
+            restored_list = []
+            for df in df_list:
+                df_copy = df.copy()
+                if col_name not in df_copy.columns:
+                    df_copy = df_copy.rename_axis(col_name).reset_index()
+                restored_list.append(df_copy)
+            return restored_list       
+
+        arr_evaluation = restore_datetime_index_to_column(arr_evaluation) 
 
         target_col = "延安发电1号机组"
 
