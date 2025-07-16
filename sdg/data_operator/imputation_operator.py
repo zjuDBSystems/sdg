@@ -1,4 +1,4 @@
-'''Operators for time-feature enhancement.
+'''Operators for imputation.
 '''
 
 from typing import override, Dict, List
@@ -15,9 +15,13 @@ from ..storage.dataset import DataType
 from ..task.task_type import TaskType
 import re
 import pickle as pkl
+import torch
+from pypots.imputation import SAITS
+from pathlib import Path
+from statsmodels.tsa.seasonal import STL
 
 
-class TimeFeatureEnhanceOperator(Operator):
+class ImputationOperator(Operator):
     def __init__(self, **kwargs):
         self.input_table_file1 = kwargs.get('input_table_file', "shanxi_day_train_total_96_96.pkl")
         self.output_table_file1 = kwargs.get('output_table_file', "shanxi_day_train_total_96_96.pkl")
@@ -25,8 +29,9 @@ class TimeFeatureEnhanceOperator(Operator):
         self.output_table_file2 = kwargs.get('output_table_file2', "shanxi_day_train_total_192_192.pkl")
         self.input_table_file3 = kwargs.get('input_table_file3', "shanxi_day_train_total_384_384.pkl")
         self.output_table_file3 = kwargs.get('output_table_file3', "shanxi_day_train_total_384_384.pkl")
-        self.loc = LocationInfo("Yanan", "CN", "Asia/Shanghai", 36.5853932, 109.4828549).observer
-        self.time_enhancement = kwargs.get('time_enhancement', True)
+        self.imputation_model_path1 = kwargs.get('imputation_model_path1', "imputation_model_checkpoints/checkpoints_96_96.pypots")
+        self.imputation_model_path2 = kwargs.get('imputation_model_path2', "imputation_model_checkpoints/checkpoints_192_192.pypots")
+        self.imputation_model_path3 = kwargs.get('imputation_model_path3', "imputation_model_checkpoints/checkpoints_384_384.pypots")
 
     @classmethod
     @override
@@ -46,14 +51,14 @@ class TimeFeatureEnhanceOperator(Operator):
     @override
     def get_meta(cls) -> Meta:
         return Meta(
-            name='TimeFeatureEnhanceOperator',
-            description='TimeFeatureEnhanceOperator.'
+            name='ImputationOperator',
+            description='ImputationOperator.'
         )
 
     def get_cost(self, dataset) -> Dict:
         cost = {}
         # operator name
-        cost["name"] = "TimeFeatureEnhanceOperator"
+        cost["name"] = "ImputationOperator"
         return cost
 
 
@@ -61,46 +66,47 @@ class TimeFeatureEnhanceOperator(Operator):
     def execute(self, dataset):
         # file_96_96
         ls_df = pkl.load(open(os.path.join(dataset.dirs[0].data_path, self.input_table_file1), "rb"))
-        ls_df = self.time_enhance(ls_df, loc=self.loc, enhancement=self.time_enhancement)
+        ls_df = self.saits_impute(ls_df,model_path=os.path.join(dataset.dirs[0].data_path, self.imputation_model_path1))
         with open(os.path.join(dataset.dirs[0].data_path, self.output_table_file1), "wb") as file:
             pkl.dump(ls_df, file, protocol=5)
         # file_192_192
         ls_df = pkl.load(open(os.path.join(dataset.dirs[0].data_path, self.input_table_file2), "rb"))
-        ls_df = self.time_enhance(ls_df, loc=self.loc, enhancement=self.time_enhancement)
+        ls_df = self.saits_impute(ls_df,model_path=os.path.join(dataset.dirs[0].data_path, self.imputation_model_path2))
         with open(os.path.join(dataset.dirs[0].data_path, self.output_table_file2), "wb") as file:
             pkl.dump(ls_df, file, protocol=5)
         # file_384_384
         ls_df = pkl.load(open(os.path.join(dataset.dirs[0].data_path, self.input_table_file3), "rb"))
-        ls_df = self.time_enhance(ls_df, loc=self.loc, enhancement=self.time_enhancement)
+        ls_df = self.saits_impute(ls_df,model_path=os.path.join(dataset.dirs[0].data_path, self.imputation_model_path3))
         with open(os.path.join(dataset.dirs[0].data_path, self.output_table_file3), "wb") as file:
             pkl.dump(ls_df, file, protocol=5)
         
         print(f'{self.get_meta().name}算子执行完成')
 
+    def saits_impute(self, arr_train, model_path=None):
+        X = np.stack([df.values for df in arr_train]).astype(np.float32)
 
-    def time_enhance(self, arr_train: List[pd.DataFrame], loc, enhancement: bool):
-        if enhancement:
-            for df in arr_train:
-                df['datetime'] = pd.to_datetime(df['datetime'], errors='coerce')
-                dt = df['datetime'].dt
+        model = SAITS(
+            n_steps=X.shape[1],
+            n_features=X.shape[2],
+            d_model=256, n_heads=4, d_ffn=512,
+            n_layers=3, dropout=0.2,
+            d_k=64, d_v=64,
+            epochs=10, patience=3, device="cuda" if torch.cuda.is_available() else "cpu"
+        )
 
-                df['month'] = dt.month
-                df['day'] = dt.day
-                df['weekday'] = dt.weekday
-                df['hour'] = dt.hour
-                df['minute'] = dt.minute
-
-                df['holiday'] = df['datetime'].map(lambda t: int(chinese_calendar.is_holiday(t)))
-
-                df["elev"] = [sun.elevation(loc, t) for t in df.datetime]
-                df["az"] = [sun.azimuth(loc, t) for t in df.datetime]
-
-                if 'datetime' in df.columns:
-                    df.set_index('datetime', inplace=True)
+        if model_path is not None and Path(model_path).exists():
+            model.load(model_path)
         else:
-            for df in arr_train:
-                if 'datetime' in df.columns:
-                    df['datetime'] = pd.to_datetime(df['datetime'], errors='coerce')
-                    df.set_index('datetime', inplace=True)
-        return arr_train
+            model.fit({"X": X})
+            if model_path is not None:
+                model.save(model_path)
+
+        with torch.no_grad():
+            imputed = model.impute({"X": X})
+
+        cols = arr_train[0].columns
+        index_t = arr_train[0].index
+        return [pd.DataFrame(imputed[i], columns=cols, index=index_t) for i, _ in enumerate(arr_train)]
+
+
 
