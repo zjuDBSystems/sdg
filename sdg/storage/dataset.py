@@ -1,31 +1,31 @@
-from enum import Enum
-from dataclasses import dataclass
-import json
 import os
+import pickle as pkl
+import re
 import shutil
+from dataclasses import dataclass
+from enum import Enum
 from pprint import pprint
 from uuid import uuid4
-
-from .power_table_data.frequency import energy_ratio_all, spectral_entropy_all, snr_all
-from .power_table_data.multi_scale import acf_multiscale_all, trend_strength_all, cross_scale_mi_all
-from .power_table_data.non_stationary import adf_nonstationarity_all, rolling_var_cv_all, hurst_all
-from .power_table_data.time import bucket_coverage_csv, holiday_balance_csv, season_span_csv, solar_angle_coverage_csv
-from ..config import settings
-
-from ..config import settings
-from .image_code_data.data_size import calculate_score_from_csv
-from .image_code_data.syntax import evaluate_js_folder
-from .image_code_data.renderable import evaluate_renderability
-from .image_code_data.ncc import evaluate_ncc
-from .image_code_data.chart_type import evaluate_chart_type
-from .image_code_data.option_diversity import evaluate_option_diversity
-from .image_code_data.code_duplication import evaluate_code_duplicate
-from .image_code_data.image_duplication import evaluate_image_duplicate
-from .image_code_data.joint_duplicate import evaluate_joint_duplicate
-from .image_code_data.config_complete import evaluate_completeness
-from .image_code_data.missing_rate_detection import evaluate_miss
-
+from typing import List
 import pandas as pd
+
+from .image_code_data.chart_type import evaluate_chart_type
+from .image_code_data.code_duplication import evaluate_code_duplicate
+from .image_code_data.config_complete import evaluate_completeness
+from .image_code_data.data_size import calculate_score_from_csv
+from .image_code_data.image_duplication import evaluate_image_duplicate
+from .image_code_data.missing_rate_detection import evaluate_miss
+from .image_code_data.ncc import evaluate_ncc
+from .image_code_data.option_diversity import evaluate_option_diversity
+from .image_code_data.syntax import evaluate_js_folder
+from .power_table_data.data_context_quality import score_calculate_domain_diversity, score_calculate_domain_completeness
+from .power_table_data.data_inner_quality import score_missing_rate, score_label_consistency
+from .power_table_data.data_redundancy import score_feature_independence
+from .power_table_data.data_representation_quality import score_stationarity_all, score_feature_readiness
+from .power_table_data.data_size import score_time_granularity, score_seasonality_strength, score_trend_strength, \
+    score_primary_freq_strength, score_dataset_balance
+from ..config import settings
+
 
 class DataType(Enum):
     """Available data types."""
@@ -50,7 +50,6 @@ class ScoreCollector:
             # # 添加其他指标...
         }
         self.missing_data = {}
-
 
     def add_missing_data(self, miss_dict):
         """
@@ -111,8 +110,6 @@ class ScoreCollector:
         return self.df
 
 
-
-
 @dataclass
 class DataEvaluation():
     # evaluation dimension key
@@ -137,7 +134,6 @@ class Datadir:
         self.relative_data_path = data_path
         self.data_path = settings.LOCAL_STORAGE_PATH + '/' + data_path
         self.data_type = data_type
-
 
 
 class Dataset:
@@ -165,7 +161,7 @@ class Dataset:
         evaluation (list[DataEvaluation]): A list of data evaluation result.
     """
 
-    def __init__(self, dirs: list[Datadir], meta_path: str,md_path:str):
+    def __init__(self, dirs: list[Datadir], meta_path: str, md_path: str):
         self.dirs = dirs
         self.relative_meta_path = meta_path
         self.meta_path = settings.LOCAL_META_STORAGE_PATH + '/' + meta_path
@@ -174,95 +170,114 @@ class Dataset:
         md_path = settings.LOCAL_META_STORAGE_PATH + '/' + md_path
         result_path = settings.LOCAL_STORAGE_PATH + '/result.csv'
         self.md_path = md_path
-        self.type_percentage={}
+        self.type_percentage = {}
         self.evaluation = {
             "screenshot_path": screenshot_path,
             "md_path": md_path,
             "result_path": result_path
         }
 
-    def evaluate_table_quality(self):
-        table_file_path = self.dirs[0].data_path  # 表格路径
+    def evaluate_table_quality(self, path="shanxi_day_train_total_96_96.pkl"):
+        table_file_path = os.path.join(self.dirs[0].data_path, path)
+        arr_evaluation = pkl.load(open(table_file_path, "rb"))
 
-        # 1、数据量的计算
-        from .power_table_data.data_size import calculate_score_from_csv
-        data_row_score, data_col_score = calculate_score_from_csv(table_file_path)
+        def restore_datetime_index_to_column(
+                df_list: List[pd.DataFrame],
+                col_name: str = "datetime") -> List[pd.DataFrame]:
+            restored_list = []
+            for df in df_list:
+                df_copy = df.copy()
+                if col_name not in df_copy.columns:
+                    df_copy = df_copy.rename_axis(col_name).reset_index()
+                restored_list.append(df_copy)
+            return restored_list       
 
-        # 2、主频得分的计算
-        energy_ratio_ser = energy_ratio_all(table_file_path)
-        spectral_entropy_ser = spectral_entropy_all(table_file_path)
-        snr_ser = snr_all(table_file_path)
+        arr_evaluation = restore_datetime_index_to_column(arr_evaluation) 
 
-        energy_ratio_score = energy_ratio_ser.mean()
-        spectral_entropy_score = spectral_entropy_ser.mean()
-        snr_score = snr_ser.mean()
+        target_col = "延安发电1号机组"
 
-        # 3、非平稳得分的计算
-        adf_pvalue_ser = adf_nonstationarity_all(table_file_path)
-        rolling_var_cv_ser = rolling_var_cv_all(table_file_path)
-        hurst_ser = hurst_all(table_file_path)
+        ep_col = [
+            '延安发电1号机组', '延安发电2号机组', '延热发电1号机组', '延热发电2号机组', '宝二发电1号机组',
+            '宝二发电2号机组',
+            '宝二发电3号机组', '宝二发电4号机组', '宝鸡发电5号机组', '宝鸡发电6号机组', '宝热发电1号机组',
+            '宝热发电2号机组',
+            '杨凌热电1号机组', '杨凌热电2号机组', '彬长发电1号机组', '彬长发电2号机组', '灞桥发电1号机组',
+            '灞桥发电2号机组',
+            '富平发电1号机组', '富平发电2号机组', '韩二发电1号机组', '韩二发电2号机组', '韩二发电3号机组',
+            '韩二发电4号机组',
+            '蒲城发电3号机组', '蒲城发电4号机组', '蒲二发电5号机组', '蒲二发电6号机组', '秦岭发电7号机组',
+            '秦岭发电8号机组',
+            '渭河热电1号机组', '渭河热电2号机组', '渭南发电1号机组', '渭南发电2号机组', '西热发电1号机组', '西热发电2号机组'
+        ]
 
-        adf_pvalue_score = adf_pvalue_ser.mean()
-        rolling_var_cv_score = rolling_var_cv_ser.mean()
-        hurst_exponent_score = hurst_ser.mean()
+        vote_cols = ['延安发电1号机组', '延安发电2号机组', '延热发电1号机组', '延热发电2号机组']
 
-        # 时间特征得分计算
-        temporal_bucket_coverage_score = bucket_coverage_csv(table_file_path)
-        holiday_balance_score = holiday_balance_csv(table_file_path)
-        season_span_score = season_span_csv(table_file_path)
-        solar_angle_coverage_score = solar_angle_coverage_csv(table_file_path)
+        EXPECTED_TIME_FEATURES = [
+            'month', 'day', 'weekday', 'hour', 'minute', 'holiday', 'elev', 'az'
+        ]
 
-        # 多尺度得分计算
-        acf_multiscale_ser = acf_multiscale_all(table_file_path)
-        trend_strength_ser = trend_strength_all(table_file_path)
-        cross_scale_mi_ser = cross_scale_mi_all(table_file_path)
+        api_key = "sk-2694f692c8a74876a7a8856fdaf7ed7e"
 
-        acf_multiscale_divergence_score = acf_multiscale_ser.mean()
-        trend_strength_score = trend_strength_ser.mean()
-        cross_scale_mi_score = cross_scale_mi_ser.mean()
+        time_granularity_score = score_time_granularity(arr_evaluation)
+        seasonality_strength_score = score_seasonality_strength(arr_evaluation, method='classical')
+        trend_strength_score = score_trend_strength(arr_evaluation, method='classical')
+        primary_freq_strength_score = score_primary_freq_strength(arr_evaluation)
+        dataset_balance_score = score_dataset_balance(arr_evaluation, value_cols=[target_col])
 
-        # 一级指标得分
-        dominant_frequency_score = (energy_ratio_score + spectral_entropy_score + snr_score) / 3
-        nonstationary_enhancement_score = (adf_pvalue_score + rolling_var_cv_score + hurst_exponent_score) / 3
-        temporal_feature_enhancement_score = (temporal_bucket_coverage_score + holiday_balance_score + season_span_score + solar_angle_coverage_score) / 4
-        multiscale_enhancement_score = (acf_multiscale_divergence_score + trend_strength_score + cross_scale_mi_score) / 3
-        data_size_score = (data_row_score + data_col_score) / 2
+        missing_rate_score = score_missing_rate(arr_evaluation)
+        label_consistency_score = score_label_consistency(arr_evaluation, label_col=target_col, vote_cols=vote_cols)
+
+        stationarity_score = score_stationarity_all(arr_evaluation)
+        temporal_features_ratio_score = score_feature_readiness(arr_evaluation, target_col=target_col,
+                                                                expected_features=EXPECTED_TIME_FEATURES)
+
+        calculate_domain_diversity_score = score_calculate_domain_diversity(arr_evaluation, api_key)
+        calculate_domain_completeness_score = score_calculate_domain_completeness(arr_evaluation, api_key)
+
+        all_cols = arr_evaluation[0].columns.tolist()
+        cols_to_keep = [
+            col for col in all_cols
+            if not any(re.search(pattern, col, re.IGNORECASE) for pattern in ep_col)
+        ]
+        feature_independence_score = score_feature_independence(
+            arr_evaluation, target_col=target_col, remain_cols=cols_to_keep)
 
         # 构建分数字典
         score_dict = {
             "一级指标": {
-                "主频提取价值": round(dominant_frequency_score, 2),
-                "非平稳增强价值": round(nonstationary_enhancement_score, 2),
-                "时序特征增强价值": round(temporal_feature_enhancement_score, 2),
-                "多尺度增强价值": round(multiscale_enhancement_score, 2),
-                "数据量扩增价值": 100 - round(data_size_score, 2),
+                "数据量": (time_granularity_score + seasonality_strength_score +
+                           trend_strength_score + primary_freq_strength_score +
+                           dataset_balance_score) / 5,
+                "数据内在质量": (missing_rate_score + label_consistency_score) / 2,
+                "数据表示质量": (stationarity_score + temporal_features_ratio_score) / 2,
+                "数据上下文质量": (calculate_domain_diversity_score +
+                                   calculate_domain_completeness_score) / 2,
+                "数据冗余": (dataset_balance_score + feature_independence_score) / 2,
             },
             "二级指标": {
-                "主频提取价值": {
-                    "主频能量占比": round(energy_ratio_score, 2),
-                    "谱熵": round(spectral_entropy_score, 2),
-                    "信噪比": round(snr_score, 2),
+                "数据量": {
+                    "时间粒度覆盖率": time_granularity_score,
+                    "季节性强度": seasonality_strength_score,
+                    "趋势强度": trend_strength_score,
+                    "主频强度": primary_freq_strength_score,
+                    "样本均衡性": dataset_balance_score,
                 },
-                "非平稳增强价值": {
-                    "单位根检验": round(adf_pvalue_score, 2),
-                    "滚动方差离散度": round(rolling_var_cv_score, 2),
-                    "赫斯特指数": round(hurst_exponent_score, 2),
+                "数据内在质量": {
+                    "数据完整性": missing_rate_score,
+                    "标签一致性": label_consistency_score,
                 },
-                "时序特征增强必要性": {
-                    "离散时间覆盖率": round(temporal_bucket_coverage_score, 2),
-                    "工作日/节假日平衡": round(holiday_balance_score, 2),
-                    "跨季节跨度": round(season_span_score, 2),
-                    "太阳辐射角覆盖度": round(solar_angle_coverage_score, 2),
+                "数据表示质量": {
+                    "时序平稳性": stationarity_score,
+                    "时间特征完备度": temporal_features_ratio_score,
                 },
-                "多尺度增强价值": {
-                    "多尺度自相关差异": round(acf_multiscale_divergence_score, 2),
-                    "趋势强度": round(trend_strength_score, 2),
-                    "跨尺度互信息": round(cross_scale_mi_score, 2),
+                "数据上下文质量": {
+                    "领域知识多样性": calculate_domain_diversity_score,
+                    "领域知识完整性": calculate_domain_completeness_score,
                 },
-                "数据量扩增价值": {
-                    "时间点得分": round(data_row_score, 2),
-                    "特征得分": round(data_col_score, 2),
-                }
+                "数据冗余": {
+                    "样本均衡性": dataset_balance_score,
+                    "特征独立性": feature_independence_score,
+                },
             }
         }
 
@@ -284,7 +299,7 @@ class Dataset:
         collector = ScoreCollector(pair_file_path)
 
         # 1、首先是数据量的计算
-        min_size = 550# 1k数据得0分
+        min_size = 550  # 1k数据得0分
         max_size = 800  # 100K数据得100分
         data_size_score = calculate_score_from_csv(pair_file_path, min_size, max_size)
         data_size_score = round(data_size_score, 2)  # 保留两位小数
@@ -315,12 +330,13 @@ class Dataset:
         # 接下来是数据集多样性
         # 5、首先是图表类型均衡性
         # print(1)
-        chart_type_score,type_percentage = evaluate_chart_type(pair_file_path)
+        chart_type_score, type_percentage = evaluate_chart_type(pair_file_path)
         chart_type_score = round(chart_type_score, 2)  # 保留两位小数
-        self.type_percentage=type_percentage
+        self.type_percentage = type_percentage
         # 6、接着是配置项均衡性
         # print(2)
-        option_diversity_score,file_to_cluster_center_distance = evaluate_option_diversity(code_file_path, pair_file_path)
+        option_diversity_score, file_to_cluster_center_distance = evaluate_option_diversity(code_file_path,
+                                                                                            pair_file_path)
         option_diversity_score = round(float(option_diversity_score), 2)  # 保留两位小数
         collector.add_scores("distance", file_to_cluster_center_distance, key_type="code")
 

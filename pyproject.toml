@@ -27,9 +27,11 @@ dependencies = [
     "chinese-calendar==1.10.0",
     "astral>2.3",
     "numpy==1.26.4",
-    "timesfm[torch]",
     "yfinance==0.2.63",
-    "statsmodels==0.14.4"
+    "statsmodels==0.14.4",
+    "numba==0.61.2",
+    "pypots==0.19",
+    "reformer_pytorch==1.4.4"
 ]
 
 [[tool.uv.index]]

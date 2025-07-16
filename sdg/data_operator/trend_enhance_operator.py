@@ -1,4 +1,4 @@
-'''Operators for non-stationary enhancement.
+'''Operators for trend enhancement.
 '''
 
 from typing import override, Dict, List
@@ -14,10 +14,11 @@ from .operator import Meta, Operator, Field
 from ..storage.dataset import DataType
 from ..task.task_type import TaskType
 import re
+from statsmodels.tsa.seasonal import STL
 import pickle as pkl
 
 
-class NonStationaryProcessOperator(Operator):
+class TrendEnhanceOperator(Operator):
     def __init__(self, **kwargs):
         self.input_table_file = kwargs.get('input_table_file', "shanxi_day_train_total_96_96.pkl")
         self.output_table_file = kwargs.get('output_table_file', "shanxi_day_train_total_96_96.pkl")
@@ -41,14 +42,14 @@ class NonStationaryProcessOperator(Operator):
     @override
     def get_meta(cls) -> Meta:
         return Meta(
-            name='NonStationaryProcessOperator',
-            description='Non-Stationary Process.'
+            name='TrendEnhanceOperator',
+            description='TrendEnhanceOperator.'
         )
 
     def get_cost(self, dataset) -> Dict:
         cost = {}
         # operator name
-        cost["name"] = "NonStationaryProcessOperator"
+        cost["name"] = "TrendEnhanceOperator"
         return cost
 
 
@@ -57,10 +58,51 @@ class NonStationaryProcessOperator(Operator):
         # files
         ls_df = pkl.load(open(os.path.join(dataset.dirs[0].data_path, self.input_table_file), "rb"))
 
+        ls_df += self.trend_extract(ls_df)
+
         with open(os.path.join(dataset.dirs[0].data_path, self.output_table_file), "wb") as file:
             pkl.dump(ls_df, file, protocol=5)
         
         print(f'{self.get_meta().name}算子执行完成')
+
+    def trend_extract(
+        self,
+        arr_train: List[pd.DataFrame],
+        *,
+        method: str = "ma",
+        window: int = 25,
+        center: bool = True,
+        period: int | None = 96,
+        robust: bool = True,
+    ) -> List[pd.DataFrame]:
+
+        if method not in {"ma", "stl"}:
+            raise ValueError("method must be either 'ma' or 'stl'")
+
+        trend_list: List[pd.DataFrame] = []
+
+        for df in arr_train:
+            if method == "ma":
+                trend_df = (
+                    df
+                    .rolling(window=window, center=center, min_periods=1)
+                    .mean()
+                    .bfill()
+                    .ffill()
+                )
+            else:
+                if period is None:
+                    raise ValueError("'period' must be provided when method='stl'")
+
+                trend_cols: list[pd.Series] = []
+                for col in df.columns:
+                    stl_res = STL(df[col], period=period, robust=robust).fit()
+                    trend_cols.append(stl_res.trend.rename(col))
+                trend_df = pd.concat(trend_cols, axis=1)
+
+            trend_list.append(trend_df)
+
+        return trend_list
 
 
 
