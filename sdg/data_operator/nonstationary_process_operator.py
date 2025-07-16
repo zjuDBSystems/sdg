@@ -19,8 +19,8 @@ import pickle as pkl
 
 class NonStationaryProcessOperator(Operator):
     def __init__(self, **kwargs):
-        self.input_table_file = kwargs.get('input_table_file', "shanxi_day_train_total.pkl")
-        self.output_table_file = kwargs.get('output_table_file', "shanxi_day_train_total.pkl")
+        self.input_table_file = kwargs.get('input_table_file', "shanxi_day_train_total_96_96.pkl")
+        self.output_table_file = kwargs.get('output_table_file', "shanxi_day_train_total_96_96.pkl")
 
 
     @classmethod
@@ -56,7 +56,6 @@ class NonStationaryProcessOperator(Operator):
     def execute(self, dataset):
         # files
         ls_df = pkl.load(open(os.path.join(dataset.dirs[0].data_path, self.input_table_file), "rb"))
-
 
         with open(os.path.join(dataset.dirs[0].data_path, self.output_table_file), "wb") as file:
             pkl.dump(ls_df, file, protocol=5)

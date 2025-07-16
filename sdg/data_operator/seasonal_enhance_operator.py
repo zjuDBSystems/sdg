@@ -15,12 +15,13 @@ from ..storage.dataset import DataType
 from ..task.task_type import TaskType
 import re
 import pickle as pkl
+from statsmodels.tsa.seasonal import STL
 
 
 class SeasonalEnhanceOperator(Operator):
     def __init__(self, **kwargs):
-        self.input_table_file = kwargs.get('input_table_file', "shanxi_day_train_total.pkl")
-        self.output_table_file = kwargs.get('output_table_file', "shanxi_day_train_total.pkl")
+        self.input_table_file = kwargs.get('input_table_file', "shanxi_day_train_total_96_96.pkl")
+        self.output_table_file = kwargs.get('output_table_file', "shanxi_day_train_total_96_96.pkl")
 
 
     @classmethod

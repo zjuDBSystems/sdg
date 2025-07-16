@@ -75,7 +75,14 @@ class ScarceSampleGenerateOperator(Operator):
         idx_list = []
 
         for i, df in enumerate(arr_train):
-            target_series = df[target_col]
+            # 确保目标列是数值类型
+            if not pd.api.types.is_numeric_dtype(df[target_col]):
+                continue  # 跳过非数值列
+            
+            target_series = df[target_col].dropna()  # 移除缺失值
+            if len(target_series) == 0:
+                continue  # 跳过空列
+            
             q1 = np.quantile(target_series, 0.25)
             q3 = np.quantile(target_series, 0.75)
             iqr = q3 - q1
@@ -97,29 +104,49 @@ class ScarceSampleGenerateOperator(Operator):
         out_list: List[pd.DataFrame] = []
 
         for idx in samples_index:
-            generated_df = arr_train[idx].copy(deep=True)
+            original_df = arr_train[idx]
+            generated_df = original_df.copy(deep=True)
             target_data = generated_df[target_col].copy()
-            feature_cols = [col for col in generated_df.columns if col != target_col]
+            
+            # 只处理数值类型的特征列
+            feature_cols = [col for col in generated_df.columns if col != target_col 
+                           and pd.api.types.is_numeric_dtype(generated_df[col])]
 
             for col in feature_cols:
-                original_data = generated_df[col].values
+                # 保存原始数据长度用于后续检查
+                original_length = len(generated_df)
+                # 确保数据是数值类型且没有缺失值
+                original_data = generated_df[col].replace([np.inf, -np.inf], np.nan).values
+                
+                # 处理每个窗口大小
+                processed_data = original_data.copy()  # 默认使用原始数据
                 for win_size in level:
-                    if win_size == 1:
-                        processed = original_data.copy()
-                    else:
-                        cumsum = np.cumsum(np.insert(original_data, 0, 0))
-                        moving_avg = (cumsum[win_size:] - cumsum[:-win_size]) / win_size
-
-                        x_old = np.linspace(0, len(original_data) - 1, len(moving_avg))
-                        x_new = np.arange(len(original_data))
-                        processed = np.interp(x_new, x_old, moving_avg)
-
-                    generated_df[col] = processed
+                    # 确保窗口大小有效
+                    if win_size < 2 or win_size > len(original_data):
+                        continue
+                        
+                    # 计算移动平均，确保结果长度与原始数据一致
+                    cumsum = np.cumsum(np.insert(original_data, 0, 0))
+                    moving_avg = (cumsum[win_size:] - cumsum[:-win_size]) / win_size
+                    
+                    # 确保移动平均结果可以正确插值到原始长度
+                    if len(moving_avg) < original_length:
+                        # 使用线性插值确保长度匹配
+                        x_old = np.linspace(0, original_length - 1, len(moving_avg))
+                        x_new = np.arange(original_length)
+                        processed_data = np.interp(x_new, x_old, moving_avg)
+                    
+                    # 验证长度是否匹配
+                    if len(processed_data) != original_length:
+                        # 如果不匹配，使用原始数据
+                        processed_data = original_data.copy()
+                        print(f"警告: 列 {col} 处理后长度不匹配，使用原始数据")
+                
+                # 确保赋值的数据长度与DataFrame索引长度一致
+                generated_df[col] = processed_data
 
             generated_df[target_col] = target_data
             out_list.append(generated_df)
 
         return out_list
-
-
 

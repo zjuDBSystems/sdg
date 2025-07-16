@@ -19,9 +19,14 @@ import pickle as pkl
 
 class TimeFeatureEnhanceOperator(Operator):
     def __init__(self, **kwargs):
-        self.input_table_file = kwargs.get('input_table_file', "shanxi_day_train_total.pkl")
-        self.output_table_file = kwargs.get('output_table_file', "shanxi_day_train_total.pkl")
-
+        self.input_table_file1 = kwargs.get('input_table_file', "shanxi_day_train_total_96_96.pkl")
+        self.output_table_file1 = kwargs.get('output_table_file', "shanxi_day_train_total_96_96.pkl")
+        self.input_table_file2 = kwargs.get('input_table_file2', "shanxi_day_train_total_192_192.pkl")
+        self.output_table_file2 = kwargs.get('output_table_file2', "shanxi_day_train_total_192_192.pkl")
+        self.input_table_file3 = kwargs.get('input_table_file3', "shanxi_day_train_total_384_384.pkl")
+        self.output_table_file3 = kwargs.get('output_table_file3', "shanxi_day_train_total_384_384.pkl")
+        self.loc = LocationInfo("Yanan", "CN", "Asia/Shanghai", 36.5853932, 109.4828549).observer
+        self.time_enhancement = kwargs.get('time_enhancement', True)
 
     @classmethod
     @override
@@ -54,17 +59,26 @@ class TimeFeatureEnhanceOperator(Operator):
 
     @override
     def execute(self, dataset):
-        # files
-        ls_df = pkl.load(open(os.path.join(dataset.dirs[0].data_path, self.input_table_file), "rb"))
-
-
-        with open(os.path.join(dataset.dirs[0].data_path, self.output_table_file), "wb") as file:
+        # file_96_96
+        ls_df = pkl.load(open(os.path.join(dataset.dirs[0].data_path, self.input_table_file1), "rb"))
+        ls_df = self.time_enhance(ls_df, loc=self.loc, enhancement=self.time_enhancement)
+        with open(os.path.join(dataset.dirs[0].data_path, self.output_table_file1), "wb") as file:
+            pkl.dump(ls_df, file, protocol=5)
+        # file_192_192
+        ls_df = pkl.load(open(os.path.join(dataset.dirs[0].data_path, self.input_table_file2), "rb"))
+        ls_df = self.time_enhance(ls_df, loc=self.loc, enhancement=self.time_enhancement)
+        with open(os.path.join(dataset.dirs[0].data_path, self.output_table_file2), "wb") as file:
+            pkl.dump(ls_df, file, protocol=5)
+        # file_384_384
+        ls_df = pkl.load(open(os.path.join(dataset.dirs[0].data_path, self.input_table_file3), "rb"))
+        ls_df = self.time_enhance(ls_df, loc=self.loc, enhancement=self.time_enhancement)
+        with open(os.path.join(dataset.dirs[0].data_path, self.output_table_file3), "wb") as file:
             pkl.dump(ls_df, file, protocol=5)
         
         print(f'{self.get_meta().name}算子执行完成')
 
 
-    def time_enhance(self, arr_train: List[pd.DataFrame], loc: LocationInfo.observer, enhancement: bool):
+    def time_enhance(self, arr_train: List[pd.DataFrame], loc, enhancement: bool):
         if enhancement:
             for df in arr_train:
                 df['datetime'] = pd.to_datetime(df['datetime'], errors='coerce')

@@ -20,8 +20,12 @@ import pickle as pkl
 
 class CrossDomainTransOperator(Operator):
     def __init__(self, **kwargs):
-        self.input_table_file = kwargs.get('input_table_file', "shanxi_day_train_total.pkl")
-        self.output_table_file = kwargs.get('output_table_file', "shanxi_day_train_total.pkl")
+        self.input_table_file1 = kwargs.get('input_table_file', "shanxi_day_train_total_96_96.pkl")
+        self.output_table_file1 = kwargs.get('output_table_file', "shanxi_day_train_total_96_96.pkl")
+        self.input_table_file2 = kwargs.get('input_table_file2', "shanxi_day_train_total_192_192.pkl")
+        self.output_table_file2 = kwargs.get('output_table_file2', "shanxi_day_train_total_192_192.pkl")
+        self.input_table_file3 = kwargs.get('input_table_file3', "shanxi_day_train_total_384_384.pkl")
+        self.output_table_file3 = kwargs.get('output_table_file3', "shanxi_day_train_total_384_384.pkl")
         self.cross_domain_csv_path = kwargs.get('cross_domain_csv', "ShandongEP/ShandongEP_2022.csv")
         self.n_estimators = 64
 
@@ -56,15 +60,29 @@ class CrossDomainTransOperator(Operator):
 
     @override
     def execute(self, dataset):
-        # files
-        ls_df = pkl.load(open(os.path.join(dataset.dirs[0].data_path, self.input_table_file), "rb"))
 
         cross_domain_csv = pd.read_csv(os.path.join(dataset.dirs[0].data_path, self.cross_domain_csv_path))
-        ls_df = self.augment_reserve_samples(ls_df, 
-                                             cross_domain_csv, 
+        # file_96_96
+        ls_df = pkl.load(open(os.path.join(dataset.dirs[0].data_path, self.input_table_file1), "rb"))
+        ls_df = self.augment_reserve_samples(ls_df,
+                                             cross_domain_csv,
+                                             n_estimators=self.n_estimators)
+        with open(os.path.join(dataset.dirs[0].data_path, self.output_table_file1), "wb") as file:
+            pkl.dump(ls_df, file, protocol=5)
+        # file_192_192
+        ls_df = pkl.load(open(os.path.join(dataset.dirs[0].data_path, self.input_table_file2), "rb"))
+        ls_df = self.augment_reserve_samples(ls_df,
+                                             cross_domain_csv,
                                              n_estimators=self.n_estimators)
 
-        with open(os.path.join(dataset.dirs[0].data_path, self.output_table_file), "wb") as file:
+        with open(os.path.join(dataset.dirs[0].data_path, self.output_table_file2), "wb") as file:
+            pkl.dump(ls_df, file, protocol=5)
+        # file_384_384
+        ls_df = pkl.load(open(os.path.join(dataset.dirs[0].data_path, self.input_table_file3), "rb"))
+        ls_df = self.augment_reserve_samples(ls_df,
+                                             cross_domain_csv,
+                                             n_estimators=self.n_estimators)
+        with open(os.path.join(dataset.dirs[0].data_path, self.output_table_file3), "wb") as file:
             pkl.dump(ls_df, file, protocol=5)
         
         print(f'{self.get_meta().name}算子执行完成')

@@ -7,6 +7,7 @@ Typical usage example:
     final_dataset = task.final_dataset
 """
 
+import os
 from uuid import UUID, uuid4
 import time
 import json
@@ -18,6 +19,7 @@ from ..data_operator.operator import Operator
 from ..event import global_message_queue, EventType, EventResponse
 from collections import defaultdict
 from typing import List, Callable, Iterable
+import pickle as pkl
 
 
 class Task:
@@ -108,6 +110,15 @@ class Task_power:
     def run(self) -> dict:
         """Executes the task by applying the operators to the input dataset."""
         dataset: Dataset = self.in_dataset
+
+        input_datafile_ls = ['shanxi_day_train_96_96.pkl', 'shanxi_day_train_192_192.pkl', 'shanxi_day_train_384_384.pkl']
+        output_datafile_ls = ['shanxi_day_train_total_96_96.pkl', 'shanxi_day_train_total_192_192.pkl', 'shanxi_day_train_total_384_384.pkl']
+        for input_datafile, output_datafile in zip(input_datafile_ls, output_datafile_ls):
+            input_datafile_path = os.path.join(dataset.dirs[0].data_path, input_datafile)
+            ls_df = pkl.load(open(input_datafile_path, "rb"))
+            with open(os.path.join(dataset.dirs[0].data_path, output_datafile), "wb") as file:
+                pkl.dump(ls_df, file, protocol=5)
+
         result=None
         for operator in self.operators:
             global_message_queue.put(EventResponse(event=EventType.REASONING, data=f'执行制备算子 {operator.get_meta().name}'))
@@ -120,7 +131,7 @@ class Task_power:
             global_message_queue.put(EventResponse(event=EventType.REASONING, data=f'算子 {operator.get_meta().name} 执行完成! 耗时: {cost:.2f}秒'))
             global_message_queue.put(EventResponse(event=EventType.REASONING, data="数据质量评估"))
             start = time.time()
-            result = dataset.evaluate_table_quality("shanxi_day_train_total.pkl")
+            result = dataset.evaluate_table_quality()
             end = time.time()
             cost = end - start
             global_message_queue.put(EventResponse(event=EventType.REASONING, data=f"数据质量评估完成, 耗时: {cost:.2f}秒"))

@@ -20,8 +20,8 @@ import pickle as pkl
 
 class TrendEnhanceOperator(Operator):
     def __init__(self, **kwargs):
-        self.input_table_file = kwargs.get('input_table_file', "shanxi_day_train_total.pkl")
-        self.output_table_file = kwargs.get('output_table_file', "shanxi_day_train_total.pkl")
+        self.input_table_file = kwargs.get('input_table_file', "shanxi_day_train_total_96_96.pkl")
+        self.output_table_file = kwargs.get('output_table_file', "shanxi_day_train_total_96_96.pkl")
 
 
     @classmethod

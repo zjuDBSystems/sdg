@@ -19,9 +19,16 @@ import pickle as pkl
 
 class DomainKnowledgeOperator(Operator):
     def __init__(self, **kwargs):
-        self.input_table_file = kwargs.get('input_table_file', "shanxi_day_train_total.pkl")
-        self.output_table_file = kwargs.get('output_table_file', "shanxi_day_train_total.pkl")
+        self.input_table_file1 = kwargs.get('input_table_file', "shanxi_day_train_total_96_96.pkl")
+        self.output_table_file1 = kwargs.get('output_table_file', "shanxi_day_train_total_96_96.pkl")
+        self.input_table_file2 = kwargs.get('input_table_file2', "shanxi_day_train_total_192_192.pkl")
+        self.output_table_file2 = kwargs.get('output_table_file2', "shanxi_day_train_total_192_192.pkl")
+        self.input_table_file3 = kwargs.get('input_table_file3', "shanxi_day_train_total_384_384.pkl")
+        self.output_table_file3 = kwargs.get('output_table_file3', "shanxi_day_train_total_384_384.pkl")
         self.domain_knowledge_csv_path = kwargs.get('output_table_file', "Plan_refine/延安发电1号机组.csv")
+        self.window_size1 = 192
+        self.window_size2 = 384
+        self.window_size3 = 768
 
     @classmethod
     @override
@@ -54,13 +61,27 @@ class DomainKnowledgeOperator(Operator):
 
     @override
     def execute(self, dataset):
-        # files
-        ls_df = pkl.load(open(os.path.join(dataset.dirs[0].data_path, self.input_table_file), "rb"))
-
         domain_knowledge_csv = pd.read_csv(os.path.join(dataset.dirs[0].data_path, self.domain_knowledge_csv_path))
-        ls_df = self.batch_broadcast_daily_to_min(ls_df, domain_knowledge_csv, window_size=192)
-
-        with open(os.path.join(dataset.dirs[0].data_path, self.output_table_file), "wb") as file:
+        # file_96_96
+        ls_df = pkl.load(open(os.path.join(dataset.dirs[0].data_path, self.input_table_file1), "rb"))
+        ls_df = self.batch_broadcast_daily_to_min(ls_df,
+                                                  domain_knowledge_csv,
+                                                  window_size=self.window_size1)
+        with open(os.path.join(dataset.dirs[0].data_path, self.output_table_file1), "wb") as file:
+            pkl.dump(ls_df, file, protocol=5)
+        # file_192_192
+        ls_df = pkl.load(open(os.path.join(dataset.dirs[0].data_path, self.input_table_file2), "rb"))
+        ls_df = self.batch_broadcast_daily_to_min(ls_df,
+                                                  domain_knowledge_csv,
+                                                  window_size=self.window_size2)
+        with open(os.path.join(dataset.dirs[0].data_path, self.output_table_file2), "wb") as file:
+            pkl.dump(ls_df, file, protocol=5)
+        # file_384_384
+        ls_df = pkl.load(open(os.path.join(dataset.dirs[0].data_path, self.input_table_file3), "rb"))
+        ls_df = self.batch_broadcast_daily_to_min(ls_df,
+                                                  domain_knowledge_csv,
+                                                  window_size=self.window_size3)
+        with open(os.path.join(dataset.dirs[0].data_path, self.output_table_file3), "wb") as file:
             pkl.dump(ls_df, file, protocol=5)
         
         print(f'{self.get_meta().name}算子执行完成')
@@ -126,7 +147,7 @@ class DomainKnowledgeOperator(Operator):
             intra_df.set_index('datetime', inplace=True)
 
             daily_broadcast = self._broadcast_daily_onto_index(
-                intra_df.index, daily_df, prefix=daily_prefix
+                intra_df.index, daily_df, prefix=daily_prefix # type: ignore
             )
 
             combined = pd.concat([intra_df, daily_broadcast], axis=1)

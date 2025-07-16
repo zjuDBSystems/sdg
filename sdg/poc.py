@@ -101,7 +101,7 @@ def run_power_task():
     global_message_queue.put(
         EventResponse(event=EventType.REQUEST, data="Load power table dataset!"))
     table_dir = Datadir('shanxi-power-table', DataType.TABLE)
-    data_set = Dataset([table_dir], '', 'key_configurations.md')
+    data_set = Dataset([table_dir], '', '')
     global_message_queue.put(EventResponse(event=EventType.RESPONSE, data="Load power table dataset done!"))
 
     global_message_queue.put(EventResponse(event=EventType.REQUEST, data="数据质量评估"))
@@ -154,11 +154,11 @@ def run_power_task():
     indicator_relations = define_indicator_relations(result)
     urgency_df = calculate_urgency(result, indicator_relations, secondary_weights)
 
-    # client = OpenAI(api_key="sk-2694f692c8a74876a7a8856fdaf7ed7e", base_url="https://api.deepseek.com")
-    # result = target_discovery(client, str(urgency_df.values.tolist()))
-    # global_message_queue.put(EventResponse(event=EventType.REASONING, data="远端大模型分析..."))
-    # global_message_queue.put(EventResponse(event=EventType.RESPONSE, data=result))
-    # print(result)
+    client = OpenAI(api_key="sk-2694f692c8a74876a7a8856fdaf7ed7e", base_url="https://api.deepseek.com")
+    result = target_discovery(client, str(urgency_df.values.tolist()))
+    global_message_queue.put(EventResponse(event=EventType.REASONING, data="远端大模型分析..."))
+    global_message_queue.put(EventResponse(event=EventType.RESPONSE, data=result))
+    print(result)
 
     task = Task_power(
         [
@@ -174,7 +174,7 @@ def run_power_task():
             registry['LabelConflictOperator'](),
             # 样本多粒度采样，靶点：时间粒度覆盖率
             registry['MultiDownsampleOperator'](),
-            # 主频提取增强，靶点：主频强度 done
+            # 主频提取增强，靶点：主频强度 
             registry['MainFrequencyEnhanceOperator'](),
             # 趋势性增强，靶点：趋势性强度
             registry['TrendEnhanceOperator'](),
@@ -184,10 +184,10 @@ def run_power_task():
             registry['ScarceSampleGenerateOperator'](),
             # 非平稳时序平稳化，靶点：时序平稳性 done
             registry['NonStationaryProcessOperator'](),
+            # 冗余特征消除，靶点：特征独立性
+            registry['RedundantFeatureRemoveOperator'](),
             # 冗余样本消除，靶点：样本均衡性
             registry['RedundantSampleRemoveOperator'](),
-            # 冗余特征消除，特征独立性
-            registry['RedundantFeatureRemoveOperator'](),
         ],
         data_set
     )
@@ -202,8 +202,8 @@ def run_power_task():
         EventResponse(event=EventType.RESPONSE, data="任务流程执行完成, 耗时: {:.2f}秒".format(cost)))
     print("任务流程执行完成, 耗时: {:.2f}秒".format(cost))
 
-    result = data_set.evaluate_table_quality("shanxi_day_train_total.pkl")
-    # print(json.dumps(result, indent=4, ensure_ascii=False))
+    result = data_set.evaluate_table_quality()
+    print(json.dumps(result, indent=4, ensure_ascii=False))
 
 
 def data_evaluation():

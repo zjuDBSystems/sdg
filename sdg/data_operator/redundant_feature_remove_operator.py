@@ -21,8 +21,8 @@ from sklearn.preprocessing import LabelEncoder
 
 class RedundantFeatureRemoveOperator(Operator):
     def __init__(self, **kwargs):
-        self.input_table_file = kwargs.get('input_table_file', "shanxi_day_train_total.pkl")
-        self.output_table_file = kwargs.get('output_table_file', "shanxi_day_train_total.pkl")
+        self.input_table_file = kwargs.get('input_table_file', "shanxi_day_train_total_96_96.pkl")
+        self.output_table_file = kwargs.get('output_table_file', "shanxi_day_train_total_96_96.pkl")
         self.target_col = "延安发电1号机组"
 
     @classmethod
@@ -80,7 +80,6 @@ class RedundantFeatureRemoveOperator(Operator):
             target_col: 目标列的列名
             corr_threshold: 相关性阈值，超过此值的特征被认为高度相关
             importance_ratio: 重要性比率阈值，低于此值的特征被认为可移除
-
         返回:
             移除冗余特征后的时序数据样本列表
         """
@@ -102,9 +101,9 @@ class RedundantFeatureRemoveOperator(Operator):
         if is_classification:
             le = LabelEncoder()
             y_encoded = le.fit_transform(y)
-            model = RandomForestClassifier(n_estimators=100, random_state=42)
+            model = RandomForestClassifier(n_estimators=5, random_state=42)
         else:
-            model = RandomForestRegressor(n_estimators=100, random_state=42)
+            model = RandomForestRegressor(n_estimators=5, random_state=42)
             y_encoded = y
 
         model.fit(X, y_encoded)

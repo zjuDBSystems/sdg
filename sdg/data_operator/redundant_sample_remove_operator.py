@@ -1,4 +1,4 @@
-'''Operators for redundant sample removement.
+'''Operators for redundant feature removement.
 '''
 
 from typing import override, Dict, List
@@ -21,8 +21,8 @@ from sklearn.preprocessing import StandardScaler
 
 class RedundantSampleRemoveOperator(Operator):
     def __init__(self, **kwargs):
-        self.input_table_file = kwargs.get('input_table_file', "shanxi_day_train_total.pkl")
-        self.output_table_file = kwargs.get('output_table_file', "shanxi_day_train_total.pkl")
+        self.input_table_file = kwargs.get('input_table_file', "shanxi_day_train_total_96_96.pkl")
+        self.output_table_file = kwargs.get('output_table_file', "shanxi_day_train_total_96_96.pkl")
         self.target_col = "延安发电1号机组"
 
     @classmethod
@@ -106,10 +106,10 @@ class RedundantSampleRemoveOperator(Operator):
         clusters = kmeans.fit_predict(features_scaled)
 
         cluster_counts = pd.Series(clusters).value_counts()
-        print(f"聚类数量分布: {cluster_counts.to_dict()}")
+        # print(f"聚类数量分布: {cluster_counts.to_dict()}")
 
         samples_count = cluster_counts.mean() # 聚类类别的样本数量均值作为每个类别保留的最大样本数
-        print(f"每个聚类将保留 {samples_count} 个样本")
+        # print(f"每个聚类将保留 {samples_count} 个样本")
 
         for cluster_id in range(n_clusters):
             cluster_indices = [i for i, c in enumerate(clusters) if c == cluster_id]
@@ -125,12 +125,9 @@ class RedundantSampleRemoveOperator(Operator):
             for idx in selected_indices:
                 out_list.append(arr_train[idx])
 
-        print(f"处理前样本总数: {len(arr_train)}")
-        print(f"处理后样本总数: {len(out_list)}")
+        # print(f"处理前样本总数: {len(arr_train)}")
+        # print(f"处理后样本总数: {len(out_list)}")
 
         return out_list
-
-
-
 
 
