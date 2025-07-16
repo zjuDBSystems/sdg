@@ -177,7 +177,7 @@ class Dataset:
             "result_path": result_path
         }
 
-    def evaluate_table_quality(self, path):
+    def evaluate_table_quality(self, path="shanxi_day_train_total.pkl"):
         table_file_path = os.path.join(self.dirs[0].data_path, path)
         arr_evaluation = pkl.load(open(table_file_path, "rb"))
 

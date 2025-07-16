@@ -1,7 +1,7 @@
-'''Operators for time enhancement.
+'''Operators for time-feature enhancement.
 '''
 
-from typing import override, Dict
+from typing import override, Dict, List
 import openai
 import os
 import pandas as pd
@@ -13,12 +13,14 @@ from ..config import settings
 from .operator import Meta, Operator, Field
 from ..storage.dataset import DataType
 from ..task.task_type import TaskType
+import re
+import pickle as pkl
 
 
 class TimeFeatureEnhanceOperator(Operator):
     def __init__(self, **kwargs):
-        self.model = kwargs.get('model', "timesfm")
-        self.score_file = kwargs.get('score_file', "./detailed_scores.csv")
+        self.input_table_file = kwargs.get('input_table_file', "shanxi_day_train_total.pkl")
+        self.output_table_file = kwargs.get('output_table_file', "shanxi_day_train_total.pkl")
 
 
     @classmethod
@@ -40,7 +42,7 @@ class TimeFeatureEnhanceOperator(Operator):
     def get_meta(cls) -> Meta:
         return Meta(
             name='TimeFeatureEnhanceOperator',
-            description='Time feature enhancement.'
+            description='TimeFeatureEnhanceOperator.'
         )
 
     def get_cost(self, dataset) -> Dict:
@@ -53,50 +55,38 @@ class TimeFeatureEnhanceOperator(Operator):
     @override
     def execute(self, dataset):
         # files
-        df = pd.read_csv(dataset.dirs[0].data_path, na_values=['nan', 'None', ''])
-
-        batch_size = 32
-        context_len = 96
-        horizon_len = 96
-        total_len = context_len + horizon_len
-
-        cols = [
-            'datetime', '负荷预测', '风电总出力预测数值', '光伏总出力预测数值', '新能源总出力预测数值','非市场机组总出力预测',
-            '外来电交易计划', '竞价空间', '延安发电1号机组', '延安发电1号机组运行状态'
-        ]
-        target_patterns = '延安发电1号机组'
-        cov_num_patterns = [
-            "负荷预测","风电总出力预测数值","光伏总出力预测数值","新能源总出力预测数值","非市场机组总出力预测","外来电交易计划","竞价空间",
-            "elev","az"
-        ]
-        cov_cat_patterns = [
-            "延安发电1号机组运行状态","month","day","weekday","hour","minute","holiday",
-        ]
-
-        df = df[cols]
-        df.index = pd.to_datetime(df['datetime'])
-        df = df.loc['2025-02':'2025-06']
-
-        cols_tmp = ['负荷预测', '风电总出力预测数值', '光伏总出力预测数值', '新能源总出力预测数值',
-                    '非市场机组总出力预测', '外来电交易计划', '竞价空间', target_patterns]
-
-        loc = LocationInfo("Yanan", "CN", "Asia/Shanghai", 36.5853932, 109.4828549).observer
-
-        df['datetime'] = pd.to_datetime(df['datetime'])
-        df['month'] = df.datetime.apply(lambda row: row.month).astype(int)
-        df['day'] = df.datetime.apply(lambda row: row.day).astype(int)
-        df['weekday'] = df.datetime.apply(lambda row: row.weekday()).astype(int)
-        df['hour'] = df.datetime.apply(lambda row: row.hour).astype(int)
-        df['minute'] = df.datetime.apply(lambda row: row.minute).astype(int)
-        df["holiday"] = df.datetime.apply(lambda row: int(chinese_calendar.is_holiday(row))).astype(int)
-
-        df["elev"] = [sun.elevation(loc, t) for t in df.datetime]  # 高度角
-        df["az"] = [sun.azimuth(loc, t) for t in df.datetime]  # 方位角
-
-        # 保存新数据
-        df.to_csv(dataset.dirs[0].data_path[:-4]+'_done3.csv', index=False)
-        print("提取时间特征作为协变量进行数据增强")
+        ls_df = pkl.load(open(os.path.join(dataset.dirs[0].data_path, self.input_table_file), "rb"))
 
 
+        with open(os.path.join(dataset.dirs[0].data_path, self.output_table_file), "wb") as file:
+            pkl.dump(ls_df, file, protocol=5)
+        
+        print(f'{self.get_meta().name}算子执行完成')
 
+
+    def time_enhance(self, arr_train: List[pd.DataFrame], loc: LocationInfo.observer, enhancement: bool):
+        if enhancement:
+            for df in arr_train:
+                df['datetime'] = pd.to_datetime(df['datetime'], errors='coerce')
+                dt = df['datetime'].dt
+
+                df['month'] = dt.month
+                df['day'] = dt.day
+                df['weekday'] = dt.weekday
+                df['hour'] = dt.hour
+                df['minute'] = dt.minute
+
+                df['holiday'] = df['datetime'].map(lambda t: int(chinese_calendar.is_holiday(t)))
+
+                df["elev"] = [sun.elevation(loc, t) for t in df.datetime]
+                df["az"] = [sun.azimuth(loc, t) for t in df.datetime]
+
+                if 'datetime' in df.columns:
+                    df.set_index('datetime', inplace=True)
+        else:
+            for df in arr_train:
+                if 'datetime' in df.columns:
+                    df['datetime'] = pd.to_datetime(df['datetime'], errors='coerce')
+                    df.set_index('datetime', inplace=True)
+        return arr_train
 

@@ -11,7 +11,7 @@ from openai import OpenAI
 from sdg.data_operator.operator import OperatorMeta
 from sdg import data_operator
 from sdg.storage.dataset import Dataset, DataType, Datadir
-from sdg.task.task import Task, Task_SeriesForecast
+from sdg.task.task import Task, Task_power
 from sdg.event import global_message_queue, EventType, EventResponse
 
 
@@ -154,22 +154,40 @@ def run_power_task():
     indicator_relations = define_indicator_relations(result)
     urgency_df = calculate_urgency(result, indicator_relations, secondary_weights)
 
-    client = OpenAI(api_key="sk-2694f692c8a74876a7a8856fdaf7ed7e", base_url="https://api.deepseek.com")
-    result = target_discovery(client, str(urgency_df.values.tolist()))
-    global_message_queue.put(EventResponse(event=EventType.REASONING, data="远端大模型分析..."))
-    global_message_queue.put(EventResponse(event=EventType.RESPONSE, data=result))
-    print(result)
+    # client = OpenAI(api_key="sk-2694f692c8a74876a7a8856fdaf7ed7e", base_url="https://api.deepseek.com")
+    # result = target_discovery(client, str(urgency_df.values.tolist()))
+    # global_message_queue.put(EventResponse(event=EventType.REASONING, data="远端大模型分析..."))
+    # global_message_queue.put(EventResponse(event=EventType.RESPONSE, data=result))
+    # print(result)
 
-    task = Task_SeriesForecast(
+    task = Task_power(
         [
-            # 提取主频成分作为协变量进行数据增强
-            # registry['FrequencyEnhanceOperator'](),
-            # 数据层面进行非平稳处理
-            # registry['NonStationaryProcessOperator'](),
-            # 提取时间特征作为协变量进行数据增强
-            # registry['TimeFeatureEnhanceOperator'](),
-            # 对特定变量添加多尺度特征进行数据增强
-            # registry['MultiscaleEnhanceOperator'](),
+            # 领域知识迁移，靶点：领域知识多样性
+            registry['CrossDomainTransOperator'](),
+            # 领域知识引入，靶点：领域知识完整性
+            registry['DomainKnowledgeOperator'](),
+            # 时间特征增强，靶点：日期标注完整性
+            registry['TimeFeatureEnhanceOperator'](),
+            # 数据缺失值填充，靶点：数据缺失率
+            registry['ImputationOperator'](),
+            # 标签冲突校准，靶点：标签一致性
+            registry['LabelConflictOperator'](),
+            # 样本多粒度采样，靶点：时间粒度覆盖率
+            registry['MultiDownsampleOperator'](),
+            # 主频提取增强，靶点：主频强度 done
+            registry['MainFrequencyEnhanceOperator'](),
+            # 趋势性增强，靶点：趋势性强度
+            registry['TrendEnhanceOperator'](),
+            # 周期性增强，靶点：周期性强度
+            registry['SeasonalEnhanceOperator'](),
+            # 稀缺样本生成，靶点：样本均衡性
+            registry['ScarceSampleGenerateOperator'](),
+            # 非平稳时序平稳化，靶点：时序平稳性 done
+            registry['NonStationaryProcessOperator'](),
+            # 冗余样本消除，靶点：样本均衡性
+            registry['RedundantSampleRemoveOperator'](),
+            # 冗余特征消除，特征独立性
+            registry['RedundantFeatureRemoveOperator'](),
         ],
         data_set
     )
